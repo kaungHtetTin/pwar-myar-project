@@ -1,5 +1,11 @@
 # PwarMyar
 
+For cPanel hosting with a separate Node socket server, follow the
+[deployment runbook](DEPLOYMENT.md). It includes the production domain map,
+build/upload steps, database preservation, cron jobs and verification. Use the
+[Codex Cloud deployment prompt](deployment/cloud-agent-prompt.md) with the
+[non-secret hosting worksheet](deployment/target.example.json).
+
 PwarMyar contains four single-page applications:
 
 - Business SPA for owners and staff using the POS.
@@ -56,11 +62,11 @@ Use `realtime-server/.env.production.example` and `realtime-server/deploy/nginx.
 - Authentication: Laravel Sanctum first-party SPA sessions
 - Tenancy: shared database with enforced `business_id` scoping
 
-The backend requires PHP 8.2 or newer. Keep the deployed PHP runtime on a current security patch release.
+The backend requires PHP 8.3 or newer. Keep the deployed PHP runtime on a current security patch release.
 
 ## Initial setup
 
-Requirements: PHP 8.2+, Composer, Node.js, npm, and MySQL/MariaDB.
+Requirements: PHP 8.3+, Composer, Node.js 22.12+ within Node 22, npm, and MySQL/MariaDB.
 
 Create the database:
 
@@ -625,3 +631,4 @@ SANCTUM_STATEFUL_DOMAINS=www.pwarmyar.com,pwarmyar.com
 CORS_ALLOWED_ORIGINS=https://www.pwarmyar.com,https://pwarmyar.com
 SESSION_SECURE_COOKIE=true
 ```
+# pwar-myar-project

@@ -1,0 +1,43 @@
+import React from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, expect, it, vi } from 'vitest';
+import { apiRequest } from '../api/client';
+import { ShopLocation, ShopLocationGate } from './ShopLocation';
+vi.mock('../api/client', () => ({ apiRequest: vi.fn() }));
+const owner = { user: { role: 'owner' }, business: { timezone: 'Asia/Rangoon' } };
+const saved = { submitted: true, location: { latitude: 16.8409, longitude: 96.1735, accuracy: 10, captured_at: '2026-10-15T02:54:00Z' } };
+beforeEach(() => { vi.clearAllMocks(); apiRequest.mockResolvedValue(saved); });
+it('keeps a denied request out of the API, then retries with actual device coordinates', async () => {
+  const locate = vi.fn().mockImplementationOnce((_ok, reject) => reject({ code: 1 })).mockImplementationOnce(ok => ok({ coords: { latitude: 17, longitude: 97, accuracy: 12 } }));
+  Object.defineProperty(navigator, 'geolocation', { configurable: true, value: { getCurrentPosition: locate } });
+  render(<ShopLocation session={owner} onNavigate={vi.fn()} />);
+  fireEvent.click(await screen.findByRole('button', { name: 'Update location' }));
+  expect(await screen.findByRole('heading', { name: 'Location access denied' })).toBeInTheDocument();
+  expect(apiRequest.mock.calls.filter(([, options]) => options?.method)).toHaveLength(0);
+  fireEvent.click(screen.getByRole('button', { name: 'Try again' }));
+  await screen.findByRole('status');
+  expect(apiRequest).toHaveBeenCalledWith('/shop-admin/owner-location', { method: 'POST', body: '{"latitude":17,"longitude":97,"accuracy":12}' });
+});
+it('guards duplicate device requests and preserves the setup prerequisite on error', async () => {
+  let rejectLocation;
+  const locate = vi.fn((_ok, reject) => { rejectLocation = reject; });
+  Object.defineProperty(navigator, 'geolocation', { configurable: true, value: { getCurrentPosition: locate } });
+  apiRequest.mockResolvedValue({ submitted: false, location: null });
+  render(<ShopLocationGate session={owner}><p>Protected workspace</p></ShopLocationGate>);
+  const button = await screen.findByRole('button', { name: 'Allow location and save' });
+  fireEvent.submit(button.closest('form')); fireEvent.submit(button.closest('form'));
+  expect(locate).toHaveBeenCalledTimes(1);
+  rejectLocation({ code: 1 });
+  fireEvent.click(await screen.findByRole('button', { name: 'Back', exact: true }));
+  await screen.findByRole('button', { name: 'Allow location and save' });
+  expect(screen.queryByText('Protected workspace')).not.toBeInTheDocument();
+});
+it('retains saved coordinates after an API failure and allows retry', async () => {
+  Object.defineProperty(navigator, 'geolocation', { configurable: true, value: { getCurrentPosition: ok => ok({ coords: { latitude: 17, longitude: 97, accuracy: 12 } }) } });
+  apiRequest.mockImplementation(async (_path, options) => { if (options?.method) throw new Error('Location could not be saved.'); return saved; });
+  render(<ShopLocation session={owner} onNavigate={vi.fn()} />);
+  fireEvent.click(await screen.findByRole('button', { name: 'Update location' }));
+  expect(await screen.findByRole('alert')).toHaveTextContent('Location could not be saved.');
+  expect(screen.getByText('16.8409, 96.1735')).toBeInTheDocument();
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Update location' })).toBeEnabled());
+});

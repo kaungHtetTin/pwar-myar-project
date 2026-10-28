@@ -1,0 +1,42 @@
+{
+  "name": "pwarmyar-frontend",
+  "version": "3.0.4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:laravel": "vite build --mode laravel",
+    "build:desktop": "vite build --mode desktop",
+    "preview": "vite preview",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "test:theme": "node ../scripts/check-platform-theme.cjs"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans-myanmar": "^5.3.0",
+    "jsbarcode": "^3.11.6",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^10.1.0",
+    "recharts": "^3.10.1",
+    "remark-gfm": "^4.0.1",
+    "socket.io-client": "^4.8.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "jsdom": "^29.0.1",
+    "vite": "^8.1.4",
+    "vitest": "^4.1.2"
+  }
+}

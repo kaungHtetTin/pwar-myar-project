@@ -1,0 +1,905 @@
+[
+  {
+    "app": "frontend",
+    "file": "frontend/src/main.jsx",
+    "line": 159,
+    "candidate": "Back to ${sourceModule.label}`, onClick: () => window.history.back()",
+    "status": "Verified: actual cross-module cached customer-detail Back returns Suppliers and preserves source, no requests. Evidence .codex/desktop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/translations.js",
+    "line": 13,
+    "candidate": "Back to customer",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/translations.js",
+    "line": 14,
+    "candidate": "Back to customers",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/translations.js",
+    "line": 139,
+    "candidate": "Back to orders",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/translations.js",
+    "line": 146,
+    "candidate": "Back to payment methods",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/translations.js",
+    "line": 209,
+    "candidate": "Back to dashboard",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/usePageNavigation.js",
+    "line": 45,
+    "candidate": "history.back",
+    "status": "Verified shared helper through customer/supplier nested and direct payment Back/Forward plus missing-module metadata regression; not a separate button. Evidence .codex/desktop-back-browser.cjs and frontend/src/components/RetainedViews.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/CustomersScreen.jsx",
+    "line": 174,
+    "candidate": "Back to customer",
+    "status": "Verified: detail/payments Back labels and restored labels exercised through nested browser Back/Forward with source/history search and exact tables, no requests. Direct row Payments -> Back list -> Forward payment region regression also passes. Evidence .codex/desktop-back-browser.cjs and CustomersScreen.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/CustomersScreen.jsx",
+    "line": 174,
+    "candidate": "Back to Customers",
+    "status": "Verified: detail/payments Back labels and restored labels exercised through nested browser Back/Forward with source/history search and exact tables, no requests. Direct row Payments -> Back list -> Forward payment region regression also passes. Evidence .codex/desktop-back-browser.cjs and CustomersScreen.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/CustomersScreen.jsx",
+    "line": 177,
+    "candidate": "Back to Customers",
+    "status": "Verified: detail/payments Back labels and restored labels exercised through nested browser Back/Forward with source/history search and exact tables, no requests. Direct row Payments -> Back list -> Forward payment region regression also passes. Evidence .codex/desktop-back-browser.cjs and CustomersScreen.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/CustomersScreen.jsx",
+    "line": 179,
+    "candidate": "Back to ${customer.name}` : ",
+    "status": "Verified: detail/payments Back labels and restored labels exercised through nested browser Back/Forward with source/history search and exact tables, no requests. Direct row Payments -> Back list -> Forward payment region regression also passes. Evidence .codex/desktop-back-browser.cjs and CustomersScreen.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/CustomersScreen.jsx",
+    "line": 179,
+    "candidate": "Back to Customers",
+    "status": "Verified: detail/payments Back labels and restored labels exercised through nested browser Back/Forward with source/history search and exact tables, no requests. Direct row Payments -> Back list -> Forward payment region regression also passes. Evidence .codex/desktop-back-browser.cjs and CustomersScreen.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SaleScreen.jsx",
+    "line": 668,
+    "candidate": "Back to checkout",
+    "status": "Verified: Back to checkout preserves payment method, discount, paid amount and original product grid with no requests/mutation. Evidence frontend/src/screens/SaleScreen.test.jsx"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/ShopScreen.jsx",
+    "line": 779,
+    "candidate": "Back to customer",
+    "status": "Verified: rendered orders/customer/chat Back callbacks restore actual source, filters, exact source controls and chat draft without requests; browser Back/Forward and main-module switch covered. Evidence .codex/desktop-shop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/ShopScreen.jsx",
+    "line": 779,
+    "candidate": "Back to orders",
+    "status": "Verified: rendered orders/customer/chat Back callbacks restore actual source, filters, exact source controls and chat draft without requests; browser Back/Forward and main-module switch covered. Evidence .codex/desktop-shop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/ShopScreen.jsx",
+    "line": 780,
+    "candidate": "Back to chat",
+    "status": "Verified: rendered orders/customer/chat Back callbacks restore actual source, filters, exact source controls and chat draft without requests; browser Back/Forward and main-module switch covered. Evidence .codex/desktop-shop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/ShopScreen.jsx",
+    "line": 780,
+    "candidate": "Back to customers",
+    "status": "Verified: rendered orders/customer/chat Back callbacks restore actual source, filters, exact source controls and chat draft without requests; browser Back/Forward and main-module switch covered. Evidence .codex/desktop-shop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SuppliersScreen.jsx",
+    "line": 364,
+    "candidate": "Back to supplier",
+    "status": "Verified: nested detail/payment and direct row Payments Back/Forward retain search/history and exact source tables with no requests; saved payment reconciles source balance on same table before Back, Forward retains record without refetch. Evidence .codex/desktop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SuppliersScreen.jsx",
+    "line": 364,
+    "candidate": "Back to Suppliers",
+    "status": "Verified: nested detail/payment and direct row Payments Back/Forward retain search/history and exact source tables with no requests; saved payment reconciles source balance on same table before Back, Forward retains record without refetch. Evidence .codex/desktop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SuppliersScreen.jsx",
+    "line": 383,
+    "candidate": "Back to Suppliers",
+    "status": "Verified: nested detail/payment and direct row Payments Back/Forward retain search/history and exact source tables with no requests; saved payment reconciles source balance on same table before Back, Forward retains record without refetch. Evidence .codex/desktop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SuppliersScreen.jsx",
+    "line": 405,
+    "candidate": "Back to ${supplier.name}` : ",
+    "status": "Verified: nested detail/payment and direct row Payments Back/Forward retain search/history and exact source tables with no requests; saved payment reconciles source balance on same table before Back, Forward retains record without refetch. Evidence .codex/desktop-back-browser.cjs"
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SuppliersScreen.jsx",
+    "line": 405,
+    "candidate": "Back to Suppliers",
+    "status": "Verified: nested detail/payment and direct row Payments Back/Forward retain search/history and exact source tables with no requests; saved payment reconciles source balance on same table before Back, Forward retains record without refetch. Evidence .codex/desktop-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/access/AccessScreen.jsx",
+    "line": 16,
+    "candidate": "onBack",
+    "status": "Verified: new/edit role, new/edit staff and password page Back restore exact access source/tab and retain draft on Forward; Cancel matrix covers edit role/staff/password. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/access/AccessScreen.jsx",
+    "line": 16,
+    "candidate": "Back to access",
+    "status": "Verified: new/edit role, new/edit staff and password page Back restore exact access source/tab and retain draft on Forward; Cancel matrix covers edit role/staff/password. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/access/AccessScreen.jsx",
+    "line": 25,
+    "candidate": "onBack",
+    "status": "Verified: new/edit role, new/edit staff and password page Back restore exact access source/tab and retain draft on Forward; Cancel matrix covers edit role/staff/password. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/access/AccessScreen.jsx",
+    "line": 35,
+    "candidate": "onBack",
+    "status": "Verified: new/edit role, new/edit staff and password page Back restore exact access source/tab and retain draft on Forward; Cancel matrix covers edit role/staff/password. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/access/AccessScreen.jsx",
+    "line": 42,
+    "candidate": "onBack",
+    "status": "Verified: new/edit role, new/edit staff and password page Back restore exact access source/tab and retain draft on Forward; Cancel matrix covers edit role/staff/password. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 158,
+    "candidate": "hardware-back",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 164,
+    "candidate": "history.back",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 167,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 168,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 169,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 170,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 462,
+    "candidate": "history.back",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 490,
+    "candidate": "navigateBack",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 490,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 492,
+    "candidate": "history.back",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 495,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/app/App.jsx",
+    "line": 524,
+    "candidate": "NavigateBack",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/billing/BillingScreen.jsx",
+    "line": 52,
+    "candidate": "Back to billing",
+    "status": "Verified: billing request app-bar/page Back and Cancel preserve source and note for Forward without return requests; unavailable-plan page/app-bar/Android Back replaces direct link with billing parent without native Back or mutation. Evidence mobile/src/app/App.test.jsx."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/components/MobilePrimitives.jsx",
+    "line": 72,
+    "candidate": "hardware-back",
+    "status": "Fixed and verified: only active retained pages consume hardware Back; inactive sheets release scroll lock and keep drafts. Evidence MobilePrimitives.test.jsx and App supplier payment Cancel/hardware/Escape matrix"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/components/MobilePrimitives.jsx",
+    "line": 76,
+    "candidate": "hardware-back",
+    "status": "Fixed and verified: only active retained pages consume hardware Back; inactive sheets release scroll lock and keep drafts. Evidence MobilePrimitives.test.jsx and App supplier payment Cancel/hardware/Escape matrix"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 825,
+    "candidate": "Back to customers",
+    "status": "Verified: detail/edit/payment-new/payment-edit failures use same in-app fallback for page/app-bar/Android Back with no native Back, minimization or mutation. Evidence App.test.jsx direct error matrices."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 864,
+    "candidate": "Back to customers",
+    "status": "Verified: real App contact edit/payment new/edit page Back, Cancel, browser Back/Forward preserve source tab, exact history control and draft; no return requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 908,
+    "candidate": "Back to customer",
+    "status": "Verified: real App contact edit/payment new/edit page Back, Cancel, browser Back/Forward preserve source tab, exact history control and draft; no return requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 950,
+    "candidate": "Back to customers",
+    "status": "Verified: filtered directory -> detail Payment records tab -> actual page Back -> browser Forward retains exact source row/search and selected tab with no requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/expenses/ExpensesScreen.jsx",
+    "line": 544,
+    "candidate": "Back to expenses",
+    "status": "Verified: expense edit-load failure page/app-bar/Android Back safely replace to expenses; no mutation or native Back. Evidence App.test.jsx direct error matrix."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/expenses/ExpensesScreen.jsx",
+    "line": 571,
+    "candidate": "Back to expenses",
+    "status": "Verified: new and edit expense page Back/Forward/Cancel restore original search/action and unsaved draft without requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 10,
+    "candidate": "Back to suppliers",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 12,
+    "candidate": "Back to customers",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 12,
+    "candidate": "Back to customer",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 14,
+    "candidate": "Back to expenses",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 16,
+    "candidate": "Back to transactions",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 20,
+    "candidate": "Back to billing",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 22,
+    "candidate": "Back to settings",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/localization/remainingPagesLocale.js",
+    "line": 24,
+    "candidate": "Back to access",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/appBarRoute.js",
+    "line": 50,
+    "candidate": "backPath",
+    "status": "Verified shared fallback mapping through actual App Android/page/app-bar direct errors and settings/product flows; not an independent rendered control. Evidence App.test.jsx and AppShell.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/appBarRoute.js",
+    "line": 57,
+    "candidate": "backPath",
+    "status": "Verified shared fallback mapping through actual App Android/page/app-bar direct errors and settings/product flows; not an independent rendered control. Evidence App.test.jsx and AppShell.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 61,
+    "candidate": "NavigateBack",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 91,
+    "candidate": "hardware-back",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 95,
+    "candidate": "hardware-back",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 153,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 157,
+    "candidate": "Back to ${appBar.backPath.slice(1).split(",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 159,
+    "candidate": "NavigateBack",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 160,
+    "candidate": "NavigateBack",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 160,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 161,
+    "candidate": "backPath",
+    "status": "Verified shared history/app-bar/hardware wiring through actual App source-retention matrices, direct fallback errors and drawer hardware close; not separate page controls. Evidence App.test.jsx, AppShell.test.jsx and mobile browser proof scripts. Individual remaining page flows tracked separately."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/productsLocale.js",
+    "line": 74,
+    "candidate": "Back to products",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 820,
+    "candidate": "Back to products",
+    "status": "Verified: direct product edit/stock errors return through page Back, app-bar Back, Return to products and Android hardware Back with in-app parent replacement and no native history Back. Evidence mobile/src/app/App.test.jsx eight-case matrix."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 839,
+    "candidate": "Back to products",
+    "status": "Verified: new/edit product page/app-bar/browser Back/Forward preserve source search/category, exact product rows and drafts; loaded 40-row scroll retained in browser. Evidence App.test.jsx and .codex/mobile-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 851,
+    "candidate": "Back to products",
+    "status": "Verified: real App stock page Back/app-bar Back/browser Forward preserve exact product source, search and quantity/reason draft without requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/purchasesLocale.js",
+    "line": 36,
+    "candidate": "Back to purchases",
+    "status": "Excluded: localization text, not an event or rendered control"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 454,
+    "candidate": "Back to purchases",
+    "status": "Verified: purchase detail/edit-load failures page/app-bar/Android Back safely replace to purchases; no mutation or native Back. Evidence App.test.jsx direct error matrix."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 469,
+    "candidate": "Back to purchases",
+    "status": "Verified: filtered purchase list -> new form or detail -> edit form; page Back returns immediate source, Forward retains note draft, Cancel and detail page Back restore original row/search with no requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 526,
+    "candidate": "Back to purchases",
+    "status": "Verified: filtered purchase list -> new form or detail -> edit form; page Back returns immediate source, Forward retains note draft, Cancel and detail page Back restore original row/search with no requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/OfflineSalesPage.jsx",
+    "line": 80,
+    "candidate": "Back to sell",
+    "status": "Verified: App integration offline-invoice page Back and browser Back/Forward retain sale search/cart and same invoice page without API or offline list reads. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 42,
+    "candidate": "backPath",
+    "status": "Verified shared SaleHeading/cart/checkout/new-customer Back: real App product search -> quantities -> checkout -> new customer -> page Back/Forward preserves exact inputs, quantity, paid amount and customer draft with no requests. Receipt variant tracked separately. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 44,
+    "candidate": "backPath",
+    "status": "Verified shared SaleHeading/cart/checkout/new-customer Back: real App product search -> quantities -> checkout -> new customer -> page Back/Forward preserves exact inputs, quantity, paid amount and customer draft with no requests. Receipt variant tracked separately. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 97,
+    "candidate": "backPath",
+    "status": "Verified shared SaleHeading/cart/checkout/new-customer Back: real App product search -> quantities -> checkout -> new customer -> page Back/Forward preserves exact inputs, quantity, paid amount and customer draft with no requests. Receipt variant tracked separately. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 100,
+    "candidate": "Back to checkout",
+    "status": "Verified shared SaleHeading/cart/checkout/new-customer Back: real App product search -> quantities -> checkout -> new customer -> page Back/Forward preserves exact inputs, quantity, paid amount and customer draft with no requests. Receipt variant tracked separately. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 192,
+    "candidate": "backPath",
+    "status": "Verified shared SaleHeading/cart/checkout/new-customer Back: real App product search -> quantities -> checkout -> new customer -> page Back/Forward preserves exact inputs, quantity, paid amount and customer draft with no requests. Receipt variant tracked separately. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 275,
+    "candidate": "backPath",
+    "status": "Verified: actual App completed receipt page/app-bar/browser/Android Back returns cart, Forward resumes the exact receipt node, subsequent Back restores product search; no new API requests or repeat sale submission. Evidence mobile/src/app/App.test.jsx, 4 receipt cases passed."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 280,
+    "candidate": "backPath",
+    "status": "Verified shared SaleHeading/cart/checkout/new-customer Back: real App product search -> quantities -> checkout -> new customer -> page Back/Forward preserves exact inputs, quantity, paid amount and customer draft with no requests. Receipt variant tracked separately. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/PrinterSettingsPage.jsx",
+    "line": 67,
+    "candidate": "Back to settings",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 34,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 34,
+    "candidate": "Back to settings",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 44,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 52,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 53,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 96,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 124,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 136,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 138,
+    "candidate": "onBack",
+    "status": "Verified: all 11 settings sections page/app-bar Back and Forward resume mounted menu without requests; nested price new/edit, restore/reset preserve immediate source and draft. Evidence App.test.jsx and .codex/mobile-settings-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 391,
+    "candidate": "Back to supplier",
+    "status": "Verified: edit/payment-new/payment-edit failures use contact parent consistently for page/app-bar/Android Back with no native Back, minimization or mutation. Evidence App.test.jsx direct error matrices."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 395,
+    "candidate": "Back to supplier",
+    "status": "Verified: real App supplier edit/payment edit Back, Cancel and Forward retain source tab, exact history control and draft without new requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 399,
+    "candidate": "Back to suppliers",
+    "status": "Verified: edit/payment-new/payment-edit failures use contact parent consistently for page/app-bar/Android Back with no native Back, minimization or mutation. Evidence App.test.jsx direct error matrices."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 409,
+    "candidate": "Back to suppliers",
+    "status": "Verified: real App supplier edit/payment edit Back, Cancel and Forward retain source tab, exact history control and draft without new requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 428,
+    "candidate": "Back to suppliers",
+    "status": "Verified: filtered directory -> detail Payment records tab -> actual page Back -> browser Forward retains exact source row/search and selected tab with no requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/transactions/TransactionsScreen.jsx",
+    "line": 492,
+    "candidate": "Back to sales",
+    "status": "Verified: sale editor page Back -> sale detail -> actual customer-history source, Forward retains source and draft without requests. Evidence App.test.jsx customer-history sale integration."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/transactions/TransactionsScreen.jsx",
+    "line": 804,
+    "candidate": "Back to transactions",
+    "status": "Verified: real App customer/supplier transaction payment edit page Back/Forward/Cancel preserve search, source action node and amount draft without return requests. Evidence mobile/src/app/App.test.jsx"
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/main.jsx",
+    "line": 23,
+    "candidate": "goBack",
+    "status": "Excluded: imported helper identifier, not a rendered control"
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/main.jsx",
+    "line": 330,
+    "candidate": "goBack",
+    "status": "Verified: rendered shop product/cart Back and Forward preserve source nodes and checkout draft with no requests; direct product and checkout Back use safe store/cart replacement fallback. Evidence .codex/shop-back-browser.cjs"
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/main.jsx",
+    "line": 665,
+    "candidate": "goBack",
+    "status": "Verified: rendered shop product/cart Back and Forward preserve source nodes and checkout draft with no requests; direct product and checkout Back use safe store/cart replacement fallback. Evidence .codex/shop-back-browser.cjs"
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/shopNavigation.js",
+    "line": 6,
+    "candidate": "goBack",
+    "status": "Verified shared helper: actual product/checkout Back and direct-link replacement exercised in .codex/shop-back-browser.cjs. Not a separate rendered button."
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/shopNavigation.js",
+    "line": 8,
+    "candidate": "history.back",
+    "status": "Verified shared helper: actual product/checkout Back and direct-link replacement exercised in .codex/shop-back-browser.cjs. Not a separate rendered button."
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 511,
+    "candidate": "onBack",
+    "status": "Excluded as separate control: component signature or onBack prop wiring; actual error-page and app-bar buttons audited in .codex/office-back-browser.cjs"
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 590,
+    "candidate": "onBack",
+    "status": "Verified: rendered business-load error Back returns original table/selection; Forward and app-bar Back preserve source without requests. Evidence .codex/office-back-browser.cjs"
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 590,
+    "candidate": "Back to businesses",
+    "status": "Verified: rendered business-load error Back returns original table/selection; Forward and app-bar Back preserve source without requests. Evidence .codex/office-back-browser.cjs"
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1269,
+    "candidate": "goBack",
+    "status": "Verified root Back handler/app-bar control for loaded and failed business detail, browser Back/Forward and retained source table/search/page/selection. Evidence .codex/office-back-browser.cjs. Other origins remain separate audit flows."
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1271,
+    "candidate": "history.back",
+    "status": "Verified root Back handler/app-bar control for loaded and failed business detail, browser Back/Forward and retained source table/search/page/selection. Evidence .codex/office-back-browser.cjs. Other origins remain separate audit flows."
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1322,
+    "candidate": "goBack",
+    "status": "Verified root Back handler/app-bar control for loaded and failed business detail, browser Back/Forward and retained source table/search/page/selection. Evidence .codex/office-back-browser.cjs. Other origins remain separate audit flows."
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1322,
+    "candidate": "Back to ${pageCopy[navigationState.entries[navigationState.index - 1",
+    "status": "Verified root Back handler/app-bar control for loaded and failed business detail, browser Back/Forward and retained source table/search/page/selection. Evidence .codex/office-back-browser.cjs. Other origins remain separate audit flows."
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1347,
+    "candidate": "onBack",
+    "status": "Excluded as separate control: component signature or onBack prop wiring; actual error-page and app-bar buttons audited in .codex/office-back-browser.cjs"
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1347,
+    "candidate": "goBack",
+    "status": "Excluded as separate control: component signature or onBack prop wiring; actual error-page and app-bar buttons audited in .codex/office-back-browser.cjs"
+  },
+  {
+    "app": "office",
+    "file": "office/src/TutorialsPage.jsx",
+    "line": 59,
+    "candidate": "Back to tutorials",
+    "status": "Verified: browser tutorial editor Back/Forward and cross-module Back retain list/draft; successful save retains the same table during pending reconciliation; logout clears cached source. Evidence .codex/office-back-browser.cjs and TutorialsPage.test.jsx"
+  },
+  {
+    "app": "office",
+    "file": "office/src/usePageNavigation.js",
+    "line": 41,
+    "candidate": "history.back",
+    "status": "Verified shared helper through tutorial editor page Back, browser Back/Forward and cross-module source/draft retention in .codex/office-back-browser.cjs; not a separate rendered button."
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/ShopChat.jsx",
+    "line": 42,
+    "candidate": "Close chat and dialog cancel; browser Back from open conversation",
+    "status": "Fixed and verified: retained page activity closes native modal on Back; Forward and Close/Escape reopening retain same draft/message input without new session/config requests. Evidence shop/src/test/chat-navigation.test.jsx and .codex/shop-back-browser.cjs"
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/billing/BillingScreen.jsx",
+    "line": 52,
+    "candidate": "Back (unavailable plan)",
+    "status": "Verified: actual App page/app-bar/Android direct-link fallback to /billing, no native Back/minimization/mutation. Evidence mobile/src/app/App.test.jsx."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 43,
+    "candidate": "Back (price type not found)",
+    "status": "Verified: actual App page/app-bar/Android direct-link fallback to /settings/prices, no native Back/minimization/mutation. Evidence mobile/src/app/App.test.jsx."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 350,
+    "candidate": "Back (product wizard previous step)",
+    "status": "Verified: product name and stock drafts retained when stepping Back and continuing; evidence mobile/src/products/ProductsScreen.test.jsx, targeted 134 tests passed."
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/NewPurchaseScreen.jsx",
+    "line": 522,
+    "candidate": "Previous (purchase wizard)",
+    "status": "Verified: quantity -> selection -> basic -> selection -> quantity retains selected and unselected products and quantity 3 without requests. Evidence frontend/src/screens/NewPurchaseScreen.test.jsx, 6 tests passed."
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/components/common.jsx",
+    "line": 118,
+    "candidate": "Close modal / Escape",
+    "status": "Fixed: hidden retained ancestors no longer register Escape/focus handlers; resumed overlay retains exact draft node. Evidence common.test.jsx and .codex/desktop-shop-back-browser.cjs (hidden cancellation modal, browser Back/Forward, Close without requests). Final shared overlay tests passed."
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/components/common.jsx",
+    "line": 219,
+    "candidate": "Close filter drawer / Escape",
+    "status": "Fixed: hidden retained ancestors no longer register Escape/focus handlers; resumed overlay retains exact draft node. Evidence common.test.jsx and .codex/desktop-shop-back-browser.cjs (hidden cancellation modal, browser Back/Forward, Close without requests). Final shared overlay tests passed."
+  },
+  {
+    "app": "office",
+    "file": "office/src/FilterDrawer.jsx",
+    "line": 57,
+    "candidate": "Close filters / Escape",
+    "status": "Fixed: nested retained-page activity prevents hidden Escape and focus handlers changing filter drafts. Exact draft node survives parent switches, returned Close executes once. Evidence office/src/FilterDrawer.test.jsx; full Office 28 tests passed."
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/components/WorkspaceHeader.jsx",
+    "line": 34,
+    "candidate": "Back action (shared workspace app bar)",
+    "status": "Verified: WorkspaceHeader.test.jsx checks exact callback once. Actual runtime source-return proofs in desktop-back-browser.cjs and desktop-shop-back-browser.cjs retain source nodes/search/drafts and perform no return requests."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 851,
+    "candidate": "Back to customers (new/edit form button start)",
+    "status": "Verified: real App customers new page Back/Cancel/app-bar/Forward preserves source search and unsent name; customer edit profile Back/Cancel/Forward retains immediate source and draft. Evidence mobile/src/app/App.test.jsx. This is the same rendered control previously inventoried at label line 864."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 514,
+    "candidate": "Cancel / Previous (purchase wizard)",
+    "status": "Verified: PurchasesScreen.test.jsx verifies FOC, note, selected products, applied product search and exact page through Previous/completed-step returns without requests; App.test.jsx verifies new/edit Cancel returns to actual retained parent."
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/transactions/TransactionsScreen.jsx",
+    "line": 681,
+    "candidate": "Cancel / Previous (sale editor)",
+    "status": "Verified: TransactionsScreen.test.jsx verifies FOC/cart and discount through Previous/Continue with exact page and unchanged requests; App.test.jsx verifies nested customer sale editor Cancel/Back returns to its actual retained source."
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/components/AuthScreen.jsx",
+    "line": 160,
+    "candidate": "Browser Back/Forward between sign-in and signup; Sign in instead",
+    "status": "Fixed and verified: retained authentication forms preserve exact email/password/business draft nodes across page switches. Actual desktop browser Back/Forward and Sign in instead issue no requests; authentication detaches old forms. Evidence AuthScreen.test.jsx (4 tests passed) and .codex/desktop-back-browser.cjs (all assertions passed, zero page errors)."
+  }
+]

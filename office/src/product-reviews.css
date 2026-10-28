@@ -1,0 +1,24 @@
+.office-product-review-table { min-width: 850px; }
+.office-product-review-table .office-cell-stack { max-width: 230px; overflow-wrap: anywhere; white-space: normal; }
+.office-review-rating { display: inline-flex; align-items: center; gap: 2px; color: var(--theme-warning-text); white-space: nowrap; }
+.office-review-rating strong { margin-left: 5px; color: var(--theme-text); font-size: 11px; }
+.office-review-excerpt { max-width: 280px; margin: 6px 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--office-muted); font-size: 12px; }
+.office-product-review-modal { width: min(680px, calc(100vw - 32px)); }
+.office-review-form fieldset { display: grid; gap: 14px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.office-review-form label, .office-review-lookup label { display: grid; gap: 6px; font-size: 12px; font-weight: 600; }
+.office-review-form :is(input, select, textarea), .office-review-lookup :is(input, select) { width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--office-line); border-radius: 5px; font: inherit; }
+.office-review-form textarea { resize: vertical; }
+.office-review-form small, .office-review-help, .office-review-lookup small { color: var(--office-muted); font-size: 11px; font-weight: 400; }
+.office-review-help { margin: 0; line-height: 1.6; }
+.office-review-lookup { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: end; }
+.office-review-lookup > :is(small, p) { grid-column: 1 / -1; margin: 0; }
+.office-drawer-filter-fields .office-review-lookup { grid-template-columns: minmax(0, 1fr); }
+.office-review-identity { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 10px; margin: 0 0 14px; padding: 12px; border: 1px solid var(--office-line); border-radius: 5px; font-size: 12px; }
+.office-review-identity dt { color: var(--office-muted); }
+.office-review-identity dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.office-review-identity dd small { display: block; margin-top: 4px; color: var(--office-muted); font-weight: 400; }
+.office-review-comment { padding: 12px 0; border-bottom: 1px solid var(--office-line-soft); margin-bottom: 10px; }
+.office-review-comment h3 { font-size: 13px; margin: 0 0 10px; }
+.office-review-comment p, .office-review-delete-comment { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.7; }
+.office-review-comment small { color: var(--office-muted); font-size: 11px; }
+.office-product-reviews > .office-panel .office-panel-header > span { color: var(--office-muted); font-size: 12px; }

@@ -1,0 +1,26 @@
+.ai-report-contact-request { margin-top: 10px; text-align: left; }
+.ai-report-contact { display: grid; gap: 14px; color: var(--text, var(--theme-text)); background: var(--surface, var(--theme-surface)); border: 1px solid var(--border, var(--theme-border)); border-radius: var(--radius-control); padding: 16px; text-align: left; min-width: 0; }
+.ai-report-contact h3, .ai-report-contact p { margin: 0; }
+.ai-report-contact h3 { font-size: 16px; line-height: 1.6; }
+.ai-report-contact p, .ai-report-contact small { font-size: 13px; line-height: 1.7; }
+.ai-report-contact-summary { padding: 10px 12px; border-left: 3px solid var(--brand-700, var(--theme-border)); background: var(--brand-100, var(--theme-background)); overflow-wrap: anywhere; }
+.ai-report-contact-summary p { max-height: 100px; overflow: auto; white-space: pre-wrap; }
+.ai-report-contact fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.ai-report-contact legend { margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.ai-report-contact-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.ai-report-contact-options label { display: flex; align-items: center; gap: 8px; padding: 9px 12px; min-height: 44px; border: 1px solid var(--border, var(--theme-border)); border-radius: var(--radius-control); cursor: pointer; font-size: 14px; }
+.ai-report-contact-options label.is-selected { background: var(--brand-100, var(--theme-background)); border-color: var(--brand-700, var(--theme-border)); }
+.ai-report-contact input[type=radio] { width: 18px; height: 18px; margin: 0; accent-color: var(--brand-700, var(--theme-primary-text)); flex: none; }
+.ai-report-contact-skip { display: flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 6px; font-size: 13px; }
+.ai-report-contact-field { display: grid; gap: 6px; margin-top: 10px; font-size: 14px; }
+.ai-report-contact-field input { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border, var(--theme-border)); border-radius: var(--radius-control); background: var(--surface, var(--theme-surface)); color: inherit; font: inherit; }
+.ai-report-contact [role=alert] { color: var(--danger, var(--theme-danger-text)); }
+.ai-report-contact-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.ai-report-contact-actions button { min-height: 44px; }
+.ai-report-contact-actions button[type=submit] { background: var(--brand-700, var(--theme-primary)); color: var(--theme-on-primary); }
+.ai-report-contact :focus-visible { outline: 2px solid var(--brand-700, var(--theme-focus)); outline-offset: 3px; }
+
+.ai-report-contact-page { padding: 16px; padding-bottom: calc(96px + var(--app-safe-area-bottom)); max-width: 700px; margin: auto; }
+.ai-report-contact-page h1 { font-size: 18px; margin: 0; }
+.ai-report-contact-page .ai-report-contact { margin-top: 16px; }
+.ai-report-contact-request button { min-height: 44px; }

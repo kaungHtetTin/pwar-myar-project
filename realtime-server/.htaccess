@@ -1,0 +1,2 @@
+# Node runs this service; Apache must never serve its source or secrets.
+Require all denied

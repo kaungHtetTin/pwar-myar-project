@@ -1,0 +1,58 @@
+.office-report-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin-top: 12px; }
+.office-modal.office-report-review-modal { display: flex; flex-direction: column; width: min(1040px, 100%); overflow: hidden; }
+.office-report-review-modal > .office-modal-header, .office-report-review-modal > .office-modal-footer { flex-shrink: 0; }
+.office-report-review-modal > .office-modal-body { overflow-y: auto; min-height: 0; }
+.office-report-review-modal .office-report-grid { margin-top: 0; }
+.office-report-detail button, .office-report-links .office-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; border-radius: 5px; padding: 0 10px; font-size: 12px; font-weight: 700; }
+.office-report-links .office-button { color: var(--office-ink); border: 1px solid var(--office-line); background: var(--theme-surface); text-decoration: none; }
+.office-report-panel fieldset > button { justify-self: start; }
+.office-report-panel { padding: 16px; min-width: 0; }
+.office-report-panel h2 { margin: 0 0 12px; font-size: 17px; }
+.office-report-heading, .office-report-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.office-report-heading { justify-content: space-between; }
+.office-report-links { margin: 12px 0; }
+.office-report-panel dl { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 10px; }
+.office-report-panel dd { margin: 0; overflow-wrap: anywhere; }
+.office-report-text, .office-report-history p, .office-report-response p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.office-report-help, .office-report-panel small { color: var(--muted, var(--theme-text-muted)); font-size: 12px; }
+.office-report-response { border-left: 3px solid var(--brand, var(--theme-border)); background: var(--surface-muted, var(--theme-background)); padding: 10px 12px; }
+.office-report-panel fieldset { display: grid; gap: 12px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.office-report-panel label { display: grid; gap: 5px; }
+.office-report-panel textarea { min-height: 90px; }
+.office-report-table td { vertical-align: middle; }
+.office-report-table td small { display: block; margin-top: 4px; color: var(--muted, var(--theme-text-muted)); }
+.office-shell .office-report-icon { width: 32px; height: 32px; min-height: 32px; padding: 0; }
+.report-status-open { color: var(--theme-warning-text); background: var(--theme-warning-soft); }
+.report-status-in_review { color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.report-status-resolved { color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.report-status-dismissed { color: var(--theme-text-muted); background: var(--theme-background); }
+.office-report-history { margin-top: 16px; }
+.office-report-history article { padding: 12px 0; border-top: 1px solid var(--border, var(--theme-border)); }
+.office-report-history article small { margin-left: 8px; }
+.office-report-panel.office-report-shop { padding: 0; overflow: hidden; }
+.office-report-shop-header { padding: 16px; background: linear-gradient(135deg, var(--theme-primary-soft), var(--theme-surface)); border-bottom: 1px solid var(--office-line); }
+.office-report-shop-eyebrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.office-report-shop-eyebrow > span:first-child { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--office-muted); }
+.office-report-shop-identity { display: flex; align-items: center; gap: 12px; margin-top: 16px; min-width: 0; }
+.office-report-shop-identity > div { min-width: 0; }
+.office-report-shop-avatar { display: grid; place-items: center; flex: 0 0 48px; height: 48px; color: var(--theme-primary-text); border: 1px solid var(--theme-border); border-radius: 12px; background: var(--theme-surface); box-shadow: 0 2px 5px color-mix(in srgb, var(--theme-shadow) 3.137%, transparent); }
+.office-report-shop-identity h3 { margin: 0 0 4px; color: var(--office-ink); font-size: 18px; line-height: 1.3; overflow-wrap: anywhere; }
+.office-report-shop-slug { color: var(--office-muted); font-size: 12px; overflow-wrap: anywhere; }
+.office-report-shop .office-report-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 16px 0 0; }
+.office-report-shop .office-report-links button { border-color: var(--theme-border); color: var(--theme-primary-text); background: var(--theme-surface); }
+.office-report-shop dl.office-report-metadata { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; padding: 0 16px; }
+.office-report-metadata > div { display: grid; grid-template-columns: minmax(100px, .75fr) minmax(0, 1.25fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--office-line-soft); }
+.office-report-metadata dt { display: flex; align-items: flex-start; gap: 7px; color: var(--office-muted); font-size: 11px; line-height: 1.5; }
+.office-report-metadata dt svg { flex-shrink: 0; margin-top: 1px; }
+.office-report-metadata dd { color: var(--office-ink); font-size: 12px; line-height: 1.5; }
+.office-report-metadata dd strong { font-weight: 600; }
+.office-report-metadata dd small { display: block; margin-top: 2px; font-weight: 400; }
+.office-report-reason { display: inline-block; border-radius: 4px; padding: 2px 6px; background: var(--theme-warning-soft); color: var(--theme-warning-text); font-size: 11px; font-weight: 600; }
+.office-report-customer-message { margin: 16px; padding: 12px; border: 1px solid var(--office-line-soft); border-radius: 6px; background: var(--theme-background); }
+.office-report-customer-message h4 { display: flex; align-items: center; gap: 7px; margin: 0 0 8px; color: var(--office-ink); font-size: 12px; font-weight: 650; }
+.office-report-customer-message p { margin: 0; color: var(--theme-text-muted); font-size: 12px; line-height: 1.7; }
+.office-report-shop > .office-report-response { margin: 16px; font-size: 12px; }
+.office-report-shop-note { display: flex; align-items: flex-start; gap: 8px; margin: 16px; }
+.office-report-shop-note svg { flex-shrink: 0; margin-top: 2px; color: var(--theme-primary-text); }
+.office-report-shop-note p { margin: 0; font-size: 11px; line-height: 1.6; }
+@media (max-width: 850px) { .office-report-grid { grid-template-columns: minmax(0, 1fr); } }

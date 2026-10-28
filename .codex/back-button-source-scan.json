@@ -1,0 +1,687 @@
+[
+  {
+    "app": "frontend",
+    "file": "frontend/src/components/WorkspaceHeader.jsx",
+    "line": 34,
+    "source": "<button className=\"workspace-icon-button workspace-back-button\" type=\"button\" aria-label={backAction.label} title={backAction.label} onClick={backAction.onClick} disabled={backAction.disabled} > <ArrowLeft size={18} /> </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 34,
+        "candidate": "Back action (shared workspace app bar)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/NewPurchaseScreen.jsx",
+    "line": 522,
+    "source": "<button type=\"button\" onClick={() => { setError(''); setWizardStep((current) => current - 1); }}><ChevronLeft size={16} /> Previous</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 522,
+        "candidate": "Previous (purchase wizard)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "frontend",
+    "file": "frontend/src/screens/SaleScreen.jsx",
+    "line": 668,
+    "source": "<button type=\"button\" disabled={savingCustomer} onClick={closeCustomerEditor}>Back to checkout</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 668,
+        "candidate": "Back to checkout"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/access/AccessScreen.jsx",
+    "line": 16,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label=\"Back to access\" onClick={onBack}><ArrowLeft size={21} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 16,
+        "candidate": "onBack"
+      },
+      {
+        "line": 16,
+        "candidate": "Back to access"
+      },
+      {
+        "line": 25,
+        "candidate": "onBack"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/billing/BillingScreen.jsx",
+    "line": 52,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label=\"Back to billing\" onClick={() => onNavigate('/billing')}><ArrowLeft size={21} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 52,
+        "candidate": "Back to billing"
+      },
+      {
+        "line": 52,
+        "candidate": "Back (unavailable plan)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/billing/BillingScreen.jsx",
+    "line": 52,
+    "source": "<button type=\"button\" onClick={() => onNavigate('/billing')}>Back</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 52,
+        "candidate": "Back to billing"
+      },
+      {
+        "line": 52,
+        "candidate": "Back (unavailable plan)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 819,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(page.kind === \"detail\" ? \"/customers\" : `/customers/${page.customerId}`, { replace: true })} > <ArrowLeft size={19} /> {page.kind === \"detail\" ? \"Back to customers\" : \"Back to customer\"} </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 825,
+        "candidate": "Back to customers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 851,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo( editingCustomerId ? `/customers/${editingCustomerId}` : \"/customers\", { replace: true }, ) } > <ArrowLeft size={19} /> Back to customers </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 851,
+        "candidate": "Back to customers (new/edit form button start)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 900,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(`/customers/${page.customerId}`, { replace: true }) } > <ArrowLeft size={19} /> Back to customer </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 908,
+        "candidate": "Back to customer"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/customers/CustomersScreen.jsx",
+    "line": 944,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(\"/customers\", { replace: true })} > <ArrowLeft size={19} /> Back to customers </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 950,
+        "candidate": "Back to customers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/expenses/ExpensesScreen.jsx",
+    "line": 538,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(\"/expenses\", { replace: true })} > <ArrowLeft size={19} /> Back to expenses </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 544,
+        "candidate": "Back to expenses"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/expenses/ExpensesScreen.jsx",
+    "line": 565,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(\"/expenses\", { replace: true })} > <ArrowLeft size={19} /> Back to expenses </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 571,
+        "candidate": "Back to expenses"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/navigation/AppShell.jsx",
+    "line": 155,
+    "source": "<button className=\"icon-button app-back-button\" type=\"button\" aria-label={`Back to ${backSourcePath(appBar.backPath).slice(1).split(\"/\")[0]}`} onClick={() => onNavigateBack ? onNavigateBack(appBar.backPath) : onNavigatePath?.(appBar.backPath) } > <ArrowLeft size={22} /> </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 153,
+        "candidate": "backPath"
+      },
+      {
+        "line": 157,
+        "candidate": "Back to ${appBar.backPath.slice(1).split("
+      },
+      {
+        "line": 159,
+        "candidate": "NavigateBack"
+      },
+      {
+        "line": 160,
+        "candidate": "NavigateBack"
+      },
+      {
+        "line": 160,
+        "candidate": "backPath"
+      },
+      {
+        "line": 161,
+        "candidate": "backPath"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 350,
+    "source": "<button type=\"button\" className=\"mobile-secondary\" onClick={() => setStep((current) => current - 1)}><ChevronLeft size={18} />Back</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 350,
+        "candidate": "Back (product wizard previous step)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 820,
+    "source": "<button type=\"button\" className=\"submission-back\" onClick={() => navigateTo('/products', { replace: true })}><ArrowLeft size={19} />Back to products</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 820,
+        "candidate": "Back to products"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 839,
+    "source": "<button type=\"button\" className=\"submission-back\" onClick={() => navigateTo('/products', { replace: true })}><ArrowLeft size={19} />Back to products</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 839,
+        "candidate": "Back to products"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/products/ProductsScreen.jsx",
+    "line": 851,
+    "source": "<button type=\"button\" className=\"submission-back\" onClick={() => navigateTo('/products', { replace: true })}><ArrowLeft size={19} />Back to products</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 851,
+        "candidate": "Back to products"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 454,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo('/purchases', { replace: true })}><ArrowLeft size={19} />Back to purchases</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 454,
+        "candidate": "Back to purchases"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 469,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo('/purchases', { replace: true })}><ArrowLeft size={19} />Back to purchases</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 469,
+        "candidate": "Back to purchases"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 514,
+    "source": "<button className=\"mobile-secondary\" type=\"button\" onClick={() => wizardStep === 1 ? navigateTo('/purchases', { replace: true }) : setWizardStep((current) => current - 1)}>{wizardStep > 1 && <ChevronLeft size={17} />}{wizardStep === 1 ? 'Cancel' : 'Previous'}</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 514,
+        "candidate": "Cancel / Previous (purchase wizard)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/purchases/PurchasesScreen.jsx",
+    "line": 526,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo('/purchases', { replace: true })}><ArrowLeft size={19} />Back to purchases</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 526,
+        "candidate": "Back to purchases"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/OfflineSalesPage.jsx",
+    "line": 80,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label={t('backToSell', 'Back to sell')} onClick={() => onNavigate('/sell')}><ArrowLeft size={20} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 80,
+        "candidate": "Back to sell"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/sell/SaleScreen.jsx",
+    "line": 44,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label={t('previousStep', 'Go to previous sale step')} onClick={() => onNavigate(backPath, { back: true })}><ArrowLeft size={20} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 42,
+        "candidate": "backPath"
+      },
+      {
+        "line": 44,
+        "candidate": "backPath"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/PrinterSettingsPage.jsx",
+    "line": 67,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label=\"Back to settings\" onClick={() => onNavigate('/settings')}><ArrowLeft size={21} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 67,
+        "candidate": "Back to settings"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 34,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label=\"Back to settings\" onClick={onBack}><ArrowLeft size={21} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 34,
+        "candidate": "onBack"
+      },
+      {
+        "line": 34,
+        "candidate": "Back to settings"
+      },
+      {
+        "line": 44,
+        "candidate": "onBack"
+      },
+      {
+        "line": 43,
+        "candidate": "Back (price type not found)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/settings/SettingsScreen.jsx",
+    "line": 43,
+    "source": "<button type=\"button\" onClick={() => onNavigate('/settings/prices')}>Back</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 34,
+        "candidate": "onBack"
+      },
+      {
+        "line": 34,
+        "candidate": "Back to settings"
+      },
+      {
+        "line": 44,
+        "candidate": "onBack"
+      },
+      {
+        "line": 52,
+        "candidate": "onBack"
+      },
+      {
+        "line": 53,
+        "candidate": "onBack"
+      },
+      {
+        "line": 43,
+        "candidate": "Back (price type not found)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 391,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(`/suppliers/${page.supplierId}`, { replace: true })}><ArrowLeft size={19} />Back to supplier</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 391,
+        "candidate": "Back to supplier"
+      },
+      {
+        "line": 395,
+        "candidate": "Back to supplier"
+      },
+      {
+        "line": 399,
+        "candidate": "Back to suppliers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 395,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(`/suppliers/${page.supplierId}`, { replace: true })}><ArrowLeft size={19} />Back to supplier</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 391,
+        "candidate": "Back to supplier"
+      },
+      {
+        "line": 395,
+        "candidate": "Back to supplier"
+      },
+      {
+        "line": 399,
+        "candidate": "Back to suppliers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 399,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(`/suppliers/${page.supplierId}`, { replace: true })}><ArrowLeft size={19} />Back to supplier</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 391,
+        "candidate": "Back to supplier"
+      },
+      {
+        "line": 395,
+        "candidate": "Back to supplier"
+      },
+      {
+        "line": 399,
+        "candidate": "Back to suppliers"
+      },
+      {
+        "line": 409,
+        "candidate": "Back to suppliers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 409,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo(editingId ? `/suppliers/${editingId}` : '/suppliers', { replace: true })}><ArrowLeft size={19} />Back to suppliers</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 399,
+        "candidate": "Back to suppliers"
+      },
+      {
+        "line": 409,
+        "candidate": "Back to suppliers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/suppliers/SuppliersScreen.jsx",
+    "line": 428,
+    "source": "<button className=\"submission-back\" type=\"button\" onClick={() => navigateTo('/suppliers', { replace: true })}><ArrowLeft size={19} />Back to suppliers</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 428,
+        "candidate": "Back to suppliers"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/transactions/TransactionsScreen.jsx",
+    "line": 489,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label=\"Back to sales\" onClick={() => onNavigate(\"/sales\")} > <ArrowLeft size={21} /> </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 492,
+        "candidate": "Back to sales"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/transactions/TransactionsScreen.jsx",
+    "line": 681,
+    "source": "<button className=\"mobile-secondary\" type=\"button\" onClick={() => wizardStep === 1 ? onNavigate(\"/sales\") : setWizardStep(1)} > {wizardStep === 2 && <ChevronLeft size={17} />}{wizardStep === 1 ? \"Cancel\" : \"Previous\"} </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 681,
+        "candidate": "Cancel / Previous (sale editor)"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "mobile",
+    "file": "mobile/src/transactions/TransactionsScreen.jsx",
+    "line": 801,
+    "source": "<button type=\"button\" className=\"icon-button\" aria-label=\"Back to transactions\" onClick={() => onNavigate(\"/transactions\")} > <ArrowLeft size={21} /> </button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 804,
+        "candidate": "Back to transactions"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "office",
+    "file": "office/src/BusinessesPage.jsx",
+    "line": 118,
+    "source": "<button type=\"button\" aria-label=\"Previous\" title=\"Previous page\" disabled={page <= 1} onClick={() => onQueryChange({ ...query, page: page - 1 })}><ChevronLeft size={16} /></button>",
+    "kind": "pagination",
+    "inventory_candidates": [],
+    "needs_review": false
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 590,
+    "source": "<button onClick={onBack}><ArrowLeft size={15} /> Back to businesses</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 590,
+        "candidate": "onBack"
+      },
+      {
+        "line": 590,
+        "candidate": "Back to businesses"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 893,
+    "source": "<button type=\"button\" disabled={historyData.page <= 1} onClick={() => onQueryChange({ ...query, page: historyData.page - 1 })}>Previous</button>",
+    "kind": "pagination",
+    "inventory_candidates": [],
+    "needs_review": false
+  },
+  {
+    "app": "office",
+    "file": "office/src/main.jsx",
+    "line": 1322,
+    "source": "<button className=\"office-appbar-back\" type=\"button\" onClick={goBack} aria-label={`Back to ${pageCopy[navigationState.entries[navigationState.index - 1].tab][0]}`} title={`Back to ${pageCopy[navigationState.entries[navigationState.index - 1].tab][0]}`}><ArrowLeft size={18} /></button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 1322,
+        "candidate": "goBack"
+      },
+      {
+        "line": 1322,
+        "candidate": "Back to ${pageCopy[navigationState.entries[navigationState.index - 1"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "office",
+    "file": "office/src/TutorialsPage.jsx",
+    "line": 59,
+    "source": "<button onClick={onClose} disabled={busy}><ArrowLeft size={16} /> Back to tutorials</button>",
+    "kind": "return-control",
+    "inventory_candidates": [
+      {
+        "line": 59,
+        "candidate": "Back to tutorials"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "office",
+    "file": "office/src/TutorialsPage.jsx",
+    "line": 135,
+    "source": "<button disabled={data.page <= 1 || busy !== null} onClick={() => setQuery(q => ({ ...q, page: data.page - 1 }))}>Previous</button>",
+    "kind": "pagination",
+    "inventory_candidates": [],
+    "needs_review": false
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/main.jsx",
+    "line": 328,
+    "source": "<a className=\"back\" onClick={(event) => { event.preventDefault(); goBack(`${storePath(slug)}${origin === \"marketplace\" ? \"?origin=marketplace\" : \"\"}`); }} href={`#${storePath(slug)}${origin === \"marketplace\" ? \"?origin=marketplace\" : \"\"}`} > <ArrowLeft size={16} /> {p.store_name} </a>",
+    "kind": "return-link",
+    "inventory_candidates": [
+      {
+        "line": 330,
+        "candidate": "goBack"
+      }
+    ],
+    "needs_review": false
+  },
+  {
+    "app": "shop",
+    "file": "shop/src/main.jsx",
+    "line": 665,
+    "source": "<a className=\"back\" href=\"#/cart\" onClick={(event) => { event.preventDefault(); goBack(\"/cart\"); }}> <ArrowLeft size={16} /> {t.cart} </a>",
+    "kind": "return-link",
+    "inventory_candidates": [
+      {
+        "line": 665,
+        "candidate": "goBack"
+      }
+    ],
+    "needs_review": false
+  }
+]

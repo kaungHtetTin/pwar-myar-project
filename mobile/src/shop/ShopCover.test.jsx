@@ -1,0 +1,52 @@
+import React from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, expect, it, vi } from 'vitest';
+import { apiRequest } from '../api/client';
+import { ShopCover } from './ShopCover';
+vi.mock('../api/client', () => ({ apiRequest: vi.fn() }));
+beforeEach(() => {
+  vi.clearAllMocks();
+  URL.createObjectURL = vi.fn(() => 'blob:cover-preview'); URL.revokeObjectURL = vi.fn();
+  apiRequest.mockResolvedValue({ cover_data_url: 'data:image/png;base64,saved' });
+});
+it('stages removal, supports undo, and deletes only when Save is submitted', async () => {
+  render(<ShopCover onNavigate={vi.fn()} />);
+  fireEvent.click(await screen.findByRole('button', { name: 'Remove', exact: true }));
+  fireEvent.click(screen.getByRole('button', { name: 'Remove cover', exact: true }));
+  expect(apiRequest.mock.calls.some(([, options]) => options?.method === 'DELETE')).toBe(false);
+  expect(screen.getByText('Cover will be removed')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'Undo removal' }));
+  expect(screen.getByRole('button', { name: 'Save changes' })).toBeDisabled();
+  fireEvent.click(screen.getByRole('button', { name: 'Remove', exact: true }));
+  fireEvent.click(screen.getByRole('button', { name: 'Remove cover', exact: true }));
+  fireEvent.click(screen.getByRole('button', { name: 'Save changes' }));
+  await waitFor(() => expect(apiRequest).toHaveBeenCalledWith('/shop-admin/cover', { method: 'DELETE', timeoutMs: 30000 }));
+});
+it('rejects unsupported files without discarding the previously selected valid file', async () => {
+  render(<ShopCover onNavigate={vi.fn()} />);
+  const input = await screen.findByLabelText('Shop cover file');
+  fireEvent.change(input, { target: { files: [new File(['image'], 'cover.png', { type: 'image/png' })] } });
+  await screen.findByAltText('Selected shop cover preview');
+  fireEvent.change(input, { target: { files: [new File(['text'], 'invalid.txt', { type: 'text/plain' })] } });
+  expect(await screen.findByRole('alert')).toHaveTextContent('Choose a PNG, JPG or WebP up to 2 MB.');
+  expect(screen.getByText('cover.png')).toBeInTheDocument();
+  fireEvent.change(input, { target: { files: [new File([new Uint8Array(2 * 1024 * 1024 + 1)], 'large.png', { type: 'image/png' })] } });
+  expect(screen.getByRole('alert')).toHaveTextContent('Choose a PNG, JPG or WebP up to 2 MB.');
+  expect(screen.getByText('cover.png')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Save changes' })).toBeEnabled();
+});
+it('retains a failed upload for retry and guards duplicate pending submissions', async () => {
+  let rejectUpload;
+  apiRequest.mockImplementation((path, options) => options?.method === 'POST' ? new Promise((resolve, reject) => { rejectUpload = reject; }) : Promise.resolve({ cover_data_url: '' }));
+  const navigate = vi.fn(); render(<ShopCover onNavigate={navigate} />);
+  fireEvent.change(await screen.findByLabelText('Shop cover file'), { target: { files: [new File(['image'], 'retry.png', { type: 'image/png' })] } });
+  const form = screen.getByRole('button', { name: 'Save changes' }).closest('form');
+  fireEvent.submit(form); fireEvent.submit(form);
+  expect(apiRequest.mock.calls.filter(([, options]) => options?.method === 'POST')).toHaveLength(1);
+  rejectUpload(new Error('Upload interrupted'));
+  expect(await screen.findByRole('alert')).toHaveTextContent('Upload interrupted');
+  expect(screen.getByText('retry.png')).toBeInTheDocument();
+  apiRequest.mockResolvedValueOnce({ cover_data_url: 'saved' });
+  fireEvent.click(screen.getByRole('button', { name: 'Save changes' }));
+  await waitFor(() => expect(navigate).toHaveBeenCalledWith('/shop', { replace: true }));
+});

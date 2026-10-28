@@ -1,0 +1,70 @@
+/* Order details share the mobile palette, spacing and touch targets. */
+.shop-order-detail { gap: .85rem; }
+.shop-order-detail .shop-order-detail-hero { padding: 1.15rem; border: 1px solid var(--brand-800); border-radius: var(--radius-surface); color: var(--theme-on-primary); background: linear-gradient(125deg, var(--brand-900), var(--brand-700)); box-shadow: 0 .35rem 1rem color-mix(in srgb, var(--theme-shadow) 10%, transparent); }
+.shop-order-detail-hero .shop-order-detail-identity { align-items: flex-start; gap: .75rem; }
+.shop-order-detail-hero .shop-order-detail-identity .shop-order-icon { width: 2.75rem; height: 2.75rem; flex-basis: 2.75rem; border: 1px solid color-mix(in srgb, var(--theme-border) 18%, transparent); border-radius: var(--radius-card); color: var(--theme-on-primary); background: color-mix(in srgb, var(--theme-surface) 10%, transparent); }
+.shop-order-detail-hero .shop-order-detail-identity small { color: var(--theme-text-muted); font-size: .63rem; }
+.shop-order-detail-hero .shop-order-detail-identity h1 { color: var(--theme-on-primary); font-size: 1.2rem; letter-spacing: -.025em; }
+.shop-order-detail-hero .shop-order-date { align-items: flex-start; margin-top: .15rem; color: var(--theme-text-muted); font-size: .59rem; }
+.shop-order-detail-hero .shop-order-date svg { flex-shrink: 0; margin-top: .15rem; }
+.shop-order-detail-hero .shop-order-hero-total { align-items: end; gap: .75rem; margin-top: 1rem; padding-top: .85rem; border-color: color-mix(in srgb, var(--theme-border) 18%, transparent); }
+.shop-order-detail-hero .shop-order-hero-total > span { color: var(--theme-text-muted); font-size: .64rem; }
+.shop-order-detail-hero .shop-order-hero-total strong { color: var(--theme-on-primary); font-size: 1.85rem; font-weight: 800; letter-spacing: -.035em; }
+.shop-order-detail-hero .shop-order-hero-total > span:last-child strong { color: var(--theme-on-primary); font-size: 1.2rem; }
+.shop-order-detail-hero .shop-order-badges { gap: .4rem; margin-top: 1rem; }
+.shop-order-detail-hero .shop-order-badge { border: 0; font-size: .58rem; text-transform: capitalize; }
+
+.shop-order-detail > .shop-order-panel { padding: 1rem; border-radius: var(--radius-surface); box-shadow: none; }
+.shop-order-detail .shop-order-panel-heading { gap: .5rem; margin-bottom: .85rem; }
+.shop-order-detail .shop-order-panel-heading > span { width: 1.25rem; height: 1.5rem; flex-basis: 1.25rem; border-radius: 0; color: var(--theme-primary-text); background: transparent; }
+.shop-order-detail .shop-order-panel-heading h2 { font-size: .82rem; font-weight: 800; letter-spacing: -.015em; }
+.shop-order-detail .shop-order-detail-notice { gap: .5rem; padding: .65rem; border: 0; color: var(--muted); background: var(--theme-background); font-size: .62rem; }
+
+/* A compact, horizontally scrollable timeline keeps every stage and date. */
+.shop-order-detail .shop-order-roadmap { display: flex; gap: 0; overflow-x: auto; overscroll-behavior-x: contain; padding: .2rem 0 .5rem; }
+.shop-order-detail .shop-order-roadmap > li { display: flex; min-width: 0; min-height: 0; flex: 1 0 3.1rem; flex-direction: column; align-items: center; gap: .5rem; padding: 0 .2rem; text-align: center; }
+.shop-order-detail .shop-order-roadmap > li:not(:last-child)::after { z-index: 0; top: .9rem; right: -1rem; bottom: auto; left: calc(50% + 1rem); width: auto; height: 2px; }
+.shop-order-detail .shop-order-step-marker { position: relative; z-index: 1; flex-shrink: 0; }
+.shop-order-detail .shop-order-step-copy { gap: .25rem; padding: 0; }
+.shop-order-detail .shop-order-step-copy strong { font-size: .56rem; line-height: 1.6; overflow-wrap: normal; word-break: normal; }
+.shop-order-detail .shop-order-step-copy small { font-size: .5rem; line-height: 1.6; }
+.shop-order-detail .shop-order-step-state { margin: auto 0 0; padding: .15rem .2rem; font-size: .46rem; white-space: nowrap; }
+
+.shop-order-detail .shop-order-action-tiles { gap: .55rem; }
+.shop-order-detail .shop-order-action-tile { min-height: 5.4rem; gap: .4rem; padding: .7rem .5rem; border-color: var(--theme-border); background: var(--theme-background); font-size: .66rem; }
+.shop-order-detail .shop-order-action-tile.is-danger { border-color: var(--theme-border); color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.shop-order-detail .shop-order-action-tile-icon { width: 2rem; height: 2rem; background: transparent; }
+.shop-order-detail .shop-order-action-tile.is-danger .shop-order-action-tile-icon { background: transparent; }
+.shop-order-detail .shop-order-action-tile:not(:disabled):hover { border-color: currentColor; }
+.shop-order-detail .shop-order-action-tile:not(:disabled):active { background: var(--brand-100); }
+.shop-order-detail .shop-order-action-tile.is-danger:not(:disabled):active { background: var(--danger-bg); }
+
+.shop-order-detail .shop-order-customer-heading { align-items: flex-start; gap: .8rem; }
+.shop-order-detail .shop-order-customer-avatar { width: 3rem; height: 3rem; flex-basis: 3rem; border: 0; font-size: .95rem; }
+.shop-order-detail .shop-order-customer-heading > div { gap: .3rem; }
+.shop-order-detail .shop-order-customer-heading strong { font-size: .9rem; }
+.shop-order-detail .shop-order-customer-heading small { display: flex; align-items: flex-start; gap: .35rem; font-size: .65rem; }
+.shop-order-detail .shop-order-customer-heading small svg { flex-shrink: 0; margin-top: .15rem; }
+.shop-order-detail .shop-order-detail-link { min-height: 2.85rem; margin-top: .85rem; padding-top: .65rem; font-size: .68rem; }
+.shop-order-detail .shop-order-fulfillment-panel .shop-order-panel-heading { padding-bottom: 0; border: 0; }
+.shop-order-detail .shop-order-fulfillment { gap: .65rem; }
+.shop-order-detail .shop-order-fulfillment-method { border: 0; color: var(--theme-primary-text); background: var(--brand-100); font-size: .64rem; }
+.shop-order-detail .shop-order-fulfillment p { gap: .5rem; font-size: .7rem; }
+.shop-order-detail .shop-order-fulfillment small { padding-left: 1.35rem; font-size: .65rem; }
+.shop-order-detail .shop-order-notes { padding: .75rem; border-left: 2px solid var(--theme-border); border-radius: 0 var(--radius-control) var(--radius-control) 0; }
+.shop-order-detail .shop-order-notes small { font-size: .6rem; }
+.shop-order-detail .shop-order-notes p { font-size: .68rem; }
+
+.shop-order-detail .shop-order-item { grid-template-columns: 2rem minmax(0, 1fr) minmax(0, auto); gap: .6rem; padding: .8rem 0; }
+.shop-order-detail .shop-order-item-icon { height: 2rem; color: var(--muted); background: var(--theme-background); font-size: .64rem; font-weight: 800; overflow-wrap: anywhere; }
+.shop-order-detail .shop-order-item > div { min-width: 0; }
+.shop-order-detail .shop-order-item strong { font-size: .72rem; }
+.shop-order-detail .shop-order-item small { font-size: .6rem; }
+.shop-order-detail .shop-order-item > b { max-width: 6.5rem; font-size: .72rem; overflow-wrap: anywhere; }
+.shop-order-detail .shop-order-totals { gap: .7rem; margin: .65rem -1rem -1rem; padding: 1rem; border-top: 1px dashed var(--theme-border); border-radius: 0 0 var(--radius-surface) var(--radius-surface); background: var(--theme-background); }
+.shop-order-detail .shop-order-totals > div { font-size: .68rem; }
+.shop-order-detail .shop-order-grand-total dd { font-size: 1.1rem; }
+.shop-order-detail .shop-order-receipt-panel:has(.shop-order-totals ~ *) .shop-order-totals { margin-bottom: .8rem; border-radius: var(--radius-control); }
+.shop-order-detail .shop-order-payment-account { gap: .45rem; padding: .75rem; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--theme-surface); }
+.shop-order-detail .shop-order-payment-account strong { font-size: .78rem; }
+.shop-order-detail .shop-order-history-toggle { font-size: .75rem; }

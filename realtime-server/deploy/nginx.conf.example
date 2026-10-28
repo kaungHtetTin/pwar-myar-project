@@ -1,0 +1,49 @@
+# Separate Node server. Replace domains, certificate paths and Laravel's
+# outbound public IP before loading this configuration.
+server {
+    listen 443 ssl;
+    server_name socket.pwarmyar.com;
+    ssl_certificate /etc/letsencrypt/live/socket.pwarmyar.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/socket.pwarmyar.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    client_max_body_size 12k;
+
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_read_timeout 75s;
+    }
+
+    location ~ ^/(?:api/)?health$ {
+        limit_except GET { deny all; }
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+
+    location = /events {
+        # Documentation address: REPLACE with the Laravel server's outbound IP.
+        allow 192.0.2.10;
+        deny all;
+        limit_except POST { deny all; }
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+
+    location = /ai-jobs {
+        # Use the same Laravel outbound IP restriction as /events.
+        allow 192.0.2.10;
+        deny all;
+        limit_except POST { deny all; }
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+
+    # Never serve application source, .env, logs, or directory listings.
+    location / { return 404; }
+}

@@ -1,0 +1,6 @@
+.office-activity-alert { position: fixed; right: 16px; bottom: 16px; z-index: 1100; display: grid; grid-template-columns: 32px minmax(0,1fr) 36px; gap: 8px; width: min(360px, calc(100vw - 32px)); box-sizing: border-box; padding: 12px; border: 1px solid var(--line, var(--theme-border)); border-left: 3px solid var(--brand, var(--theme-border)); border-radius: 10px; background: var(--surface, var(--theme-surface)); color: var(--text, var(--theme-primary-text)); box-shadow: 0 4px 18px color-mix(in srgb, var(--theme-shadow) 14%, transparent); }
+.office-activity-alert strong { display: block; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.office-activity-alert p { margin: 4px 0 10px; color: var(--muted, var(--theme-text-muted)); font-size: 13px; overflow-wrap: anywhere; }
+.office-activity-icon { display: grid; place-items: center; width: 32px; height: 32px; background: var(--theme-primary-soft); color: var(--theme-primary-text); border-radius: 8px; }
+.office-activity-dismiss { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: inherit; }
+.office-activity-alert button:focus-visible { outline: 2px solid var(--theme-focus); outline-offset: 2px; }

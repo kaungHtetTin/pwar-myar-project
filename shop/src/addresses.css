@@ -1,0 +1,41 @@
+main.shopping-main:has([data-retained-view]:not([hidden]) .addresses-page) { max-width: none; padding: 0; margin: 0; background: var(--theme-surface); min-height: calc(100dvh - 60px); }
+.addresses-page { font-family: 'Shop Auth DM Sans', 'Noto Sans Myanmar', sans-serif; }
+.addresses-intro { padding: 18px 14px 34px; background: var(--theme-primary); color: var(--theme-on-primary); }
+.addresses-intro h1 { margin: 0 0 5px; font-size: 28px; line-height: 34px; color: inherit; }
+.addresses-intro p { margin: 0; font-size: 14px; line-height: 21px; color: inherit; }
+.addresses-content { position: relative; max-width: 900px; margin: -16px auto 0; padding: 18px 14px 28px; background: var(--theme-surface); border-radius: 16px 16px 0 0; }
+.addresses-content .feature-panel-heading { margin: 0 0 18px; gap: 12px; }
+.addresses-content .feature-panel-heading h2 { margin: 0; font-size: 18px; line-height: 24px; }
+main.shopping-main .addresses-content .feature-panel-heading button { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 12px; border-radius: 10px; font-size: 13px; }
+.addresses-content .feature-list { display: grid; gap: 16px; }
+.addresses-content .address-card { padding: 16px; border: 1px solid var(--theme-border); border-radius: 14px; background: var(--theme-surface); box-shadow: 0 2px 6px color-mix(in srgb, var(--theme-shadow) 2.745%, transparent); }
+.addresses-content .address-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.addresses-content .address-card-top > strong { font-size: 18px; }
+.address-pin { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+.addresses-content .feature-chip { margin-left: auto; font-size: 12px; color: var(--theme-primary-text); background: var(--theme-primary-soft); padding: 5px 9px; }
+.addresses-content .address-card > strong { font-size: 15px; line-height: 22px; }
+.address-phone { display: block; margin-top: 4px; font-size: 14px; color: var(--theme-text-muted); }
+.addresses-content .address-card p { margin: 12px 0 16px; font-size: 14px; line-height: 22px; color: var(--theme-text-muted); white-space: pre-line; overflow-wrap: anywhere; }
+.addresses-content .feature-actions { gap: 10px; }
+main.shopping-main .addresses-content .feature-actions button { min-height: 44px; border-radius: 10px; font-size: 14px; }
+.addresses-content .address-default-action { margin-right: auto; color: var(--theme-primary-text); }
+.addresses-content .address-editor { margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.addresses-content .address-editor h3 { margin: 0 0 20px; font-size: 20px; }
+.addresses-content .address-editor fieldset { gap: 18px; }
+.addresses-content .feature-form-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+main.shopping-main .addresses-content .address-editor label { font-size: 14px; line-height: 21px; gap: 6px; }
+main.shopping-main .addresses-content .address-editor input:not([type="checkbox"]), main.shopping-main .addresses-content .address-editor textarea { min-height: 46px; padding: 12px; font-size: 14px; font-weight: 400; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-surface); }
+main.shopping-main .addresses-content .address-editor textarea { min-height: 100px; }
+.addresses-content .address-editor .feature-check { min-height: 44px; }
+.addresses-content .address-editor .feature-actions { display: grid; grid-template-columns: 1fr 1fr; }
+.addresses-content .feature-empty { border: 1px solid var(--theme-border); border-radius: 14px; padding: 30px 18px; color: var(--theme-text-muted); }
+.addresses-content :is(button,a,input,textarea):focus-visible { outline: 2px solid var(--theme-focus); outline-offset: 2px; }
+.address-picker .addresses-intro { display: none; }
+#root:has([data-retained-view]:not([hidden]) .addresses-page) > .mobile-navigation { display: none; }
+.shopping-header:has(+ main [data-retained-view]:not([hidden]) .addresses-page) .desktop-navigation { display: none; }
+body:has([data-retained-view]:not([hidden]) .addresses-page) { padding-bottom: 0; }
+.address-editor-modal { width: min(440px, calc(100vw - 28px)); max-height: calc(100dvh - 32px); padding: 20px; border: 1px solid var(--theme-border); border-radius: 18px; background: var(--theme-surface); color: var(--theme-text); overflow: auto; }
+.address-editor-modal::backdrop { background: color-mix(in srgb, var(--theme-info) 40%, transparent); }
+.addresses-content .address-editor-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.addresses-content .address-editor-heading h3 { margin: 0; }
+main.shopping-main .address-modal-close { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--theme-text-muted); }

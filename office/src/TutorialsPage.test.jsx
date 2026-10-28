@@ -1,0 +1,112 @@
+import React from 'react';
+import { act, render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { TutorialsPage } from './TutorialsPage';
+import { api } from './api';
+
+vi.mock('./api', () => ({ api: vi.fn(), apiBlob: vi.fn() }));
+const tutorial = { id: 1, title: 'First sale', description: 'Scan and checkout', youtube_url: 'https://youtu.be/abcdefghijk', is_published: true, sort_order: 2, has_thumbnail: false };
+const listing = { items: [tutorial], total: 1, page: 1, last_page: 1 };
+beforeEach(() => { window.history.replaceState({}, '', '/'); vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); api.mockReset(); api.mockResolvedValue(listing); });
+afterEach(() => { vi.restoreAllMocks(); });
+
+describe('Tutorial management', () => {
+  it('returns to the existing list after save while its changed rows reconcile in the background', async () => {
+    let reads = 0, resolveRefresh;
+    api.mockImplementation((path, options) => {
+      if (options?.method === 'POST') return Promise.resolve({ ...tutorial, title: 'Updated sale' });
+      reads += 1;
+      if (reads === 1) return Promise.resolve(listing);
+      return new Promise(resolve => { resolveRefresh = resolve; });
+    });
+    render(<TutorialsPage />);
+    await screen.findByText('First sale');
+    const table = screen.getByRole('table');
+    fireEvent.click(screen.getByRole('button', { name: 'Actions for First sale' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
+    fireEvent.change(screen.getByLabelText('Title'), { target: { value: 'Updated sale' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Save tutorial' }));
+    await waitFor(() => expect(resolveRefresh).toBeTypeOf('function'));
+    await waitFor(() => expect(table).toBeVisible());
+    expect(screen.getByRole('table')).toBe(table);
+    expect(screen.queryByText('Loading tutorials…')).not.toBeInTheDocument();
+    await act(async () => resolveRefresh({ ...listing, items: [{ ...tutorial, title: 'Updated sale' }] }));
+    expect(screen.getByText('Updated sale')).toBeVisible();
+    expect(screen.getByRole('table')).toBe(table);
+  });
+  it('restores the mounted list on Back and the editor draft on browser Forward without fetching again', async () => {
+    render(<TutorialsPage />);
+    await screen.findByText('First sale');
+    const table = screen.getByRole('table');
+    fireEvent.click(screen.getByRole('button', { name: 'Add tutorial' }));
+    const title = screen.getByLabelText('Title');
+    fireEvent.change(title, { target: { value: 'Unsent draft' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Back to tutorials' }));
+    await waitFor(() => expect(table).toBeVisible());
+    expect(screen.getByRole('table')).toBe(table);
+    expect(api).toHaveBeenCalledTimes(1);
+    window.history.forward();
+    await waitFor(() => expect(title).toBeVisible());
+    expect(screen.getByLabelText('Title')).toBe(title);
+    expect(title).toHaveValue('Unsent draft');
+    window.history.back();
+    await waitFor(() => expect(table).toBeVisible());
+    expect(api).toHaveBeenCalledTimes(1);
+  });
+  it('creates a draft with multipart data and supports publishing', async () => {
+    render(<TutorialsPage />);
+    await screen.findByText('First sale');
+    fireEvent.click(screen.getByRole('button', { name: 'Add tutorial' }));
+    expect(screen.getByLabelText(/Published —/)).not.toBeChecked();
+    fireEvent.change(screen.getByLabelText('Title'), { target: { value: 'Printer setup' } });
+    fireEvent.change(screen.getByLabelText(/YouTube link/), { target: { value: 'https://youtu.be/abcdefghijk' } });
+    fireEvent.change(screen.getByLabelText(/Description/), { target: { value: 'Learn to print.' } });
+    fireEvent.click(screen.getByLabelText(/Published —/));
+    fireEvent.click(screen.getByRole('button', { name: 'Save tutorial' }));
+    await screen.findByText('Tutorial published on the portfolio.');
+    const [, options] = api.mock.calls.find(([path, options]) => path === '/office/tutorials' && options?.method === 'POST');
+    expect(options.body).toBeInstanceOf(FormData);
+    expect(options.body.get('title')).toBe('Printer setup');
+    expect(options.body.get('is_published')).toBe('1');
+    expect(options.body.has('_method')).toBe(false);
+  });
+  it('edits and unpublishes without losing saved values', async () => {
+    render(<TutorialsPage />);
+    await screen.findByText('First sale');
+    fireEvent.click(screen.getByRole('button', { name: 'Actions for First sale' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
+    expect(screen.getByLabelText('Title')).toHaveValue('First sale');
+    fireEvent.click(screen.getByLabelText(/Published —/));
+    fireEvent.click(screen.getByRole('button', { name: 'Save tutorial' }));
+    await screen.findByText('Tutorial saved as a draft.');
+    const [, options] = api.mock.calls.find(([path]) => path === '/office/tutorials/1');
+    expect(options.body.get('_method')).toBe('PUT');
+    expect(options.body.get('is_published')).toBe('0');
+    expect(options.body.get('sort_order')).toBe('2');
+  });
+  it('requires delete confirmation and reloads after deletion', async () => {
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    render(<TutorialsPage />);
+    await screen.findByText('First sale');
+    fireEvent.click(screen.getByRole('button', { name: 'Actions for First sale' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Delete' }));
+    expect(api).toHaveBeenCalledTimes(1);
+    confirm.mockReturnValue(true);
+    fireEvent.click(screen.getByRole('button', { name: 'Actions for First sale' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Delete' }));
+    await screen.findByText('Tutorial deleted.');
+    expect(api).toHaveBeenCalledWith('/office/tutorials/1', { method: 'DELETE' });
+    await waitFor(() => expect(api.mock.calls.at(-1)[0]).toContain('refresh=1'));
+  });
+  it('keeps the editor and entered data when saving fails', async () => {
+    render(<TutorialsPage />);
+    await screen.findByText('First sale');
+    fireEvent.click(screen.getByRole('button', { name: 'Actions for First sale' }));
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
+    api.mockRejectedValueOnce(new Error('Enter a valid YouTube video link.'));
+    fireEvent.click(screen.getByRole('button', { name: 'Save tutorial' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Enter a valid YouTube video link.');
+    expect(screen.getByLabelText('Title')).toHaveValue('First sale');
+    expect(screen.getByRole('button', { name: 'Save tutorial' })).toBeEnabled();
+  });
+});

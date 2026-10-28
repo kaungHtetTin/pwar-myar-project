@@ -1,0 +1,428 @@
+<?php
+
+use App\Http\Controllers\ActivityAlertController;
+use App\Http\Controllers\Api\AccessRoleController;
+use App\Http\Controllers\Api\AiAssistantController;
+use App\Http\Controllers\Api\AiBillingRequestController;
+use App\Http\Controllers\Api\AiBusinessActionController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BusinessTimezoneController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\DataBackupController;
+use App\Http\Controllers\Api\ErrorReportController;
+use App\Http\Controllers\Api\ExpenseController;
+use App\Http\Controllers\Api\PriceTypeController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProductImportController;
+use App\Http\Controllers\Api\PurchaseController;
+use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\SaleController;
+use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\StaffController;
+use App\Http\Controllers\Api\SubscriptionAlertController;
+use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\SupplierController;
+use App\Http\Controllers\McpSupportAccessController;
+use App\Http\Controllers\Office\AdminManagementController;
+use App\Http\Controllers\Office\AiAssistantSettingsController;
+use App\Http\Controllers\Office\AiBalanceBookController;
+use App\Http\Controllers\Office\AppReleaseController;
+use App\Http\Controllers\Office\BankBookController;
+use App\Http\Controllers\Office\BrandingController;
+use App\Http\Controllers\Office\BusinessOwnerEmailController;
+use App\Http\Controllers\Office\BusinessSubscriptionController;
+use App\Http\Controllers\Office\ContactSettingsController;
+use App\Http\Controllers\Office\FinancialBookController;
+use App\Http\Controllers\Office\FinancialReportController;
+use App\Http\Controllers\Office\MarketplaceCategoryController;
+use App\Http\Controllers\Office\MarketplaceProductController;
+use App\Http\Controllers\Office\OfficeAuthController;
+use App\Http\Controllers\Office\PaymentMethodController;
+use App\Http\Controllers\Office\PlanController;
+use App\Http\Controllers\Office\PlatformUserController;
+use App\Http\Controllers\Office\PlatformUserEmailController;
+use App\Http\Controllers\Office\ProductReviewController;
+use App\Http\Controllers\Office\ShopReviewController;
+use App\Http\Controllers\Office\TutorialController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Middleware\AuditOfficeAction;
+use App\Http\Middleware\VerifyPasswordReset;
+use App\Models\AppRelease;
+use App\Services\AccessService;
+use App\Support\BusinessLogo;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+
+require __DIR__.'/ecommerce.php';
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+
+Route::get('/health', fn () => ['ok' => DB::selectOne('SELECT 1') !== null, 'backend' => 'laravel', 'database' => 'mysql']);
+Route::get('/health/workers', [\App\Http\Controllers\WorkerHealthController::class, 'show'])->middleware('throttle:600,1');
+Route::post('/auth/register', [AuthController::class, 'register'])->middleware('throttle:120,1');
+Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:120,1');
+Route::post('/auth/forgot-password', [PasswordResetController::class, 'requestCode'])->middleware('throttle:120,1');
+Route::post('/auth/reset-password', [PasswordResetController::class, 'reset'])->middleware('throttle:120,1');
+Route::get('/contact-settings', [ContactSettingsController::class, 'show']);
+Route::get('/branding/realtime/config', [\App\Http\Controllers\ResourceRealtimeController::class, 'config'])->middleware('throttle:600,1');
+Route::get('/branding/realtime/auth', [\App\Http\Controllers\ResourceRealtimeController::class, 'auth'])->middleware('throttle:600,1');
+
+Route::middleware(['auth:sanctum', VerifyPasswordReset::class, 'business'])->group(function () {
+    Route::get('/realtime/resources/config', [\App\Http\Controllers\ResourceRealtimeController::class, 'config']);
+    Route::post('/realtime/resources/auth', [\App\Http\Controllers\ResourceRealtimeController::class, 'auth'])->middleware('throttle:120,1');
+    Route::prefix('ai-assistant')->middleware('throttle:ai-chat')->group(function () {
+        Route::get('/config', [AiAssistantController::class, 'config']);
+        Route::get('/product-template', [AiAssistantController::class, 'template']);
+        Route::get('/conversations', [AiAssistantController::class, 'index']);
+        Route::post('/conversations', [AiAssistantController::class, 'store']);
+        Route::get('/conversations/{conversation}/messages', [AiAssistantController::class, 'messages'])->whereUuid('conversation');
+        Route::get('/conversations/{conversation}/messages/{message}/image', [AiAssistantController::class, 'image'])->whereUuid('conversation')->whereNumber('message');
+        Route::get('/conversations/{conversation}/messages/{clientId}/delivery', [AiAssistantController::class, 'delivery'])->whereUuid('conversation')->whereUuid('clientId');
+        Route::post('/conversations/{conversation}/messages', [AiAssistantController::class, 'send'])->whereUuid('conversation')->middleware('throttle:ai-chat-send');
+        Route::middleware('owner')->group(function () {
+            Route::get('/purchase-drafts/{draft}', function (\Illuminate\Http\Request $request, string $draft) { return app(\App\Services\AiInvoicePurchases::class)->show($request->user('web'), $draft); })->whereUuid('draft');
+            Route::get('/conversations/{conversation}/billing-requests', [AiBillingRequestController::class, 'index'])->whereUuid('conversation');
+            Route::get('/conversations/{conversation}/billing-requests/{draft}', [AiBillingRequestController::class, 'show'])->whereUuid('conversation')->whereUuid('draft');
+            Route::post('/conversations/{conversation}/billing-requests/{draft}/validate', [AiBillingRequestController::class, 'validateProof'])->whereUuid('conversation')->whereUuid('draft')->middleware('throttle:120,1');
+            Route::post('/conversations/{conversation}/billing-requests/{draft}/submit', [AiBillingRequestController::class, 'submit'])->whereUuid('conversation')->whereUuid('draft')->middleware('throttle:120,1');
+            Route::post('/conversations/{conversation}/billing-requests/{draft}/cancel', [AiBillingRequestController::class, 'cancel'])->whereUuid('conversation')->whereUuid('draft')->middleware('throttle:120,1');
+            Route::get('/error-reports', [ErrorReportController::class, 'index']);
+            Route::get('/error-report-requests/{draft}', [ErrorReportController::class, 'draft'])->whereNumber('draft');
+            Route::post('/error-report-requests/{draft}/submit', [ErrorReportController::class, 'complete'])->whereNumber('draft')->middleware('throttle:120,1');
+            Route::post('/error-reports', [ErrorReportController::class, 'store'])->middleware('throttle:120,1');
+            Route::get('/error-reports/{report}', [ErrorReportController::class, 'show'])->whereNumber('report');
+            Route::get('/conversations/{conversation}/actions', [AiBusinessActionController::class, 'index'])->whereUuid('conversation');
+            Route::get('/conversations/{conversation}/actions/{action}', [AiBusinessActionController::class, 'show'])->whereUuid(['conversation', 'action']);
+            Route::post('/conversations/{conversation}/actions/{action}/confirm', [AiBusinessActionController::class, 'confirm'])->whereUuid(['conversation', 'action'])->middleware('throttle:120,1');
+            Route::post('/conversations/{conversation}/actions/{action}/cancel', [AiBusinessActionController::class, 'cancel'])->whereUuid(['conversation', 'action']);
+            Route::post('/conversations/{conversation}/actions/{action}/revise', [AiBusinessActionController::class, 'revise'])->whereUuid(['conversation', 'action']);
+        });
+    });
+    Route::get('/auth/me', [AuthController::class, 'me']);
+
+    Route::post('/mcp/access', [McpSupportAccessController::class, 'owner'])->middleware('throttle:120,1');
+    Route::put('/auth/profile', [AuthController::class, 'updateProfile'])
+        ->middleware(['throttle:120,1', 'subscription']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/app-config', fn () => array_merge(config('mkpos'), [
+        'business' => array_merge(
+            request()->user('web')->business->only(['id', 'name', 'slug', 'timezone', 'currency']),
+            [
+                'logo_data_url' => BusinessLogo::dataUrl((string) (DB::table('settings')
+                    ->where('key', BusinessLogo::SETTING_KEY)
+                    ->value('value') ?? '')),
+            ],
+        ),
+        'permissions' => app(AccessService::class)->permissions(request()->user('web')),
+        'language' => DB::table('settings')->where('key', 'language')->value('value') ?: 'en',
+    ]));
+    Route::get('/subscription', [SubscriptionController::class, 'status']);
+    Route::middleware('owner')->group(function () {
+        Route::get('/activity-alerts', [ActivityAlertController::class, 'index']);
+        Route::get('/activity-alerts/config', [ActivityAlertController::class, 'config']);
+        Route::post('/activity-alerts/auth', [ActivityAlertController::class, 'auth']);
+        Route::get('/subscription/alerts', [SubscriptionAlertController::class, 'index']);
+        Route::get('/subscription/alerts/config', [SubscriptionAlertController::class, 'config']);
+        Route::post('/subscription/alerts/auth', [SubscriptionAlertController::class, 'auth']);
+        Route::get('/subscription/plans', [SubscriptionController::class, 'plans']);
+        Route::get('/subscription/payment-methods', [SubscriptionController::class, 'paymentMethods']);
+        Route::get('/subscription/billing-history', [SubscriptionController::class, 'billingHistory']);
+        Route::post('/subscription/requests', [SubscriptionController::class, 'requestPlan'])->middleware('throttle:120,1');
+    });
+
+    Route::middleware('subscription')->group(function () {
+        Route::middleware('module:products,sell,purchases')->group(function () {
+            Route::get('/products', [ProductController::class, 'index']);
+            Route::get('/products/marketplace-categories', [ProductController::class, 'marketplaceCategories']);
+            Route::get('/categories', [ProductController::class, 'categories']);
+            Route::get('/products/low-stock', [ProductController::class, 'lowStock']);
+            Route::get('/products/summary', [ProductController::class, 'summary']);
+            Route::get('/products/barcode/{barcode}', [ProductController::class, 'barcode']);
+            Route::get('/products/{id}/photo', [ProductController::class, 'photo'])->whereNumber('id');
+            Route::get('/products/{id}', [ProductController::class, 'show'])->whereNumber('id');
+        });
+        Route::middleware('module:products')->group(function () {
+            Route::get('/product-imports', [ProductImportController::class, 'index']);
+            Route::post('/product-imports', [ProductImportController::class, 'store']);
+            Route::get('/product-imports/{id}', [ProductImportController::class, 'show'])->whereUuid('id');
+            Route::get('/product-imports/{id}/rows', [ProductImportController::class, 'rows'])->whereUuid('id');
+            Route::post('/product-imports/{id}/process', [ProductImportController::class, 'process'])->whereUuid('id');
+            Route::post('/products/internal-barcode', [ProductController::class, 'internalBarcode']);
+            Route::post('/products', [ProductController::class, 'store']);
+            Route::post('/products/bulk-delete', [ProductController::class, 'destroyMany']);
+            Route::put('/products/{id}', [ProductController::class, 'update']);
+            Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+            Route::post('/products/{id}/photo', [ProductController::class, 'uploadPhoto'])->whereNumber('id');
+            Route::delete('/products/{id}/photo', [ProductController::class, 'deletePhoto'])->whereNumber('id');
+            Route::post('/products/{id}/adjust-stock', [ProductController::class, 'adjustStock']);
+            Route::get('/products/{id}/stock-movements', [ProductController::class, 'movements']);
+        });
+
+        Route::get('/price-types', [PriceTypeController::class, 'index'])->middleware('module:products,sell');
+        Route::middleware('module:products')->group(function () {
+            Route::post('/price-types', [PriceTypeController::class, 'store']);
+            Route::put('/price-types/{priceType}', [PriceTypeController::class, 'update']);
+            Route::delete('/price-types/{priceType}', [PriceTypeController::class, 'destroy']);
+        });
+
+        Route::get('/customers', [CustomerController::class, 'index'])->middleware('module:customers,sell,transactions');
+        Route::post('/customers', [CustomerController::class, 'store'])->middleware('module:customers,sell');
+        Route::middleware('module:customers')->group(function () {
+            Route::put('/customers/{id}', [CustomerController::class, 'update']);
+            Route::delete('/customers/{id}', [CustomerController::class, 'destroy']);
+        });
+        Route::middleware('module:customers,transactions')->group(function () {
+            Route::get('/customers/{id}/detail', [CustomerController::class, 'detail']);
+            Route::get('/customers/{id}/statement', [CustomerController::class, 'statement']);
+            Route::get('/customers/{id}/sales', [CustomerController::class, 'sales']);
+            Route::get('/customers/{id}/payments', [CustomerController::class, 'payments']);
+            Route::post('/customers/{id}/payments', [CustomerController::class, 'storePayment']);
+            Route::get('/customer-payments', [CustomerController::class, 'allPayments']);
+            Route::get('/customer-payments/{id}', [CustomerController::class, 'showPayment']);
+            Route::put('/customer-payments/{id}', [CustomerController::class, 'updatePayment']);
+            Route::delete('/customer-payments/{id}', [CustomerController::class, 'destroyPayment']);
+        });
+
+        Route::get('/suppliers', [SupplierController::class, 'index'])->middleware('module:suppliers,purchases,transactions');
+        Route::middleware('module:suppliers')->group(function () {
+            Route::post('/suppliers', [SupplierController::class, 'store']);
+            Route::get('/suppliers/{id}', [SupplierController::class, 'show']);
+            Route::get('/suppliers/{id}/statement', [SupplierController::class, 'statement']);
+            Route::post('/suppliers/{id}/payments', [SupplierController::class, 'storePayment']);
+            Route::put('/suppliers/{id}', [SupplierController::class, 'update']);
+            Route::delete('/suppliers/{id}', [SupplierController::class, 'destroy']);
+        });
+        Route::middleware('module:suppliers,transactions')->group(function () {
+            Route::get('/supplier-payments', [SupplierController::class, 'allPayments']);
+            Route::get('/supplier-payments/{id}', [SupplierController::class, 'showPayment']);
+            Route::put('/supplier-payments/{id}', [SupplierController::class, 'updatePayment']);
+            Route::delete('/supplier-payments/{id}', [SupplierController::class, 'destroyPayment']);
+        });
+
+        Route::get('/sales/last/receipt', [SaleController::class, 'lastReceipt'])->middleware('module:sell,sales');
+        Route::get('/sales', [SaleController::class, 'index'])->middleware('module:sales');
+        Route::middleware('module:sales,customers')->group(function () {
+            Route::get('/sales/{id}', [SaleController::class, 'show']);
+            Route::put('/sales/{id}', [SaleController::class, 'update']);
+            Route::delete('/sales/{id}', [SaleController::class, 'destroy']);
+            Route::post('/sales/{id}/void', [SaleController::class, 'destroy']);
+        });
+        Route::middleware('module:sell,sales,customers')->group(function () {
+            Route::get('/sales/{id}/receipt', [SaleController::class, 'receipt']);
+            Route::post('/sales/{id}/print', [SaleController::class, 'print']);
+        });
+        Route::post('/sales/offline-sync', [SaleController::class, 'offlineSync'])->middleware('module:sell');
+        Route::post('/sales', [SaleController::class, 'store'])->middleware('module:sell');
+
+        Route::middleware('module:purchases,transactions')->group(function () {
+            Route::get('/purchases', [PurchaseController::class, 'index']);
+            Route::post('/purchases', [PurchaseController::class, 'store']);
+            Route::get('/purchases/{id}', [PurchaseController::class, 'show']);
+            Route::put('/purchases/{id}', [PurchaseController::class, 'update']);
+            Route::delete('/purchases/{id}', [PurchaseController::class, 'destroy']);
+            Route::post('/purchases/{id}/void', [PurchaseController::class, 'destroy']);
+        });
+
+        Route::middleware('module:expenses,transactions')->group(function () {
+            Route::get('/expenses/summary', [ExpenseController::class, 'summary']);
+            Route::get('/expenses', [ExpenseController::class, 'index']);
+            Route::post('/expenses', [ExpenseController::class, 'store']);
+            Route::get('/expenses/{id}', [ExpenseController::class, 'show']);
+            Route::put('/expenses/{id}', [ExpenseController::class, 'update']);
+            Route::delete('/expenses/{id}', [ExpenseController::class, 'destroy']);
+            Route::post('/expenses/{id}/void', [ExpenseController::class, 'destroy']);
+        });
+
+        Route::middleware('module:reports')->group(function () {
+            Route::get('/reports/summary', [ReportController::class, 'summary']);
+            Route::get('/reports/today-summary', [ReportController::class, 'today']);
+            Route::get('/reports/summary.csv', [ReportController::class, 'csv']);
+        });
+
+        Route::middleware('owner')->group(function () {
+            Route::get('/roles', [AccessRoleController::class, 'index']);
+            Route::get('/roles/{id}', [AccessRoleController::class, 'show']);
+            Route::post('/roles', [AccessRoleController::class, 'store']);
+            Route::put('/roles/{id}', [AccessRoleController::class, 'update']);
+            Route::delete('/roles/{id}', [AccessRoleController::class, 'destroy']);
+            Route::get('/staff', [StaffController::class, 'index']);
+            Route::get('/staff/{id}', [StaffController::class, 'show']);
+            Route::post('/staff', [StaffController::class, 'store']);
+            Route::put('/staff/{id}', [StaffController::class, 'update']);
+            Route::put('/staff/{id}/password', [StaffController::class, 'resetPassword'])->middleware('throttle:120,1');
+            Route::delete('/staff/{id}', [StaffController::class, 'destroy']);
+
+            Route::post('/settings/logo', [SettingsController::class, 'uploadLogo']);
+            Route::get('/settings/timezone', [BusinessTimezoneController::class, 'show']);
+            Route::put('/settings/timezone', [BusinessTimezoneController::class, 'update']);
+            Route::delete('/settings/logo', [SettingsController::class, 'deleteLogo']);
+            Route::get('/data/status', [DataBackupController::class, 'status']);
+            Route::post('/data/reset', [DataBackupController::class, 'reset'])->middleware('throttle:120,1');
+        });
+        Route::put('/settings', [SettingsController::class, 'update']);
+        Route::get('/settings/printers', [SettingsController::class, 'printers']);
+        Route::post('/settings/receipt-preview', [SettingsController::class, 'receiptPreview']);
+        Route::post('/settings/test-print', [SettingsController::class, 'testPrint']);
+        Route::get('/data/export', [DataBackupController::class, 'export'])
+            ->middleware(['subscription.capability:data_export', 'owner']);
+        Route::post('/data/restore-file', [DataBackupController::class, 'restore'])
+            ->middleware(['subscription.capability:data_restore', 'owner']);
+        Route::get('/settings', [SettingsController::class, 'index']);
+    });
+});
+
+Route::get('/branding', [BrandingController::class, 'show']);
+Route::get('/branding/assets/{asset}', [BrandingController::class, 'asset'])->whereIn('asset', ['logo', 'icon', 'favicon']);
+
+Route::post('/office/auth/login', [OfficeAuthController::class, 'login'])->middleware('throttle:120,1');
+Route::middleware(['office.auth', AuditOfficeAction::class])->prefix('office')->group(function () {
+    Route::get('/assistant-approvals', [\App\Http\Controllers\Office\AssistantApprovalController::class, 'index']);
+    Route::post('/assistant-approvals/{id}/approve', [\App\Http\Controllers\Office\AssistantApprovalController::class, 'approve'])->whereNumber('id')->middleware('throttle:120,1');
+    Route::post('/assistant-approvals/{id}/reject', [\App\Http\Controllers\Office\AssistantApprovalController::class, 'reject'])->whereNumber('id')->middleware('throttle:120,1');
+    Route::get('/health/system', \App\Http\Controllers\Office\ServerHealthController::class)->middleware('throttle:600,1');
+    Route::get('/health/workers', [\App\Http\Controllers\WorkerHealthController::class, 'details'])->middleware('throttle:600,1');
+    Route::get('/error-reports', [App\Http\Controllers\Office\ErrorReportController::class, 'index']);
+    Route::get('/error-reports/businesses', [App\Http\Controllers\Office\ErrorReportController::class, 'businesses']);
+    Route::post('/error-reports', [App\Http\Controllers\Office\ErrorReportController::class, 'store'])->middleware('throttle:120,1');
+    Route::get('/error-reports/{report}', [App\Http\Controllers\Office\ErrorReportController::class, 'show'])->whereNumber('report');
+    Route::put('/error-reports/{report}', [App\Http\Controllers\Office\ErrorReportController::class, 'update'])->whereNumber('report')->middleware('throttle:120,1');
+    Route::delete('/error-reports/{report}', [App\Http\Controllers\Office\ErrorReportController::class, 'destroy'])->whereNumber('report')->middleware('throttle:120,1');
+    Route::get('/error-reports/{report}/images/{index}', [App\Http\Controllers\Office\ErrorReportController::class, 'image'])->whereNumber(['report', 'index']);
+    Route::prefix('agent-skills/ai/proposals')->controller(\App\Http\Controllers\Office\SkillManagementController::class)->group(function () {
+        Route::post('/', 'prepare')->middleware('throttle:120,1');
+        Route::get('/{proposal}', 'show')->whereUuid('proposal');
+        Route::post('/{proposal}/apply', 'apply')->whereUuid('proposal')->middleware('throttle:120,1');
+        Route::post('/{proposal}/discard', 'discard')->whereUuid('proposal')->middleware('throttle:120,1');
+    });
+    Route::prefix('agent-skills')->controller(\App\Http\Controllers\Office\AgentSkillController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::post('/preview', 'preview');
+        Route::get('/{skill}', 'show')->whereNumber('skill');
+        Route::put('/{skill}', 'update')->whereNumber('skill');
+        Route::delete('/{skill}', 'destroy')->whereNumber('skill');
+        Route::get('/{skill}/versions', 'versions')->whereNumber('skill');
+        Route::get('/{skill}/versions/{version}', 'version')->whereNumber(['skill','version']);
+        Route::post('/{skill}/publish', 'publish')->whereNumber('skill');
+        Route::post('/{skill}/versions/{version}/restore', 'restore')->whereNumber(['skill','version']);
+    });
+    Route::get('/agent-assignments', [\App\Http\Controllers\Office\AgentSkillController::class, 'agents']);
+    Route::get('/agent-assignments/{agent}', [\App\Http\Controllers\Office\AgentSkillController::class, 'assignments']);
+    Route::put('/agent-assignments/{agent}', [\App\Http\Controllers\Office\AgentSkillController::class, 'saveAssignments']);
+    Route::get('/ai-assistant', [AiAssistantSettingsController::class, 'show']);
+    Route::get('/telegram-support', [\App\Http\Controllers\Office\TelegramSupportSettingsController::class, 'show']);
+    Route::get('/telegram-support/groups', [\App\Http\Controllers\Office\TelegramSupportGroupsController::class, 'index']);
+    Route::post('/telegram-support/groups', [\App\Http\Controllers\Office\TelegramSupportGroupsController::class, 'store']);
+    Route::put('/telegram-support/groups/{group}', [\App\Http\Controllers\Office\TelegramSupportGroupsController::class, 'update'])->whereNumber('group');
+    Route::put('/telegram-support', [\App\Http\Controllers\Office\TelegramSupportSettingsController::class, 'update']);
+    Route::post('/telegram-support/test-connection', [\App\Http\Controllers\Office\TelegramSupportSettingsController::class, 'test'])->middleware('throttle:120,1');
+    Route::post('/telegram-support/register-webhook', [\App\Http\Controllers\Office\TelegramSupportSettingsController::class, 'register'])->middleware('throttle:120,1');
+    Route::get('/sales-ai/topups', [\App\Http\Controllers\Office\SalesAiTopupController::class, 'index']);
+    Route::get('/sales-ai/topups/{id}', [\App\Http\Controllers\Office\SalesAiTopupController::class, 'show'])->whereNumber('id');
+    Route::get('/businesses/{businessId}/sales-ai/wallet', [\App\Http\Controllers\Office\SalesAiTopupController::class, 'wallet'])->whereNumber('businessId');
+    Route::patch('/businesses/{businessId}/sales-ai/wallet', [\App\Http\Controllers\Office\SalesAiTopupController::class, 'adjustWallet'])->whereNumber('businessId');
+    Route::post('/sales-ai/topups/{id}/review', [\App\Http\Controllers\Office\SalesAiTopupController::class, 'review'])->whereNumber('id');
+    Route::get('/sales-ai/topups/{id}/screenshot', [\App\Http\Controllers\Office\SalesAiTopupController::class, 'screenshot'])->whereNumber('id');
+    Route::get('/ai-balance-book', [AiBalanceBookController::class, 'index']);
+    Route::get('/ai-balance-book/summary', [AiBalanceBookController::class, 'summary']);
+    Route::post('/ai-balance-book/top-ups', [AiBalanceBookController::class, 'topUp']);
+    Route::put('/ai-assistant', [AiAssistantSettingsController::class, 'update']);
+    Route::put('/ai-assistant/api-key', [AiAssistantSettingsController::class, 'replaceKey']);
+    Route::post('/ai-assistant/test-connection', [AiAssistantSettingsController::class, 'testConnection'])->middleware('throttle:120,1');
+    Route::get('/admins', [AdminManagementController::class, 'index']);
+    Route::post('/admins', [AdminManagementController::class, 'store']);
+    Route::put('/admins/{admin}', [AdminManagementController::class, 'update'])->whereNumber('admin');
+    Route::delete('/admins/{admin}', [AdminManagementController::class, 'destroy'])->whereNumber('admin');
+    Route::get('/activity-log', [AdminManagementController::class, 'activity']);
+    Route::get('/bank-books', [BankBookController::class, 'index']);
+    Route::post('/bank-books', [BankBookController::class, 'store']);
+    Route::put('/bank-books/{bank}', [BankBookController::class, 'update'])->whereNumber('bank');
+    Route::delete('/bank-books/{bank}', [BankBookController::class, 'destroy'])->whereNumber('bank');
+    Route::put('/subscription-bank-book', [BankBookController::class, 'subscriptionAccount']);
+    Route::put('/branding', [BrandingController::class, 'update']);
+    Route::post('/branding/theme/preview', [BrandingController::class, 'preview'])->middleware('throttle:120,1');
+    Route::post('/branding/{asset}', [BrandingController::class, 'upload'])->whereIn('asset', ['logo', 'icon', 'favicon']);
+    Route::delete('/branding/{asset}', [BrandingController::class, 'reset'])->whereIn('asset', ['logo', 'icon', 'favicon']);
+    Route::post('/mcp/access', [McpSupportAccessController::class, 'admin'])->middleware('throttle:120,1');
+    Route::get('/activity-alerts', [ActivityAlertController::class, 'index']);
+    Route::get('/activity-alerts/config', [ActivityAlertController::class, 'config']);
+    Route::post('/activity-alerts/auth', [ActivityAlertController::class, 'auth']);
+    Route::post('/businesses/{businessId}/email', [BusinessOwnerEmailController::class, 'storeOwner'])->whereNumber('businessId')->middleware('throttle:120,1');
+    Route::post('/platform-users/{platformUser}/email', [PlatformUserEmailController::class, 'store'])->whereNumber('platformUser')->middleware('throttle:120,1');
+    Route::apiResource('platform-users', PlatformUserController::class)->parameters(['platform-users' => 'platformUser'])->whereNumber('platformUser');
+    Route::get('/product-reviews', [ProductReviewController::class, 'index']);
+    Route::get('/product-reviews/options', [ProductReviewController::class, 'options']);
+    Route::post('/product-reviews', [ProductReviewController::class, 'store'])->middleware('throttle:120,1');
+    Route::get('/product-reviews/{review}', [ProductReviewController::class, 'show'])->whereNumber('review');
+    Route::put('/product-reviews/{review}', [ProductReviewController::class, 'update'])->whereNumber('review')->middleware('throttle:120,1');
+    Route::delete('/product-reviews/{review}', [ProductReviewController::class, 'destroy'])->whereNumber('review')->middleware('throttle:120,1');
+    Route::get('/shop-reviews', [ShopReviewController::class, 'index']);
+    Route::get('/shop-reviews/options', [ShopReviewController::class, 'options']);
+    Route::post('/shop-reviews', [ShopReviewController::class, 'store'])->middleware('throttle:120,1');
+    Route::get('/shop-reviews/{review}', [ShopReviewController::class, 'show'])->whereNumber('review');
+    Route::put('/shop-reviews/{review}', [ShopReviewController::class, 'update'])->whereNumber('review')->middleware('throttle:120,1');
+    Route::delete('/shop-reviews/{review}', [ShopReviewController::class, 'destroy'])->whereNumber('review')->middleware('throttle:120,1');
+    Route::get('/tutorials', [TutorialController::class, 'index']);
+    Route::get('/marketplace-products', [MarketplaceProductController::class, 'index']);
+    Route::get('/marketplace-products/shops', [MarketplaceProductController::class, 'shops']);
+    Route::post('/marketplace-products/link', [MarketplaceProductController::class, 'link'])->middleware('throttle:120,1');
+    Route::get('/marketplace-products/{id}', [MarketplaceProductController::class, 'show'])->whereNumber('id');
+    Route::get('/marketplace-categories', [MarketplaceCategoryController::class, 'index']);
+    Route::get('/marketplace-categories/options', [MarketplaceCategoryController::class, 'options']);
+    Route::get('/marketplace-categories/{id}', [MarketplaceCategoryController::class, 'show'])->whereNumber('id');
+    Route::post('/marketplace-categories', [MarketplaceCategoryController::class, 'store'])->middleware('throttle:120,1');
+    Route::put('/marketplace-categories/{id}', [MarketplaceCategoryController::class, 'update'])->whereNumber('id')->middleware('throttle:120,1');
+    Route::delete('/marketplace-categories/{id}', [MarketplaceCategoryController::class, 'destroy'])->whereNumber('id')->middleware('throttle:120,1');
+    Route::post('/tutorials', [TutorialController::class, 'store']);
+    Route::put('/tutorials/{tutorial}', [TutorialController::class, 'update'])->whereNumber('tutorial');
+    Route::delete('/tutorials/{tutorial}', [TutorialController::class, 'destroy'])->whereNumber('tutorial');
+    Route::get('/tutorials/{tutorial}/thumbnail', [TutorialController::class, 'thumbnail'])->whereNumber('tutorial');
+    Route::get('/auth/me', [OfficeAuthController::class, 'me']);
+    Route::put('/auth/profile', [OfficeAuthController::class, 'updateProfile'])->middleware('throttle:120,1');
+    Route::post('/auth/logout', [OfficeAuthController::class, 'logout']);
+    Route::get('/app-releases', [AppReleaseController::class, 'index']);
+    Route::get('/contact-settings', [ContactSettingsController::class, 'show']);
+    Route::put('/contact-settings', [ContactSettingsController::class, 'update'])->middleware('throttle:120,1');
+    Route::put('/app-releases/{platform}', [AppReleaseController::class, 'store'])
+        ->whereIn('platform', AppRelease::PLATFORMS)
+        ->middleware('throttle:120,1');
+    Route::get('/plans', [PlanController::class, 'index']);
+    Route::post('/plans', [PlanController::class, 'store']);
+    Route::put('/plans/{id}', [PlanController::class, 'update']);
+    Route::delete('/plans/{id}', [PlanController::class, 'destroy']);
+    Route::get('/payment-methods', [PaymentMethodController::class, 'index']);
+    Route::post('/payment-methods', [PaymentMethodController::class, 'store']);
+    Route::put('/payment-methods/{id}', [PaymentMethodController::class, 'update']);
+    Route::delete('/payment-methods/{id}', [PaymentMethodController::class, 'destroy']);
+    Route::get('/businesses', [BusinessSubscriptionController::class, 'index']);
+    Route::delete('/businesses', [BusinessSubscriptionController::class, 'destroyBusinesses'])->middleware('throttle:120,1');
+    Route::get('/businesses/{businessId}', [BusinessSubscriptionController::class, 'show']);
+    Route::put('/businesses/{businessId}/owner-password', [BusinessSubscriptionController::class, 'resetOwnerPassword'])->middleware('throttle:120,1');
+    Route::get('/subscription-requests', [BusinessSubscriptionController::class, 'requests']);
+    Route::get('/subscription-payments', [FinancialReportController::class, 'payments']);
+    Route::get('/financial-report', [FinancialReportController::class, 'index']);
+    Route::get('/financial-book', [FinancialBookController::class, 'index']);
+    Route::put('/financial-book/founders', [FinancialBookController::class, 'updateFounders'])->middleware('throttle:120,1');
+    Route::post('/financial-book/entries', [FinancialBookController::class, 'store'])->middleware('throttle:120,1');
+    Route::patch('/financial-book/entries/{entry}/bank-book', [FinancialBookController::class, 'assignBank'])->whereNumber('entry')->middleware('throttle:120,1');
+    Route::post('/financial-book/entries/{entry}/void', [FinancialBookController::class, 'void'])->whereNumber('entry')->middleware('throttle:120,1');
+    Route::delete('/financial-records/{paymentId}', [FinancialReportController::class, 'destroy'])->whereNumber('paymentId');
+    Route::put('/businesses/{businessId}/subscription', [BusinessSubscriptionController::class, 'assign']);
+    Route::patch('/businesses/{businessId}/subscriptions/{subscriptionId}/period', [BusinessSubscriptionController::class, 'updatePeriod'])->whereNumber(['businessId', 'subscriptionId'])->middleware('throttle:120,1');
+    Route::post('/businesses/{businessId}/subscription/renew', [BusinessSubscriptionController::class, 'renew']);
+    Route::post('/businesses/{businessId}/subscription/trial/extend', [BusinessSubscriptionController::class, 'extendTrial']);
+    Route::patch('/businesses/{businessId}/subscription/status', [BusinessSubscriptionController::class, 'setStatus']);
+    Route::delete('/businesses/{businessId}/subscription', [BusinessSubscriptionController::class, 'cancel']);
+    Route::post('/subscription-requests/{requestId}/approve', [BusinessSubscriptionController::class, 'approve']);
+    Route::post('/subscription-requests/{requestId}/reject', [BusinessSubscriptionController::class, 'reject']);
+    Route::get('/subscription-requests/{requestId}/payment-screenshot', [BusinessSubscriptionController::class, 'paymentScreenshot']);
+});

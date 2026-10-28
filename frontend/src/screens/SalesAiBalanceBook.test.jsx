@@ -1,0 +1,55 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, expect, it, vi } from 'vitest';
+import { request } from '../api';
+import { SalesAiBalanceBook } from './SalesAiBalanceBook';
+vi.mock('../api', () => ({ request: vi.fn() }));
+vi.mock('recharts', () => ({ ResponsiveContainer: ({ children }) => <div>{children}</div>, BarChart: ({ children }) => <div>{children}</div>, CartesianGrid: () => null, XAxis: () => null, YAxis: () => null, Tooltip: () => null, Bar: () => null }));
+const usage = { timezone: 'Asia/Yangon', daily: { total: '3', items: [{ key: '2026-10-26', label: 'Oct 26', cost: '3' }] }, monthly: { total: '12', items: [{ key: '2026-10', label: 'Oct 2026', cost: '12' }] } };
+const row = id => ({ id, description: `Entry ${id}`, amount: '-1.234567', balance_after: '475.803576', created_at: '2026-10-25 17:30:00' });
+beforeEach(() => {
+  vi.clearAllMocks();
+  request.mockImplementation(async path => {
+    const query = new URLSearchParams(path.split('?')[1]);
+    const offset = Number(query.get('offset')), limit = Number(query.get('limit'));
+    return { wallet: { available: '475.803576', reserved: '0' }, items: Array.from({ length: Math.min(limit, 52 - offset) }, (_, index) => row(index + offset + 1)), total: 52, ...(query.get('include_usage') === '1' ? { usage } : {}) };
+  });
+});
+it('paginates exact totals, retains cached pages on return and changes page size', async () => {
+  const view = render(<SalesAiBalanceBook active refreshToken="0" />);
+  await screen.findByText('Entry 1');
+  expect(screen.getByText('1-25 of 52')).toBeInTheDocument();
+  expect(screen.getByRole('img', { name: 'Daily usage: 3 MMK' })).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+  await screen.findByText('Entry 26');
+  expect(screen.getByText('26-50 of 52')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'Prev' }));
+  await screen.findByText('Entry 1');
+  expect(request).toHaveBeenCalledTimes(2);
+  view.rerender(<SalesAiBalanceBook active={false} refreshToken="0" />);
+  view.rerender(<SalesAiBalanceBook active refreshToken="0" />);
+  expect(request).toHaveBeenCalledTimes(2);
+  fireEvent.change(screen.getByLabelText('Balance rows per page'), { target: { value: '50' } });
+  await screen.findByText('Entry 50');
+  expect(screen.getByText('1-50 of 52')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+  await screen.findByText('Entry 52');
+  expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled();
+  expect(request.mock.calls.filter(([path]) => path.includes('include_usage=1'))).toHaveLength(1);
+});
+it('retains rows on failure, retries the requested page and keeps the successful page on return', async () => {
+  const base = request.getMockImplementation(); let rejectPage;
+  request.mockImplementation(path => path.includes('offset=25') ? new Promise((_, reject) => { rejectPage = reject; }) : base(path));
+  const view = render(<SalesAiBalanceBook active refreshToken="0" />);
+  await screen.findByText('Entry 1');
+  fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+  await act(async () => { rejectPage(new Error('Balance connection interrupted')); });
+  expect(screen.getByText('Entry 1')).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toHaveTextContent('Balance connection interrupted');
+  request.mockImplementation(base);
+  fireEvent.click(screen.getByRole('button', { name: 'Retry balance book' }));
+  await screen.findByText('Entry 26');
+  view.rerender(<SalesAiBalanceBook active={false} refreshToken="0" />);
+  view.rerender(<SalesAiBalanceBook active refreshToken="0" />);
+  await waitFor(() => expect(request).toHaveBeenCalledTimes(3));
+});

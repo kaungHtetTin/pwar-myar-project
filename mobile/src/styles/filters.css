@@ -1,0 +1,225 @@
+.mobile-filter-toggle,
+.purchase-filter-toggle,
+.expense-filter-toggle,
+.transaction-filter-toggle,
+.customer-filter-toggle,
+.supplier-filter-toggle {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  color: var(--theme-text-muted);
+  background: var(--theme-surface);
+  font-size: .66rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mobile-filter-toggle small {
+  display: grid;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  place-items: center;
+  padding-inline: 0.22rem;
+  border-radius: var(--radius-round);
+  color: var(--theme-on-primary);
+  background: var(--brand-700);
+  font-size: .55rem;
+}
+
+.mobile-filter-toggle.is-active,
+.purchase-filter-toggle.is-active,
+.expense-filter-toggle.is-active,
+.transaction-filter-toggle.is-active,
+.customer-filter-toggle.is-active,
+.supplier-filter-toggle.is-active {
+  border-color: var(--theme-border);
+  color: var(--theme-primary-text);
+  background: var(--theme-primary-soft);
+}
+
+.transaction-filter-toggle > svg:last-child { display: none; }
+
+.purchase-filter-toggle::after,
+.expense-filter-toggle::after,
+.transaction-filter-toggle::after,
+.customer-filter-toggle::after,
+.supplier-filter-toggle::after {
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-left: 0.08rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  content: '';
+  transform: translateY(-0.12rem) rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.purchase-filter-toggle.is-active::after,
+.expense-filter-toggle.is-active::after,
+.transaction-filter-toggle.is-active::after,
+.customer-filter-toggle.is-active::after,
+.supplier-filter-toggle.is-active::after {
+  transform: translateY(0.12rem) rotate(225deg);
+}
+
+.customer-filter-toggle {
+  font-size: 0;
+}
+
+.customer-filter-toggle::before {
+  content: 'Filters';
+  font-size: .66rem;
+}
+
+.mobile-filter-chevron {
+  transition: transform 160ms ease;
+}
+
+.mobile-filter-toggle.is-active .mobile-filter-chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-collapsible-filter,
+.purchase-history-filters,
+.expense-filter-panel,
+.transaction-filter-panel,
+.customer-history-filters,
+.supplier-history-filters {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  width: 100%;
+  margin: 0;
+  padding-top: 0.55rem;
+  border: 0;
+  border-top: 1px solid var(--theme-border);
+  background: transparent;
+}
+
+.mobile-filter-panel .clear-filters {
+  grid-column: 1 / -1;
+}
+
+.mobile-collapsible-filter .mobile-field,
+.purchase-history-filters .mobile-field,
+.expense-filter-panel .mobile-field,
+.transaction-filter-panel .mobile-field,
+.customer-history-filters .mobile-field,
+.supplier-history-filters .mobile-field {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.mobile-collapsible-filter .mobile-field > label,
+.mobile-collapsible-filter .mobile-field > span:first-child,
+.purchase-history-filters .mobile-field > label,
+.purchase-history-filters .mobile-field > span:first-child,
+.expense-filter-panel .mobile-field > label,
+.expense-filter-panel .mobile-field > span:first-child,
+.transaction-filter-panel .mobile-field > label,
+.transaction-filter-panel .mobile-field > span:first-child,
+.customer-history-filters .mobile-field > label,
+.customer-history-filters .mobile-field > span:first-child,
+.supplier-history-filters .mobile-field > label,
+.supplier-history-filters .mobile-field > span:first-child {
+  position: absolute;
+  z-index: 1;
+  top: 0.3rem;
+  left: 0.7rem;
+  overflow: hidden;
+  max-width: calc(100% - 1.4rem);
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: .5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mobile-collapsible-filter input,
+.mobile-collapsible-filter select,
+.purchase-history-filters input,
+.purchase-history-filters select,
+.expense-filter-panel input,
+.expense-filter-panel select,
+.transaction-filter-panel input,
+.transaction-filter-panel select,
+.customer-history-filters input,
+.customer-history-filters select,
+.supplier-history-filters input,
+.supplier-history-filters select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 1.05rem 0.68rem 0.25rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-control);
+  outline: 0;
+  color: var(--text);
+  background: var(--theme-surface);
+  font: inherit;
+  font-size: 0.76rem;
+}
+
+.mobile-collapsible-filter input:focus,
+.mobile-collapsible-filter select:focus,
+.purchase-history-filters input:focus,
+.purchase-history-filters select:focus,
+.expense-filter-panel input:focus,
+.expense-filter-panel select:focus,
+.transaction-filter-panel input:focus,
+.transaction-filter-panel select:focus,
+.customer-history-filters input:focus,
+.customer-history-filters select:focus,
+.supplier-history-filters input:focus,
+.supplier-history-filters select:focus {
+  border-color: var(--brand-700);
+  background: var(--theme-surface);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-shadow) 10%, transparent);
+}
+
+.mobile-filter-actions,
+.purchase-history-filters > div:last-child,
+.expense-filter-panel > div:last-of-type,
+.transaction-filter-actions,
+.customer-history-filter-actions,
+.supplier-history-filters > div:last-child {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 0.55rem;
+}
+
+.mobile-filter-actions > button,
+.purchase-history-filters > div:last-child > button,
+.expense-filter-panel > div:last-of-type > button,
+.transaction-filter-actions > button,
+.customer-history-filter-actions > button,
+.supplier-history-filters > div:last-child > button {
+  min-height: 2.75rem;
+}
+
+@media (min-width: 44rem) {
+  .mobile-collapsible-filter {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mobile-filter-actions {
+    justify-self: end;
+    min-width: 16rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-filter-chevron { transition: none; }
+}

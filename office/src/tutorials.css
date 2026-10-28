@@ -1,0 +1,24 @@
+.office-tutorial-manager { padding:20px; min-width:0; }
+.office-tutorial-heading { display:flex; gap:16px; justify-content:space-between; align-items:center; margin-bottom:18px; }
+.office-tutorial-heading h2 { display:flex; gap:8px; align-items:center; margin:0 0 6px; font-size:20px; }
+.office-tutorial-heading p { margin:0; color:var(--muted,var(--theme-text-muted)); font-size:14px; }
+.office-tutorial-heading > button { flex-shrink:0; }
+.office-tutorial-fields { display:grid; gap:16px; border:0; padding:0; margin:0; min-width:0; }
+.office-tutorial-fields label,.office-tutorial-search label { display:flex; flex-direction:column; gap:6px; min-width:0; font-weight:600; }
+.office-tutorial-fields small { font-weight:400; color:var(--muted,var(--theme-text-muted)); font-size:13px; }
+.office-tutorial-fields input:not([type=checkbox]),.office-tutorial-fields textarea { box-sizing:border-box; width:100%; min-width:0; }
+.office-tutorial-fields textarea { resize:vertical; }
+.office-tutorial-form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.office-tutorial-fields .office-tutorial-check { flex-direction:row; align-items:center; }
+.office-tutorial-fields input[type=checkbox] { width:18px; height:18px; min-height:18px; margin:0 6px 0 0; flex:0 0 18px; accent-color:var(--theme-primary-text); }
+.office-tutorial-preview { width:240px; max-width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; }
+.office-tutorial-actions { display:flex; justify-content:flex-end; gap:10px; padding-top:16px; margin-top:20px; border-top:1px solid var(--theme-border); }
+.office-tutorial-search { display:flex; align-items:flex-end; gap:10px; margin-bottom:16px; }
+.office-tutorial-search label { flex:1; }
+.office-tutorial-search input { margin:0; }
+.office-tutorial-description { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; color:var(--theme-text-muted); margin:6px 0; }
+.office-tutorial-table { min-width:640px; }
+.office-tutorial-table td:first-child { max-width:480px; overflow-wrap:anywhere; }
+.office-tutorial-row-actions { display:flex; gap:8px; white-space:nowrap; }
+.office-tutorial-manager .office-tutorial-delete { color:var(--theme-danger-text); border-color:var(--theme-border); }
+@media(max-width:640px) { .office-tutorial-manager { padding:14px; } .office-tutorial-heading { align-items:flex-start; flex-direction:column; } .office-tutorial-form-grid { grid-template-columns:minmax(0,1fr); } .office-tutorial-search { flex-wrap:wrap; } .office-tutorial-search label { flex-basis:100%; } }

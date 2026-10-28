@@ -1,0 +1,7 @@
+.office-sales-ai-balance-form form { display:grid; gap:14px; padding:14px; }
+.office-sales-ai-balance-current { display:grid; gap:4px; font-variant-numeric:tabular-nums; }
+.office-sales-ai-balance-current small { color:var(--theme-text-muted); }
+.office-sales-ai-balance-form fieldset { display:grid; gap:12px; border:0; padding:0; margin:0; min-width:0; }
+.office-sales-ai-balance-form label { display:grid; gap:6px; font-size:12px; font-weight:600; }
+.office-sales-ai-balance-form :is(input,textarea) { min-width:0; width:100%; }
+.office-sales-ai-balance-form p { margin:0; }

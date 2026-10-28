@@ -1,0 +1,86 @@
+{
+  "feature": "Shop flash sales and coupons",
+  "date": "2026-10-07",
+  "scope": [
+    "Laravel shop API",
+    "frontend My Shop Promotions",
+    "customer shop catalog and checkout"
+  ],
+  "rules": {
+    "flash_sales": "One product per sale; online unit; percentage or fixed unit discount; optional total quantity limit; best active overlapping sale wins.",
+    "coupons": "One code per order; case insensitive; percentage or fixed merchandise discount after flash pricing; optional total usage limit and minimum subtotal.",
+    "duration": "Optional start and end independently; edited in business timezone and stored/checked in UTC; inclusive start, exclusive end.",
+    "limits": "Count placed orders/quantities, including cancelled orders; retry keys count once; checkout and admin writes share a storefront row lock.",
+    "history": "Order prices, coupon allocations and promotion names/codes are snapshotted; deleting archives a promotion.",
+    "positive_totals": "Discounts preserve at least one currency unit in merchandise totals to match payment contracts."
+  },
+  "controls": [
+    {
+      "name": "Add flash sale / Add coupon",
+      "result": "Open the corresponding shared modal",
+      "verified": "Component tests"
+    },
+    {
+      "name": "Search publication products / select product",
+      "result": "Choose a tenant catalog product",
+      "verified": "Component test and tenant API validation"
+    },
+    {
+      "name": "Save promotion",
+      "result": "Validate optional limits/dates, save once, retain form on failure",
+      "verified": "Component and API tests"
+    },
+    {
+      "name": "Pause",
+      "result": "Disable the existing promotion without deleting history",
+      "verified": "Component test"
+    },
+    {
+      "name": "Enable / Edit",
+      "result": "Enable or edit an existing promotion with shop-local date conversion",
+      "verified": "Handlers inspected; API update tested; individual button clicks not exercised"
+    },
+    {
+      "name": "Filters / Apply Filter",
+      "result": "Apply type and status filters without resetting retained drafts",
+      "verified": "Component and API tests"
+    },
+    {
+      "name": "Clear / Close filters / Next / Prev / Retry list",
+      "result": "Reset filters, dismiss drawer, change page, or retry load",
+      "verified": "Shared handlers inspected; individual clicks not exercised in new page"
+    },
+    {
+      "name": "Cancel / Close promotion",
+      "result": "Dismiss without saving",
+      "verified": "Cancel component test; shared modal close covered by existing common tests"
+    },
+    {
+      "name": "Delete / Delete promotion",
+      "result": "Open danger confirmation, then archive promotion while preserving order snapshots",
+      "verified": "Component and API tests"
+    },
+    {
+      "name": "Return to Promotions",
+      "result": "Retain filters and unsaved draft; no new initial list fetch",
+      "verified": "RetainedViews component test; browser/device Back not visually exercised"
+    },
+    {
+      "name": "Add to cart",
+      "result": "Do not add beyond remaining sale quantity including units already in the cart",
+      "verified": "Customer app component test"
+    },
+    {
+      "name": "Review order / Place order / Retry submission",
+      "result": "Submit coupon, show server discount and total, preserve exact retry payload",
+      "verified": "Customer app component and API tests"
+    }
+  ],
+  "validation": {
+    "frontend": "20 promotion/report/order tests passed; affected ESLint passed; build passed",
+    "shop": "42 full existing suite tests passed; 9 checkout tests including 2 new promotion flows passed; build passed",
+    "backend": "5 promotion and 4 analytics tests passed; broader e-commerce/chat run: 77 passed, 2 pre-existing credit-contact failures assuming an empty global customer table.",
+    "migration": "2026_10_07_000002_add_shop_promotions applied locally",
+    "visual": "Unavailable: browser runtime missing sandboxPolicy; no visual verification claimed."
+  }
+}

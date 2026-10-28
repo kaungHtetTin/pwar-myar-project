@@ -1,0 +1,137 @@
+/* Settings references 055-070: compact shared controls, natural continuation. */
+.settings-page { width: min(100%, 720px); margin: 0 auto; min-height: calc(100dvh - 60px); padding: 0 14px calc(84px + var(--app-safe-area-bottom)); color: var(--text); }
+.settings-page.settings-form-page { display: block; padding-bottom: calc(156px + var(--app-safe-area-bottom)); }
+.settings-page > .settings-reference-header { display: flex; align-items: center; gap: 6px; min-height: 56px; margin: 0 -14px 12px; padding: 6px 14px; background: var(--surface); }
+.settings-reference-header :is(.page-kicker, p) { display: none; }
+.settings-reference-header h1 { margin: 0; font-size: 18px; }
+.settings-navigation-group { margin: 0 0 14px; }
+.settings-navigation-group h2, .settings-group-label { margin: 0 0 6px; color: var(--muted); font-size: 12px; font-weight: 500; line-height: 1.6; }
+.settings-navigation-group .settings-section-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.settings-navigation-group .settings-section-grid > button { grid-template-columns: 32px minmax(0,1fr) 18px; gap: 10px; min-height: 58px; padding: 8px 10px; border: 0; border-radius: 0; box-shadow: none; }
+.settings-navigation-group .settings-section-grid > button + button { border-top: 1px solid var(--border); }
+.settings-navigation-group .settings-section-grid > button > span:first-child { width: 32px; height: 32px; border-radius: var(--radius-small); }
+.settings-navigation-group .settings-section-grid strong { font-size: 14px; font-weight: 600; }
+.settings-navigation-group .settings-section-grid small { font-size: 12px; line-height: 1.6; }
+.settings-page .settings-mobile-form { display: grid; gap: 12px; }
+.settings-page .mobile-form-section { display: grid; min-width: 0; gap: 12px; margin: 0; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: none; }
+.settings-page .mobile-section-heading { margin: 0; padding: 0; border: 0; }
+.settings-page .mobile-section-heading > span { display: none; }
+.settings-page .mobile-section-heading h3, .settings-page .mobile-form-section > h3, .settings-reset-scope h3 { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.65; }
+.settings-page .mobile-section-heading p, .settings-page .mobile-form-section > p { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.settings-page .mobile-field { display: grid; min-width: 0; gap: 5px; margin: 0; }
+.settings-page .mobile-field > :is(input, select, textarea) { min-width: 0; }
+.settings-page .mobile-field small { font-size: 12px; line-height: 1.65; }
+.settings-page :is(input,select,textarea,button) { scroll-margin-top: 76px; scroll-margin-bottom: 170px; }
+.settings-page.settings-form-page > .settings-mobile-form > .mobile-form-actions { position: fixed; z-index: 6; right: auto; bottom: calc(60px + var(--app-safe-area-bottom)); left: 50%; display: flex; width: min(100%,720px); gap: 8px; margin: 0; padding: 10px 14px; transform: translateX(-50%); border-top: 1px solid var(--border); background: var(--surface); }
+.settings-page .mobile-form-actions > button { flex: 1; min-width: 0; }
+.settings-page .mobile-printer-fields .mobile-form-actions { position: static; width: auto; padding: 0; transform: none; border: 0; }
+.settings-page .settings-check { display: flex; min-height: 44px; gap: 10px; padding: 8px; }
+.settings-page .settings-check > input { flex: 0 0 18px; width: 18px; min-height: 18px; height: 18px; margin: 0; padding: 0; }
+.settings-page .settings-check :is(strong, small) { white-space: normal; overflow-wrap: anywhere; }
+.settings-page .settings-check strong { font-size: 14px; font-weight: 500; }
+.settings-page .settings-check small { font-size: 12px; line-height: 1.6; }
+.settings-toggle-row { display: flex; min-width: 0; min-height: 44px; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 0; cursor: pointer; }
+.settings-toggle-row > span:first-child { display: grid; min-width: 0; gap: 2px; }
+.settings-toggle-row strong { color: var(--text); font-size: 14px; font-weight: 400; line-height: 1.65; }
+.settings-toggle-row small { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.settings-page .settings-account-card { grid-template-columns: 40px minmax(0,1fr) auto; gap: 10px; padding: 8px; border-radius: var(--radius-control); background: var(--control-canvas); }
+.settings-page .settings-account-card > span { width: 40px; height: 40px; border-radius: var(--radius-round); }
+.settings-page .settings-account-card strong { font-size: 14px; }
+.settings-page .settings-account-card small { font-size: 12px; overflow-wrap: anywhere; }
+.settings-page .settings-account-card b { font-size: 11px; }
+.settings-page .settings-password { padding-right: 0; }
+.settings-page .settings-password .ui-icon-button { flex-basis: 38px; width: 38px; min-width: 38px; min-height: 40px; height: 40px; }
+.settings-page .settings-choice-list { min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.settings-page .settings-choice-list > legend { margin-bottom: 6px; padding: 0; font-size: 12px; }
+.settings-page .settings-choice-list > label { align-items: flex-start; min-height: 48px; margin: 0 0 8px; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
+.settings-page .settings-choice-list > label > input { margin-top: 3px; }
+.settings-choice-list > label > span { display: grid; gap: 2px; }
+.settings-choice-list strong { color: var(--text); font-size: 14px; font-weight: 500; line-height: 1.65; }
+.settings-choice-list small { color: var(--muted); font-size: 12px; font-weight: 400; line-height: 1.65; }
+.settings-page .settings-choice-list > label.is-selected { border-color: var(--brand-700); background: var(--brand-100); }
+.settings-page .settings-segments { padding: 0; margin: 0; border: 0; box-shadow: none; }
+.settings-segments > legend { padding: 0; margin-bottom: 6px; font-size: 12px; }
+.settings-segments > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.settings-page .settings-segments button { min-width: 0; padding-inline: 5px; }
+.settings-page .settings-segments button[aria-pressed=true] { color: var(--theme-primary-text); border-color: var(--brand-800); background: var(--brand-100); }
+.settings-page .settings-pricing-fields { display: grid; gap: 12px; }
+.settings-page .settings-pricing-fields > .ui-field { grid-template-columns: minmax(0, 1fr) minmax(0, 132px); align-items: center; gap: 8px; }
+.settings-page .settings-pricing-mode { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.settings-page .settings-pricing-mode > legend { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); }
+.settings-page .settings-price-page { padding: 0; gap: 12px; }
+.settings-page .settings-price-list { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.settings-page .settings-price-row { min-height: 90px; padding: 12px; }
+.settings-page .settings-price-row :is(strong,small,em) { overflow: visible; white-space: normal; overflow-wrap: anywhere; }
+.settings-page .settings-price-row strong { font-size: 14px; }
+.settings-page .settings-price-row :is(small,em), .settings-page .settings-usage { font-size: 12px; line-height: 1.65; }
+.settings-page .settings-info-note, .settings-page-intro { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.settings-info-note > p { margin: 4px 0 0; }
+.settings-price-example { display: grid; gap: 4px; }
+.settings-price-example > strong { color: var(--theme-primary-text); font-size: 13px; }
+.settings-price-example dl { margin: 4px 0 0; }
+.settings-price-example dl > div { display: flex; gap: 8px; justify-content: space-between; }
+.settings-price-example dd { margin: 0; color: var(--text); }
+.settings-price-example dl > div:last-child { padding-top: 6px; margin-top: 6px; border-top: 1px solid var(--border); font-weight: 600; }
+.settings-page :is(.settings-danger-note,.settings-security-state) { padding: 10px; }
+.settings-page :is(.settings-danger-note,.settings-security-state) > svg { flex: 0 0 20px; }
+.settings-page :is(.settings-danger-note,.settings-security-state) strong { font-size: 14px; line-height: 1.65; }
+.settings-page :is(.settings-danger-note,.settings-security-state) small { font-size: 12px; line-height: 1.65; }
+.settings-page .settings-data-grid { gap: 6px; }
+.settings-page .settings-data-grid article { min-height: 88px; padding: 8px; }
+.settings-page .settings-data-grid small { font-size: 12px; }
+.settings-page .settings-data-grid strong { font-size: 14px; white-space: normal; overflow-wrap: anywhere; }
+.settings-page .settings-data-reset-link { padding: 12px; gap: 6px; }
+.settings-page .settings-data-reset-link > strong { font-size: 14px; }
+.settings-page .settings-data-reset-link > small { font-size: 12px; line-height: 1.65; }
+.settings-page .settings-file-picker { min-height: 88px; padding: 12px; }
+.settings-page .settings-file-picker strong { font-size: 14px; overflow-wrap: anywhere; }
+.settings-page .settings-file-picker small { font-size: 12px; line-height: 1.65; }
+.settings-reset-scope { display: grid; gap: 8px; }
+.settings-reset-scope ul { margin: 0 0 4px; padding-left: 20px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.settings-page .settings-repeat-list { gap: 10px; }
+.settings-page .settings-repeat-list > div { grid-template-columns: 32px minmax(0,1fr) 36px; gap: 8px; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-control); }
+.settings-page .settings-repeat-list > div > span { width: 32px; height: 32px; font-size: 14px; }
+.settings-page .settings-repeat-list > div > button { min-width: 36px; width: 36px; color: var(--theme-danger-text); }
+.settings-page .settings-language-section { gap: 12px; }
+.settings-page .settings-language-note :is(strong,small) { font-size: 12px; line-height: 1.65; }
+.settings-language-note > svg { flex: 0 0 18px; }
+.settings-page .settings-shop-logo { grid-template-columns: 52px minmax(0,1fr); padding: 8px; }
+.settings-page .settings-shop-logo-copy strong { font-size: 14px; }
+.settings-page .settings-shop-logo-copy small { font-size: 12px; }
+.settings-page .settings-shop-logo-actions { flex-wrap: wrap; }
+.settings-page .settings-shop-logo-actions button { min-height: 40px; font-size: 12px; }
+.settings-page .settings-format-summary strong, .settings-page .barcode-live-preview-heading strong { font-size: 14px; }
+.settings-page .settings-format-summary small, .settings-page .barcode-live-preview-heading small, .settings-page .barcode-live-preview > small { font-size: 12px; line-height: 1.65; }
+.settings-page .barcode-live-preview-heading { flex-wrap: wrap; }
+.settings-page .settings-about-page { gap: 16px; }
+.settings-page .settings-about-page > .settings-brand-card { display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 16px; text-align: left; }
+.settings-brand-card > span:last-child { display: grid; gap: 3px; }
+.settings-page .settings-about-page .settings-brand-card strong { color: var(--text); font-size: 20px; }
+.settings-page .settings-about-page .settings-brand-card small, .settings-brand-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.settings-row-icon { display: grid; flex: 0 0 32px; width: 32px; height: 32px; align-items: center; justify-content: center; border-radius: var(--radius-control); color: var(--theme-primary-text); background: var(--brand-100); }
+.settings-page .settings-about-page dl > div { display: grid; grid-template-columns: 32px minmax(0,1fr); align-items: center; gap: 0 10px; padding: 10px; }
+.settings-page .settings-about-page dl .settings-row-icon { grid-row: span 2; }
+.settings-page .settings-about-page dt { font-size: 14px; color: var(--text); }
+.settings-page .settings-about-page dd { grid-column: 2; margin: 0; font-size: 12px; font-weight: 400; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.settings-support-list { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.settings-support-list > a { display: grid; grid-template-columns: 32px minmax(0,1fr) 18px; align-items: center; gap: 10px; min-height: 58px; padding: 10px; color: var(--text); text-decoration: none; }
+.settings-support-list > a + a { border-top: 1px solid var(--border); }
+.settings-support-list > a > span:nth-child(2) { display: grid; min-width: 0; }
+.settings-support-list strong { font-size: 14px; font-weight: 500; }
+.settings-support-list small { color: var(--muted); font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; }
+.settings-support-list a:focus-visible { outline: 2px solid var(--brand-700); outline-offset: -3px; }
+.settings-printer-context { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--brand-100); }
+.settings-printer-context > span:last-child { display: grid; gap: 2px; min-width: 0; }
+.settings-printer-context strong { font-size: 14px; font-weight: 600; }
+.settings-printer-context small { font-size: 12px; color: var(--muted); line-height: 1.65; }
+.settings-printer-info { display: flex; gap: 10px; }
+.settings-printer-info svg { flex-shrink: 0; }
+.settings-printer-info p { margin: 0; font-size: 12px; line-height: 1.65; }
+.settings-page .mobile-printer-fields { display: grid; gap: 12px; }
+.settings-page .settings-choice-list { display: grid; gap: 8px; }
+.settings-page.mobile-printer-page form > .mobile-form-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+.settings-page.mobile-printer-page form > .mobile-form-actions > .mobile-primary { grid-column: auto; }
+.settings-printer-test-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.settings-printer-test-actions > button { min-width: 0; }
+@media(max-width:360px) { .settings-page .mobile-three-fields, .settings-page .mobile-two-fields { grid-template-columns: minmax(0,1fr); } .settings-page .settings-account-card { grid-template-columns: 36px minmax(0,1fr); } .settings-page .settings-account-card b { grid-column: 2; justify-self: start; } }
+@media(max-width:360px) { .settings-page .settings-pricing-mode { grid-template-columns: minmax(0, 1fr); } .settings-page .settings-pricing-fields > .ui-field { grid-template-columns: minmax(0, 1fr) minmax(0, 120px); } }

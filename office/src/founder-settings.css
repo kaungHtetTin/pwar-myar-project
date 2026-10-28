@@ -1,0 +1,17 @@
+.office-founder-header { gap: 16px; }
+.office-founder-total { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 6px 10px; font-variant-numeric: tabular-nums; }
+.office-founder-total span, .office-founder-total small { font-size: 11px; color: var(--office-muted); }
+.office-founder-total strong { font-size: 18px; color: var(--office-muted); }
+.office-founder-total[data-complete="true"] strong { color: var(--theme-primary-text); }
+.office-founder-table { min-width: 680px; }
+.office-founder-table th:nth-child(2), .office-founder-table .office-founder-share { text-align: right; width: 170px; font-variant-numeric: tabular-nums; }
+.office-founder-table th:nth-child(3), .office-founder-table td:nth-child(3) { width: 130px; }
+.office-founder-modal { max-width: 480px; }
+.office-founder-modal-form fieldset { display: grid; gap: 14px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.office-founder-modal-form label { display: grid; gap: 5px; font-size: 12px; font-weight: 600; }
+.office-founder-modal-form input { width: 100%; min-width: 0; min-height: 34px; font: inherit; font-weight: 400; }
+.office-founder-modal-form .office-founder-row-actions { justify-content: flex-end; padding-top: 4px; }
+.office-founder-row-actions { display: flex; gap: 8px; align-items: center; }
+.office-founder-row-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; font-size: 12px; }
+.office-founder-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 10px 12px; border-top: 1px solid var(--office-line-soft); }
+.office-founder-save-note { display: grid; gap: 3px; color: var(--office-muted); font-size: 11px; }

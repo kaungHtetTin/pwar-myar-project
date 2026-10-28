@@ -1,0 +1,71 @@
+/* Route identity belongs to the shared app bar on the mobile-only client.
+   This file is intentionally imported after every module stylesheet. */
+.submission-page-header,
+.mobile-form-title,
+.module-placeholder .page-kicker,
+.module-placeholder h1 {
+  display: none !important;
+}
+
+.products-title-row > div,
+.sale-compact-header > div {
+  display: none !important;
+}
+
+.products-title-row {
+  min-height: 0 !important;
+  justify-content: flex-end !important;
+}
+
+.sale-compact-header {
+  min-height: 0 !important;
+  justify-content: flex-end !important;
+  padding-block: 0 !important;
+}
+
+.sale-compact-header > button:first-child {
+  display: none !important;
+}
+
+.offline-sales-page .sale-compact-header {
+  display: none !important;
+}
+
+/* Keep native single-select arrows clear of the right edge on every mobile
+   screen. This stylesheet loads last so feature-level background shorthands
+   cannot remove the shared chevron. */
+#root select:not([multiple]) {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.25rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1.5 1.5 6 6l4.5-4.5' stroke='%23516a5f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.75rem 0.5rem;
+}
+
+.mobile-export-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: .38rem;
+  padding: .5rem .7rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-control);
+  color: var(--theme-primary-text);
+  background: var(--theme-surface);
+  font-size: .6rem;
+  font-weight: 800;
+}
+
+.mobile-export-button.is-compact span { display: none; }
+.mobile-export-button.is-compact { width: 2.75rem; padding: 0; }
+
+.mobile-export-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 .5rem;
+}
+
+.mobile-list-heading > .mobile-export-button { margin-left: auto; }

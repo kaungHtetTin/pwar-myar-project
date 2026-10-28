@@ -1,0 +1,4 @@
+interface:
+  display_name: "Develop MKPOS Mobile"
+  short_description: "Build consistent mobile-first MKPOS workflows"
+  default_prompt: "Use $develop-mkpos-mobile to build the next MKPOS mobile page with full-page forms, shared swipe refresh, and endless-scroll lists."

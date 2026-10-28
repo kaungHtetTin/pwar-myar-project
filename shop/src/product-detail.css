@@ -1,0 +1,15 @@
+/* Product routes own their surface, including while their data is loading. */
+body:has(> #root > main.is-product-page) { background: var(--theme-background); }
+main.shopping-main.is-product-page { background: var(--theme-background); min-width: 0; }
+.is-product-page .product-detail { min-width: 0; }
+.is-product-page .product-detail > .product-image { overflow: hidden; }
+@media (max-width: 760px) {
+  main.shopping-main.is-product-page {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 14px 12px 170px;
+    background: var(--theme-surface);
+  }
+  .is-product-page > [data-retained-view]:not([hidden]) { min-width: 0; }
+}

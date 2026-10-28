@@ -1,0 +1,306 @@
+/* Large-screen document scrolling.
+   Desktop pages use the browser scrollbar for their full vertical content.
+   Data tables keep horizontal overflow, but must not trap wheel gestures. */
+@media (min-width: 981px) {
+  html {
+    height: auto !important;
+    min-height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  body,
+  #root {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: visible !important;
+  }
+
+  .app-shell {
+    align-items: start;
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: visible !important;
+  }
+
+  .app-shell > .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .app-shell > main {
+    display: block;
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: visible !important;
+  }
+
+  .module-view:not([hidden]) {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Retained screens have one or more state-preserving frames between the
+     module and page. Match those page roots as well as unwrapped screens. */
+  :is(.module-view:not([hidden]), .module-view:not([hidden]) [data-retained-view]:not([hidden])) > :is(
+    .sale-screen,
+    .products-layout,
+    .purchases-layout,
+    .suppliers-layout,
+    .supplier-detail-page,
+    .customers-layout,
+    .customer-account-page,
+    .expenses-layout,
+    .transactions-layout,
+    .reports-layout,
+    .billing-screen,
+    .settings-screen,
+    .access-screen
+  ) {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  :is(
+    .sale-main-panel,
+    .product-main-panel,
+    .supplier-main-panel,
+    .customer-main-panel,
+    .customer-account-page-content,
+    .expense-main-panel,
+    .transaction-main-panel,
+    .report-main-panel,
+    .settings-workspace,
+    .access-layout
+  ),
+  :is(.module-view:not([hidden]), .module-view:not([hidden]) [data-retained-view]:not([hidden])) > .purchases-layout:not(.purchase-modal-layout) .purchase-main-panel {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  :is(
+    .sale-left-panel,
+    .sale-cart-panel,
+    .product-table-card,
+    .purchase-table-card,
+    .supplier-table-card,
+    .customer-table-card,
+    .customer-history-card,
+    .expense-table-card,
+    .transaction-table-card,
+    .access-panel,
+    .settings-panel
+  ) {
+    height: auto !important;
+    min-height: 0;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  .settings-workspace {
+    grid-template-rows: auto;
+  }
+
+  .settings-panel {
+    grid-template-rows: 58px auto 54px;
+  }
+
+  .settings-panel.settings-panel--data {
+    display: block;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .settings-panel.settings-panel--data > .settings-panel-content {
+    padding: 0;
+    overflow: visible !important;
+    background: transparent;
+  }
+
+  .settings-panel-content,
+  .settings-side-tabs,
+  .sale-product-grid,
+  .sale-cart-items,
+  .supplier-detail-page {
+    height: auto !important;
+    min-height: 0;
+    max-height: none !important;
+    overflow-y: visible !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  :is(
+    .product-table-card,
+    .purchase-table-card,
+    .supplier-table-card,
+    .customer-table-card,
+    .expense-table-card,
+    .transaction-table-card
+  ) {
+    grid-template-rows: auto auto;
+  }
+
+  :is(
+    .product-grid-wrap,
+    .purchase-table-wrap,
+    .supplier-table-wrap,
+    .supplier-detail-table-wrap,
+    .customer-table-wrap,
+    .customer-history-table,
+    .expense-table-wrap,
+    .transaction-table-wrap,
+    .billing-table-wrap,
+    .access-table-wrap,
+    .access-role-list,
+    .desktop-sync-table-wrap,
+    .table-wrap.sheet-table
+  ) {
+    max-height: none !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  /* Let formerly viewport-sized tracks grow, including empty placeholders. */
+  .desktop-workspace :is(.product-table-card, .purchase-table-card, .supplier-table-card, .customer-table-card, .expense-table-card, .transaction-table-card) {
+    display: block;
+  }
+  .desktop-workspace :is(.product-grid-wrap, .purchase-table-wrap, .supplier-table-wrap, .customer-table-wrap, .expense-table-wrap, .transaction-table-wrap, .sale-product-grid) {
+    height: auto !important;
+    max-height: none !important;
+    flex: none;
+  }
+  .desktop-workspace .sale-left-panel { grid-template-rows: auto; grid-auto-rows: auto; }
+}
+
+/* Sell is a desktop POS workspace at every viewport width: products and cart stay side by side. */
+.app-shell.desktop-workspace .sale-main-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px;
+}
+
+.app-shell.desktop-workspace .sale-left-panel,
+.app-shell.desktop-workspace .sale-cart-panel {
+  min-width: 0;
+}
+
+.app-shell.desktop-workspace .sale-scan-bar {
+  grid-template-columns: minmax(180px, 1fr) minmax(120px, 0.38fr) 124px !important;
+}
+
+/* POS owns the viewport. Only its product and cart collections scroll. */
+html:has(body.pos-sell-active),
+body.pos-sell-active,
+body.pos-sell-active #root {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+body.pos-sell-active .app-shell.pos-mode {
+  height: 100dvh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Keep the POS canvas locked while allowing the complete sidebar, including its footer, to scroll. */
+body.pos-sell-active .app-shell.pos-mode > .sidebar {
+  align-self: stretch;
+  box-sizing: border-box;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+}
+
+body.pos-sell-active .app-shell.pos-mode > .sidebar > nav {
+  flex: 0 0 auto;
+  min-height: max-content;
+  overflow: visible;
+}
+
+body.pos-sell-active .app-shell.pos-mode > main {
+  display: grid;
+  grid-template-rows: var(--mkpos-topbar-height) minmax(0, 1fr);
+  height: 100dvh !important;
+  min-height: 0 !important;
+  padding-bottom: var(--mkpos-main-pad);
+  overflow: hidden !important;
+}
+
+body.pos-sell-active .app-shell.pos-mode .workspace-header {
+  position: relative;
+}
+
+body.pos-sell-active .module-view[data-module='sell']:not([hidden]),
+body.pos-sell-active .module-view[data-module='sell'] [data-retained-view]:not([hidden]),
+body.pos-sell-active .module-view[data-module='sell'] [data-retained-view]:not([hidden]) > .sale-screen,
+body.pos-sell-active .module-view[data-module='sell'] .sale-screen,
+body.pos-sell-active .module-view[data-module='sell'] .sale-main-panel {
+  box-sizing: border-box;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+body.pos-sell-active .module-view[data-module='sell']:not([hidden]) {
+  padding-top: var(--mkpos-main-pad);
+}
+
+body.pos-sell-active .module-view[data-module='sell'] .sale-left-panel,
+body.pos-sell-active .module-view[data-module='sell'] .sale-cart-panel {
+  align-self: stretch;
+  position: static;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+body.pos-sell-active .module-view[data-module='sell'] .sale-left-panel {
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-auto-rows: initial;
+}
+
+body.pos-sell-active .module-view[data-module='sell'] .sale-cart-panel {
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+}
+
+body.pos-sell-active .module-view[data-module='sell'] .sale-product-list {
+  min-height: 0;
+  overflow: hidden;
+}
+
+body.pos-sell-active .module-view[data-module='sell'] .sale-product-grid,
+body.pos-sell-active .module-view[data-module='sell'] .sale-cart-items {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}

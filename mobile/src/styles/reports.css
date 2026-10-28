@@ -1,0 +1,111 @@
+/* Reports 046 / 119 / 156 / 160–162: compact PwarMyar styling with natural scrolling. */
+.report-reference-page.sale-retail-page { width: min(100%,720px); margin: auto; min-height: 100dvh; padding: 0 14px calc(90px + var(--app-safe-area-bottom)); color: var(--theme-text); font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Myanmar",sans-serif; }
+.report-reference-page button, .report-filter-panel button, .report-filter-panel input { font-family: inherit; }
+.report-reference-header h1 { font-size: 20px; }
+.report-reference-header button:last-child { margin-left: auto; }
+.report-reference-page button:focus-visible, .report-filter-panel button:focus-visible { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.report-filter-controls { display: grid; gap: 6px; margin: 0 0 12px; }
+.report-period-label { color: var(--control-label); font-size: var(--control-label-size); font-weight: 600; line-height: 1.75; }
+.report-filter-toolbar.mobile-control-row { display: grid; grid-template-columns: minmax(0,1fr) 44px; gap: 8px; margin: 0; }
+.report-period-button > span { flex: 1; min-width: 0; text-align: left; overflow-wrap: anywhere; }
+.report-period-button > svg { flex-shrink: 0; }
+.report-filter-toolbar .mobile-filter-toggle { display: grid; width: 44px; height: auto; place-items: center; padding: 0; }
+.report-filter-toolbar .mobile-filter-toggle > span, .report-filter-toolbar .mobile-filter-toggle > .mobile-filter-chevron { display: none; }
+.report-filter-toolbar .mobile-filter-toggle > svg { width: 20px; height: 20px; }
+.report-download { display: flex; gap: 6px; align-items: center; justify-content: center; padding: 6px 9px; font-size: 11px; font-weight: 650; }
+.report-reference-page button:disabled { opacity: .55; cursor: default; }
+.report-profit { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 12px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: linear-gradient(110deg,var(--theme-success-soft),var(--theme-success-soft)); color: var(--theme-text); }
+.report-profit > div { min-width: 0; }
+.report-profit small { display: flex; gap: 5px; align-items: center; font-size: 12px; }
+.report-profit strong { display: block; margin-top: 1px; font-size: 28px; line-height: 1.3; letter-spacing: -.6px; overflow-wrap: anywhere; }
+.report-profit p { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 4px 0 0; font-size: 10px; color: var(--theme-text-muted); }
+.report-profit-art { flex-shrink: 0; color: var(--theme-success-text); opacity: .65; }
+.report-profit.is-negative { background: var(--theme-danger-soft); border-color: var(--theme-border); color: var(--theme-danger-text); }
+.report-profit.is-negative .report-profit-art { color: var(--theme-danger-text); }
+.report-mobile-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 0; margin: 10px 0 0; padding: 6px 0; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: var(--theme-surface); }
+.report-reference-page .report-mobile-metric { min-width: 0; min-height: 0; display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto; align-content: start; gap: 3px; padding: 9px 10px; border: 0; border-radius: 0; box-shadow: none; }
+.report-mobile-metric:not(:nth-child(3n+1)) { border-left: 1px solid var(--theme-border); }
+.report-mobile-metric:nth-child(n+4) { border-top: 1px solid var(--theme-border); }
+.report-mobile-metric small { font-size: 10px; font-weight: 400; line-height: 1.4; color: var(--theme-text-muted); overflow: visible; white-space: normal; overflow-wrap: anywhere; }
+.report-mobile-metric strong { font-size: 12px; line-height: 1.4; overflow: visible; white-space: normal; overflow-wrap: anywhere; color: var(--theme-text); }
+.report-section-links { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 0; }
+.report-section-links button { padding: 5px 9px; min-height: 32px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-surface); font-size: 10px; }
+.report-section { min-width: 0; margin-top: 12px; padding: 12px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: var(--theme-surface); scroll-margin-top: 12px; }
+.report-mobile-heading { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 12px; }
+.report-mobile-heading > svg { flex: 0 0 21px; color: var(--theme-primary-text); }
+.report-mobile-heading > div { min-width: 0; flex: 1; }
+.report-mobile-heading h2 { margin: 0; color: var(--theme-text); font-size: 14px; font-weight: 650; line-height: 1.4; }
+.report-mobile-heading small { display: block; margin-top: 2px; color: var(--theme-text-muted); font-size: 10px; line-height: 1.5; }
+.report-value-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 12px; line-height: 1.45; }
+.report-value-row + .report-value-row { border-top: 1px solid var(--theme-border); }
+.report-value-row > span { min-width: 0; color: var(--theme-text-muted); }
+.report-value-row > strong { flex-shrink: 0; max-width: 60%; text-align: right; font-size: 13px; font-weight: 650; overflow-wrap: anywhere; }
+.report-value-row.is-highlight { margin: 3px -4px 0; padding: 9px 5px; border: 0; border-radius: var(--radius-small); background: var(--theme-primary-soft); color: var(--theme-text); }
+.report-value-row.is-highlight > span { color: inherit; font-weight: 550; }
+.report-help { margin: 8px 0 0; color: var(--theme-text-muted); font-size: 10px; line-height: 1.6; }
+.report-scope-label { margin: 15px 0 -3px; font-size: 12px; font-weight: 550; color: var(--theme-text-muted); }
+.report-current-section, .report-breakdowns, .report-reference-page .report-section { scroll-margin-top: 64px; }
+.report-inventory-total { display: block; font-size: 29px; line-height: 1.3; font-weight: 750; color: var(--theme-text); letter-spacing: -.5px; overflow-wrap: anywhere; }
+.report-inventory-investment-label { display: block; margin-top: 2px; color: var(--theme-text-muted); font-size: 11px; }
+.report-account-counts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; padding-top: 10px; border-top: 1px solid var(--theme-border); }
+.report-account-counts > span { display: grid; gap: 4px; color: var(--theme-text-muted); font-size: 11px; }
+.report-account-counts strong { color: var(--theme-text); font-size: 15px; }
+.report-trend-tabs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px; padding: 3px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); background: var(--theme-background); }
+.report-trend-tabs button { min-height: 32px; padding: 5px; border: 0; border-radius: var(--radius-small); color: var(--theme-text-muted); background: transparent; font-size: 12px; }
+.report-trend-tabs button[aria-pressed="true"] { color: var(--theme-on-primary); background: var(--brand-800); }
+.report-trend-chart h3 { margin: 12px 0 0; font-size: 12px; font-weight: 600; }
+.report-sales-bars { display: flex; height: 185px; gap: 5px; margin-top: 10px; overflow-x: auto; padding: 0 0 6px; scrollbar-width: thin; }
+.report-sales-bar-column { display: grid; flex: 1 0 40px; min-width: 40px; grid-template-rows: 26px minmax(0,1fr) 18px; gap: 3px; align-items: end; text-align: center; }
+.report-sales-bars.is-daily .report-sales-bar-column { flex-basis: 28px; min-width: 28px; }
+.report-sales-bar-value { overflow: hidden; color: var(--theme-text-muted); font-size: 9px; line-height: 1.3; white-space: nowrap; text-overflow: ellipsis; }
+.report-sales-bar-track { display: flex; align-items: flex-end; height: 100%; border-bottom: 1px solid var(--theme-border); background: repeating-linear-gradient(to top,var(--theme-surface) 0,var(--theme-surface) calc(33.333% - 1px),var(--theme-background) 33.333%); }
+.report-sales-bar-track i { width: min(18px,75%); display: block; margin: 0 auto; border-radius: var(--radius-subtle) var(--radius-subtle) 0 0; background: linear-gradient(var(--theme-primary),var(--theme-primary)); }
+.report-sales-bar-column small { color: var(--theme-text-muted); font-size: 10px; align-self: start; }
+.report-payment-summary { display: grid; grid-template-columns: 92px minmax(0,1fr); gap: 16px; align-items: center; margin: 4px 0 12px; }
+.report-breakdown-label { margin: 14px 0 3px; font-size: 11px; font-weight: 550; color: var(--theme-text-muted); }
+.report-payment-pie { width: 92px; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(var(--theme-primary) 0 var(--paid-percent),var(--theme-primary-soft) var(--paid-percent) 100%); }
+.report-payment-pie.is-empty { background: var(--theme-background); }
+.report-payment-summary > div:last-child { display: grid; gap: 10px; }
+.report-payment-summary span { display: grid; grid-template-columns: 7px minmax(0,1fr); align-items: center; gap: 2px 6px; color: var(--theme-text-muted); font-size: 11px; }
+.report-payment-summary span i { width: 7px; height: 7px; border-radius: 50%; background: var(--theme-primary); }
+.report-payment-summary span + span i { background: var(--theme-primary-soft); }
+.report-payment-summary strong { grid-column: 2; color: var(--theme-text); font-size: 12px; overflow-wrap: anywhere; }
+.report-mobile-ranks article { display: grid; grid-template-columns: 26px minmax(0,1fr) auto; gap: 8px; align-items: center; min-height: 49px; padding: 8px 0; }
+.report-mobile-ranks article + article { border-top: 1px solid var(--theme-border); }
+.report-rank-number { display: grid; place-items: center; width: 26px; height: 28px; border-radius: var(--radius-small); background: var(--theme-background); color: var(--theme-text-muted); font-size: 12px; }
+.is-payments .report-rank-number, .is-expenses .report-rank-number { background: none; color: var(--theme-primary-text); }
+.report-rank-number i { width: 10px; height: 10px; border-radius: 50%; background: var(--rank-color); }
+.report-mobile-ranks article > div { min-width: 0; }
+.report-mobile-ranks strong { display: block; color: var(--theme-text); font-size: 12px; font-weight: 500; overflow-wrap: anywhere; }
+.report-mobile-ranks small { display: block; margin-top: 2px; color: var(--theme-text-muted); font-size: 10px; }
+.report-mobile-ranks b { max-width: 135px; text-align: right; font-size: 12px; font-weight: 550; overflow-wrap: anywhere; }
+.report-refresh-error { display: flex; align-items: center; gap: 10px; padding: 10px; margin-bottom: 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); background: var(--theme-danger-soft); color: var(--theme-danger-text); }
+.report-refresh-error > svg { flex-shrink: 0; }
+.report-refresh-error > div { min-width: 0; flex: 1; }
+.report-refresh-error strong { display: block; font-size: 12px; }
+.report-refresh-error small { display: block; margin-top: 2px; color: var(--theme-text-muted); font-size: 10px; line-height: 1.5; overflow-wrap: anywhere; }
+.report-refresh-error button { min-height: 32px; padding: 5px 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); background: var(--theme-surface); color: var(--theme-danger-text); font-size: 11px; }
+.report-refresh-status { margin: 0 0 8px; color: var(--theme-text-muted); font-size: 11px; }
+.report-loading { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: center; padding-top: 16px; color: var(--theme-text-muted); font-size: 13px; }
+.report-skeleton { grid-column: 1/-1; height: 250px; border-radius: var(--radius-card); background: linear-gradient(var(--theme-surface-muted) 0 85px,transparent 85px 97px,var(--theme-background) 97px 235px,transparent 235px); }
+.report-filter-panel.mobile-collapsible-filter { display: grid; align-content: start; gap: 20px; background: var(--theme-surface); padding: 16px; }
+.report-filter-group { min-width: 0; margin: 0; padding: 0; border: 0; }
+.report-filter-group legend, .report-currency-field { margin-bottom: 8px; color: var(--text); font-size: 14px; }
+.report-chart-values { margin-top: 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); }
+.report-chart-values summary { padding: 8px; font-size: 11px; color: var(--theme-primary-text); cursor: pointer; }
+.report-chart-values summary:focus-visible { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.report-chart-values table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.report-chart-values th, .report-chart-values td { padding: 7px 8px; border-top: 1px solid var(--theme-border); text-align: left; }
+.report-chart-values td:last-child, .report-chart-values th:last-child { text-align: right; }
+.report-filter-dates { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.report-currency-field { display: grid; gap: 8px; }
+.report-currency-field > span { font-weight: 600; }
+.report-currency-field > div { display: flex; justify-content: space-between; gap: 8px; padding: 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-text-muted); background: var(--theme-background); }
+.report-currency-field small { font-size: 12px; }
+.report-filter-help { display: flex; gap: 9px; padding: 12px; border-radius: var(--radius-card); background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+.report-filter-help > svg { flex: 0 0 19px; }
+.report-filter-help strong, .report-filter-help p { margin: 0; font-size: 12px; font-weight: 400; line-height: 1.65; }
+.report-filter-help strong { font-weight: 600; }
+.report-filter-help p { margin-top: 4px; }
+@media (max-width: 359px) { .report-download > span { display: none; } .report-mobile-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .report-mobile-metric:not(:nth-child(3n+1)) { border-left: 0; } .report-mobile-metric:nth-child(even) { border-left: 1px solid var(--theme-border); } .report-mobile-metric:nth-child(n+3) { border-top: 1px solid var(--theme-border); } .report-value-row { gap: 8px; font-size: 11px; } .report-mobile-ranks b { max-width: 105px; font-size: 11px; } }
+html[lang="my"] .report-reference-page, html[lang="my"] .report-filter-panel { line-height: 1.7; }

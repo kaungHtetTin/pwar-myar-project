@@ -1,0 +1,50 @@
+import React from 'react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { afterEach, expect, it, vi } from 'vitest';
+import { ShopChatButton } from './ShopChatButton';
+import { request } from '../api';
+import { io } from 'socket.io-client';
+vi.mock('../api', () => ({ request: vi.fn() }));
+vi.mock('socket.io-client', () => ({ io: vi.fn() }));
+afterEach(() => { cleanup(); vi.clearAllMocks(); vi.useRealTimers(); });
+it('opens chat once and refreshes the total on realtime and local read events', async () => {
+  let unread = 123;
+  const handlers = {}, open = vi.fn();
+  const socket = { connected: true, on: vi.fn((event, handler) => { handlers[event] = handler; }), removeAllListeners: vi.fn(), disconnect: vi.fn() };
+  io.mockReturnValue(socket);
+  request.mockImplementation(async path => path.endsWith('/config') ? { enabled: true, channel: 'business.1', realtime_enabled: true }
+    : { enabled: true, cursor: 0, items: [], unread_count: unread });
+  const { unmount } = render(<ShopChatButton onOpen={open} />);
+  const button = await screen.findByRole('button', { name: 'Chat, 123 unread messages' });
+  await waitFor(() => expect(handlers['chat.changed']).toBeTypeOf('function'));
+  expect(button).toHaveTextContent('99+');
+  fireEvent.click(button);
+  expect(open).toHaveBeenCalledOnce();
+  unread = 4;
+  await act(async () => handlers['chat.changed']());
+  expect(button).toHaveAccessibleName('Chat, 4 unread messages');
+  unread = 0;
+  await act(async () => window.dispatchEvent(new Event('mkpos:shop-chat-read')));
+  expect(button).toHaveAccessibleName('Chat');
+  expect(button.querySelector('.workspace-chat-badge')).toBeNull();
+  expect(request.mock.calls.some(([path]) => path.endsWith('/unread'))).toBe(false);
+  unmount();
+  expect(socket.disconnect).toHaveBeenCalledOnce();
+});
+it('keeps the last total after a network failure and recovers after backoff', async () => {
+  vi.useFakeTimers();
+  let unread = 6;
+  request.mockImplementation(async path => path.endsWith('/config') ? { enabled: false }
+    : { enabled: true, cursor: 0, items: [], unread_count: unread });
+  await act(async () => { render(<ShopChatButton onOpen={() => {}} />); });
+  expect(screen.getByRole('button')).toHaveAccessibleName('Chat, 6 unread messages');
+  request.mockRejectedValueOnce(new Error('offline'));
+  await act(async () => window.dispatchEvent(new Event('mkpos:shop-chat-read')));
+  expect(screen.getByRole('button')).toHaveAccessibleName('Chat, 6 unread messages');
+  unread = 2;
+  const calls = request.mock.calls.length;
+  await act(async () => window.dispatchEvent(new Event('mkpos:shop-chat-read')));
+  expect(request).toHaveBeenCalledTimes(calls);
+  await act(async () => vi.advanceTimersByTimeAsync(15000));
+  expect(screen.getByRole('button')).toHaveAccessibleName('Chat, 2 unread messages');
+});

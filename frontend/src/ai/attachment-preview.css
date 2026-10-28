@@ -1,0 +1,9 @@
+.ai-attachment-preview { display: flex; align-items: center; gap: 10px; min-width: 0; max-width: 100%; padding: 8px; border: 1px solid var(--line, var(--theme-border)); border-radius: 8px; background: var(--surface, var(--theme-surface)); }
+.ai-attachment-thumbnail { display: grid; place-items: center; flex: 0 0 56px; width: 56px; height: 56px; overflow: hidden; border-radius: 5px; color: var(--brand, var(--theme-primary-text)); background: var(--surface-soft, var(--theme-background)); }
+.ai-attachment-thumbnail img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.ai-attachment-copy { display: grid; flex: 1; min-width: 0; gap: 4px; }
+.ai-attachment-copy strong { color: var(--text); font-size: 12px; line-height: 1.5; font-weight: 500; overflow-wrap: anywhere; }
+.ai-attachment-copy small { color: var(--muted); font-size: 10px; line-height: 1.5; }
+body .ai-attachment-preview .ai-attachment-remove { display: grid; place-items: center; flex: none; width: 30px; height: 30px; min-height: 30px; padding: 0; border: 0; color: var(--muted); background: transparent; box-shadow: none; }
+.ai-chat-file:has(.ai-attachment-preview) { display: block; padding: 8px 0; }
+.shop-chat-message > .ai-attachment-preview { margin-block: 4px 8px; }

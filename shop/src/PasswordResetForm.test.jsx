@@ -1,0 +1,54 @@
+import React from 'react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { PasswordResetForm } from './PasswordResetForm';
+import { post } from './api';
+vi.mock('./api', () => ({ post: vi.fn() }));
+beforeEach(() => post.mockReset());
+afterEach(() => { cleanup(); vi.useRealTimers(); });
+const send = async (resendAfter = 60) => {
+  post.mockResolvedValueOnce({ message: 'If an eligible account exists, a reset code has been sent.', resend_after: resendAfter });
+  fireEvent.change(screen.getByLabelText('Email address'), { target: { value: 'buyer@example.test' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Send reset code' }));
+  await screen.findByLabelText('Email verification code');
+};
+it('requests an OTP, then resets the password without signing the user in', async () => {
+  const back = vi.fn(); render(<PasswordResetForm onBack={back} />); await send();
+  expect(post.mock.calls[0][0]).toBe('/customer/forgot-password');
+  expect(screen.getByRole('button', { name: 'Resend code in 60s' })).toBeDisabled();
+  fireEvent.change(screen.getByLabelText('Email verification code'), { target: { value: '012345' } });
+  fireEvent.change(screen.getByLabelText('New password'), { target: { value: 'new-password' } });
+  fireEvent.change(screen.getByLabelText('Confirm new password'), { target: { value: 'new-password' } });
+  post.mockResolvedValueOnce({ message: 'Reset successfully' });
+  fireEvent.click(screen.getByRole('button', { name: 'Reset password' }));
+  await screen.findByText('Your password has been changed. Sign in with your new password.');
+  expect(post.mock.calls[1][0]).toBe('/customer/reset-password');
+  expect(post.mock.calls[1][1]).toMatchObject({ email: 'buyer@example.test', code: '012345', password_confirmation: 'new-password' });
+  fireEvent.click(screen.getByRole('button', { name: 'Back to sign in' })); expect(back).toHaveBeenCalledOnce();
+});
+it('preserves a failed reset for retry and blocks duplicate submissions while saving', async () => {
+  render(<PasswordResetForm onBack={vi.fn()} />); await send();
+  fireEvent.change(screen.getByLabelText('Email verification code'), { target: { value: '111111' } });
+  fireEvent.change(screen.getByLabelText('New password'), { target: { value: 'new-password' } });
+  fireEvent.change(screen.getByLabelText('Confirm new password'), { target: { value: 'new-password' } });
+  post.mockRejectedValueOnce(Object.assign(new Error('Invalid code'), { payload: { errors: { code: ['Request a new code'] } } }));
+  fireEvent.submit(screen.getByRole('button', { name: 'Reset password' }).closest('form'));
+  await screen.findByText('Invalid code'); expect(screen.getByLabelText('Email verification code')).toHaveValue('111111');
+  expect(screen.getByLabelText('Email verification code')).toHaveAttribute('aria-invalid', 'true');
+  let finish; post.mockImplementationOnce(() => new Promise(resolve => { finish = resolve; }));
+  const form = screen.getByRole('button', { name: 'Reset password' }).closest('form');
+  fireEvent.submit(form); fireEvent.submit(form);
+  expect(post).toHaveBeenCalledTimes(3); expect(screen.getByRole('button', { name: 'Back to sign in' })).toBeDisabled();
+  await act(async () => finish({}));
+});
+it('resends after cooldown and clears the code before switching email', async () => {
+  render(<PasswordResetForm onBack={vi.fn()} />); await send(1);
+  await screen.findByRole('button', { name: 'Resend code' }, { timeout: 2500 });
+  post.mockResolvedValueOnce({ message: 'New code sent', resend_after: 60 });
+  fireEvent.click(screen.getByRole('button', { name: 'Resend code' }));
+  await act(async () => {}); expect(post).toHaveBeenCalledTimes(2);
+  expect(screen.getByRole('button', { name: 'Resend code in 60s' })).toBeDisabled();
+  fireEvent.click(screen.getByRole('button', { name: 'Use a different email' }));
+  expect(screen.queryByLabelText('Email verification code')).not.toBeInTheDocument();
+  expect(screen.getByLabelText('Email address')).not.toHaveAttribute('readonly');
+});

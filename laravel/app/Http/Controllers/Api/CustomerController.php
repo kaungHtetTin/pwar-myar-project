@@ -1,0 +1,289 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Services\BusinessRecordWriter;
+use App\Support\AppTime;
+use App\Tenancy\TenantContext;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class CustomerController extends ApiController
+{
+    public function index(Request $request)
+    {
+        $query = DB::table('customers as c')->where('c.is_active', true)
+            ->select('c.*')->selectRaw($this->balanceSql().' as balance');
+        if ($search = trim((string) $request->query('q', ''))) {
+            $like = "%{$search}%";
+            $query->where(fn ($q) => $q->where('c.name', 'like', $like)->orWhere('c.phone', 'like', $like)->orWhere('c.email', 'like', $like)->orWhere('c.address', 'like', $like)->orWhere('c.note', 'like', $like));
+        }
+        $balanceSql = $this->balanceSql();
+        match ($request->query('account_status', 'all')) {
+            'receivable' => $query->whereRaw("({$balanceSql}) > 0"),
+            'payable' => $query->whereRaw("({$balanceSql}) < 0"),
+            'settled' => $query->whereRaw("({$balanceSql}) = 0"),
+            default => null,
+        };
+        match ($request->query('sale_activity', 'all')) {
+            'with_sales' => $query->whereExists(fn ($sale) => $sale->selectRaw('1')->from('sales as s')->whereColumn('s.customer_id', 'c.id')->where('s.status', 'completed')),
+            'without_sales' => $query->whereNotExists(fn ($sale) => $sale->selectRaw('1')->from('sales as s')->whereColumn('s.customer_id', 'c.id')->where('s.status', 'completed')),
+            default => null,
+        };
+        $result = $this->page($query->orderBy('c.name'), $request, 200, 500);
+        if (isset($result['items'])) {
+            $result['items'] = $this->stats($result['items']);
+            $result['account_summary'] = $this->accountSummary();
+
+            return $result;
+        }
+
+        return $result;
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->validatedCustomer($request);
+        $id = DB::table('customers')->insertGetId($data + ['business_id' => app(TenantContext::class)->requireId(), 'is_active' => true, 'created_at' => now(), 'updated_at' => now()]);
+
+        return (array) DB::table('customers')->where('id', $id)->select('*')->selectRaw('0 as balance')->first();
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $data = $this->validatedCustomer($request);
+        abort_if(! DB::table('customers')->where('id', $id)->where('is_active', true)->update($data + ['updated_at' => now()]), 404, 'Customer not found');
+
+        return $this->customer($id);
+    }
+
+    public function destroy(int $id)
+    {
+        abort_if(! DB::table('customers')->where('id', $id)->where('is_active', true)->update(['is_active' => false, 'updated_at' => now()]), 404, 'Customer not found');
+
+        return ['ok' => true];
+    }
+
+    public function detail(int $id)
+    {
+        $customer = $this->customer($id);
+        $credit = (int) DB::table('sales')->where('customer_id', $id)->where('status', 'completed')->sum('credit_amount');
+        $paid = (int) DB::table('customer_payments')->where('customer_id', $id)->where('status', 'completed')->where('direction', 'customer_to_shop')->sum('amount');
+        $payout = (int) DB::table('customer_payments')->where('customer_id', $id)->where('status', 'completed')->where('direction', 'shop_to_customer')->sum('amount');
+
+        $sales = DB::table('sales')->where('customer_id', $id)->where('status', 'completed');
+
+        return ['customer' => $customer, 'summary' => ['total_sales' => (int) (clone $sales)->sum('total'), 'sale_count' => (clone $sales)->count(),
+            'last_sale' => $sales->max('created_at'), 'credit_total' => $credit, 'paid_total' => $paid, 'payout_total' => $payout, 'balance' => $credit - $paid + $payout]];
+    }
+
+    public function sales(Request $request, int $id)
+    {
+        abort_if(! DB::table('customers')->where('id', $id)->where('is_active', true)->exists(), 404, 'Customer not found');
+        $query = DB::table('sales')->where('customer_id', $id)->where('status', 'completed');
+        if ($search = trim((string) $request->query('q', ''))) {
+            $like = "%{$search}%";
+            $query->where(fn ($q) => $q->where('receipt_no', 'like', $like)->orWhere('payment_method', 'like', $like));
+        }
+        $saleType = $request->query('sale_type', 'all');
+        if ($saleType === 'credit') {
+            $query->where('credit_amount', '>', 0);
+        } elseif ($saleType === 'paid') {
+            $query->where('credit_amount', '<=', 0);
+        }
+        $this->historyFilters($query, $request);
+
+        $result = $this->page($query->orderByDesc('created_at')->orderByDesc('id'), $request, 25, 100);
+        if ($request->boolean('with_items') && isset($result['items'])) {
+            $saleIds = array_map(fn ($sale) => is_array($sale) ? $sale['id'] : $sale->id, $result['items']);
+            $items = DB::table('sale_items as si')->leftJoin('products as p', 'p.id', '=', 'si.product_id')
+                ->whereIn('si.sale_id', $saleIds)->orderBy('si.id')
+                ->select('si.*', 'p.photo_path', 'p.updated_at as product_updated_at', DB::raw("COALESCE(p.base_unit, 'Unit') as unit_name"))
+                ->get()->groupBy('sale_id');
+            $result['items'] = array_map(function ($sale) use ($items) {
+                $sale = (array) $sale;
+                $sale['items'] = ($items->get($sale['id']) ?? collect())->map(function ($row) {
+                    $item = (array) $row;
+                    $item['photo_url'] = $item['photo_path'] ? '/products/'.$item['product_id'].'/photo?v='.strtotime((string) $item['product_updated_at']) : null;
+                    unset($item['photo_path'], $item['product_updated_at']);
+
+                    return $item;
+                })->all();
+
+                return $sale;
+            }, $result['items']);
+        }
+
+        return $result;
+    }
+
+    public function payments(Request $request, int $id)
+    {
+        abort_if(! DB::table('customers')->where('id', $id)->where('is_active', true)->exists(), 404, 'Customer not found');
+        $query = DB::table('customer_payments')->where('customer_id', $id);
+        $this->historyFilters($query, $request);
+
+        return $this->page($query->orderByDesc('created_at')->orderByDesc('id'), $request, 25, 100);
+    }
+
+    public function statement(Request $request, int $id)
+    {
+        $detail = $this->detail($id);
+        $salesQuery = DB::table('sales')->where('customer_id', $id)->where('credit_amount', '>', 0);
+        $paymentsQuery = DB::table('customer_payments')->where('customer_id', $id);
+        $this->historyFilters($salesQuery, $request);
+        $this->historyFilters($paymentsQuery, $request);
+
+        return $detail + ['start' => $request->query('start'), 'end' => $request->query('end'),
+            'sales' => $salesQuery->orderBy('created_at')->get(), 'payments' => $paymentsQuery->orderBy('created_at')->get()];
+    }
+
+    public function storePayment(Request $request, int $id)
+    {
+        if ($request->input('direction') === 'shop_to_customer') app(\App\Services\AdminPinProtection::class)->authorize($request);
+        abort_if(! DB::table('customers')->where('id', $id)->where('is_active', true)->exists(), 404, 'Customer not found');
+        $data = $this->validatedPayment($request);
+        $paymentId = DB::table('customer_payments')->insertGetId($data + ['customer_id' => $id, 'status' => 'completed', 'created_at' => now(), 'updated_at' => now()]);
+
+        return $this->paymentResponse($paymentId);
+    }
+
+    public function allPayments(Request $request)
+    {
+        $query = DB::table('customer_payments as cp')->join('customers as c', 'c.id', '=', 'cp.customer_id')->select('cp.*', 'c.name as customer_name');
+        if ($request->filled('customer_id')) {
+            $query->where('cp.customer_id', (int) $request->query('customer_id'));
+        }
+        if (($status = $request->query('status', 'all')) !== 'all') {
+            $query->where('cp.status', $status);
+        }
+        if ($search = trim((string) $request->query('q', ''))) {
+            $like = "%{$search}%";
+            $query->where(fn ($q) => $q->where('c.name', 'like', $like)->orWhere('cp.note', 'like', $like)->orWhere('cp.payment_method', 'like', $like));
+        }
+        if (($direction = $request->query('direction', 'all')) !== 'all') {
+            $query->where('cp.direction', $direction);
+        }
+        if ($method = trim((string) $request->query('payment_method', ''))) {
+            $query->where('cp.payment_method', $method);
+        }
+        if ($request->query('start', $request->query('date_from'))) {
+            $query->whereDate('cp.created_at', '>=', $request->query('start', $request->query('date_from')));
+        }
+        if ($request->query('end', $request->query('date_to'))) {
+            $query->whereDate('cp.created_at', '<=', $request->query('end', $request->query('date_to')));
+        }
+
+        $summaryRow = (clone $query)->select([])->selectRaw("COALESCE(SUM(CASE WHEN cp.direction='customer_to_shop' THEN cp.amount ELSE 0 END),0) AS incoming, COALESCE(SUM(CASE WHEN cp.direction='shop_to_customer' THEN cp.amount ELSE 0 END),0) AS outgoing, SUM(CASE WHEN cp.direction='customer_to_shop' THEN 1 ELSE 0 END) AS incoming_count, SUM(CASE WHEN cp.direction='shop_to_customer' THEN 1 ELSE 0 END) AS outgoing_count")->first();
+        $sort = $request->query('sort', 'newest');
+        match ($sort) {
+            'oldest' => $query->orderBy('cp.created_at')->orderBy('cp.id'),
+            'amount_desc' => $query->orderByDesc('cp.amount')->orderByDesc('cp.id'),
+            'amount_asc' => $query->orderBy('cp.amount')->orderBy('cp.id'),
+            default => $query->orderByDesc('cp.created_at')->orderByDesc('cp.id'),
+        };
+        $result = $this->page($query, $request, 25, 100);
+        if (isset($result['items'])) {
+            $result['summary'] = array_map(fn ($value) => (int) $value, (array) $summaryRow);
+        }
+
+        return $result;
+    }
+
+    public function showPayment(int $id)
+    {
+        return $this->paymentResponse($id);
+    }
+
+    public function updatePayment(Request $request, int $id)
+    {
+        app(\App\Services\AdminPinProtection::class)->authorize($request);
+        $data = $this->validatedPayment($request, true);
+        abort_if(! DB::table('customer_payments')->where('id', $id)->update($data + ['updated_at' => now()]), 404, 'Payment not found');
+
+        return $this->paymentResponse($id);
+    }
+
+    public function destroyPayment(int $id)
+    {
+        app(\App\Services\AdminPinProtection::class)->authorize();
+        $payment = DB::table('customer_payments')->where('id', $id)->first();
+        abort_if(! $payment, 404, 'Payment not found');
+        DB::table('customer_payments')->where('id', $id)->delete();
+
+        return ['id' => $id, 'customer_id' => $payment->customer_id, 'deleted' => true];
+    }
+
+    private function validatedCustomer(Request $request): array
+    {
+        return app(BusinessRecordWriter::class)->validate('customer', $request->all());
+    }
+
+    public function validatedPayment(Request $request, bool $includeCustomer = false): array
+    {
+        $rules = ['amount' => ['required', 'integer', 'min:1'], 'direction' => ['required', 'in:customer_to_shop,shop_to_customer'], 'payment_method' => ['nullable', 'string', 'max:255'], 'note' => ['nullable', 'string']];
+        if ($includeCustomer) {
+            $rules['customer_id'] = ['required', 'exists:customers,id'];
+        }
+        $data = $request->validate($rules);
+        $data['payment_method'] = $data['payment_method'] ?? 'Cash';
+        $data['note'] = $data['note'] ?? '';
+
+        return $data;
+    }
+
+    private function balanceSql(): string
+    {
+        return "CAST(COALESCE((SELECT SUM(s.credit_amount) FROM sales s WHERE s.customer_id=c.id AND s.status='completed'),0)-COALESCE((SELECT SUM(CASE WHEN cp.direction='customer_to_shop' THEN cp.amount ELSE -cp.amount END) FROM customer_payments cp WHERE cp.customer_id=c.id AND cp.status='completed'),0) AS SIGNED)";
+    }
+
+    private function stats(array $customers): array
+    {
+        foreach ($customers as &$customer) {
+            $sales = DB::table('sales')->where('customer_id', $customer['id'])->where('status', 'completed');
+            $customer['sale_count'] = (clone $sales)->count();
+            $customer['total_sales'] = (int) (clone $sales)->sum('total');
+            $customer['last_sale'] = $sales->max('created_at');
+        }
+
+        return $customers;
+    }
+
+    private function customer(int $id): array
+    {
+        $row = DB::table('customers as c')->where('c.id', $id)->where('c.is_active', true)->select('c.*')->selectRaw($this->balanceSql().' as balance')->first();
+        abort_if(! $row, 404, 'Customer not found');
+
+        return (array) $row;
+    }
+
+    private function accountSummary(): array
+    {
+        $rows = DB::table('customers as c')->where('c.is_active', true)->selectRaw($this->balanceSql().' as balance')->get();
+
+        return ['total_customers' => $rows->count(), 'receivable_total' => (int) $rows->sum(fn ($r) => max((int) $r->balance, 0)),
+            'payable_total' => (int) $rows->sum(fn ($r) => max(-(int) $r->balance, 0)), 'open_accounts' => $rows->filter(fn ($r) => (int) $r->balance !== 0)->count()];
+    }
+
+    private function historyFilters($query, Request $request, string $column = 'created_at'): void
+    {
+        $start = $request->query('start', $request->query('date_from'));
+        $end = $request->query('end', $request->query('date_to'));
+        AppTime::filterDays($query, $start, $end, $column);
+        if (($status = $request->query('status', 'all')) !== 'all') {
+            $query->where('status', $status);
+        }
+    }
+
+    private function paymentResponse(int $id): array
+    {
+        $row = DB::table('customer_payments')->where('id', $id)->first();
+        abort_if(! $row, 404, 'Payment not found');
+        $result = (array) $row;
+        $account = $this->customer((int) $row->customer_id);
+        $result['balance'] = $account['balance'];
+        $result['customer_name'] = $account['name'];
+
+        return $result;
+    }
+}

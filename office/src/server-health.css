@@ -1,0 +1,37 @@
+.office-health-header, .office-health-title { display: flex; align-items: center; gap: 8px; }
+.office-health-header { flex-wrap: wrap; padding: 10px 12px; }
+.office-health-title h2 { margin: 0; font-size: 13px; }
+.office-health-title > svg { color: var(--theme-primary-text); }
+.office-health-header > p { margin: 0 0 0 auto; color: var(--office-muted); font-size: 10px; }
+.office-health-content { padding: 10px 12px 12px; }
+.office-health-scope-note { color: var(--office-muted); font-size: 10px; line-height: 1.5; margin: 0 0 8px; }
+.office-health-badge { display: inline-flex; align-items: center; justify-self: start; gap: 4px; padding: 2px 6px; border-radius: 4px; font-size: 10px; line-height: 1.5; white-space: nowrap; background: var(--theme-surface-muted); color: var(--office-muted); }
+.office-health-badge.is-healthy { color: var(--theme-success-text); background: var(--theme-success-soft); }
+.office-health-badge:is(.is-warning,.is-degraded) { color: var(--theme-warning-text); background: var(--theme-warning-soft); }
+.office-health-badge.is-unhealthy { color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.office-health-summary { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 8px 0 10px; border-bottom: 1px solid var(--office-line); margin-bottom: 10px; }
+.office-health-total { display: flex; align-items: baseline; gap: 5px; }
+.office-health-total strong { font-size: 14px; font-variant-numeric: tabular-nums; }
+.office-health-total span { font-size: 11px; color: var(--office-muted); }
+.office-health-groups { display: grid; gap: 8px; }
+.office-health-group { min-width: 0; border: 1px solid var(--office-line); border-radius: 5px; overflow: hidden; }
+.office-health-group-toggle { display: flex; align-items: center; width: 100%; gap: 8px; min-height: 32px; padding: 7px 10px; border: 0; border-radius: 0; text-align: left; background: var(--theme-surface-muted); }
+.office-health-group-toggle > strong { font-size: 11px; }
+.office-health-group-toggle > span { color: var(--office-muted); font-size: 10px; }
+.office-health-group-toggle .office-health-group-result { margin-left: auto; }
+.office-health-group-toggle .has-issues { color: var(--theme-warning-text); }
+.office-health-group-toggle svg { flex: 0 0 15px; }
+.office-health-group-toggle svg.is-closed { transform: rotate(-90deg); }
+.office-health-checks { overflow-x: auto; border-top: 1px solid var(--office-line); }
+.office-health-checks[hidden] { display: none; }
+.office-health-rows { list-style: none; padding: 0; margin: 0; min-width: 850px; }
+.office-health-check { display: grid; grid-template-columns: 15px 180px 104px 150px minmax(260px,1fr); align-items: center; column-gap: 10px; min-height: 36px; padding: 7px 10px; background: var(--theme-surface); }
+.office-health-check + .office-health-check { border-top: 1px solid var(--office-line); }
+.office-health-check > svg { color: var(--office-muted); }
+.office-health-check.is-healthy > svg { color: var(--theme-success-text); }
+.office-health-check.is-warning > svg { color: var(--theme-warning-text); }
+.office-health-check.is-unhealthy > svg { color: var(--theme-danger-text); }
+.office-health-check > strong { font-size: 11px; font-weight: 600; }
+.office-health-check p { margin: 0; color: var(--office-muted); font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+.office-health-check small { color: var(--office-muted); font-size: 10px; line-height: 1.5; }
+.office-health-empty { margin: 20px 0; text-align: center; color: var(--office-muted); font-size: 12px; }

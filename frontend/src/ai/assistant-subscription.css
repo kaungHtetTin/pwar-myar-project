@@ -1,0 +1,4 @@
+.ai-subscription-notice { flex: none; min-width: 0; margin: 6px 12px; padding: 8px 10px; border: 1px solid var(--line, var(--border, var(--theme-border))); border-radius: var(--radius-sm, 8px); color: var(--text, var(--theme-text)); background: var(--surface-soft, var(--theme-surface)); font-size: 12px; line-height: 1.75; overflow-wrap: anywhere; }
+.ai-subscription-notice p { margin: 0; }
+.ai-subscription-notice .ai-reply-content p { margin: 5px 0 0; }
+.ai-mobile-page .ai-subscription-notice { font-size: 13px; }

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*
+!.env.example
+!.env.*.example
+!.env.production
+!.env.laravel
+artifacts/
+test-artifacts/
+coverage/
+playwright-report/
+test-results/
+.vite/
+*.log
+*.tsbuildinfo

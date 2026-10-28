@@ -1,0 +1,46 @@
+body:has(> #root > main.is-report-page) { background: var(--theme-background); }
+main.shopping-main.is-report-page { background: var(--theme-background); max-width: none; margin: 0; padding: 20px 24px 40px; }
+.shop-report-page { width: 100%; max-width: 720px; margin-inline: auto; color: var(--shop-ink); }
+.shop-report-page .report-back { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 12px; min-height: 44px; color: var(--theme-primary-text); font-size: 13px; }
+.report-intro { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.report-title-icon { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border-radius: 14px; background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+.report-intro > div { flex: 1; min-width: 0; }
+.report-intro h1 { margin: 0; font-size: 28px; line-height: 1.3; }
+.report-shop-name { display: flex; align-items: center; gap: 6px; margin: 6px 0 0; color: var(--shop-muted); font-size: 14px; overflow-wrap: anywhere; }
+.report-shop-name svg { flex-shrink: 0; }
+main.shopping-main .report-intro .shop-icon-button { width: 44px; height: 44px; min-width: 44px; border: 1px solid var(--shop-line); background: var(--theme-surface); }
+.report-guidance { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding: 16px; border: 1px solid var(--theme-border); border-radius: 12px; background: var(--theme-primary-soft); }
+.report-guidance > svg { flex-shrink: 0; color: var(--theme-primary-text); margin-top: 2px; }
+.report-guidance p { margin: 0; color: var(--theme-text-muted); font-size: 13px; line-height: 1.7; }
+main.shopping-main .shop-report-page .report-form { padding: 24px; border: 1px solid var(--shop-line); border-radius: 16px; background: var(--theme-surface); box-shadow: 0 3px 14px color-mix(in srgb, var(--theme-shadow) 1.961%, transparent); }
+.report-form fieldset { display: grid; min-width: 0; gap: 10px; }
+.report-form label { display: block; margin: 0; font-size: 14px; }
+.report-details-field, .report-reference-field { display: grid; gap: 8px; margin-top: 14px; min-width: 0; }
+main.shopping-main .report-form :is(input, select, textarea) { width: 100%; min-width: 0; min-height: 46px; padding: 11px 12px; font-size: 15px; border-radius: 9px; background: var(--theme-surface); }
+main.shopping-main .report-form textarea { min-height: 160px; resize: vertical; line-height: 1.6; }
+.report-form .report-character-count { text-align: right; font-variant-numeric: tabular-nums; }
+.shop-report-page .report-form small { font-size: 12px; line-height: 1.6; color: var(--shop-muted); }
+main.shopping-main .report-form .report-submit { min-height: 48px; width: 100%; margin-top: 16px; padding: 12px; font-size: 14px; box-shadow: none; }
+.shop-report-page .report-active, .shop-report-page .report-success { display: flex; align-items: flex-start; gap: 10px; }
+.report-active svg, .report-success svg { flex-shrink: 0; }
+.report-active p { margin: 0; }
+.shop-report-page .report-history { margin-top: 30px; }
+.report-history h2 { margin: 0 0 14px; font-size: 18px; }
+.report-history-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.report-history-heading > strong { flex: 1 1 180px; overflow-wrap: anywhere; font-size: 14px; }
+.report-status { display: inline-flex; max-width: 100%; padding: 4px 9px; border-radius: 16px; font-size: 11px; font-weight: 600; background: var(--theme-background); color: var(--theme-text-muted); }
+.report-status.is-open, .report-status.is-in_review { background: var(--theme-warning-soft); color: var(--theme-warning-text); }
+.report-status.is-resolved { background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+.report-history-card time { display: block; margin-top: 8px; color: var(--shop-muted); font-size: 12px; }
+.report-history-card > p { font-size: 14px; line-height: 1.7; }
+.shop-report-page :is(a, button, input, select, textarea):focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+@media (max-width: 760px) {
+  main.shopping-main.is-report-page { padding: 12px 14px 32px; background: var(--theme-background); }
+  .report-intro { gap: 10px; margin-bottom: 20px; }
+  .report-intro h1 { font-size: 24px; }
+  .report-title-icon { flex-basis: 44px; height: 44px; border-radius: 12px; }
+  .report-shop-name { font-size: 13px; }
+  .report-guidance { padding: 14px; }
+  main.shopping-main .shop-report-page .report-form { padding: 18px 16px; }
+  main.shopping-main .report-form :is(input, select, textarea) { font-size: 16px; }
+}

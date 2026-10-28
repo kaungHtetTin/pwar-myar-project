@@ -1,0 +1,22 @@
+/* Reference 071: compact grouped shop navigation, naturally scrollable. */
+.shop-overview-page { width: min(100%,720px); min-height: calc(100dvh - 60px); margin: 0 auto; padding: 0 14px calc(84px + var(--app-safe-area-bottom)); color: var(--theme-text); }
+.shop-overview-header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 6px; min-height: 56px; margin: 0 -14px 12px; padding: 6px 10px; border-bottom: 1px solid var(--theme-border); background: var(--theme-surface); }
+.shop-overview-header .icon-button { display: grid; width: 36px; min-height: 40px; flex: 0 0 36px; place-items: center; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.shop-overview-header .icon-button svg { transform: rotate(180deg); }
+.shop-overview-header h1 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.4; }
+.shop-overview-identity { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; width: 100%; min-height: 80px; align-items: center; gap: 12px; margin: 0 0 16px; padding: 13px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); color: var(--theme-primary-text); background: var(--theme-background); text-align: left; font: inherit; }
+.shop-overview-identity-icon { display: grid; width: 44px; height: 44px; place-items: center; border-radius: var(--radius-control); background: var(--theme-primary-soft); }
+.shop-overview-identity > span:nth-child(2) { display: grid; min-width: 0; gap: 3px; }
+.shop-overview-identity strong { color: var(--theme-text); font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+.shop-overview-identity small { color: var(--theme-text-muted); font-size: 12px; line-height: 1.5; }
+.shop-overview-group { margin-bottom: 16px; }
+.shop-overview-group h2 { margin: 0 0 7px; color: var(--theme-text-muted); font-size: 12px; font-weight: 600; line-height: 1.5; }
+.shop-overview-group .settings-section-grid { display: grid; grid-template-columns: 1fr; gap: 0; margin: 0; overflow: hidden; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: var(--theme-surface); }
+.shop-overview-group .settings-section-grid > button { display: grid; grid-template-columns: 32px minmax(0,1fr) 18px; min-height: 62px; align-items: center; gap: 10px; padding: 9px 11px; border: 0; border-radius: 0; box-shadow: none; }
+.shop-overview-group .settings-section-grid > button + button { border-top: 1px solid var(--theme-border); }
+.shop-overview-group .settings-section-grid > button > span:first-child { width: 32px; height: 32px; color: var(--theme-primary-text); background: transparent; }
+.shop-overview-group .settings-section-grid strong { font-size: 13px; font-weight: 650; line-height: 1.5; }
+.shop-overview-group .settings-section-grid small { color: var(--theme-text-muted); font-size: 11px; line-height: 1.5; }
+.shop-overview-page button:focus-visible { outline: 2px solid var(--brand-700); outline-offset: -3px; }
+.shop-overview-group .settings-section-grid > button:active { background: var(--theme-background); }
+.shop-overview-page .shop-mobile-card { margin-top: 12px; }

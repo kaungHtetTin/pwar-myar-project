@@ -1,0 +1,28 @@
+.shop-mobile-page.shop-logo-reference-page { width:min(100%,720px); min-height:calc(100dvh - 60px); margin:auto; padding:0 14px calc(150px + var(--app-safe-area-bottom)); }
+.shop-logo-header { position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:7px; min-height:56px; margin:0 -14px 12px; padding:6px 10px; border-bottom:1px solid var(--border); background:var(--surface); }
+.shop-logo-header .icon-button { display:grid; width:36px; min-height:40px; place-items:center; padding:0; border:0; background:transparent; box-shadow:none; }
+.shop-logo-reference-page .shop-logo-header h1 { margin:0; font-size:17px; line-height:1.5; }
+.shop-logo-form { display:grid; gap:12px; }
+.shop-logo-card { min-width:0; padding:14px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); }
+.shop-logo-preview-frame { width:min(100%,180px); aspect-ratio:1; margin:0 auto 16px; overflow:hidden; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); }
+.shop-logo-preview-frame img { display:block; width:100%; height:100%; padding:8px; object-fit:contain; }
+.shop-logo-empty { display:grid; align-content:center; justify-items:center; height:100%; gap:10px; padding:12px; color:var(--theme-primary-text); text-align:center; }
+.shop-logo-empty strong { font-size:12px; line-height:1.6; }
+.shop-logo-file-name { margin:0 0 12px; color:var(--muted); font-size:11px; overflow-wrap:anywhere; }
+.shop-logo-reference-page .shop-logo-card h2 { margin:0 0 5px; font-size:15px; line-height:1.5; }
+.shop-logo-card > p { margin:0; color:var(--muted); font-size:12px; line-height:1.7; }
+.shop-logo-note { display:flex; align-items:flex-start; gap:9px; margin:14px 0; padding:12px; border-radius:var(--radius-control); color:var(--theme-primary-text); background:var(--brand-100); }
+.shop-logo-note > svg { flex-shrink:0; }
+.shop-logo-note p { margin:0; font-size:12px; line-height:1.7; }
+.shop-logo-requirements { padding-top:13px; border-top:1px solid var(--border); }
+.shop-logo-requirements h3 { margin:0 0 7px; font-size:13px; line-height:1.6; }
+.shop-logo-requirements ul { display:grid; gap:4px; margin:0; padding-left:17px; color:var(--muted); font-size:12px; line-height:1.7; }
+.shop-logo-image-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:16px; }
+.shop-logo-image-actions button { min-width:0; min-height:42px; gap:6px; font-size:12px; }
+.shop-logo-image-actions .mobile-danger { border:1px solid var(--danger-bg); color:var(--theme-danger-text); background:var(--danger-bg); box-shadow:none; }
+.shop-logo-card .shop-logo-removal-note { margin-top:10px; }
+.shop-logo-save-bar { position:fixed; z-index:6; left:50%; bottom:calc(60px + var(--app-safe-area-bottom)); display:grid; grid-template-columns:1fr 1fr; width:min(100%,720px); gap:9px; padding:10px 14px; transform:translateX(-50%); border-top:1px solid var(--border); background:var(--surface); }
+.shop-logo-save-bar button { min-width:0; min-height:42px; font-size:13px; }
+.shop-logo-save-bar button:disabled,.shop-logo-image-actions button:disabled { opacity:.5; cursor:not-allowed; }
+.shop-logo-error { margin:0; padding:11px; border:1px solid var(--danger-bg); border-radius:var(--radius-small); color:var(--theme-danger-text); background:var(--danger-bg); font-size:12px; line-height:1.7; }
+.shop-logo-reference-page :is(button,input):focus-visible { outline:2px solid var(--brand-700); outline-offset:2px; }

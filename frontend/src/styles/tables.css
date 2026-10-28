@@ -1,0 +1,630 @@
+/*
+ * PwarMyar data-table standard
+ *
+ * The Suppliers directory is the visual reference for every interactive
+ * web/desktop table. Screen styles still own column widths and domain badges;
+ * this file owns the shared card, header, row, scrolling, state and footer UI.
+ * Print-only statement and receipt tables intentionally remain independent.
+ */
+
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .purchase-wizard-quantity-table,
+  .purchase-review-table,
+  .customer-table,
+  .customer-history-table table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table,
+  .table-wrap.sheet-table table
+) {
+  width: 100%;
+  min-width: 680px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--theme-surface);
+}
+
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .purchase-wizard-quantity-table,
+  .purchase-review-table,
+  .customer-table,
+  .customer-history-table table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table,
+  .table-wrap.sheet-table table
+) thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 39px;
+  padding: 7px 9px;
+  border: 0;
+  border-bottom: 1px solid var(--theme-border);
+  background: var(--theme-background);
+  color: var(--theme-text);
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .purchase-wizard-quantity-table,
+  .purchase-review-table,
+  .customer-table,
+  .customer-history-table table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table,
+  .table-wrap.sheet-table table
+) tbody td {
+  box-sizing: border-box;
+  height: 47px;
+  padding: 7px 9px;
+  border: 0;
+  border-bottom: 1px solid var(--theme-border);
+  background: transparent;
+  color: var(--theme-text);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Header and body cells must use the same sizing model. Without this, fixed
+   table layouts can shift at the right edge when a body cell has wider
+   content or row actions. */
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .purchase-wizard-quantity-table,
+  .purchase-review-table,
+  .customer-table,
+  .customer-history-table table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table,
+  .table-wrap.sheet-table table
+) thead th {
+  box-sizing: border-box;
+}
+
+/* Status is operational data: keep the complete label visible and centered
+   instead of inheriting the table cell's aggressive word wrapping. */
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table
+) :is(
+  .status-badge,
+  .status-pill,
+  .access-status,
+  .desktop-sale-status,
+  .transaction-type-badge,
+  .transaction-direction-badge,
+  .transaction-method-badge
+) {
+  max-width: none;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .purchase-wizard-quantity-table,
+  .purchase-review-table,
+  .customer-table,
+  .customer-history-table table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table,
+  .table-wrap.sheet-table table
+) tbody tr:nth-child(even) {
+  background: var(--theme-surface);
+}
+
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .product-stock-list-table,
+  .purchase-history-table,
+  .purchase-wizard-quantity-table,
+  .purchase-review-table,
+  .customer-table,
+  .customer-history-table table,
+  .expense-table,
+  .transaction-table,
+  .billing-table,
+  .access-table,
+  .desktop-sync-table,
+  .table-wrap.sheet-table table
+) tbody tr:hover {
+  background: var(--theme-background);
+}
+
+/* Directory tables may scroll horizontally, but row actions must remain
+   available at the viewport edge. Keep both parts of the column sticky and
+   opaque so horizontally scrolling values never show through underneath. */
+body :is(
+  .supplier-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .access-table
+) thead th:last-child,
+body :is(
+  .supplier-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .access-table
+) tbody td:last-child {
+  position: sticky;
+  right: 0;
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
+  border-left: 1px solid var(--theme-border);
+  background-clip: padding-box;
+  box-shadow: none;
+  text-align: center;
+}
+
+body :is(
+  .supplier-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .access-table
+) thead th:last-child {
+  z-index: 5;
+  background: transparent;
+}
+
+body :is(
+  .supplier-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .access-table
+) tbody td:last-child {
+  z-index: 3;
+  background: var(--theme-surface);
+}
+
+body :is(
+  .supplier-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .access-table
+) tbody tr:nth-child(even) td:last-child {
+  background: var(--theme-surface);
+}
+
+body :is(
+  .supplier-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table,
+  .access-table
+) tbody tr:hover td:last-child {
+  background: var(--theme-background);
+}
+
+/* Explicit action-cell hook wins over legacy nth-child sizing and desktop
+   density overrides. `inset-inline-end` also preserves the pinned edge when
+   the document language changes. */
+body .module-view .table-wrap:has(.table-actions-cell),
+body .module-view .product-grid-wrap:has(.table-actions-cell) {
+  isolation: isolate;
+}
+
+body .module-view table th.table-actions-cell,
+body .module-view table td.table-actions-cell {
+  position: sticky !important;
+  right: 0 !important;
+  inset-inline-end: 0 !important;
+  left: auto !important;
+  width: 88px !important;
+  min-width: 88px !important;
+  max-width: 88px !important;
+  border-left: 1px solid var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  background-clip: padding-box !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+
+body .module-view table th.table-actions-cell {
+  z-index: 12 !important;
+  background: transparent !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+
+body .module-view table td.table-actions-cell {
+  z-index: 10 !important;
+}
+
+body .module-view table tbody tr:nth-child(even) td.table-actions-cell {
+  background: var(--theme-surface) !important;
+}
+
+body .module-view table tbody tr:hover td.table-actions-cell {
+  background: var(--theme-background) !important;
+}
+
+/* Any table that declares the shared action col owns the same pinned edge.
+   Keying this contract from the colgroup avoids missing newer tables when a
+   screen-specific class is not added to the legacy selector list above. */
+body .module-view table:has(> colgroup > col.table-action-column) :is(th:last-child, td:last-child:not([colspan])) {
+  box-sizing: border-box;
+  position: sticky;
+  right: 0;
+  inset-inline-end: 0;
+  left: auto;
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
+  border-left: 1px solid var(--theme-border);
+  background-clip: padding-box;
+  box-shadow: none;
+  text-align: center;
+}
+
+body .module-view table:has(> colgroup > col.table-action-column) thead th:last-child {
+  z-index: 5;
+  background: transparent;
+}
+
+body .module-view table:has(> colgroup > col.table-action-column) tbody td:last-child:not([colspan]) {
+  z-index: 3;
+  background: var(--theme-surface);
+}
+
+body .module-view table:has(> colgroup > col.table-action-column) tbody tr:nth-child(even) td:last-child:not([colspan]) {
+  background: var(--theme-surface);
+}
+
+body .module-view table:has(> colgroup > col.table-action-column) tbody tr:hover td:last-child:not([colspan]) {
+  background: var(--theme-background);
+}
+
+body :is(
+  .supplier-table,
+  .supplier-detail-table,
+  .product-data-table,
+  .purchase-history-table,
+  .customer-table,
+  .expense-table,
+  .transaction-table
+) tbody td > strong {
+  color: var(--theme-text);
+  font-weight: 750;
+}
+
+/* Primary list table cards and scroll viewports. */
+body :is(
+  .supplier-table-card,
+  .supplier-detail-table-card,
+  .product-table-card,
+  .purchase-table-card,
+  .customer-table-card,
+  .expense-table-card,
+  .transaction-table-card,
+  .billing-table-card,
+  .shop-table-card
+) {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  background: var(--theme-surface);
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--theme-shadow) 4.5%, transparent);
+}
+
+body :is(
+  .supplier-table-wrap,
+  .supplier-detail-table-wrap,
+  .product-grid-wrap,
+  .purchase-table-wrap,
+  .customer-table-wrap,
+  .expense-table-wrap,
+  .transaction-table-wrap,
+  .billing-table-wrap,
+  .access-table-wrap,
+  .desktop-sync-table-wrap,
+  .customer-history-table,
+  .purchase-wizard-table-wrap,
+  .table-wrap.sheet-table
+) {
+  position: relative;
+  min-width: 0;
+  overflow: auto;
+  background: var(--theme-surface);
+  /* A stable gutter leaves an empty scrollbar-width strip after a pinned
+     action column on pages whose table does not need vertical scrolling. */
+  scrollbar-gutter: auto;
+  overscroll-behavior: contain;
+}
+
+/* Shop list cards own the outer outline; the legacy sheet wrapper is only
+   the scrolling viewport. Its border/radius otherwise creates a second frame. */
+body .shop-table-card > .table-wrap.sheet-table {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* The card bottom or pagination footer owns the final separator. */
+body .shop-table-card > .table-wrap.sheet-table > table tbody tr:last-child > td {
+  border-bottom: 0;
+}
+
+/* Primary directory tables retain sensible widths before horizontal scrolling. */
+body :is(.supplier-table, .product-data-table, .customer-table, .expense-table) { min-width: 920px; }
+body .transaction-table { min-width: 980px; }
+body :is(.access-table, .billing-table) { min-width: 720px; }
+body .desktop-sync-table { min-width: 780px; }
+
+/* Shared empty and loading presentation inside a table viewport. */
+body :is(
+  .supplier-table-wrap,
+  .supplier-detail-table-wrap,
+  .product-grid-wrap,
+  .purchase-table-wrap,
+  .customer-table-wrap,
+  .expense-table-wrap,
+  .transaction-table-wrap,
+  .customer-history-table
+) > .empty-state {
+  display: grid;
+  min-height: 160px;
+  padding: 24px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--theme-text-muted);
+  text-align: center;
+}
+
+.table-loading-state {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  min-height: 120px;
+  place-items: center;
+  background: color-mix(in srgb, var(--theme-surface) 82%, transparent);
+  color: var(--theme-text-muted);
+}
+
+.table-loading-state-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  background: var(--theme-surface);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--theme-shadow) 8%, transparent);
+  color: var(--theme-text-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.table-loading-state-spinner {
+  flex: 0 0 auto;
+  color: var(--theme-primary-text);
+  animation: mkpos-table-loading-spin 0.8s linear infinite;
+}
+
+body :is(
+  .supplier-table-wrap,
+  .supplier-detail-table-wrap,
+  .product-grid-wrap,
+  .purchase-table-wrap,
+  .customer-table-wrap,
+  .expense-table-wrap,
+  .transaction-table-wrap,
+  .billing-table-wrap,
+  .access-table-wrap,
+  .desktop-sync-table-wrap,
+  .customer-history-table,
+  .table-wrap.sheet-table
+):has(> .table-loading-state) {
+  min-height: 160px;
+}
+
+@keyframes mkpos-table-loading-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-loading-state-spinner { animation: none; }
+}
+
+body .product-grid-wrap > .product-empty-state,
+body .access-table-wrap > .access-empty {
+  display: grid;
+  min-height: 160px;
+  padding: 24px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--theme-text-muted);
+  text-align: center;
+}
+
+body .billing-table-wrap .billing-empty {
+  display: grid;
+  min-height: 120px;
+  padding: 24px;
+  place-items: center;
+  background: transparent;
+  color: var(--theme-text-muted);
+  text-align: center;
+}
+
+body .desktop-sync-table .desktop-empty-row {
+  height: 160px;
+  color: var(--theme-text-muted);
+  text-align: center;
+}
+
+/* One pagination/footer language across all paginated list tables. */
+body :is(
+  .supplier-table-footer,
+  .supplier-history-footer,
+  .product-table-footer,
+  .purchase-history-footer,
+  .customer-table-footer,
+  .customer-history-list-footer,
+  .expense-table-footer,
+  .transaction-table-footer
+) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border: 0;
+  border-top: 1px solid var(--theme-border);
+  border-radius: 0;
+  background: var(--theme-surface);
+  color: var(--theme-text-muted);
+  font-size: 0.9rem;
+}
+
+body :is(
+  .table-pagination,
+  .supplier-pagination,
+  .supplier-history-pagination,
+  .product-pagination,
+  .customer-pagination,
+  .expense-pagination,
+  .transaction-pagination
+) {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+body .table-pagination > span {
+  min-width: 3.5rem;
+  color: var(--theme-text-muted);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+body :is(
+  .supplier-table-footer,
+  .supplier-history-footer,
+  .product-table-footer,
+  .purchase-history-footer,
+  .customer-table-footer,
+  .customer-history-list-footer,
+  .expense-table-footer,
+  .transaction-table-footer
+) button {
+  min-height: 31px;
+  border-radius: 4px;
+}
+
+@media (max-width: 700px) {
+  body :is(
+    .supplier-table-footer,
+    .supplier-history-footer,
+    .product-table-footer,
+    .purchase-history-footer,
+    .customer-table-footer,
+    .customer-history-list-footer,
+    .expense-table-footer,
+    .transaction-table-footer
+  ) {
+    align-items: stretch;
+  }
+}
+
+.csv-export-button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.transaction-toolbar-actions,
+.access-header-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}

@@ -1,0 +1,6 @@
+.mkpos-modal.app-variant-recommendation { width: min(440px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); }
+.app-variant-recommendation .app-variant-copy { display: flex; gap: 14px; align-items: flex-start; }
+.app-variant-copy > svg { flex-shrink: 0; color: var(--primary, var(--theme-primary-text)); }
+.app-variant-copy p { margin: 0; line-height: 1.65; }
+.app-variant-recommendation .mkpos-modal-footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.app-variant-recommendation .mkpos-modal-footer button { min-height: 44px; }

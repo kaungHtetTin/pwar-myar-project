@@ -1,0 +1,49 @@
+.office-modal.office-skill-modal { width:min(920px,100%); }
+.office-modal.office-assignment-modal { width:min(680px,100%); }
+.office-skill-modal,.office-assignment-modal { display:flex; flex-direction:column; min-width:0; box-sizing:border-box; overflow:hidden; max-height:calc(100dvh - 48px); }
+.office-skill-modal > .office-modal-body,.office-assignment-modal > .office-modal-body { flex:1 1 auto; min-width:0; box-sizing:border-box; overflow-x:hidden; }
+.office-skill-modal .office-modal-header > div { min-width:0; overflow-wrap:anywhere; }
+.office-skill-modal .office-modal-body > form,.office-assignment-modal .office-modal-body > form { min-width:0; margin:0; }
+.office-skill-modal > .office-modal-footer,.office-assignment-modal > .office-modal-footer { flex-wrap:wrap; box-sizing:border-box; }
+.office-skill-modal .office-skill-section { min-width:0; align-content:start; }
+.office-skill-modal .office-skill-sections { min-width:0; flex-wrap:wrap; row-gap:0; }
+.office-skill-modal > .office-modal-header,.office-skill-modal > .office-modal-footer,
+.office-assignment-modal > .office-modal-header,.office-assignment-modal > .office-modal-footer { flex-shrink:0; }
+.office-skill-modal > .office-modal-body,.office-assignment-modal > .office-modal-body { min-height:0; overflow-y:auto; overscroll-behavior:contain; }
+.office-skill-fields { display:grid; gap:14px; min-width:0; border:0; padding:0; margin:14px 0; }
+.office-modal .office-skill-fields label { display:grid; align-content:start; align-self:start; gap:6px; min-width:0; margin:0; }
+.office-modal .office-skill-fields :is(input:not([type="checkbox"]),select,textarea) { width:100%; min-width:0; max-width:100%; box-sizing:border-box; margin:0; padding:7px 10px; font-size:13px; line-height:20px; }
+.office-modal .office-skill-fields :is(input:not([type="checkbox"]),select) { height:36px; min-height:36px; }
+.office-modal .office-skill-fields textarea { height:auto; }
+.office-skill-fields textarea { resize:vertical; line-height:1.55; }
+.office-skill-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:14px; min-width:0; }
+.office-skill-actions { display:flex; align-items:end; gap:10px; flex-wrap:wrap; margin:12px 0; }
+.office-modal .office-skill-fields label.office-skill-check { display:flex; align-items:center; justify-content:flex-start; gap:8px; min-height:32px; cursor:pointer; }
+.office-modal .office-skill-fields .office-skill-check input[type="checkbox"] { flex:0 0 16px; width:16px; min-width:16px; max-width:16px; height:16px; min-height:16px; max-height:16px; margin:0; padding:0; accent-color:var(--office-brand); }
+.office-skill-preview pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:420px; overflow:auto; padding:14px; background:var(--theme-surface-muted); border-radius:8px; }
+/* Keep the skill editor compact and separate content from publishing history. */
+.office-skill-modal > .office-modal-body { display:block; padding:16px 20px 20px; }
+.office-skill-modal .office-skill-fields { margin:0; }
+.office-skill-section { display:grid; gap:16px; }
+.office-skill-section[hidden] { display:none; }
+.office-skill-overview { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; color:var(--office-muted); font-size:12px; }
+.office-skill-overview code { overflow-wrap:anywhere; font-size:11px; }
+.office-skill-badges { display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+.office-skill-required { padding-left:10px; border-left:1px solid var(--office-line); }
+.office-skill-sections { display:flex; gap:20px; margin:0 0 18px; border-bottom:1px solid var(--office-line); }
+.office-skill-sections button { padding:10px 0; border:0; border-bottom:2px solid transparent; border-radius:0; background:transparent; box-shadow:none; color:var(--office-muted); font-size:12px; font-weight:600; }
+.office-skill-sections button[aria-pressed="true"] { border-bottom-color:var(--office-brand); color:var(--office-brand); }
+.office-skill-sections button:focus-visible { outline:2px solid var(--office-brand); outline-offset:3px; }
+.office-skill-section-heading { margin-bottom:14px; }
+.office-skill-section-heading h3 { margin:0 0 4px; font-size:14px; }
+.office-skill-section-heading p { margin:0; color:var(--office-muted); font-size:12px; line-height:1.5; }
+.office-skill-modal .office-skill-fields label { font-size:12px; font-weight:600; }
+.office-skill-modal .office-skill-fields small { color:var(--office-muted); font-size:11px; font-weight:400; line-height:1.5; }
+.office-skill-optional { color:var(--office-muted); font-size:11px; font-weight:400; }
+.office-skill-note { margin:0; padding:10px 12px; background:var(--theme-background); border:1px solid var(--office-line); border-radius:5px; color:var(--office-muted); font-size:12px; line-height:1.5; }
+.office-skill-save-hint { margin-right:auto; color:var(--office-muted); font-size:11px; }
+.office-skill-current { display:inline-block; margin-left:8px; color:var(--office-muted); font-size:11px; }
+.office-skill-version-section > button { margin-top:12px; }
+.office-skill-preview pre { margin-bottom:0; font-size:12px; line-height:1.6; }
+
+@media(max-width:700px) { .office-skill-grid { grid-template-columns:1fr; } }

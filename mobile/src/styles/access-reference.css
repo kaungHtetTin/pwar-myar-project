@@ -1,0 +1,97 @@
+/* Access references 049–054, 110 and 157. Owner-only administration stays enforced. */
+.access-reference-page.sale-retail-page { --sale-nav-height: calc(60px + var(--app-safe-area-bottom)); width: min(100%, 720px); margin: 0 auto; padding: 0 14px calc(var(--sale-nav-height) + 20px); color: var(--theme-text); line-height: 1.4; }
+.access-reference-page.access-form-page { padding-bottom: calc(var(--sale-nav-height) + 82px); }
+.access-reference-header { gap: 5px; }
+.access-reference-header h1 { font-size: 20px; }
+.access-reference-header .mobile-export-button { display: flex; min-width: 32px; width: 32px; min-height: 35px; padding: 0; border: 0; color: var(--theme-primary-text); background: transparent; box-shadow: none; }
+.access-reference-header .access-reference-add { display: flex; width: auto; min-width: 0; min-height: 34px; gap: 5px; align-items: center; padding: 5px 10px; border-radius: var(--radius-small); font-size: 12px; font-weight: 500; box-shadow: none; }
+.access-reference-page .access-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 12px 0; padding: 0; border: 0; border-bottom: 1px solid var(--theme-border); border-radius: 0; background: transparent; }
+.access-reference-page .access-tabs > button { min-height: 37px; padding: 7px; border: 0; border-radius: var(--radius-small) var(--radius-small) 0 0; color: var(--theme-text-muted); background: transparent; font-size: 14px; font-weight: 400; }
+.access-reference-page .access-tabs > .is-active { border-bottom: 2px solid var(--brand-800); color: var(--theme-primary-text); background: var(--theme-surface-muted); font-weight: 600; }
+.access-owner-notice { display: flex; gap: 10px; align-items: center; margin-bottom: 11px; padding: 11px; border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-surface-muted); }
+.access-owner-notice > svg { box-sizing: content-box; width: 17px; height: 17px; flex-shrink: 0; padding: 7px; border-radius: var(--radius-round); color: var(--theme-on-primary); background: var(--theme-primary); }
+.access-owner-notice > div { display: grid; gap: 3px; }
+.access-owner-notice strong { font-size: 12px; font-weight: 500; }
+.access-owner-notice small { color: var(--theme-text-muted); font-size: 11px; }
+.access-reference-page .access-card-list { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.access-reference-page .access-card { border: 0; border-radius: var(--radius-card); background: var(--theme-surface); box-shadow: none; }
+.access-reference-row { display: flex; gap: 11px; min-width: 0; align-items: flex-start; padding: 12px; }
+.access-reference-avatar { display: grid; width: 44px; height: 44px; flex-shrink: 0; place-items: center; border-radius: var(--radius-round); color: var(--theme-primary-text); background: var(--theme-primary-soft); font-size: 16px; font-weight: 650; }
+.access-reference-page .access-card-copy { display: grid; min-width: 0; flex: 1; gap: 4px; }
+.access-reference-page .access-card-copy > strong { overflow: visible; color: var(--theme-text); font-size: 15px; line-height: 1.3; white-space: normal; }
+.access-reference-page .access-card-copy > small { overflow-wrap: anywhere; color: var(--theme-text-muted); font-size: 11px; line-height: 1.4; white-space: normal; }
+.access-reference-page .access-card-menu { width: 22px; min-height: 25px; height: 25px; flex-shrink: 0; margin: 0 -3px 0 0; padding: 0; border: 0; color: var(--theme-text-muted); background: transparent; }
+.access-reference-page .access-status { display: block; width: fit-content; flex-shrink: 0; margin-top: 2px; padding: 3px 8px; border-radius: var(--radius-round); color: var(--theme-danger-text); background: var(--theme-danger-soft); font-size: 10px; font-weight: 400; }
+.access-reference-page .access-status.is-active { color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.access-you { display: inline-block; margin-left: 5px; padding: 3px 10px; border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-primary-soft); font-size: 10px; font-style: normal; font-weight: 400; vertical-align: middle; }
+.access-reference-page .access-permission-pills { display: flex; flex-wrap: wrap; gap: 5px; margin: -3px 38px 12px 67px; padding: 0; }
+.access-reference-page .access-permission-pills > span, .access-reference-pill { display: block; width: fit-content; padding: 3px 9px; border-radius: var(--radius-round); color: var(--theme-text-muted); background: var(--theme-background); font-size: 10px; font-weight: 400; }
+.access-owner-protected { display: flex; gap: 6px; align-items: center; margin: -3px 0 12px 67px; color: var(--theme-text-muted); font-size: 10px; }
+.access-owner-protected svg { color: var(--theme-primary-text); }
+.access-reference-panel { min-width: 0; padding: 13px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: var(--theme-surface); }
+.access-reference-page .access-mobile-form { display: grid; gap: 11px; margin-top: 12px; }
+.access-reference-page .access-mobile-form > fieldset { display: grid; min-width: 0; gap: 11px; margin: 0; padding: 0; border: 0; }
+.access-reference-page .mobile-field { display: grid; min-width: 0; gap: 6px; color: var(--theme-text); font-size: 12px; font-weight: 500; }
+.access-reference-page .mobile-field > input, .access-reference-page .mobile-field > select, .access-reference-page .access-clearable-input > input, .access-reference-page .access-role-select > select, .access-reference-page .access-password-field > div > input { width: 100%; min-width: 0; min-height: 35px; margin: 0; padding: 7px 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); outline: 0; color: var(--theme-text); background: var(--theme-surface); font: inherit; font-size: 13px; font-weight: 400; }
+.access-reference-page input:focus, .access-reference-page select:focus { border-color: var(--brand-700); outline: 2px solid var(--brand-100); outline-offset: 1px; box-shadow: none; }
+.access-reference-page button:focus-visible { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.access-reference-page .mobile-field-error { color: var(--theme-danger-text); font-size: 12px; }
+.access-reference-page .mobile-field > small, .access-form-help { margin: 0; color: var(--theme-text-muted); font-size: 11px; font-weight: 400; }
+.access-required { margin-left: 4px; color: var(--theme-danger-text); font-size: inherit; font-style: normal; }
+.access-page-access-heading { margin: 2px 0 -2px; }
+.access-page-access-heading h2 { margin: 0 0 5px; font-size: 14px; font-weight: 650; }
+.access-page-access-heading p { margin: 0; color: var(--theme-text-muted); font-size: 11px; }
+.access-reference-permissions { display: grid; gap: 9px; }
+.access-permission-group { display: flex; gap: 12px; padding: 11px; }
+.access-group-icon { display: grid; width: 36px; height: 36px; flex-shrink: 0; place-items: center; border-radius: var(--radius-round); color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.access-permission-group > div { min-width: 0; flex: 1; }
+.access-permission-group h3 { margin: 0 0 7px; font-size: 14px; font-weight: 650; }
+.access-permission-group > div > div { display: grid; gap: 8px; }
+.access-permission-group label { display: flex; gap: 10px; align-items: center; color: var(--theme-text); font-size: 12px; font-weight: 400; }
+.access-reference-page .access-permission-group input { width: 16px; height: 16px; min-height: 16px; flex-shrink: 0; margin: 0; padding: 0; border: 1px solid var(--theme-border); border-radius: var(--radius-subtle); accent-color: var(--theme-primary-text); }
+.access-owner-only p { margin: 0; color: var(--theme-text-muted); font-size: 11px; line-height: 1.5; }
+.access-reference-page .access-reference-actions { position: fixed; z-index: 34; left: 0; right: 0; bottom: var(--sale-nav-height); display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 0; padding: 9px 14px; border-top: 1px solid var(--theme-border); background: var(--theme-surface); }
+.access-reference-actions > button { min-height: 40px; padding: 7px; border-radius: var(--radius-small); font-size: 13px; font-weight: 600; box-shadow: none; }
+.access-clearable-input, .access-role-select, .access-password-field > div { position: relative; display: flex; min-width: 0; align-items: center; }
+.access-reference-page .access-clearable-input > input, .access-reference-page .access-password-field > div > input { padding-right: 36px; }
+.access-clearable-input > button, .access-password-field > div > button { position: absolute; right: 2px; display: grid; width: 32px; min-height: 32px; place-items: center; padding: 0; border: 0; color: var(--theme-text-muted); background: transparent; }
+.access-clearable-input > button > svg { border-radius: var(--radius-round); color: var(--theme-text); background: var(--theme-surface-muted); }
+.access-role-select > svg { position: absolute; left: 10px; pointer-events: none; color: var(--theme-primary-text); }
+.access-reference-page .access-role-select > select { padding-left: 38px; }
+.access-status-toggle { display: grid; gap: 9px; }
+.access-status-toggle > span:first-child { color: var(--theme-text); font-size: 12px; font-weight: 500; }
+.access-status-toggle > span:nth-child(2) { position: relative; display: flex; gap: 11px; align-items: center; }
+.access-status-toggle input { position: absolute; width: 40px; min-height: 24px; height: 24px; margin: 0; padding: 0; opacity: 0; }
+.access-status-toggle i { position: relative; width: 40px; height: 24px; pointer-events: none; border-radius: var(--radius-round); background: var(--theme-surface-raised); }
+.access-status-toggle i::after { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: var(--radius-round); background: var(--theme-surface); content: ''; }
+.access-status-toggle input:checked + i { background: var(--theme-primary); }
+.access-status-toggle input:checked + i::after { left: 19px; }
+.access-status-toggle input:focus-visible + i { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.access-status-toggle strong { font-size: 13px; font-weight: 400; }
+.access-status-toggle small { color: var(--theme-text-muted); font-size: 11px; }
+.access-reference-panel h2 { margin: 0 0 13px; font-size: 14px; font-weight: 600; }
+.access-password-link > button { display: flex; width: 100%; align-items: center; gap: 14px; padding: 0; border: 0; color: var(--theme-text-muted); background: var(--theme-surface); text-align: left; }
+.access-password-link > button > span { display: grid; flex: 1; gap: 5px; }
+.access-password-link strong { color: var(--theme-text-muted); font-size: 12px; font-weight: 400; }
+.access-password-link small { color: var(--theme-text-muted); font-size: 11px; line-height: 1.5; }
+.access-password-profile { display: flex; align-items: flex-start; gap: 11px; }
+.access-password-profile > div { display: grid; min-width: 0; gap: 5px; }
+.access-password-profile strong { font-size: 15px; }
+.access-password-profile small { color: var(--theme-text-muted); font-size: 11px; }
+.access-denied-content { display: flex; min-height: calc(100dvh - 160px); flex-direction: column; align-items: center; justify-content: center; padding: 18px 0 30px; text-align: center; }
+.access-denied-content > span { display: grid; width: 106px; height: 106px; place-items: center; border-radius: var(--radius-round); color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.access-denied-content h2 { margin: 24px 0 10px; font-size: 21px; font-weight: 650; }
+.access-denied-content p { margin: 0; color: var(--theme-text-muted); font-size: 14px; line-height: 1.6; }
+.access-denied-content > button { display: flex; width: 100%; min-height: 48px; gap: 8px; align-items: center; justify-content: center; margin-top: 60px; padding: 10px; border-radius: var(--radius-small); font-size: 14px; font-weight: 500; box-shadow: none; }
+@media (max-width: 370px) { .access-reference-header .access-reference-add { padding-inline: 7px; font-size: 11px; } .access-reference-row { gap: 8px; padding: 10px; } .access-reference-avatar { width: 38px; height: 38px; font-size: 14px; } .access-reference-page .access-card-copy > strong { font-size: 13px; } .access-reference-page .access-permission-pills { margin-left: 56px; } .access-reference-page .access-status { padding-inline: 6px; font-size: 9px; } .access-you { margin-left: 3px; padding-inline: 7px; } .access-denied-content p { font-size: 12px; } .access-denied-content > button { font-size: 12px; } }
+
+.access-reference-page.sale-retail-page { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Myanmar", sans-serif; }
+.access-reference-header > button.access-reference-add { color: var(--theme-on-primary); background: var(--brand-800); }
+.access-reference-page .mobile-field { font-weight: 600; }
+.access-reference-page .mobile-field > input, .access-reference-page select { font-weight: 400; }
+
+
+.access-reference-page button, .access-reference-page input, .access-reference-page select, .access-reference-page small { font-family: inherit; }
+.access-denied-content { min-height: calc(100dvh - 235px); }
+.access-denied-content > button { margin-top: 34px; }
+

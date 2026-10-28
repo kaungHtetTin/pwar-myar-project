@@ -1,0 +1,4 @@
+# The repository is private. Only Laravel's public directory may be served.
+Options -Indexes
+RewriteEngine On
+RewriteRule !^laravel/public(?:/|$) - [F,L]

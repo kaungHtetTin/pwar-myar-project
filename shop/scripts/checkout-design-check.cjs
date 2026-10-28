@@ -1,0 +1,75 @@
+const { chromium } = require('playwright');
+const fs = require('fs');
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage({ viewport: { width: 393, height: 852 } });
+  let quotes = 0;
+  await page.addInitScript(() => { localStorage.clear(); sessionStorage.clear(); localStorage.setItem('mkpos.shop.carts.v2', JSON.stringify([{ slug: 'demo', name: 'Demo Shop', items: [{ id: 1, name: 'Fresh Apples', quantity: 1, price: 36500, currency: 'K' }] }])); });
+  await page.route('**/ecommerce/**', async route => {
+    if (route.request().url().endsWith('/quote')) {
+      quotes++;
+      return route.fulfill({ json: { currency: 'K', total: 36500, subtotal: 36500, delivery_fee: 0, items: [], quote_hash: 'fixture' } });
+    }
+    return route.fulfill({ json: { slug: 'demo', display_name: 'Demo Shop', accepting_orders: true, address: '123 Main Street, Yangon', currency: 'K', logo_url: '/src/assets/home-local-groceries.webp', payment_methods: [{ id: 'cash', name: 'Cash on pickup', type: 'cash', instructions: 'Pay when collecting your order.' }], delivery_zones: [{ id: 1, name: 'Yangon', fee: 3000 }] } });
+  });
+  await page.goto('http://127.0.0.1:5177/#/store/demo/checkout');
+  await page.getByRole('button', { name: 'Continue', exact: true }).waitFor();
+  await page.evaluate(() => document.fonts.ready);
+  fs.mkdirSync('test-artifacts/checkout', { recursive: true });
+  await page.screenshot({ path: 'test-artifacts/checkout/details-393.png' });
+  await page.screenshot({ path: 'test-artifacts/checkout/details-full.png', fullPage: true });
+  for (const width of [360,393,1366]) {
+    await page.setViewportSize({ width, height: 852 });
+    if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) throw Error('Horizontal overflow');
+  }
+  await page.setViewportSize({ width: 393, height: 852 });
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  if (await page.locator('.checkout-steps [aria-current]').innerText() !== '1\nDetails') throw Error('Invalid details advanced');
+  await page.locator('input[autocomplete="name"]').fill('Test Buyer');
+  await page.locator('input[type="tel"]').fill('0912345678');
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByRole('heading', { name: 'Receive your order', exact: true }).waitFor();
+  await page.getByRole('button', { name: '1 Details' }).click();
+  if (await page.locator('input[autocomplete="name"]').inputValue() !== 'Test Buyer') throw Error('Draft lost');
+  await page.getByRole('button', { name: 'Delivery Get it delivered to your address' }).click();
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  if (!(await page.locator('.checkout-steps [aria-current]').innerText()).includes('Delivery')) throw Error('Invalid delivery details advanced');
+  await page.getByLabel('Delivery zone', { exact: true }).selectOption('1');
+  await page.getByRole('button', { name: 'Checkout account', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Checkout account' }).waitFor();
+  await page.screenshot({ path: 'test-artifacts/checkout/account-modal.png' });
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'Edit delivery address' }).click();
+  await page.locator('textarea[autocomplete="street-address"]').fill('Discard this');
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  if (!(await page.getByRole('dialog', { name: 'Delivery address' }).isVisible())) throw Error('Missing address did not open modal');
+  if (await page.locator('textarea[autocomplete="street-address"]').inputValue()) throw Error('Cancelled draft saved');
+  await page.locator('textarea[autocomplete="street-address"]').fill('123 Test Street');
+  await page.screenshot({ path: 'test-artifacts/checkout/address-modal.png' });
+  await page.getByRole('button', { name: 'Save address' }).click();
+  await page.getByRole('button', { name: 'Edit delivery address' }).click();
+  if (await page.locator('textarea[autocomplete="street-address"]').inputValue() !== '123 Test Street') throw Error('Saved address lost');
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  if (await page.getByRole('button', { name: 'Place order', exact: true }).count()) throw Error('Place order shown in Payment');
+  await page.screenshot({ path: 'test-artifacts/checkout/payment-tab.png', fullPage: true });
+  await page.locator('#shop-checkout-form button:not([hidden])').last().click();
+  await page.waitForFunction(() => document.querySelector('.order-summary .totals'));
+  if (!(await page.locator('.checkout-steps [aria-current]').innerText()).includes('Review')) throw Error('Review did not open');
+  if (await page.getByRole('button', { name: 'Review order', exact: true }).count()) throw Error('Review action still shown');
+  await page.screenshot({ path: 'test-artifacts/checkout/review-tab.png', fullPage: true });
+  await page.getByRole('button', { name: 'Edit payment and order details' }).click();
+  if (!(await page.locator('.checkout-steps [aria-current]').innerText()).includes('Payment')) throw Error('Edit did not return');
+  await page.getByRole('button', { name: '4 Review' }).click();
+  if (quotes !== 1) throw Error('Quote requested more than once');
+  await page.screenshot({ path: 'test-artifacts/checkout/payment-393.png', fullPage: true });
+  const comparison = await browser.newPage({ viewport: { width: 806, height: 880 } });
+  const reference = fs.readFileSync('design/ChatGPT Image Oct 13, 2026, 12_04_27 PM-8.png').toString('base64');
+  const rendered = fs.readFileSync('test-artifacts/checkout/details-393.png').toString('base64');
+  await comparison.setContent(`<body style="margin:0;display:flex;gap:20px;background:#ddd;font:12px Arial"><div>Reference · 393 × 852<img style="display:block;width:393px;height:852px" src="data:image/png;base64,${reference}"></div><div>Rendered · 393 × 852<img style="display:block;width:393px;height:852px" src="data:image/png;base64,${rendered}"></div></body>`);
+  await comparison.screenshot({ path: 'test-artifacts/checkout/comparison.png' });
+  console.log('PASS: responsive layout, contact/delivery validation, fulfillment selection, retained draft on step Back, one quote request. API intercepted; no order submitted.');
+  await browser.close();
+})().catch(error => { console.error(error); process.exit(1); });

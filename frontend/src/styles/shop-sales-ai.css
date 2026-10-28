@@ -1,0 +1,52 @@
+.sales-ai-settings { display: grid; gap: 16px; }
+.sales-ai-settings[hidden] { display: none; }
+.sales-telegram-settings .sales-ai-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
+.sales-telegram-settings .sales-ai-fields > :is(p, button) { grid-column: 1 / -1; }
+.sales-telegram-settings .sales-ai-fields > .field:has(input[type="password"], input[readonly]) { grid-column: 1 / -1; }
+.sales-telegram-settings label:has(> input[type="checkbox"]) { display: flex; align-items: center; justify-content: flex-start; gap: 9px; min-height: 36px; }
+.sales-telegram-settings label > input[type="checkbox"] { width: 16px; height: 16px; min-height: 16px; flex: 0 0 16px; margin: 0; accent-color: var(--theme-primary); }
+.sales-telegram-settings td small { display: block; margin-top: 4px; color: var(--theme-text-muted); }
+.sales-telegram-settings .form-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.sales-telegram-group-modal .sales-ai-fields > .field:has(input[readonly]) { grid-column: auto; }
+.sales-telegram-group-modal .sales-ai-fields > .field:has(select) { grid-column: 1 / -1; }
+@media (max-width: 720px) { .sales-telegram-settings .sales-ai-fields { grid-template-columns: minmax(0, 1fr); } }
+.sales-ai-heading, .sales-ai-wallet-summary, .sales-ai-actions, .sales-ai-tabs { display: flex; align-items: center; gap: 12px; }
+.sales-ai-heading { justify-content: space-between; }
+.sales-ai-heading h2, .sales-ai-heading p { margin: 0; }
+.sales-ai-heading p { color: var(--theme-text-muted); margin-top: 4px; }
+.sales-ai-wallet-summary { padding: 16px; border: 1px solid var(--theme-border); border-radius: 10px; background: var(--theme-surface); }
+.sales-ai-wallet-summary > div { display: grid; gap: 5px; flex: 1; }
+.sales-ai-wallet-summary strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.sales-ai-wallet-summary small { color: var(--theme-text-muted); }
+.sales-ai-fields { border: 0; padding: 0; margin: 0; display: grid; gap: 16px; min-width: 0; }
+.sales-ai-tools, .sales-ai-accounts, .sales-ai-policies { padding: 14px; border: 1px solid var(--theme-border); border-radius: 8px; display: grid; gap: 12px; }
+.sales-ai-tools label { display: flex; align-items: flex-start; gap: 10px; }
+.sales-ai-tools label span { display: grid; gap: 4px; }
+.sales-ai-settings .sales-ai-tools label, .sales-ai-settings .sales-ai-accounts label { display:flex; grid-template-columns:none; justify-content:flex-start; }
+.sales-ai-settings .sales-ai-tools input, .sales-ai-settings .sales-ai-accounts input { width:16px; height:16px; min-height:16px; flex:0 0 16px; accent-color:var(--theme-primary); }
+.sales-ai-tabs button:not(.primary) { background:var(--theme-surface); color:var(--theme-text); border:1px solid var(--theme-border); }
+.sales-ai-tools small { color: var(--theme-text-muted); }
+.sales-ai-accounts label { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sales-ai-accounts label span { overflow-wrap: anywhere; }
+.sales-ai-actions { justify-content: flex-end; border-top: 1px solid var(--theme-border); padding-top: 16px; }
+.sales-ai-proof { display: block; object-fit: contain; max-width: 100%; max-height: 300px; border: 1px solid var(--theme-border); border-radius: 8px; margin-top: 12px; }
+
+.sales-ai-policies > p { margin:0; font-size:13px; line-height:1.6; }
+
+.sales-ai-settings, .sales-ai-balance-book { min-width:0; max-width:100%; }
+.sales-ai-balance-book { display:grid; gap:16px; }
+.sales-ai-balance-book[hidden] { display:none; }
+.sales-ai-usage-charts { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:14px; min-width:0; }
+.sales-ai-usage-chart { min-width:0; padding:14px; background:var(--theme-surface); border:1px solid var(--theme-border); border-radius:8px; }
+.sales-ai-usage-chart header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+.sales-ai-usage-chart h3, .sales-ai-ledger-heading h3 { margin:0; font-size:14px; }
+.sales-ai-usage-chart small { color:var(--theme-text-muted); font-size:11px; }
+.sales-ai-usage-chart strong { font-size:14px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.sales-ai-usage-canvas { width:100%; min-width:0; height:200px; margin-top:12px; }
+.sales-ai-ledger-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px; border-bottom:1px solid var(--theme-border); }
+.sales-ai-ledger-heading label { display:flex; align-items:center; gap:8px; font-size:12px; }
+.sales-ai-ledger-heading select { width:auto; min-width:68px; }
+body .sales-ai-balance-book .shop-data-table { width:100%; min-width:0; table-layout:fixed; }
+body .sales-ai-balance-book .shop-data-table :is(th,td) { white-space:normal; overflow-wrap:anywhere; padding:12px; }
+.sales-ai-balance-book .shop-data-table :is(th,td):nth-child(n+3) { text-align:right; font-variant-numeric:tabular-nums; }
+.sales-ai-balance-book .data-table-footer { flex-wrap:wrap; gap:10px; }

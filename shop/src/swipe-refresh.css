@@ -1,0 +1,14 @@
+.swipe-refresh-shell { position: relative; min-width: 0; width: 100%; overscroll-behavior-y: contain; }
+.swipe-refresh-content { position: relative; min-width: 0; }
+.swipe-refresh-content.is-pulling { top: var(--pull-distance); }
+.swipe-refresh-shell:has(> .swipe-refresh-content.is-pulling) { background: var(--theme-surface); }
+.swipe-refresh-content.is-pulling :is(.app-bar-search-band, [data-shop-refresh-bar]) { transform: translateY(calc(-1 * var(--pull-distance))); }
+.swipe-refresh-content.is-pulling :is(.chats-list-surface, .home-content, .favorites-surface) { box-shadow: none; }
+.swipe-refresh-indicator { position: absolute; top: calc(var(--refresh-actionbar-height, 0px) + 6px); left: 50%; z-index: 8; display: inline-flex; align-items: center; gap: 7px; min-height: 40px; max-width: calc(100% - 28px); padding: 8px 14px; border: 1px solid var(--theme-border); border-radius: 24px; opacity: 0; color: var(--theme-primary-text); background: var(--theme-surface); box-shadow: 0 5px 16px color-mix(in srgb, var(--theme-shadow) 13.333%, transparent); transform: translate(-50%, calc(var(--pull-distance) - 48px)); pointer-events: none; }
+.swipe-refresh-indicator.is-visible { opacity: 1; }
+.swipe-refresh-indicator.is-ready { color: var(--theme-on-primary); background: var(--theme-primary); }
+.swipe-refresh-indicator span { font-size: 12px; font-weight: 600; }
+.swipe-refresh-indicator svg { flex-shrink: 0; }
+.swipe-refresh-indicator .spin { animation: shop-refresh-spin .8s linear infinite; }
+@keyframes shop-refresh-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .swipe-refresh-indicator .spin { animation: none; } }

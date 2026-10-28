@@ -1,0 +1,38 @@
+.shop-reviews-screen { display: grid; min-width: 0; gap: .85rem; }
+.shop-reviews-screen > .products-title-row { margin: 0; }
+.shop-review-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem; }
+.shop-review-controls .product-search { min-width: 0; margin: 0; }
+.shop-review-controls .mobile-filter-chevron { display: none; }
+.shop-reviews-screen > .mobile-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+.shop-reviews-screen .mobile-summary-card small { overflow: visible; white-space: normal; text-overflow: clip; line-height: 1.45; }
+.shop-review-list-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem; }
+.shop-review-list-heading h2 { margin: 0; color: var(--theme-primary-text); font-size: .82rem; }
+.shop-review-list-heading > span { color: var(--muted); font-size: .59rem; }
+.shop-review-card { min-width: 0; padding: 1rem 1rem .45rem; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); overflow-wrap: anywhere; box-shadow: 0 .2rem .65rem color-mix(in srgb, var(--theme-shadow) 3%, transparent); }
+.shop-review-card-heading { display: flex; align-items: center; gap: .6rem; }
+.shop-review-avatar { display: grid; width: 2.35rem; height: 2.35rem; flex: 0 0 2.35rem; place-items: center; border-radius: 50%; color: var(--theme-primary-text); background: var(--brand-100); font-size: .76rem; font-weight: 800; }
+.shop-review-card-heading > div { display: grid; min-width: 0; flex: 1; gap: .2rem; }
+.shop-review-card-heading h3 { margin: 0; color: var(--theme-primary-text); font-size: .8rem; line-height: 1.5; }
+.shop-review-card-heading > div > small { color: var(--muted); font-size: .53rem; line-height: 1.6; }
+.shop-review-rating { display: inline-flex; flex-shrink: 0; align-items: center; gap: .25rem; padding: .3rem .4rem; border-radius: var(--radius-control); color: var(--theme-primary-text); background: var(--theme-background); }
+.shop-review-rating strong { font-size: .78rem; }
+.shop-review-rating small { color: var(--muted); font-size: .55rem; font-weight: 600; }
+.shop-review-target { display: flex; align-items: flex-start; gap: .4rem; margin-top: .85rem; color: var(--muted); font-size: .62rem; line-height: 1.6; }
+.shop-review-target svg { flex-shrink: 0; margin-top: .1rem; }
+.shop-review-stars { display: flex; gap: .2rem; margin-top: .65rem; color: var(--border); }
+.shop-review-stars .is-filled { color: var(--theme-primary-text); }
+.shop-review-comment { margin: .55rem 0 .8rem; color: var(--text); font-size: .73rem; line-height: 1.75; white-space: pre-wrap; }
+.shop-review-comment.is-rating-only { color: var(--muted); font-size: .65rem; }
+.shop-review-reply { margin-bottom: .8rem; padding: .7rem; border-left: 2px solid var(--theme-border); border-radius: 0 var(--radius-control) var(--radius-control) 0; background: var(--theme-background); }
+.shop-review-reply > span { display: flex; align-items: center; gap: .35rem; color: var(--theme-primary-text); font-size: .6rem; font-weight: 750; }
+.shop-review-reply p { margin: .35rem 0 0; color: var(--muted); font-size: .67rem; line-height: 1.7; white-space: pre-wrap; }
+.shop-review-awaiting { display: inline-flex; align-items: center; gap: .3rem; margin-bottom: .75rem; padding: .2rem .4rem; border-radius: var(--radius-control); color: var(--muted); background: var(--theme-background); font-size: .55rem; }
+.shop-review-reply-action { display: flex; width: 100%; min-height: 2.85rem; align-items: center; gap: .4rem; padding: .55rem 0 .15rem; border: 0; border-top: 1px solid var(--border); border-radius: 0; color: var(--theme-primary-text); background: transparent; font: inherit; font-size: .65rem; font-weight: 750; text-align: left; }
+.shop-review-reply-action > span { min-width: 0; flex: 1; }
+.shop-review-reply-action svg { flex-shrink: 0; }
+.shop-review-reply-action:focus-visible { outline: 3px solid var(--brand-700); outline-offset: -2px; }
+.shop-review-reply-action:hover { color: var(--theme-primary-text); }
+.shop-review-empty { display: grid; min-height: 10rem; align-content: center; justify-items: center; gap: .6rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-surface); color: var(--muted); background: var(--surface); text-align: center; }
+.shop-review-empty > svg { color: var(--theme-primary-text); }
+.shop-review-empty h2 { margin: 0; color: var(--theme-primary-text); font-size: .85rem; }
+.shop-review-empty p { margin: 0; font-size: .7rem; line-height: 1.65; }

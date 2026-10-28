@@ -1,0 +1,35 @@
+{
+  "name": "pwarmyar-office",
+  "version": "3.0.4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:laravel": "vite build --mode laravel",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "test:theme": "node ../scripts/check-platform-theme.cjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io-client": "^4.8.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^17.4.0",
+    "jsdom": "^29.0.1",
+    "vite": "^8.1.4",
+    "vitest": "^4.1.2"
+  }
+}

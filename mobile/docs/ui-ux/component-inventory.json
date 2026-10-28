@@ -1,0 +1,2086 @@
+{
+  "schemaVersion": 1,
+  "source": "Production src/**/*.jsx, PascalCase JSX-bearing functions; generated, not runtime exports.",
+  "components": [
+    {
+      "id": "src/access/AccessReferenceParts.jsx#AccessPermissionGroups",
+      "name": "AccessPermissionGroups",
+      "source": "src/access/AccessReferenceParts.jsx",
+      "line": 5,
+      "inputs": "{ modules, selected, onToggle, error }",
+      "contract": "Real assignable permissions grouped by workflow; retain granular API keys and owner-only exclusions."
+    },
+    {
+      "id": "src/access/AccessReferenceParts.jsx#AccessPasswordField",
+      "name": "AccessPasswordField",
+      "source": "src/access/AccessReferenceParts.jsx",
+      "line": 10,
+      "inputs": "{ label, value, onChange, error, autoFocus, autoComplete = 'new-password', hint }",
+      "contract": "Controlled password with confirmation support, show/hide button and inline validation."
+    },
+    {
+      "id": "src/access/AccessReferenceParts.jsx#AccessDenied",
+      "name": "AccessDenied",
+      "source": "src/access/AccessReferenceParts.jsx",
+      "line": 15,
+      "inputs": "{ onBack }",
+      "contract": "Owner-only access boundary with authorized workspace return; never fetch protected records."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#AccessHeader",
+      "name": "AccessHeader",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 19,
+      "inputs": "{ title, onBack, children }",
+      "contract": "Back/title/context for access forms; keep one heading and a clear return target."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#Field",
+      "name": "Field",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 20,
+      "inputs": "{ label, error, required, children }",
+      "contract": "Labeled field wrapper; align helper/error text and associate messages with the input. Match MobileField styling."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#RoleFormPage",
+      "name": "RoleFormPage",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 22,
+      "inputs": "{ id, modules, onNavigate, onSaved }",
+      "contract": "Role identity and page permissions; group selections and preserve required-page validation."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#AccessScreen",
+      "name": "AccessScreen",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 30,
+      "inputs": "{ denied, session, fallbackPath = '/settings', onNavigate = () => {}, ...props }",
+      "contract": "Access module entry/localization boundary; keep route and permission decisions outside visual controls."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#StaffFormPage",
+      "name": "StaffFormPage",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 34,
+      "inputs": "{ id, roles, onNavigate, onSaved }",
+      "contract": "Staff identity, role, active state and initial password; show conditional fields without losing values."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#PasswordPage",
+      "name": "PasswordPage",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 44,
+      "inputs": "{ id, onNavigate }",
+      "contract": "Staff password reset; retain staff context, password confirmation and safe busy state."
+    },
+    {
+      "id": "src/access/AccessScreen.jsx#AccessScreenContent",
+      "name": "AccessScreenContent",
+      "source": "src/access/AccessScreen.jsx",
+      "line": 51,
+      "inputs": "{ pathname = '/access', onNavigate, session, fallbackPath }",
+      "contract": "Roles/Staff directory and form dispatch; preserve tab, pagination, exports and guarded actions."
+    },
+    {
+      "id": "src/app/App.jsx#AuthLoading",
+      "name": "AuthLoading",
+      "source": "src/app/App.jsx",
+      "line": 82,
+      "inputs": "(none)",
+      "contract": "Stable session-check screen; concise announced status, no unauthorized-content flash."
+    },
+    {
+      "id": "src/app/App.jsx#OfflineUnavailable",
+      "name": "OfflineUnavailable",
+      "source": "src/app/App.jsx",
+      "line": 93,
+      "inputs": "{ onBack }",
+      "contract": "No-cache offline gate with shared connection styling, explicit Retry and a reversible route to login; no business data fabricated."
+    },
+    {
+      "id": "src/app/App.jsx#App",
+      "name": "App",
+      "source": "src/app/App.jsx",
+      "line": 99,
+      "inputs": "(none)",
+      "contract": "Session, account, routes and retained views; visual changes must preserve navigation and offline boundaries."
+    },
+    {
+      "id": "src/app/AuthReferenceParts.jsx#AuthPageHeader",
+      "name": "AuthPageHeader",
+      "source": "src/app/AuthReferenceParts.jsx",
+      "line": 4,
+      "inputs": "{ title, onBack }",
+      "contract": "Authentication title and source-aware return; omit Back when no safe in-app source exists."
+    },
+    {
+      "id": "src/app/AuthReferenceParts.jsx#AuthStorefront",
+      "name": "AuthStorefront",
+      "source": "src/app/AuthReferenceParts.jsx",
+      "line": 8,
+      "inputs": "(none)",
+      "contract": "Decorative theme-colored vector storefront; hidden from assistive technology."
+    },
+    {
+      "id": "src/app/AuthReferenceParts.jsx#AuthBrandHero",
+      "name": "AuthBrandHero",
+      "source": "src/app/AuthReferenceParts.jsx",
+      "line": 24,
+      "inputs": "(none)",
+      "contract": "Shared storefront, PwarMyar wordmark and localized business tagline."
+    },
+    {
+      "id": "src/app/AuthReferenceParts.jsx#AuthSessionLoading",
+      "name": "AuthSessionLoading",
+      "source": "src/app/AuthReferenceParts.jsx",
+      "line": 28,
+      "inputs": "(none)",
+      "contract": "Real session-check status with reduced-motion-aware spinner, no fake progress or navigation."
+    },
+    {
+      "id": "src/app/AuthScreen.jsx#AuthScreen",
+      "name": "AuthScreen",
+      "source": "src/app/AuthScreen.jsx",
+      "line": 20,
+      "inputs": "props",
+      "contract": "Authentication entry with localization/session callbacks; preserve selected login/signup route."
+    },
+    {
+      "id": "src/app/AuthScreen.jsx#TextField",
+      "name": "TextField",
+      "source": "src/app/AuthScreen.jsx",
+      "line": 22,
+      "inputs": "{ id, label, icon: Icon, error, ...inputProps }",
+      "contract": "Visible label, correct autocomplete/input type, inline errors and keyboard submission."
+    },
+    {
+      "id": "src/app/AuthScreen.jsx#PasswordField",
+      "name": "PasswordField",
+      "source": "src/app/AuthScreen.jsx",
+      "line": 36,
+      "inputs": "{ id, label, error, value, onChange, autoComplete, placeholder, visible, onToggle }",
+      "contract": "Labeled masked input with named show/hide control; preserve autocomplete and error association."
+    },
+    {
+      "id": "src/app/AuthScreen.jsx#LoginForm",
+      "name": "LoginForm",
+      "source": "src/app/AuthScreen.jsx",
+      "line": 64,
+      "inputs": "{ onAuthenticated, onNavigate }",
+      "contract": "Login fields, pending/error states and submit; retain values on recoverable rejection."
+    },
+    {
+      "id": "src/app/AuthScreen.jsx#SignupForm",
+      "name": "SignupForm",
+      "source": "src/app/AuthScreen.jsx",
+      "line": 139,
+      "inputs": "{ onAuthenticated, onNavigate }",
+      "contract": "Existing registration fields and confirmation; group without changing payload requirements."
+    },
+    {
+      "id": "src/app/AuthScreen.jsx#AuthScreenContent",
+      "name": "AuthScreenContent",
+      "source": "src/app/AuthScreen.jsx",
+      "line": 202,
+      "inputs": "{ page = 'login', onAuthenticated, onNavigate, onBack }",
+      "contract": "Authentication layout/form switching; no duplicate heading or lost navigation context."
+    },
+    {
+      "id": "src/app/PasswordResetForm.jsx#PasswordResetForm",
+      "name": "PasswordResetForm",
+      "source": "src/app/PasswordResetForm.jsx",
+      "line": 5,
+      "inputs": "{ onBack }",
+      "contract": "Email code recovery with resend cooldown, confirmation, validation and return to sign in; preserve server security and error behavior."
+    },
+    {
+      "id": "src/billing/BillingReferenceParts.jsx#BillingHeader",
+      "name": "BillingHeader",
+      "source": "src/billing/BillingReferenceParts.jsx",
+      "line": 6,
+      "inputs": "{ title = 'Billing', onBack, disabled = false }",
+      "contract": "Task title and source-aware Back; preserve workspace fallback and busy state."
+    },
+    {
+      "id": "src/billing/BillingReferenceParts.jsx#BillingSection",
+      "name": "BillingSection",
+      "source": "src/billing/BillingReferenceParts.jsx",
+      "line": 11,
+      "inputs": "{ icon: Icon, title, subtitle, children, footer, className = '' }",
+      "contract": "Compact icon/title/subtitle card with aligned body and optional full-width footer."
+    },
+    {
+      "id": "src/billing/BillingReferenceParts.jsx#BillingAccount",
+      "name": "BillingAccount",
+      "source": "src/billing/BillingReferenceParts.jsx",
+      "line": 15,
+      "inputs": "{ method, methods = [], onChange, onNotice, readOnly = false }",
+      "contract": "Real payment account selection/details and named clipboard actions with visible feedback."
+    },
+    {
+      "id": "src/billing/BillingReferenceParts.jsx#BillingPlanSummary",
+      "name": "BillingPlanSummary",
+      "source": "src/billing/BillingReferenceParts.jsx",
+      "line": 23,
+      "inputs": "{ plan }",
+      "contract": "Selected real plan, price, duration and description; no invented billing periods."
+    },
+    {
+      "id": "src/billing/BillingReferenceParts.jsx#BillingInstructions",
+      "name": "BillingInstructions",
+      "source": "src/billing/BillingReferenceParts.jsx",
+      "line": 27,
+      "inputs": "{ title, children, icon: Icon = Info }",
+      "contract": "Theme instruction/status panel; distinguish payment submission from activation."
+    },
+    {
+      "id": "src/billing/BillingReferenceParts.jsx#BillingProof",
+      "name": "BillingProof",
+      "source": "src/billing/BillingReferenceParts.jsx",
+      "line": 31,
+      "inputs": "{ file, onChange, error, readOnly = false, uploaded = false }",
+      "contract": "Validated proof upload, local object-URL preview, replace/remove and read-only received state; release URLs."
+    },
+    {
+      "id": "src/billing/BillingScreen.jsx#BillingContacts",
+      "name": "BillingContacts",
+      "source": "src/billing/BillingScreen.jsx",
+      "line": 20,
+      "inputs": "(none)",
+      "contract": "Configured support channels as labeled links; hide absent values and preserve correct targets."
+    },
+    {
+      "id": "src/billing/BillingScreen.jsx#PaymentPendingPage",
+      "name": "PaymentPendingPage",
+      "source": "src/billing/BillingScreen.jsx",
+      "line": 31,
+      "inputs": "{ pending, plan, screenshot, onNavigate }",
+      "contract": "Saved pending request details with read-only proof, private-image fallback and source-aware Done/View billing."
+    },
+    {
+      "id": "src/billing/BillingScreen.jsx#PaymentRequestPage",
+      "name": "PaymentRequestPage",
+      "source": "src/billing/BillingScreen.jsx",
+      "line": 38,
+      "inputs": "{ planId, plans, methods, pending, loading, onNavigate, onSubmitted }",
+      "contract": "Plan/account/proof/reference submission; preview and validation, pending office approval."
+    },
+    {
+      "id": "src/billing/BillingScreen.jsx#BillingScreen",
+      "name": "BillingScreen",
+      "source": "src/billing/BillingScreen.jsx",
+      "line": 67,
+      "inputs": "props",
+      "contract": "Billing localization/route wrapper; preserve selected plan and session refresh."
+    },
+    {
+      "id": "src/billing/BillingScreen.jsx#BillingScreenContent",
+      "name": "BillingScreenContent",
+      "source": "src/billing/BillingScreen.jsx",
+      "line": 69,
+      "inputs": "{ pathname = '/billing', onNavigate = () => {} }",
+      "contract": "Current plan, packages, payment availability and history; distinguish trial/expired/pending."
+    },
+    {
+      "id": "src/chat/ChatAlerts.jsx#ChatAlerts",
+      "name": "ChatAlerts",
+      "source": "src/chat/ChatAlerts.jsx",
+      "line": 6,
+      "inputs": "{ apiRequest, basePath, onOpen }",
+      "contract": "Nonblocking realtime chat notice; deduplicate and open correct thread through app navigation."
+    },
+    {
+      "id": "src/components/CsvExportButton.jsx#CsvExportButton",
+      "name": "CsvExportButton",
+      "source": "src/components/CsvExportButton.jsx",
+      "line": 4,
+      "inputs": "{ onExport, onNotice, className = '', label = 'Export CSV', compact = false, icon: ExportIcon = Download }",
+      "contract": "Secondary icon-and-label export; maintain pending state and prevent duplicate downloads."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileField",
+      "name": "MobileField",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 6,
+      "inputs": "{ id, label, error, hint, children }",
+      "contract": "Shared label/helper/error wrapper; input IDs, focus and error association must remain accessible."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileNotice",
+      "name": "MobileNotice",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 17,
+      "inputs": "{ notice, onClose, dismissLabel = 'Dismiss message' }",
+      "contract": "Semantic success/error/info notice; readable message, optional named dismissal, no layout jump."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileFilterToggle",
+      "name": "MobileFilterToggle",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 27,
+      "inputs": "{ open, onToggle, controls, label, count = 0, className = '' }",
+      "contract": "Named filter utility with active state/count and expanded relationship to drawer."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileFilterPanel",
+      "name": "MobileFilterPanel",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 47,
+      "inputs": "{ open, id, onClose, onSubmit, className = '', children, as = 'form', title: heading, description, icon: HeadingIcon = Filter, footer }",
+      "contract": "Right-side native-dialog drawer; fixed header/actions, scrolling body, focus/body-lock/back lifecycle."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileFilterActions",
+      "name": "MobileFilterActions",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 113,
+      "inputs": "{ onClear, clearLabel, applyLabel, className = '' }",
+      "contract": "Consistent Reset and Apply region; preserve module reset defaults and draft/commit behavior."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileSheet",
+      "name": "MobileSheet",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 123,
+      "inputs": "{ open, title, description, onClose, closeLabel = `Close ${title}`, children, className = '' }",
+      "contract": "Bottom sheet with title/context/close and body; body-lock, Escape/hardware Back and inactive-view cleanup."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#MobileDeleteSheet",
+      "name": "MobileDeleteSheet",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 162,
+      "inputs": "{ open, title, description, itemTitle, itemDescription, cancelLabel = 'Cancel', confirmLabel = 'Delete', busyLabel = 'Deleting…', busy = false, onClose, onConfirm, children, }",
+      "contract": "Destructive confirmation with target identity, consequence, cancel/confirm and busy labels; never duplicate submit."
+    },
+    {
+      "id": "src/components/MobilePrimitives.jsx#EndlessListFooter",
+      "name": "EndlessListFooter",
+      "source": "src/components/MobilePrimitives.jsx",
+      "line": 207,
+      "inputs": "{ list, count, noun, labels = {} }",
+      "contract": "Loading-more, retry, fallback load-more and end states; preserve already loaded rows."
+    },
+    {
+      "id": "src/components/PrintStatusNotice.jsx#PrintStatusNotice",
+      "name": "PrintStatusNotice",
+      "source": "src/components/PrintStatusNotice.jsx",
+      "line": 3,
+      "inputs": "(none)",
+      "contract": "Print progress/success/error separate from transaction success; retry must not repeat checkout."
+    },
+    {
+      "id": "src/customers/CustomerReferenceParts.jsx#CustomerReferenceHeader",
+      "name": "CustomerReferenceHeader",
+      "source": "src/customers/CustomerReferenceParts.jsx",
+      "line": 9,
+      "inputs": "{ title, onBack, onNew, onMenu, backPath = '/customers' }",
+      "contract": "Customer task title, source-aware Back, New contact shortcut and account actions; preserve real source history and permission-aware navigation."
+    },
+    {
+      "id": "src/customers/CustomerReferenceParts.jsx#CustomerReferenceSale",
+      "name": "CustomerReferenceSale",
+      "source": "src/customers/CustomerReferenceParts.jsx",
+      "line": 14,
+      "inputs": "{ sale, currency, onOpen }",
+      "contract": "Reference account-history receipt with batched product items, saved totals and source-aware sale navigation; never fabricate unloaded items."
+    },
+    {
+      "id": "src/customers/CustomerReferenceParts.jsx#CustomerReferencePayment",
+      "name": "CustomerReferencePayment",
+      "source": "src/customers/CustomerReferenceParts.jsx",
+      "line": 19,
+      "inputs": "{ payment, currency, onActions }",
+      "contract": "Saved payment date/time, method, actual ID, amount and direction; preserve note and existing actions menu."
+    },
+    {
+      "id": "src/customers/CustomerReferenceParts.jsx#CustomerBalanceChoices",
+      "name": "CustomerBalanceChoices",
+      "source": "src/customers/CustomerReferenceParts.jsx",
+      "line": 25,
+      "inputs": "{ value, onChange }",
+      "contract": "Balance-state radio cards using supported account_status values; preserve filter drafts until Apply."
+    },
+    {
+      "id": "src/customers/CustomersScreen.jsx#CustomerForm",
+      "name": "CustomerForm",
+      "source": "src/customers/CustomersScreen.jsx",
+      "line": 73,
+      "inputs": "{ editing, form, errors, saving, onChange, onCancel, onSubmit, cancelLabel = \"Cancel\", submitLabel, }",
+      "contract": "Credit contact identity/contact fields; validate inline and return to actual origin."
+    },
+    {
+      "id": "src/customers/CustomersScreen.jsx#CustomersScreen",
+      "name": "CustomersScreen",
+      "source": "src/customers/CustomersScreen.jsx",
+      "line": 102,
+      "inputs": "props",
+      "contract": "Credit customer route/localization wrapper; preserve retained account context."
+    },
+    {
+      "id": "src/customers/CustomersScreen.jsx#PaymentForm",
+      "name": "PaymentForm",
+      "source": "src/customers/CustomersScreen.jsx",
+      "line": 113,
+      "inputs": "{ editing, customer, form, errors, methods, saving, onChange, onCancel, onSubmit, currency = 'Ks', }",
+      "contract": "Customer movement direction/amount/method/note; clarify money direction and preserve validation."
+    },
+    {
+      "id": "src/customers/CustomersScreen.jsx#CustomerSkeleton",
+      "name": "CustomerSkeleton",
+      "source": "src/customers/CustomersScreen.jsx",
+      "line": 141,
+      "inputs": "(none)",
+      "contract": "Contact-shaped placeholder; themed, decorative, reduced-motion compatible with announced loading."
+    },
+    {
+      "id": "src/customers/CustomersScreen.jsx#CustomersScreenContent",
+      "name": "CustomersScreenContent",
+      "source": "src/customers/CustomersScreen.jsx",
+      "line": 162,
+      "inputs": "{ pathname, onNavigate, session }",
+      "contract": "Contact list/detail/history/forms; compact rows, scoped balances and retained tabs/filters."
+    },
+    {
+      "id": "src/expenses/ExpensesScreen.jsx#ExpenseForm",
+      "name": "ExpenseForm",
+      "source": "src/expenses/ExpensesScreen.jsx",
+      "line": 78,
+      "inputs": "{ editing, form, errors, methods, categories, saving, onChange, onCancel, onSubmit, }",
+      "contract": "Date/category/title/amount/method/note; currency context and field-level save errors."
+    },
+    {
+      "id": "src/expenses/ExpensesScreen.jsx#ExpensesScreen",
+      "name": "ExpensesScreen",
+      "source": "src/expenses/ExpensesScreen.jsx",
+      "line": 229,
+      "inputs": "props",
+      "contract": "Expense route/localization wrapper; do not reset source state on form return."
+    },
+    {
+      "id": "src/expenses/ExpensesScreen.jsx#ExpensesScreenContent",
+      "name": "ExpensesScreenContent",
+      "source": "src/expenses/ExpensesScreen.jsx",
+      "line": 240,
+      "inputs": "{ pathname, onNavigate }",
+      "contract": "Expense summaries/list/forms; scoped date filters, export and guarded deletion."
+    },
+    {
+      "id": "src/localization/LocaleProvider.jsx#LocaleProvider",
+      "name": "LocaleProvider",
+      "source": "src/localization/LocaleProvider.jsx",
+      "line": 5,
+      "inputs": "{ children }",
+      "contract": "Nonvisual language context; preserve en/my selection and formatting across retained views."
+    },
+    {
+      "id": "src/localization/ModuleLocalizationBoundary.jsx#ModuleLocalizationBoundary",
+      "name": "ModuleLocalizationBoundary",
+      "source": "src/localization/ModuleLocalizationBoundary.jsx",
+      "line": 51,
+      "inputs": "{ messages, patterns = [], children }",
+      "contract": "Nonvisual module translation boundary; keep drawer descendants localized and user data unaltered."
+    },
+    {
+      "id": "src/navigation/AppShell.jsx#DrawerLanguage",
+      "name": "DrawerLanguage",
+      "source": "src/navigation/AppShell.jsx",
+      "line": 62,
+      "inputs": "{language,onChange}",
+      "contract": "Native language selector in the shared navigation footer, reflecting the current language without leaving the source page."
+    },
+    {
+      "id": "src/navigation/AppShell.jsx#AppShell",
+      "name": "AppShell",
+      "source": "src/navigation/AppShell.jsx",
+      "line": 66,
+      "inputs": "{ session, shopLogo = \"\", modules, activeModule, pathname = \"\", onNavigate, onNavigatePath, onNavigateBack, onLoggedOut, onRefresh, offlineMode = false, children, }",
+      "contract": "Authorized module navigation, business/header context and trial banner; conversation-only full-page exception."
+    },
+    {
+      "id": "src/navigation/ModulePlaceholder.jsx#ModulePlaceholderContent",
+      "name": "ModulePlaceholderContent",
+      "source": "src/navigation/ModulePlaceholder.jsx",
+      "line": 6,
+      "inputs": "{ module }",
+      "contract": "Fallback title/description and unavailable state; offer a valid authorized destination."
+    },
+    {
+      "id": "src/navigation/ModulePlaceholder.jsx#ModulePlaceholder",
+      "name": "ModulePlaceholder",
+      "source": "src/navigation/ModulePlaceholder.jsx",
+      "line": 19,
+      "inputs": "props",
+      "contract": "Localized fallback wrapper; do not invent unsupported module features."
+    },
+    {
+      "id": "src/navigation/RetainedViews.jsx#RetainedFrame",
+      "name": "RetainedFrame",
+      "source": "src/navigation/RetainedViews.jsx",
+      "line": 4,
+      "inputs": "{ active, children }",
+      "contract": "Nonvisual retained-page frame; restore window/inner scroll and focus without visible stale overlays."
+    },
+    {
+      "id": "src/navigation/RetainedViews.jsx#RetainedViews",
+      "name": "RetainedViews",
+      "source": "src/navigation/RetainedViews.jsx",
+      "line": 29,
+      "inputs": "{ activeKey, children }",
+      "contract": "Nonvisual route cache; preserve list/detail state and isolate account/offline identities."
+    },
+    {
+      "id": "src/navigation/SwipeRefreshShell.jsx#SwipeRefreshShell",
+      "name": "SwipeRefreshShell",
+      "source": "src/navigation/SwipeRefreshShell.jsx",
+      "line": 8,
+      "inputs": "{ onRefresh, children }",
+      "contract": "Pull-refresh gesture/status; respect dialogs, inputs and swipe-disabled conversation regions."
+    },
+    {
+      "id": "src/products/ProductBarcodeScanner.jsx#ProductBarcodeScanner",
+      "name": "ProductBarcodeScanner",
+      "source": "src/products/ProductBarcodeScanner.jsx",
+      "line": 6,
+      "inputs": "{ open, onClose, onDetected, title = 'Scan product barcode', description = 'Point the rear camera at the barcode. The product search will run automatically.', onManualBarcode, manualLabel = 'Enter barcode manually', manualSubmitLabel = 'Search product', }",
+      "contract": "Camera barcode surface; loading/permission/error/close lifecycle, single detection and optional manual-entry fallback without a blank failed preview."
+    },
+    {
+      "id": "src/products/ProductPhoto.jsx#ProductPhoto",
+      "name": "ProductPhoto",
+      "source": "src/products/ProductPhoto.jsx",
+      "line": 4,
+      "inputs": "{ path, alt = '', className = '', loading = 'lazy' }",
+      "contract": "Product image with proportional square crop/fallback; prevent broken-image layout shifts."
+    },
+    {
+      "id": "src/products/ProductPhotoCamera.jsx#ProductPhotoCamera",
+      "name": "ProductPhotoCamera",
+      "source": "src/products/ProductPhotoCamera.jsx",
+      "line": 15,
+      "inputs": "{ open, onClose, onCapture }",
+      "contract": "Camera capture/retake/cancel and permission recovery; stop camera on close/inactive view."
+    },
+    {
+      "id": "src/products/ProductPhotoField.jsx#ProductPhotoField",
+      "name": "ProductPhotoField",
+      "source": "src/products/ProductPhotoField.jsx",
+      "line": 8,
+      "inputs": "{ photoUrl = '', photoFile = null, removed = false, onChange, onRemove, error = '', referenceLayout = '' }",
+      "contract": "Choose/camera/crop/remove photo workflow; current preview distinct from saved image, format/size errors inline."
+    },
+    {
+      "id": "src/products/ProductReferenceForm.jsx#FormField",
+      "name": "FormField",
+      "source": "src/products/ProductReferenceForm.jsx",
+      "line": 8,
+      "inputs": "{ label, error, children }",
+      "contract": "Product wizard label/control/error group; retain true optional/required rules and accessible field identity."
+    },
+    {
+      "id": "src/products/ProductReferenceForm.jsx#ProductReferenceForm",
+      "name": "ProductReferenceForm",
+      "source": "src/products/ProductReferenceForm.jsx",
+      "line": 12,
+      "inputs": "{ form, setForm, priceRules, categories, errors, saving, editing, onSubmit, onCancel, currency }",
+      "contract": "References 007–012 create/edit wizard; retained photo, description, units, stock and configured manual/automatic prices; guarded Save product."
+    },
+    {
+      "id": "src/products/ProductReferenceParts.jsx#ProductReferenceHeader",
+      "name": "ProductReferenceHeader",
+      "source": "src/products/ProductReferenceParts.jsx",
+      "line": 7,
+      "inputs": "{ title, onBack, onAdd }",
+      "contract": "Products task Back/title/Add or menu; use the shared source-aware navigation context."
+    },
+    {
+      "id": "src/products/ProductReferenceParts.jsx#ProductReferenceProfile",
+      "name": "ProductReferenceProfile",
+      "source": "src/products/ProductReferenceParts.jsx",
+      "line": 12,
+      "inputs": "{ product, currency, variant = 'inventory', onPhoto }",
+      "contract": "Product photo, real identity, base/buying unit or stock/price context appropriate to wizard/stock screen."
+    },
+    {
+      "id": "src/products/ProductReferenceParts.jsx#LocalPhoto",
+      "name": "LocalPhoto",
+      "source": "src/products/ProductReferenceParts.jsx",
+      "line": 23,
+      "inputs": "{ file }",
+      "contract": "Temporary product-file preview; create and revoke its object URL with file lifecycle."
+    },
+    {
+      "id": "src/products/ProductReferenceParts.jsx#ProductUnitInput",
+      "name": "ProductUnitInput",
+      "source": "src/products/ProductReferenceParts.jsx",
+      "line": 29,
+      "inputs": "{ label, value, onChange, unit, prefix, hint, error, formatted = false, ...props }",
+      "contract": "Labeled input with real unit/prefix and optional integer money formatting; error/hint and read-only rules remain explicit."
+    },
+    {
+      "id": "src/products/ProductReferenceStock.jsx#ProductReferenceStock",
+      "name": "ProductReferenceStock",
+      "source": "src/products/ProductReferenceStock.jsx",
+      "line": 7,
+      "inputs": "{ product, currency, quantity, setQuantity, reason, setReason, saving, valid, onSubmit, onBack, notice, onDismiss, list, footer }",
+      "contract": "Reference 013 add/remove direction with signed API quantity, final balance validation, reason, busy/error/retry and movement history."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#Sheet",
+      "name": "Sheet",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 83,
+      "inputs": "{ wide = false, className = '', ...props }",
+      "contract": "Legacy local sheet owner; normalize appearance to shared sheet while preserving its close/back/submit behavior."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#BarcodePreview",
+      "name": "BarcodePreview",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 87,
+      "inputs": "{ value }",
+      "contract": "Actual CODE128 preview generated from the product barcode; accessible value, contained scaling and fallback on invalid input. Preserve the print encoding."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#LoadingCards",
+      "name": "LoadingCards",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 96,
+      "inputs": "(none)",
+      "contract": "Inventory-shaped initial skeletons; do not replace populated rows during refresh."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#EndlessFooter",
+      "name": "EndlessFooter",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 105,
+      "inputs": "{ list, itemCount, noun = 'items' }",
+      "contract": "Local pagination feedback; match shared footer loading/retry/end behavior without resetting rows."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#StockStatusContent",
+      "name": "StockStatusContent",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 116,
+      "inputs": "{ status, onAdjust }",
+      "contract": "Stock icon/text/quantity semantics; do not communicate availability through color alone."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#SummaryCard",
+      "name": "SummaryCard",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 142,
+      "inputs": "{ icon: Icon, label, value, tone, onClick }",
+      "contract": "Compact inventory KPI with scope/unit; prioritize value then label, not decorative icon size."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#ProductCard",
+      "name": "ProductCard",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 149,
+      "inputs": "{ product, currency, deleting, onEdit, onAdjust, onPrint, onDelete }",
+      "contract": "Reference 006 compact photo/name/SKU/stock/primary price card with separate Stock/Edit/Print/Delete menu."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#ProductsScreenContent",
+      "name": "ProductsScreenContent",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 178,
+      "inputs": "{ pathname, onNavigate, session }",
+      "contract": "Inventory search/filter/tools, wizard and stock screen; preserve selected tools and source list state."
+    },
+    {
+      "id": "src/products/ProductsScreen.jsx#ProductsScreen",
+      "name": "ProductsScreen",
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 761,
+      "inputs": "props",
+      "contract": "Products localization/module entry; preserve product route and return state."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceDetail.jsx#PurchaseReferenceDetail",
+      "name": "PurchaseReferenceDetail",
+      "source": "src/purchases/PurchaseReferenceDetail.jsx",
+      "line": 6,
+      "inputs": "{ purchase, currency, onBack, onEdit, onDelete, onPrint, onSupplier, notice, deleteSheet }",
+      "contract": "Saved purchase identity, totals and recorded payment aggregate; source-aware Back, print, edit and protected delete."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceForm.jsx#PurchaseWarningReview",
+      "name": "PurchaseWarningReview",
+      "source": "src/purchases/PurchaseReferenceForm.jsx",
+      "line": 10,
+      "inputs": "{ form, payment, currency, onEdit }",
+      "contract": "Item/paid-FOC-cost and payment context behind the below-cost confirmation; preserve actual draft amounts and return to editable Costs without saving."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceForm.jsx#PurchaseReferenceForm",
+      "name": "PurchaseReferenceForm",
+      "source": "src/purchases/PurchaseReferenceForm.jsx",
+      "line": 14,
+      "inputs": "{ form, setForm, step, setStep, editing, saving, currency, supplierPicker, products, categories, search, setSearch, category, setCategory, selectedIds, toggleProduct, updateItem, updateItemUnit, removeItem, totals, payment, paymentErrors, methods, onContinue, onSave, onBack, onNewSupplier, productFooter, notice, warning, warningOpen }",
+      "contract": "Controlled four-stage create/edit presentation with supplier picker, product selection, right filter drawer, costs and payment review."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceParts.jsx#PurchaseDateInput",
+      "name": "PurchaseDateInput",
+      "source": "src/purchases/PurchaseReferenceParts.jsx",
+      "line": 15,
+      "inputs": "{ value, onChange, ...props }",
+      "contract": "Reference-formatted date surface backed by a real accessible native date input; whole-field picker activation, keyboard entry and visible wrapper focus."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceParts.jsx#PurchaseReferenceHeader",
+      "name": "PurchaseReferenceHeader",
+      "source": "src/purchases/PurchaseReferenceParts.jsx",
+      "line": 20,
+      "inputs": "{ title, onBack, onNew, onPrint, showMenu = true }",
+      "contract": "Reference purchase header with source-aware Back, permission-aware module menu, New and Print actions."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceParts.jsx#PurchaseReferenceProgress",
+      "name": "PurchaseReferenceProgress",
+      "source": "src/purchases/PurchaseReferenceParts.jsx",
+      "line": 25,
+      "inputs": "{ step, onStep, editing, saving, warning }",
+      "contract": "Four-stage purchase wizard; current/completed state, accessible step names and guarded backward navigation."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceParts.jsx#PurchaseSupplierSummary",
+      "name": "PurchaseSupplierSummary",
+      "source": "src/purchases/PurchaseReferenceParts.jsx",
+      "line": 30,
+      "inputs": "{ name, supplier, onChange, onOpen, date, reference }",
+      "contract": "Supplier identity, optional saved contacts/date/reference, Change and permission-aware detail navigation."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceParts.jsx#PurchaseReferenceLine",
+      "name": "PurchaseReferenceLine",
+      "source": "src/purchases/PurchaseReferenceParts.jsx",
+      "line": 35,
+      "inputs": "{ item, currency, editing, onChange, onUnitChange }",
+      "contract": "Buying unit, paid and FOC quantities, conversion, line total and effective cost; preserve selected-unit API semantics."
+    },
+    {
+      "id": "src/purchases/PurchaseReferenceParts.jsx#PurchaseReferenceItems",
+      "name": "PurchaseReferenceItems",
+      "source": "src/purchases/PurchaseReferenceParts.jsx",
+      "line": 54,
+      "inputs": "{ items, currency, detail = false }",
+      "contract": "Read-only received quantity, effective cost and line totals; use real purchase data and photo fallback."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#Field",
+      "name": "Field",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 68,
+      "inputs": "{ label, error, hint, children }",
+      "contract": "Labeled field wrapper; align helper/error text and associate messages with the input. Match MobileField styling."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#Sheet",
+      "name": "Sheet",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 72,
+      "inputs": "props",
+      "contract": "Legacy local sheet owner; normalize appearance to shared sheet while preserving its close/back/submit behavior."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#EndlessFooter",
+      "name": "EndlessFooter",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 74,
+      "inputs": "{ list, count, noun }",
+      "contract": "Local pagination feedback; match shared footer loading/retry/end behavior without resetting rows."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#Notice",
+      "name": "Notice",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 85,
+      "inputs": "{ notice, onClose }",
+      "contract": "Local dismissible notice; align shared semantic colors, error roles and readable text."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#SupplierPicker",
+      "name": "SupplierPicker",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 90,
+      "inputs": "{ value, supplierId, supplier, compact, onChange, onSelect, onNew }",
+      "contract": "Searchable supplier selection sheet; draft radio choice, explicit Use supplier confirmation, cancel without changing the linked supplier, paginated results and permission-aware new supplier action."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#PurchasesScreenContent",
+      "name": "PurchasesScreenContent",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 125,
+      "inputs": "{ pathname, onNavigate, session }",
+      "contract": "Purchase history/detail/four-step wizard; preserve draft, price-warning and stock-reversal confirmations."
+    },
+    {
+      "id": "src/purchases/PurchasesScreen.jsx#PurchasesScreen",
+      "name": "PurchasesScreen",
+      "source": "src/purchases/PurchasesScreen.jsx",
+      "line": 503,
+      "inputs": "props",
+      "contract": "Purchase localization wrapper; preserve origin and route state."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#ReportMetric",
+      "name": "ReportMetric",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 16,
+      "inputs": "{ label, value }",
+      "contract": "Value/title/context metric; distinguish period activity, current balance and unavailable data."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#ReportHeading",
+      "name": "ReportHeading",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 19,
+      "inputs": "{ icon: Icon, title, subtitle }",
+      "contract": "Shared compact report section icon/title with explicit period or snapshot scope."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#ReportValue",
+      "name": "ReportValue",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 22,
+      "inputs": "{ label, value, highlight = false }",
+      "contract": "Readable label/value row with semantic total emphasis; retain long amounts and labels."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#RankList",
+      "name": "RankList",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 25,
+      "inputs": "{ rows, type, currency }",
+      "contract": "Payment receipts versus sales totals, product quantities/FOC and expense values; retain readable amounts and zero-data states."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#SalesBarChart",
+      "name": "SalesBarChart",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 33,
+      "inputs": "{ title, period, items = [], currency }",
+      "contract": "Month/year sales visualization with period label and equivalent readable values; no color-only meaning."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#ReportDateField",
+      "name": "ReportDateField",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 44,
+      "inputs": "{ label, value, onChange }",
+      "contract": "Labeled native date entry and picker within the shared report filter drawer."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#ReportsScreen",
+      "name": "ReportsScreen",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 47,
+      "inputs": "props",
+      "contract": "Report localization entry; preserve period and export context."
+    },
+    {
+      "id": "src/reports/ReportsScreen.jsx#ReportsScreenContent",
+      "name": "ReportsScreenContent",
+      "source": "src/reports/ReportsScreen.jsx",
+      "line": 50,
+      "inputs": "{ session }",
+      "contract": "Scrollable report hierarchy; draft filters commit after successful Apply, scoped CSV, current snapshots, month/year tabs and retained results on refresh failure."
+    },
+    {
+      "id": "src/sell/OfflineSalesPage.jsx#OfflineSalesPage",
+      "name": "OfflineSalesPage",
+      "source": "src/sell/OfflineSalesPage.jsx",
+      "line": 17,
+      "inputs": "{ offlineMode, session, onNavigate }",
+      "contract": "Reference-based offline queue: exact stored status counts, local receipt cards/preview, retained latest/oldest ordering, guarded queue sync/retry and canonical receipt identity."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#RetailSaleHeading",
+      "name": "RetailSaleHeading",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 40,
+      "inputs": "{ cart, onNavigate, isCart = false, isCheckout = false, title, backPath, onPrintLast, showCart = false }",
+      "contract": "Reference-mapped Sell/Cart/Checkout header with source-aware Back, cart shortcut/count, checkout actions/print-last entry and module menu; preserve permission-aware fallback and focus return."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#SaleLoadingCards",
+      "name": "SaleLoadingCards",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 55,
+      "inputs": "(none)",
+      "contract": "Product-selection placeholders shaped like sale cards; themed reduced-motion loading."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#CustomerPicker",
+      "name": "CustomerPicker",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 60,
+      "inputs": "{ selected, onSelect, onCreate, confirmSelection = false }",
+      "contract": "Searchable paginated contact selection; Sell opts into pending choice plus confirmation, while sale-edit/filter callers keep immediate selection."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#NewCheckoutCustomer",
+      "name": "NewCheckoutCustomer",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 87,
+      "inputs": "{ draft, settings, setDraft, onNavigate }",
+      "contract": "Focused contact create flow; return chosen customer to intact checkout draft."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#ProductStep",
+      "name": "ProductStep",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 145,
+      "inputs": "{ cart, setCart, categories, settings, productList, onNavigate, onSearchChange, onCategoryChange, externalNotice, clearExternalNotice, offlineMode, offlineState }",
+      "contract": "Sale product selection/search/scan/category; cart continuation and offline cache awareness."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#QuantityStep",
+      "name": "QuantityStep",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 231,
+      "inputs": "{ cart, setCart, onNavigate, settings, offlineMode }",
+      "contract": "Per-price cart lines, quantity/FOC/pack shortcuts; warnings and totals stay tied to the affected line."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#SellSaleComplete",
+      "name": "SellSaleComplete",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 272,
+      "inputs": "{ receipt, currency, printing, onPrint, onNew }",
+      "contract": "Saved receipt identity/date, total/paid/balance/change, customer/method, print-only retry and explicit Start new sale; do not invent sale metadata."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#CheckoutStep",
+      "name": "CheckoutStep",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 288,
+      "inputs": "{ draft, setDraft, settings, receipt, setReceipt, onNavigate, onCompleted, offlineMode, offlineState, session }",
+      "contract": "Customer/totals/payment, guarded submit and completion states; receipt-fetch failure cannot resubmit a saved sale, and local invoices stay distinct from confirmed sales."
+    },
+    {
+      "id": "src/sell/SaleScreen.jsx#SaleScreen",
+      "name": "SaleScreen",
+      "source": "src/sell/SaleScreen.jsx",
+      "line": 419,
+      "inputs": "{ pathname = '/sell', onNavigate = () => {}, offlineMode = false, session = null }",
+      "contract": "Retained sale draft and step routing; prevent cart loss across search, Back and offline transitions."
+    },
+    {
+      "id": "src/settings/PrinterSettingsPage.jsx#PrinterSettingsPage",
+      "name": "PrinterSettingsPage",
+      "source": "src/settings/PrinterSettingsPage.jsx",
+      "line": 8,
+      "inputs": "{ onNavigate }",
+      "contract": "Device-specific system/TCP/Bluetooth setup; conditional validation, paired-device paging, test and save states."
+    },
+    {
+      "id": "src/settings/ReceiptPreview.jsx#ReceiptPreview",
+      "name": "ReceiptPreview",
+      "source": "src/settings/ReceiptPreview.jsx",
+      "line": 4,
+      "inputs": "{ preview, settings, preparing = false }",
+      "contract": "Readable print-layout preview; paper-aware scaling, loading/error/close without losing settings draft."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#BarcodeLivePreview",
+      "name": "BarcodeLivePreview",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 23,
+      "inputs": "{ settings }",
+      "contract": "Physical-size barcode sample; preserve encoded value, dimensions and readable name/value options."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#PageHeader",
+      "name": "PageHeader",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 35,
+      "inputs": "{ title, copy, onBack }",
+      "contract": "Settings Back/title/copy; consistent hierarchy and source-aware return."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#SettingField",
+      "name": "SettingField",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 36,
+      "inputs": "{ label, error, children, hint }",
+      "contract": "Settings label/help/error wrapper; normalize shared form spacing and accessible associations."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#PriceEditor",
+      "name": "PriceEditor",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 38,
+      "inputs": "{ mode, originalName, rows, onNavigate, onChanged }",
+      "contract": "Manual/automatic rule editor; conditional markup/rounding/profit and explicit apply-to-existing consequence."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#SettingsScreen",
+      "name": "SettingsScreen",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 48,
+      "inputs": "props",
+      "contract": "Settings route and staff/owner boundaries; native printer page retains its special integration."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#RestorePage",
+      "name": "RestorePage",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 50,
+      "inputs": "{ settings, restricted, language, onNavigate, onRestored }",
+      "contract": "Backup selection, replacement consequence, typed confirmation and PIN; long-running safe feedback."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#ResetDataPage",
+      "name": "ResetDataPage",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 57,
+      "inputs": "{ settings, onNavigate, onReset }",
+      "contract": "Operational reset explanation/typed confirmation plus final destructive sheet; preserve server safety backup."
+    },
+    {
+      "id": "src/settings/SettingsScreen.jsx#SettingsScreenContent",
+      "name": "SettingsScreenContent",
+      "source": "src/settings/SettingsScreen.jsx",
+      "line": 100,
+      "inputs": "{ pathname = '/settings', onNavigate = () => {} }",
+      "contract": "Settings index/section forms and previews; preserve save, language, device and data-tool behaviors."
+    },
+    {
+      "id": "src/shop/OrderCard.jsx#OrderBadge",
+      "name": "OrderBadge",
+      "source": "src/shop/OrderCard.jsx",
+      "line": 6,
+      "inputs": "{ value, fulfillment = false, statusIcon = false }",
+      "contract": "Compact readable order/payment state label; semantic styling and accessible text."
+    },
+    {
+      "id": "src/shop/OrderCard.jsx#OrderCard",
+      "name": "OrderCard",
+      "source": "src/shop/OrderCard.jsx",
+      "line": 17,
+      "inputs": "{ order, timezone, onNavigate }",
+      "contract": "Shared reference 073/080 order card: reference/status header, date, initials/name/item count, right-aligned amount/payment, thumbnails and fulfillment/chevron; preserve request alerts and source navigation."
+    },
+    {
+      "id": "src/shop/OrderRoadmap.jsx#OrderRoadmap",
+      "name": "OrderRoadmap",
+      "source": "src/shop/OrderRoadmap.jsx",
+      "line": 6,
+      "inputs": "{ order, timezone, compact = false }",
+      "contract": "Fulfillment progress for actual order state; completed/current/remaining/exception labels, no fictitious steps."
+    },
+    {
+      "id": "src/shop/ShopCatalog.jsx#ShopCatalog",
+      "name": "ShopCatalog",
+      "source": "src/shop/ShopCatalog.jsx",
+      "line": 13,
+      "inputs": "{ onNavigate }",
+      "contract": "Compact publication rows, real counts, draft filters and all-filtered bulk confirmation; preserve list on Back."
+    },
+    {
+      "id": "src/shop/ShopCatalog.jsx#ShopPublicationForm",
+      "name": "ShopPublicationForm",
+      "source": "src/shop/ShopCatalog.jsx",
+      "line": 52,
+      "inputs": "{ id, onNavigate }",
+      "contract": "Unit, description and publication editor; read-only inventory/prices, draft preview and validation retention."
+    },
+    {
+      "id": "src/shop/ShopCatalog.jsx#CatalogHeader",
+      "name": "CatalogHeader",
+      "source": "src/shop/ShopCatalog.jsx",
+      "line": 74,
+      "inputs": "{ title, onBack }",
+      "contract": "Compact task header with existing retained navigation."
+    },
+    {
+      "id": "src/shop/ShopCatalog.jsx#PublicationPhoto",
+      "name": "PublicationPhoto",
+      "source": "src/shop/ShopCatalog.jsx",
+      "line": 82,
+      "inputs": "{ product }",
+      "contract": "Authenticated photo and theme package fallback."
+    },
+    {
+      "id": "src/shop/ShopCatalog.jsx#CatalogSubscriptionGate",
+      "name": "CatalogSubscriptionGate",
+      "source": "src/shop/ShopCatalog.jsx",
+      "line": 85,
+      "inputs": "{ onNavigate }",
+      "contract": "Expired catalog gate with Billing and My Shop navigation; no protected list request."
+    },
+    {
+      "id": "src/shop/ShopChat.jsx#SharedProduct",
+      "name": "SharedProduct",
+      "source": "src/shop/ShopChat.jsx",
+      "line": 17,
+      "inputs": "{ product }",
+      "contract": "Message product attachment with identity/photo/price and available navigation; missing-product fallback."
+    },
+    {
+      "id": "src/shop/ShopChat.jsx#ShopChatInbox",
+      "name": "ShopChatInbox",
+      "source": "src/shop/ShopChat.jsx",
+      "line": 29,
+      "inputs": "{ onNavigate, session }",
+      "contract": "Compact conversation rows, query/unread filter, time/presence/unread cues and pagination."
+    },
+    {
+      "id": "src/shop/ShopChat.jsx#ChatProductPicker",
+      "name": "ChatProductPicker",
+      "source": "src/shop/ShopChat.jsx",
+      "line": 61,
+      "inputs": "{ uuid, onSelect, onClose }",
+      "contract": "Searchable paginated product selector with pending selection, cancel and explicit attachment; never sends automatically."
+    },
+    {
+      "id": "src/shop/ShopChat.jsx#ShopConversation",
+      "name": "ShopConversation",
+      "source": "src/shop/ShopChat.jsx",
+      "line": 74,
+      "inputs": "{ uuid, onNavigate, session }",
+      "contract": "Full-page white Back/profile header, neutral message canvas, themed bubbles and fixed composer; retain draft/scroll/retries."
+    },
+    {
+      "id": "src/shop/ShopChat.jsx#ChatInboxHeader",
+      "name": "ChatInboxHeader",
+      "source": "src/shop/ShopChat.jsx",
+      "line": 172,
+      "inputs": "{ onNavigate }",
+      "contract": "Compact inbox header with My Shop return."
+    },
+    {
+      "id": "src/shop/ShopChat.jsx#ChatProductImage",
+      "name": "ChatProductImage",
+      "source": "src/shop/ShopChat.jsx",
+      "line": 181,
+      "inputs": "{ product }",
+      "contract": "Real supplied public product photo with a themed package fallback."
+    },
+    {
+      "id": "src/shop/ShopConfiguration.jsx#ShopConfigurationList",
+      "name": "ShopConfigurationList",
+      "source": "src/shop/ShopConfiguration.jsx",
+      "line": 18,
+      "inputs": "{ section, onNavigate, session }",
+      "contract": "Contact/delivery/payment list resources, capacity and guarded deletion; payment presentation follows references 098-100 through ShopMethodsList."
+    },
+    {
+      "id": "src/shop/ShopConfiguration.jsx#ShopConfigurationForm",
+      "name": "ShopConfigurationForm",
+      "source": "src/shop/ShopConfiguration.jsx",
+      "line": 46,
+      "inputs": "{ section, id, onNavigate, session }",
+      "contract": "Type-specific contact/delivery/manual-payment forms; method section cards and fixed Save/Cancel, unique retained IDs, capacity/inline errors, guarded submit and source retention."
+    },
+    {
+      "id": "src/shop/ShopConfiguration.jsx#ShopContactsHeader",
+      "name": "ShopContactsHeader",
+      "source": "src/shop/ShopConfiguration.jsx",
+      "line": 72,
+      "inputs": "{ title, onBack, action }",
+      "contract": "Compact contact list/form header with retained Back and optional Add action."
+    },
+    {
+      "id": "src/shop/ShopConfiguration.jsx#ContactPlatformIcon",
+      "name": "ContactPlatformIcon",
+      "source": "src/shop/ShopConfiguration.jsx",
+      "line": 75,
+      "inputs": "{ platform }",
+      "contract": "Shared Lucide platform-category icon for public contact rows."
+    },
+    {
+      "id": "src/shop/ShopConfiguration.jsx#ShopDeliveryHeader",
+      "name": "ShopDeliveryHeader",
+      "source": "src/shop/ShopConfiguration.jsx",
+      "line": 80,
+      "inputs": "{ title, onBack, action }",
+      "contract": "Compact delivery page header with source-aware Back and optional add action."
+    },
+    {
+      "id": "src/shop/ShopCover.jsx#ShopCoverHeader",
+      "name": "ShopCoverHeader",
+      "source": "src/shop/ShopCover.jsx",
+      "line": 9,
+      "inputs": "{ onNavigate }",
+      "contract": "Compact cover task header with My Shop return, including restricted states."
+    },
+    {
+      "id": "src/shop/ShopCover.jsx#ShopCover",
+      "name": "ShopCover",
+      "source": "src/shop/ShopCover.jsx",
+      "line": 13,
+      "inputs": "{ onNavigate }",
+      "contract": "Cover preview, validated replacement, staged removal/Undo and explicit save; retain draft on upload/delete failure."
+    },
+    {
+      "id": "src/shop/ShopCustomerCredit.jsx#ShopCustomerCredit",
+      "name": "ShopCustomerCredit",
+      "source": "src/shop/ShopCustomerCredit.jsx",
+      "line": 8,
+      "inputs": "{ customer, customerKey, onNavigate, onCancel, onBusyChange }",
+      "contract": "Buyer identity, suggested matches, searchable existing-contact picker and create-new radio choice; explicit linking without balances or record merging."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#CustomerHistory",
+      "name": "CustomerHistory",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 16,
+      "inputs": "{ customerKey, customerName, session, onNavigate }",
+      "contract": "Buyer order-history toolbar/filters and shared OrderCard rows; preserve history paging/scroll."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#BuyerBadge",
+      "name": "BuyerBadge",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 27,
+      "inputs": "{ customer }",
+      "contract": "Compact Registered, Guest or Blocked buyer status."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#ShopCustomerCard",
+      "name": "ShopCustomerCard",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 31,
+      "inputs": "{ customer, onNavigate }",
+      "contract": "Credit-contact-inspired compact buyer row: name/contact, purchase badge and chevron; no large avatar/footer."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#ShopCustomers",
+      "name": "ShopCustomers",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 39,
+      "inputs": "{ session, onNavigate }",
+      "contract": "Reference buyer directory: header/export, search/filter/export, simple count, compact identity/status/contact rows and currency-separated spending; draft radio filters."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#BuyerProfile",
+      "name": "BuyerProfile",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 73,
+      "inputs": "{ customer, actions }",
+      "contract": "Compact buyer identity, status and contact card with equal Chat and More actions."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#BuyerStatistics",
+      "name": "BuyerStatistics",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 79,
+      "inputs": "{ report }",
+      "contract": "Purchase statistics tiles with spending and order count separated by currency."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#ShopCustomerDetail",
+      "name": "ShopCustomerDetail",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 83,
+      "inputs": "{ customerKey, session, onNavigate }",
+      "contract": "Customer-name header, white profile with Chat/More, Purchase statistics then shared OrderCard history with filter/export; extended actions and metrics in More; retained source navigation."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#ShopCustomerAction",
+      "name": "ShopCustomerAction",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 100,
+      "inputs": "{ customerKey, action, session, onNavigate }",
+      "contract": "Centered block/unblock modal with optional saved reason; explicit existing/new credit-contact linking page; guarded submit, retry and source Cancel."
+    },
+    {
+      "id": "src/shop/ShopCustomers.jsx#ShopBuyerHeader",
+      "name": "ShopBuyerHeader",
+      "source": "src/shop/ShopCustomers.jsx",
+      "line": 115,
+      "inputs": "{ title, onBack, actions }",
+      "contract": "Compact buyer list/detail/action header with retained source Back navigation."
+    },
+    {
+      "id": "src/shop/ShopDatePresets.jsx#ShopDatePresets",
+      "name": "ShopDatePresets",
+      "source": "src/shop/ShopDatePresets.jsx",
+      "line": 4,
+      "inputs": "{ timezone = 'Asia/Rangoon', onChange }",
+      "contract": "Date preset controls inside filter drawers; selected/custom range and module-specific default behavior."
+    },
+    {
+      "id": "src/shop/ShopFulfillment.jsx#FulfillmentInput",
+      "name": "FulfillmentInput",
+      "source": "src/shop/ShopFulfillment.jsx",
+      "line": 8,
+      "inputs": "{ icon: Icon, ...props }",
+      "contract": "Labeled icon input for pickup address or hours; forward field ID and validation state to the input."
+    },
+    {
+      "id": "src/shop/ShopFulfillment.jsx#ShopFulfillment",
+      "name": "ShopFulfillment",
+      "source": "src/shop/ShopFulfillment.jsx",
+      "line": 12,
+      "inputs": "{ onNavigate }",
+      "contract": "Reference 102 pickup address/hours, buyer instructions and live preview; fixed Save above navigation, retained draft, current-settings merge, field errors and retry."
+    },
+    {
+      "id": "src/shop/ShopLocation.jsx#LocationDisclosure",
+      "name": "LocationDisclosure",
+      "source": "src/shop/ShopLocation.jsx",
+      "line": 24,
+      "inputs": "{ detailed = false }",
+      "contract": "Compact public-coordinate disclosure shared by normal and denied location states; explain owner-only GPS updates."
+    },
+    {
+      "id": "src/shop/ShopLocation.jsx#ShopLocation",
+      "name": "ShopLocation",
+      "source": "src/shop/ShopLocation.jsx",
+      "line": 27,
+      "inputs": "{ session, onNavigate, required = false, onSubmitted, locationState }",
+      "contract": "References 072/154: saved coordinates/time, public-location explanation, owner GPS update, help disclosures and dedicated denied/retry state; preserve setup gate and retained source."
+    },
+    {
+      "id": "src/shop/ShopLocation.jsx#ShopLocationGate",
+      "name": "ShopLocationGate",
+      "source": "src/shop/ShopLocation.jsx",
+      "line": 51,
+      "inputs": "{ children, session, onNavigate }",
+      "contract": "Missing-location prerequisite around management; explain required owner action without leaking blocked content."
+    },
+    {
+      "id": "src/shop/ShopLogo.jsx#ShopLogoHeader",
+      "name": "ShopLogoHeader",
+      "source": "src/shop/ShopLogo.jsx",
+      "line": 9,
+      "inputs": "{ onNavigate, busy = false }",
+      "contract": "Compact Business logo header with source-aware Back; retain in permission/subscription states."
+    },
+    {
+      "id": "src/shop/ShopLogo.jsx#ShopLogo",
+      "name": "ShopLogo",
+      "source": "src/shop/ShopLogo.jsx",
+      "line": 12,
+      "inputs": "{ session, onNavigate }",
+      "contract": "Reference 104 shared-logo preview, identity explanation, owner note, requirements and Replace/Remove; staged removal with Undo, fixed Save/Cancel, file validation and retry."
+    },
+    {
+      "id": "src/shop/ShopMethods.jsx#ShopMethodsHeader",
+      "name": "ShopMethodsHeader",
+      "source": "src/shop/ShopMethods.jsx",
+      "line": 6,
+      "inputs": "{ title, onBack, action, busy = false }",
+      "contract": "Compact method list/add/edit header; source-aware Back and Add, retained in restricted states."
+    },
+    {
+      "id": "src/shop/ShopMethods.jsx#ShopMethodsList",
+      "name": "ShopMethodsList",
+      "source": "src/shop/ShopMethods.jsx",
+      "line": 9,
+      "inputs": "{ resource, list, onNavigate, deleting, busy, error, onDelete, onCloseDelete, onConfirmDelete }",
+      "contract": "Reference 098: title/Add, count/explanation, cash/bank icons, masked receiving summary, manual payment and active state; overflow Edit/Delete with confirmation and retry."
+    },
+    {
+      "id": "src/shop/ShopMethods.jsx#ShopMethodFields",
+      "name": "ShopMethodFields",
+      "source": "src/shop/ShopMethods.jsx",
+      "line": 23,
+      "inputs": "{ form, change, errors, recordKey }",
+      "contract": "References 099/100: name, Cash/Bank transfer radio cards, receiving details, instructions/count and active switch; retain draft values and supported API limits."
+    },
+    {
+      "id": "src/shop/ShopOrderPresentation.jsx#ShopOrdersHeader",
+      "name": "ShopOrdersHeader",
+      "source": "src/shop/ShopOrderPresentation.jsx",
+      "line": 7,
+      "inputs": "{ title = 'Orders', onBack, actions, onMore }",
+      "contract": "Reference Back/title/export/More header; retain source state and accessible action names."
+    },
+    {
+      "id": "src/shop/ShopOrderPresentation.jsx#OrderUnavailable",
+      "name": "OrderUnavailable",
+      "source": "src/shop/ShopOrderPresentation.jsx",
+      "line": 10,
+      "inputs": "{ error, onBack, onRetry }",
+      "contract": "Reference unavailable illustration/message with Back to orders and recoverable network Retry."
+    },
+    {
+      "id": "src/shop/ShopOrderPresentation.jsx#OrderItemPhoto",
+      "name": "OrderItemPhoto",
+      "source": "src/shop/ShopOrderPresentation.jsx",
+      "line": 13,
+      "inputs": "{ item }",
+      "contract": "Authenticated tenant-scoped item image with the themed package fallback and contained bounds."
+    },
+    {
+      "id": "src/shop/ShopOrderPresentation.jsx#OrderActionSummary",
+      "name": "OrderActionSummary",
+      "source": "src/shop/ShopOrderPresentation.jsx",
+      "line": 16,
+      "inputs": "{ order }",
+      "contract": "Actual order identity/customer/items/amount/payment context for action and review forms."
+    },
+    {
+      "id": "src/shop/ShopOrderPresentation.jsx#OrderReceivingAccount",
+      "name": "OrderReceivingAccount",
+      "source": "src/shop/ShopOrderPresentation.jsx",
+      "line": 19,
+      "inputs": "{ order }",
+      "contract": "Read-only immutable payment-method snapshot; wrap actual receiving details without duplication."
+    },
+    {
+      "id": "src/shop/ShopOrderPresentation.jsx#OrderContextLink",
+      "name": "OrderContextLink",
+      "source": "src/shop/ShopOrderPresentation.jsx",
+      "line": 22,
+      "inputs": "{ label, children, onClick, disabled = false }",
+      "contract": "Clickable customer/fulfillment identity with chevron; preserve disabled unavailable identities."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#ShopOrders",
+      "name": "ShopOrders",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 27,
+      "inputs": "{ onNavigate, session }",
+      "contract": "Reference 073/120/158: search/filter/export, count/sort and shared cards; draft-only Reset/Apply and recoverable pagination; retained source."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#OrderPanel",
+      "name": "OrderPanel",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 60,
+      "inputs": "{ title, icon: Icon, children, className = '' }",
+      "contract": "Consistent detail section heading/body; meaningful icon only, no repeated decorative customer/fulfillment symbol."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#ShopOrderDetail",
+      "name": "ShopOrderDetail",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 67,
+      "inputs": "{ id, onNavigate, session, initialAction = null, initialRequestId = null, onModalClose }",
+      "contract": "References 074/164: white amount/progress summary; primary/Print/More icon-label strip; customer/fulfillment, requests, items, linked sale, payment and visible audit."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#ShopOrderAction",
+      "name": "ShopOrderAction",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 168,
+      "inputs": "{ id, action, onNavigate, session }",
+      "contract": "Direct action-route adapter into order context/modal; preserve deep-link and close/back behavior."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#ShopOrderActionForm",
+      "name": "ShopOrderActionForm",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 172,
+      "inputs": "{ action, order, session, onCancel, onSaved, onBusyChange }",
+      "contract": "Action-specific reason/payment/refund/return fields and confirmation; enforce existing prerequisites."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#ShopRequestReview",
+      "name": "ShopRequestReview",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 211,
+      "inputs": "{ id, requestId, onNavigate, session }",
+      "contract": "Full-page reference 076: order identity, request evidence, decision radios, required note and pinned Save/Cancel; retained source."
+    },
+    {
+      "id": "src/shop/ShopOrders.jsx#ShopRequestReviewForm",
+      "name": "ShopRequestReviewForm",
+      "source": "src/shop/ShopOrders.jsx",
+      "line": 218,
+      "inputs": "{ id, requestId, order, session, onCancel, onSaved, onBusyChange }",
+      "contract": "Request evidence/reason and accept/reject confirmation; validation and mutation reconciliation."
+    },
+    {
+      "id": "src/shop/ShopPrimitives.jsx#ShopBusy",
+      "name": "ShopBusy",
+      "source": "src/shop/ShopPrimitives.jsx",
+      "line": 6,
+      "inputs": "{ label }",
+      "contract": "Themed compact spinner/status for local operation; accessible text and reduced-motion support."
+    },
+    {
+      "id": "src/shop/ShopPrimitives.jsx#ShopLoading",
+      "name": "ShopLoading",
+      "source": "src/shop/ShopPrimitives.jsx",
+      "line": 10,
+      "inputs": "{ label = 'Loading…', variant = 'list' }",
+      "contract": "Shop skeleton variants shaped for list/detail/form/report/conversation; avoid unrelated giant spinner."
+    },
+    {
+      "id": "src/shop/ShopPrimitives.jsx#ShopLoadState",
+      "name": "ShopLoadState",
+      "source": "src/shop/ShopPrimitives.jsx",
+      "line": 18,
+      "inputs": "{ resource, children }",
+      "contract": "Shared first-load/error/empty handling; keep existing content during background refresh."
+    },
+    {
+      "id": "src/shop/ShopPrimitives.jsx#ShopField",
+      "name": "ShopField",
+      "source": "src/shop/ShopPrimitives.jsx",
+      "line": 22,
+      "inputs": "{ name, label, errors = {}, children, id: fieldId }",
+      "contract": "Shop label/input/error wrapper; optional unique field ID for retained forms, preserving default IDs for existing callers."
+    },
+    {
+      "id": "src/shop/ShopPrimitives.jsx#ShopPrivateImage",
+      "name": "ShopPrivateImage",
+      "source": "src/shop/ShopPrimitives.jsx",
+      "line": 26,
+      "inputs": "{ path, label }",
+      "contract": "Authenticated image loading, URL lifecycle, failure/retry and expiry handling; no whole-page failure."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionHeader",
+      "name": "PromotionHeader",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 24,
+      "inputs": "{ title, onBack, children }",
+      "contract": "Compact Promotions/task title, source Back, Add dropdown and flash-sale default-discount action."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionBadge",
+      "name": "PromotionBadge",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 27,
+      "inputs": "{ value }",
+      "contract": "Text coupon/flash-sale and active/scheduled/expired/paused/exhausted states using shared compact colors."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionPhoto",
+      "name": "PromotionPhoto",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 28,
+      "inputs": "{ product }",
+      "contract": "Real catalog product photo or themed package fallback, contained in the selection row."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionRow",
+      "name": "PromotionRow",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 35,
+      "inputs": "{ promotion: p, selected, disabled, onSelect, onMenu, timezone, currency }",
+      "contract": "Reference selectable code/name/type/status card with overflow actions, real discount/schedule/usage and product context."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#ShopPromotions",
+      "name": "ShopPromotions",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 39,
+      "inputs": "{ onNavigate, session }",
+      "contract": "Reference 088/126: Add dropdown, search/filter, selectable status/discount/schedule cards and pinned selection bar; staged filters and retained source."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionProductPicker",
+      "name": "PromotionProductPicker",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 84,
+      "inputs": "{ onClose, onPick, selectedRows, single = false }",
+      "contract": "Reference 141 shared right drawer: search/category, draft multi-selection, filtered bulk selection, cap100, Cancel/discard and explicit Add with settings retention."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionSection",
+      "name": "PromotionSection",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 98,
+      "inputs": "{ title, children, className='' }",
+      "contract": "Compact labeled coupon/flash-sale form section with natural content height and shared gutters."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#PromotionEnabled",
+      "name": "PromotionEnabled",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 99,
+      "inputs": "{ checked, onChange, id, label='Enabled' }",
+      "contract": "Native enabled switch with visible focus, real controlled state and unique retained-form IDs."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#DiscountFields",
+      "name": "DiscountFields",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 100,
+      "inputs": "{ form, change, errors, prefix='', radio=false, idPrefix=prefix, currency='Ks' }",
+      "contract": "Percent/fixed discount inputs with clear units, minimums/limits and mode-specific validation."
+    },
+    {
+      "id": "src/shop/ShopPromotions.jsx#ShopPromotionForm",
+      "name": "ShopPromotionForm",
+      "source": "src/shop/ShopPromotions.jsx",
+      "line": 107,
+      "inputs": "{ id, type='coupon', onNavigate, session }",
+      "contract": "References 089-091: sectioned coupon or flash-sale form, independent product discounts/limits, schedule/availability and usage; pinned Save/Cancel; preserve API rules."
+    },
+    {
+      "id": "src/shop/ShopReport.jsx#ShopReportHeader",
+      "name": "ShopReportHeader",
+      "source": "src/shop/ShopReport.jsx",
+      "line": 21,
+      "inputs": "{ onBack, children }",
+      "contract": "Reference Shop report header with retained source Back and filter/export actions, including error/permission states."
+    },
+    {
+      "id": "src/shop/ShopReport.jsx#ShopReportMetric",
+      "name": "ShopReportMetric",
+      "source": "src/shop/ShopReport.jsx",
+      "line": 24,
+      "inputs": "{ metric, summary, previous, currency, onInfo }",
+      "contract": "Four headline API metrics with honest percentage/percentage-point comparisons, zero-baseline state and definition/previous-value info."
+    },
+    {
+      "id": "src/shop/ShopReport.jsx#Breakdown",
+      "name": "Breakdown",
+      "source": "src/shop/ShopReport.jsx",
+      "line": 32,
+      "inputs": "{ title, icon:Icon, rows=[], subtitle, compact=false, onDetails, sectionRef, children }",
+      "contract": "Compact and expanded report icon/title/value rows, real scope/units, empty state, optional details jumps and historical/buyer context."
+    },
+    {
+      "id": "src/shop/ShopReport.jsx#ShopReportProducts",
+      "name": "ShopReportProducts",
+      "source": "src/shop/ShopReport.jsx",
+      "line": 35,
+      "inputs": "{ products, currency }",
+      "contract": "Three-row top-product preview with real quantities, actual currency amounts, listed-sales share and local View all/Show fewer."
+    },
+    {
+      "id": "src/shop/ShopReport.jsx#ShopReportMetricInfo",
+      "name": "ShopReportMetricInfo",
+      "source": "src/shop/ShopReport.jsx",
+      "line": 39,
+      "inputs": "{ info, data, onClose }",
+      "contract": "Focused metric definition and actual previous-value/comparison sheet; keyboard trap, safe dismissal and trigger focus restoration."
+    },
+    {
+      "id": "src/shop/ShopReport.jsx#ShopReport",
+      "name": "ShopReport",
+      "source": "src/shop/ShopReport.jsx",
+      "line": 49,
+      "inputs": "{ onNavigate }",
+      "contract": "References 087/125/165: period/currency controls, four metrics, daily chart/table, products, compact summaries and expanded breakdowns; draft-only Reset/Apply, displayed-scope CSV and retained buyer navigation."
+    },
+    {
+      "id": "src/shop/ShopReportCharts.jsx#ShopReportTrend",
+      "name": "ShopReportTrend",
+      "source": "src/shop/ShopReportCharts.jsx",
+      "line": 5,
+      "inputs": "{ data, table, onToggle }",
+      "contract": "Reference completed-sales line and completed-order columns with labeled separate axes, exact daily table and actual totals."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ShopReviewHeader",
+      "name": "ShopReviewHeader",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 18,
+      "inputs": "{ title='Reviews', onBack, busy=false, children }",
+      "contract": "Reference Reviews/reply title with source-aware Back, export/filter actions and guarded busy/error states."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ReviewStars",
+      "name": "ReviewStars",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 21,
+      "inputs": "{ rating, numeric=false }",
+      "contract": "Five green/empty stars with accessible numeric rating and compact optional score."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ReviewContext",
+      "name": "ReviewContext",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 25,
+      "inputs": "{ review, session }",
+      "contract": "Reference customer/date/type/stars, real product name/unit/photo and unchanged comment or rating-only state."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ReviewReplySnapshot",
+      "name": "ReviewReplySnapshot",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 29,
+      "inputs": "{ review, session, editor=false, action }",
+      "contract": "Distinct saved public-reply card/date, edit action and editor snapshot; never display draft text as the saved reply."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ReviewCard",
+      "name": "ReviewCard",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 32,
+      "inputs": "{ review, session, onNavigate }",
+      "contract": "Reference 085 compact identity/stars/product/comment with awaiting badge or saved reply; permission-aware Reply/Edit."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ReviewFilterGroup",
+      "name": "ReviewFilterGroup",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 37,
+      "inputs": "{ title, name, options, value, onChange, stars=false }",
+      "contract": "Labeled native radio group for type/rating/reply/comment/date/sort with stable names and visible focus."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ShopReviews",
+      "name": "ShopReviews",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 40,
+      "inputs": "{ session, onNavigate }",
+      "contract": "References 085/124: Back/export/filter, search, total-vs-loaded summaries, compact cards, draft radio filters and paginated applied-scope CSV; retained source."
+    },
+    {
+      "id": "src/shop/ShopReviews.jsx#ShopReviewReply",
+      "name": "ShopReviewReply",
+      "source": "src/shop/ShopReviews.jsx",
+      "line": 69,
+      "inputs": "{ id, onNavigate, session }",
+      "contract": "Reference 086 original review, saved reply, public draft/counter/removal notice; guarded save, server-snapshot reconciliation and retained source."
+    },
+    {
+      "id": "src/shop/ShopScreen.jsx#ShopMenuItem",
+      "name": "ShopMenuItem",
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 54,
+      "inputs": "{ title, description, icon: Icon, onClick }",
+      "contract": "Purposeful icon, title, description and chevron as one navigation target; permission-filtered by parent."
+    },
+    {
+      "id": "src/shop/ShopScreen.jsx#ShopScreen",
+      "name": "ShopScreen",
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 65,
+      "inputs": "{ pathname, onNavigate, session }",
+      "contract": "Shop route/permission/subscription dispatch and localization; include own conversation page class."
+    },
+    {
+      "id": "src/shop/ShopStorefront.jsx#ShopBranding",
+      "name": "ShopBranding",
+      "source": "src/shop/ShopStorefront.jsx",
+      "line": 10,
+      "inputs": "{ kind, session, onNavigate }",
+      "contract": "Existing shared business-logo workflow and legacy branding support; dedicated ShopCover handles the cover route."
+    },
+    {
+      "id": "src/shop/StorefrontSettings.jsx#ShopStorefrontHeader",
+      "name": "ShopStorefrontHeader",
+      "source": "src/shop/StorefrontSettings.jsx",
+      "line": 23,
+      "inputs": "{ onBack, busy=false }",
+      "contract": "Sticky Storefront title and source-aware Back; disabled while saving."
+    },
+    {
+      "id": "src/shop/StorefrontSettings.jsx#StorefrontSwitch",
+      "name": "StorefrontSwitch",
+      "source": "src/shop/StorefrontSettings.jsx",
+      "line": 26,
+      "inputs": "{ id, label, hint, icon:Icon, checked, onChange }",
+      "contract": "Accessible native labeled switch with consequence hint, keyboard focus and shared theme states."
+    },
+    {
+      "id": "src/shop/StorefrontSettings.jsx#StorefrontSection",
+      "name": "StorefrontSection",
+      "source": "src/shop/StorefrontSettings.jsx",
+      "line": 29,
+      "inputs": "{ title, icon:Icon, children, className='' }",
+      "contract": "Shared compact surface and section heading, preserving reference order with natural scrolling."
+    },
+    {
+      "id": "src/shop/StorefrontSettings.jsx#StorefrontHours",
+      "name": "StorefrontHours",
+      "source": "src/shop/StorefrontSettings.jsx",
+      "line": 32,
+      "inputs": "{ hours, onChange, errors }",
+      "contract": "Expandable weekly schedule; per-day closed/time inputs, retained disabled drafts and automatic expansion for field errors."
+    },
+    {
+      "id": "src/shop/StorefrontSettings.jsx#ShopStorefront",
+      "name": "ShopStorefront",
+      "source": "src/shop/StorefrontSettings.jsx",
+      "line": 39,
+      "inputs": "{ session, onNavigate }",
+      "contract": "Reference storefront sections with independent settings, fresh delivery snapshot, owner-only profile, retained drafts and fixed guarded Save/Cancel."
+    },
+    {
+      "id": "src/subscription/TrialBanner.jsx#TrialBanner",
+      "name": "TrialBanner",
+      "source": "src/subscription/TrialBanner.jsx",
+      "line": 12,
+      "inputs": "{ session, onBilling }",
+      "contract": "Compact subscription/trial status with billing action; preserve server truth and route-specific suppression."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierReferenceHeader",
+      "name": "SupplierReferenceHeader",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 9,
+      "inputs": "{title,onBack,onNew,onMenu,onDelete,busy=false}",
+      "contract": "Compact sticky supplier route title with source-aware Back, Add, action menu and edit-payment Delete; busy navigation guard."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierAvatar",
+      "name": "SupplierAvatar",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 10,
+      "inputs": "{name}",
+      "contract": "Shared themed initials avatar for supplier contacts; real names wrap without truncation."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierBalance",
+      "name": "SupplierBalance",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 11,
+      "inputs": "{balance=0}",
+      "contract": "Real configured currency and absolute account amount with payable, credit or settled status."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierDirectoryCard",
+      "name": "SupplierDirectoryCard",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 12,
+      "inputs": "{supplier,onOpen,onMenu}",
+      "contract": "Reference contact row plus balance/state footer, separate contact navigation and retained action menu."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierForm",
+      "name": "SupplierForm",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 13,
+      "inputs": "{editing,form,errors,saving,onChange,onCancel,onSubmit}",
+      "contract": "Supplier identity/contact person/address/note form; readable labels and retained validation values."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierPaymentForm",
+      "name": "SupplierPaymentForm",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 14,
+      "inputs": "{supplier,editing,form,errors,saving,onChange,onCancel,onSubmit,onOpenSupplier}",
+      "contract": "Supplier movement direction/amount/method/note; use supplier-specific financial language."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierPurchaseCard",
+      "name": "SupplierPurchaseCard",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 26,
+      "inputs": "{purchase,onOpen}",
+      "contract": "Reference purchase identity/date, payment state and total/paid/balance columns; opens existing purchase detail."
+    },
+    {
+      "id": "src/suppliers/SupplierReferenceParts.jsx#SupplierPaymentCard",
+      "name": "SupplierPaymentCard",
+      "source": "src/suppliers/SupplierReferenceParts.jsx",
+      "line": 27,
+      "inputs": "{payment,onActions}",
+      "contract": "Reference payment identity/date/method and amount/direction columns with retained note and edit/delete menu."
+    },
+    {
+      "id": "src/suppliers/SuppliersScreen.jsx#SuppliersScreen",
+      "name": "SuppliersScreen",
+      "source": "src/suppliers/SuppliersScreen.jsx",
+      "line": 49,
+      "inputs": "props",
+      "contract": "Supplier route/localization wrapper; preserve source state."
+    },
+    {
+      "id": "src/suppliers/SuppliersScreen.jsx#SuppliersScreenContent",
+      "name": "SuppliersScreenContent",
+      "source": "src/suppliers/SuppliersScreen.jsx",
+      "line": 51,
+      "inputs": "{ pathname, onNavigate, session }",
+      "contract": "Supplier list/detail/history/forms; payable direction, tabs, filters and statement actions."
+    },
+    {
+      "id": "src/transactions/PaymentReferenceParts.jsx#PaymentReferenceHeader",
+      "name": "PaymentReferenceHeader",
+      "source": "src/transactions/PaymentReferenceParts.jsx",
+      "line": 9,
+      "inputs": "{title,onBack,onExport,onDelete,busy=false}",
+      "contract": "Shared compact sticky title and source-aware Back; busy guards and edit Delete."
+    },
+    {
+      "id": "src/transactions/PaymentReferenceParts.jsx#PaymentReferenceRow",
+      "name": "PaymentReferenceRow",
+      "source": "src/transactions/PaymentReferenceParts.jsx",
+      "line": 13,
+      "inputs": "{row,supplier,currency,onOpen,onActions}",
+      "contract": "Initials, account identity, actual date/amount, direction and method/reference with detail and action controls."
+    },
+    {
+      "id": "src/transactions/PaymentReferenceParts.jsx#PaymentReferenceSummary",
+      "name": "PaymentReferenceSummary",
+      "source": "src/transactions/PaymentReferenceParts.jsx",
+      "line": 17,
+      "inputs": "{summary,supplier,currency,loaded=false,busy=false}",
+      "contract": "Incoming/outgoing matching totals and counts, loading state and explicit loaded-only fallback for old API responses."
+    },
+    {
+      "id": "src/transactions/PaymentReferenceParts.jsx#PaymentReferenceFilters",
+      "name": "PaymentReferenceFilters",
+      "source": "src/transactions/PaymentReferenceParts.jsx",
+      "line": 21,
+      "inputs": "{open,onClose,draft,onChange,onApply,onReset,methods,supplier,error,id}",
+      "contract": "Native shared right drawer with staged date presets/custom bounds, method and direction radios; local validation and Reset/Apply."
+    },
+    {
+      "id": "src/transactions/PaymentTransactions.jsx#PaymentLoading",
+      "name": "PaymentLoading",
+      "source": "src/transactions/PaymentTransactions.jsx",
+      "line": 19,
+      "inputs": "(none)",
+      "contract": "Theme-consistent payment history skeleton with accessible loading status."
+    },
+    {
+      "id": "src/transactions/PaymentTransactions.jsx#PaymentDeleteDialog",
+      "name": "PaymentDeleteDialog",
+      "source": "src/transactions/PaymentTransactions.jsx",
+      "line": 20,
+      "inputs": "{target,supplier,onClose,onDeleted}",
+      "contract": "Shared guarded delete confirmation; in-sheet error/retry, correct ledger endpoint and balance reconciliation."
+    },
+    {
+      "id": "src/transactions/PaymentTransactions.jsx#PaymentAccountPicker",
+      "name": "PaymentAccountPicker",
+      "source": "src/transactions/PaymentTransactions.jsx",
+      "line": 26,
+      "inputs": "{supplier,onChoose,onClose}",
+      "contract": "Shared searchable account sheet with paginated customer/supplier choices; preserves supported payment reassignment without raw IDs."
+    },
+    {
+      "id": "src/transactions/PaymentTransactions.jsx#PaymentReferenceEditor",
+      "name": "PaymentReferenceEditor",
+      "source": "src/transactions/PaymentTransactions.jsx",
+      "line": 33,
+      "inputs": "{id,supplier,onNavigate,settings,currency}",
+      "contract": "Reference linked account/balance, direction, amount/method/note, original date and supplier metadata; guarded Save, Back and Delete."
+    },
+    {
+      "id": "src/transactions/PaymentTransactions.jsx#PaymentHistoryTab",
+      "name": "PaymentHistoryTab",
+      "source": "src/transactions/PaymentTransactions.jsx",
+      "line": 60,
+      "inputs": "{supplier,active,onNavigate,settings,currency}",
+      "contract": "Retained ledger query, matching server summary, native right filter drawer, sorting, CSV, payment detail/actions and pagination retry."
+    },
+    {
+      "id": "src/transactions/PaymentTransactions.jsx#PaymentTransactions",
+      "name": "PaymentTransactions",
+      "source": "src/transactions/PaymentTransactions.jsx",
+      "line": 84,
+      "inputs": "{pathname='/transactions',onNavigate=()=>{},session}",
+      "contract": "Reference payment history/edit routing; visited customer/supplier tabs retain independent search, filters, sorting and loaded pages."
+    },
+    {
+      "id": "src/transactions/SalesHistoryScreen.jsx#SalesHistoryScreen",
+      "name": "SalesHistoryScreen",
+      "source": "src/transactions/SalesHistoryScreen.jsx",
+      "line": 4,
+      "inputs": "props",
+      "contract": "Sales-specific wrapper around transaction infrastructure; preserve sale labels, routes and list state."
+    },
+    {
+      "id": "src/transactions/SalesPrintFailure.jsx#SalesPrintFailure",
+      "name": "SalesPrintFailure",
+      "source": "src/transactions/SalesPrintFailure.jsx",
+      "line": 6,
+      "inputs": "{ open, error, sale, settings, currency, printing, onClose, onRetry }",
+      "contract": "Real receipt preview and error with Close/Retry; retry saved receipt only, preserve sale state and show busy status."
+    },
+    {
+      "id": "src/transactions/SalesReferenceFilters.jsx#SalesReferenceFilters",
+      "name": "SalesReferenceFilters",
+      "source": "src/transactions/SalesReferenceFilters.jsx",
+      "line": 8,
+      "inputs": "{ open, onClose, draft, error, onChange, methods, onApply, onReset }",
+      "contract": "Shared right drawer with validated draft dates, applied filter counts, cancellation, draft Reset, paginated customer picker, payment filters and preserved channel options."
+    },
+    {
+      "id": "src/transactions/SalesReferenceParts.jsx#SalesReferenceHeader",
+      "name": "SalesReferenceHeader",
+      "source": "src/transactions/SalesReferenceParts.jsx",
+      "line": 10,
+      "inputs": "{ title, onBack, onPrint, onMore, extra, printing, backPath = '/sales' }",
+      "contract": "Sales title, source-aware Back, export/print/module actions; loading and errors retain a usable return control."
+    },
+    {
+      "id": "src/transactions/SalesReferenceParts.jsx#SalesReferenceHistoryRow",
+      "name": "SalesReferenceHistoryRow",
+      "source": "src/transactions/SalesReferenceParts.jsx",
+      "line": 15,
+      "inputs": "{ row, currency, onOpen, onActions }",
+      "contract": "Saved receipt, customer, item count, actual date, right-aligned status/amount and preserved sale action menu."
+    },
+    {
+      "id": "src/transactions/SalesReferenceParts.jsx#SalesReferenceEditor",
+      "name": "SalesReferenceEditor",
+      "source": "src/transactions/SalesReferenceParts.jsx",
+      "line": 20,
+      "inputs": "{ form, totals, currency, step, setStep, priceTypes, methods, saving, errors, adminPinRequired, selectedCustomer, setForm, patchItem, updateQuantity, normalizeQuantity, onBack, onContinue, onSave, onAddProduct, onCustomer, onMenu }",
+      "contract": "Consistent Cart/Checkout progress and naturally scrolling controls; retain FOC, price tiers, discount, customer credit, PIN, visible validation and save state."
+    },
+    {
+      "id": "src/transactions/SalesReferenceParts.jsx#SalesReferenceDetail",
+      "name": "SalesReferenceDetail",
+      "source": "src/transactions/SalesReferenceParts.jsx",
+      "line": 41,
+      "inputs": "{ sale, currency, printing, onBack, onPrint, onEdit, onMore }",
+      "contract": "Saved amount/payment metadata, item photos and totals; pinned receipt/edit/More actions and online-sale edit restriction."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#TransactionActionCard",
+      "name": "TransactionActionCard",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 105,
+      "inputs": "{ row, onOpen, onActions }",
+      "contract": "Movement action summary/menu with party/reference/amount; separate navigation and destructive targets."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#TransactionsScreen",
+      "name": "TransactionsScreen",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 165,
+      "inputs": "props",
+      "contract": "Transaction localization/entry wrapper; preserve tab and source route."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#TransactionSkeletons",
+      "name": "TransactionSkeletons",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 176,
+      "inputs": "(none)",
+      "contract": "History-shaped loading placeholders; theme/reduced motion and no populated-data replacement."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#ProductPicker",
+      "name": "ProductPicker",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 194,
+      "inputs": "{ priceTypes, onSelect, currency = 'Ks' }",
+      "contract": "Sale edit product selection with search/price identity; empty/error/selected and close states."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#SaleEditPage",
+      "name": "SaleEditPage",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 300,
+      "inputs": "{ id, settings, onNavigate, onSaved, currency = 'Ks' }",
+      "contract": "Two-step Cart/Checkout editor; stock/account rules, line warnings and draft retained on rejection."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#PaymentEditPage",
+      "name": "PaymentEditPage",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 526,
+      "inputs": "{ id, settings, onNavigate, onSaved, supplier = false, }",
+      "contract": "Legacy payment edit implementation retained in the sales source; active transaction payment routes use PaymentReferenceEditor."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#SaleDetailPage",
+      "name": "SaleDetailPage",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 731,
+      "inputs": "{ id, settings, onNavigate, currency = 'Ks' }",
+      "contract": "Receipt/customer/items/totals/payment detail and authorized actions; printing separated from mutation success."
+    },
+    {
+      "id": "src/transactions/TransactionsScreen.jsx#TransactionsScreenContent",
+      "name": "TransactionsScreenContent",
+      "source": "src/transactions/TransactionsScreen.jsx",
+      "line": 807,
+      "inputs": "{ pathname = \"/transactions\", onNavigate = () => {}, view = \"payments\", session, }",
+      "contract": "Existing sales history/detail/edit dispatcher; active payment history is handled by PaymentTransactions."
+    }
+  ]
+}

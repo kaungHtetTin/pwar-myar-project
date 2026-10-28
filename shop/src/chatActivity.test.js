@@ -1,0 +1,77 @@
+import { afterEach, expect, it, vi } from 'vitest';
+import { monitorChat } from './chatActivity';
+
+afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
+it('waits for Retry-After on rate limiting and resumes from the retained cursor', async () => {
+  vi.useFakeTimers();
+  const api = vi.fn(async path => path.includes('/notifications') ? { enabled: true, cursor: 9, unread_count: 0, items: [] } : {});
+  const stop = monitorChat(api, '/chat', vi.fn());
+  await vi.advanceTimersByTimeAsync(0);
+  api.mockRejectedValueOnce(Object.assign(new Error('Too Many Attempts'), { status: 429, retryAfterMs: 30000 }));
+  await vi.advanceTimersByTimeAsync(15000);
+  const limited = api.mock.calls.length;
+  await vi.advanceTimersByTimeAsync(15000);
+  expect(api).toHaveBeenCalledTimes(limited);
+  await vi.advanceTimersByTimeAsync(15000);
+  expect(api).toHaveBeenCalledWith('/chat/notifications?after_id=9');
+  expect(api.mock.calls.length).toBeGreaterThan(limited);
+  stop();
+});
+it('keeps presence active on any foreground page, pauses in background, and stops on logout', async () => {
+  vi.useFakeTimers();
+  let hidden = false;
+  vi.spyOn(document, 'hidden', 'get').mockImplementation(() => hidden);
+  const api = vi.fn(async () => ({ enabled: true, cursor: 0, unread_count: 0, items: [] }));
+  const stop = monitorChat(api, '/chat', vi.fn());
+  await vi.advanceTimersByTimeAsync(30000);
+  expect(api.mock.calls.filter(([path]) => path.endsWith('/presence'))).toHaveLength(2);
+  hidden = true;
+  const calls = api.mock.calls.length;
+  await vi.advanceTimersByTimeAsync(60000);
+  expect(api).toHaveBeenCalledTimes(calls);
+  hidden = false;
+  document.dispatchEvent(new Event('visibilitychange'));
+  await vi.advanceTimersByTimeAsync(0);
+  expect(api.mock.calls.filter(([path]) => path.endsWith('/presence'))).toHaveLength(3);
+  stop();
+  const stopped = api.mock.calls.length;
+  await vi.advanceTimersByTimeAsync(60000);
+  expect(api).toHaveBeenCalledTimes(stopped);
+});
+
+
+it('does not replay message IDs across polls, reconnects or remounts, and isolates accounts', async () => {
+  vi.useFakeTimers();
+  localStorage.clear();
+  let feed = { enabled: true, cursor: 10, unread_count: 1, items: [] };
+  const api = vi.fn(async path => path.includes('/notifications') ? feed : {});
+  const received = vi.fn();
+  let stop = monitorChat(api, '/chat', received, 'account-A');
+  await vi.advanceTimersByTimeAsync(0);
+  feed = { ...feed, cursor: 11, items: [{ id: 11, uuid: 'thread', preview: 'New message' }] };
+  await vi.advanceTimersByTimeAsync(15000);
+  expect(received.mock.calls.at(-1)[0].items).toEqual(feed.items);
+  await vi.advanceTimersByTimeAsync(15000);
+  expect(received.mock.calls.at(-1)[0].items).toEqual([]);
+  stop();
+  stop = monitorChat(api, '/chat', received, 'account-A');
+  await vi.advanceTimersByTimeAsync(0);
+  expect(api).toHaveBeenCalledWith('/chat/notifications?after_id=11');
+  expect(received.mock.calls.at(-1)[0].items).toEqual([]);
+  window.dispatchEvent(new Event('online'));
+  await vi.advanceTimersByTimeAsync(0);
+  expect(received.mock.calls.at(-1)[0].items).toEqual([]);
+  feed = { ...feed, cursor: 12, items: [{ id: 12 }] };
+  await vi.advanceTimersByTimeAsync(15000);
+  expect(received.mock.calls.at(-1)[0].items).toEqual([{ id: 12 }]);
+  feed = { ...feed, cursor: 11, items: [{ id: 11 }] };
+  await vi.advanceTimersByTimeAsync(15000);
+  expect(received.mock.calls.at(-1)[0]).toMatchObject({ cursor: 12, items: [] });
+  stop();
+  const other = vi.fn(async path => path.includes('/notifications') ? { ...feed, cursor: 20, items: [] } : {});
+  stop = monitorChat(other, '/chat', vi.fn(), 'account-B');
+  await vi.advanceTimersByTimeAsync(0);
+  expect(other).toHaveBeenCalledWith('/chat/notifications');
+  stop();
+  localStorage.clear();
+});

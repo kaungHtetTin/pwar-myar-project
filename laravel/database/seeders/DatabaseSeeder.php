@@ -1,0 +1,33 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\PlatformAdmin;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        if (app()->environment('production')) {
+            throw new \RuntimeException('Use office:create-admin to provision a production administrator with a private password.');
+        }
+
+        PlatformAdmin::firstOrCreate(
+            ['email' => 'admin@pwarmyar.com'],
+            [
+                'name' => 'PwarMyar Administrator',
+                'role' => 'super_admin',
+                'password' => Hash::make('password'),
+                'is_active' => true,
+            ]
+        );
+    }
+}

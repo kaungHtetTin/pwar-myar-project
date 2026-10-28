@@ -1,0 +1,34 @@
+main.shopping-main:has([data-retained-view]:not([hidden]) .edit-profile-page) { padding: 0; margin: 0; max-width: none; background: var(--theme-surface); min-height: calc(100dvh - 60px); }
+.shopping-header:has(+ main [data-retained-view]:not([hidden]) .edit-profile-page) { background: var(--theme-primary); }
+.shopping-header:has(+ main [data-retained-view]:not([hidden]) .edit-profile-page) :is(.language,.updates-link) { display: none; }
+.shopping-header:has(+ main [data-retained-view]:not([hidden]) .edit-profile-page) .brand { margin-right: auto; }
+.edit-profile-page { max-width: 760px; margin: auto; padding: 0 14px 28px; font-family: 'Shop Auth DM Sans', 'Noto Sans Myanmar', sans-serif; color: var(--theme-text); }
+.edit-profile-intro { margin: 0 -14px; padding: 18px 18px 38px; color: var(--theme-on-primary); background: var(--theme-primary); }
+.edit-profile-intro h1 { margin: 0 0 3px; font-size: 24px; line-height: 30px; color: inherit; }
+.edit-profile-intro p { margin: 5px 0 0; font-size: 14px; line-height: 21px; color: inherit; }
+.edit-profile-page form { margin-top: -28px; position: relative; }
+.edit-profile-page fieldset { display: block; padding: 0; margin: 0; border: 0; min-width: 0; }
+.edit-profile-panel { margin: 0 0 18px; padding: 18px 14px; border: 1px solid var(--theme-border); border-radius: 14px; background: var(--theme-surface); box-shadow: 0 2px 6px color-mix(in srgb, var(--theme-shadow) 2.745%, transparent); }
+.edit-profile-photo { display: flex; flex-direction: column; align-items: center; padding: 0 0 16px; }
+.edit-profile-photo .me-avatar { width: 88px; height: 88px; }
+main.shopping-main .edit-profile-page .edit-photo-camera { position: absolute; right: -3px; bottom: -1px; display: grid; place-items: center; width: 28px; height: 28px; min-height: 28px; padding: 0; border: 2px solid var(--theme-border); border-radius: 50%; background: var(--theme-primary); color: var(--theme-on-primary); }
+.edit-photo-camera::after { content: ''; position: absolute; inset: -8px; }
+main.shopping-main .edit-profile-page .edit-photo-link { padding: 8px 0; min-height: 44px; line-height: 20px; border: 0; background: transparent; color: var(--theme-primary-text); font-size: 14px; }
+main.shopping-main .edit-profile-page .edit-photo-remove { padding: 8px; min-height: 44px; border: 0; background: transparent; color: var(--theme-danger-text); font-size: 13px; }
+main.shopping-main .edit-profile-panel > label { display: block; margin: 0 0 18px; font-size: 14px; line-height: 21px; font-weight: 700; }
+main.shopping-main .edit-profile-panel > label:last-child { margin-bottom: 0; }
+.edit-profile-input { display: flex; align-items: center; gap: 12px; padding: 0 12px; height: 46px; margin-top: 6px; border: 1px solid var(--theme-border); border-radius: 10px; background: var(--theme-surface); color: var(--theme-text-muted); }
+.edit-profile-input > svg { flex: none; width: 20px; height: 20px; }
+body main.shopping-main .edit-profile-page .edit-profile-input :is(input,select) { border: 0; border-radius: 0; outline: 0; box-shadow: none; width: 100%; min-width: 0; min-height: 0; height: 44px; padding: 0; margin: 0; color: var(--theme-text); background: transparent; font-size: 14px; line-height: 21px; font-weight: 400; }
+.edit-profile-input:focus-within { border-color: var(--theme-focus); box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-shadow) 14.902%, transparent); }
+.edit-profile-address header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.edit-profile-address h2 { font-size: 18px; margin: 0; line-height: 24px; }
+.edit-profile-address header a { display: flex; align-items: center; min-height: 44px; color: var(--theme-primary-text); font-size: 13px; }
+.edit-address-field { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--theme-primary-soft); border-radius: 12px; }
+.edit-address-field > span { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 50%; background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+body main.shopping-main .edit-profile-page .edit-address-field textarea { flex: 1; min-width: 0; min-height: 72px; padding: 0; margin: 0; border: 0; background: transparent; font-size: 14px; line-height: 21px; color: var(--theme-text); resize: vertical; }
+.edit-profile-actions { display: grid; gap: 10px; padding: 0; }
+main.shopping-main .edit-profile-page .edit-profile-actions button { display: grid; place-items: center; width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--theme-border); border-radius: 12px; color: var(--theme-primary-text); background: var(--theme-primary-soft); font-size: 15px; line-height: 22px; font-weight: 700; }
+main.shopping-main .edit-profile-page .edit-profile-actions .primary { background: var(--theme-primary); color: var(--theme-on-primary); border-color: var(--theme-border); }
+.edit-profile-page :is(button,a):focus-visible { outline: 2px solid var(--theme-focus); outline-offset: 2px; }
+@media(min-width:761px) { .edit-profile-page { padding: 0 16px 24px; } .edit-profile-intro { margin-inline: -16px; padding: 24px 28px 40px; } .edit-profile-panel { padding: 24px; } .edit-profile-input { height: 44px; } body main.shopping-main .edit-profile-page .edit-profile-input :is(input,select) { height: 42px; font-size: 15px; } .edit-profile-panel > label { font-size: 15px; margin-bottom: 16px; } main.shopping-main .edit-profile-page .edit-profile-actions button { min-height: 44px; font-size: 15px; } }

@@ -1,0 +1,30 @@
+main.shopping-main:has([data-retained-view]:not([hidden]) .updates-page) { max-width: none; margin: 0; padding: 0; background: var(--theme-surface); min-height: calc(100dvh - 60px); }
+.updates-page { font-family: 'Shop Auth DM Sans', 'Noto Sans Myanmar', sans-serif; color: var(--theme-text); }
+.notifications-intro { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 14px 34px; background: var(--theme-primary); color: var(--theme-on-primary); }
+.notifications-intro h1 { margin: 0 0 5px; color: inherit; font-size: 28px; line-height: 34px; }
+.notifications-intro p { margin: 0; color: inherit; font-size: 14px; line-height: 21px; }
+main.shopping-main .notifications-intro button { flex: none; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 12px; background: color-mix(in srgb, var(--theme-surface) 9.412%, transparent); color: var(--theme-on-primary); }
+.notifications-content { position: relative; max-width: 900px; margin: -16px auto 0; padding: 18px 14px 28px; border-radius: 16px 16px 0 0; background: var(--theme-surface); }
+.notifications-content .feature-tabs { display: flex; gap: 8px; padding: 4px; margin: 0 0 20px; background: var(--theme-info-soft); border-radius: 14px; }
+main.shopping-main .notifications-content .feature-tabs button { flex: 1; min-height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--theme-text-muted); font-size: 14px; font-weight: 700; }
+main.shopping-main .notifications-content .feature-tabs button[aria-pressed="true"] { background: var(--theme-primary); color: var(--theme-on-primary); }
+.notifications-content .feature-list { display: grid; gap: 10px; }
+.notifications-content .update-card { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1px solid var(--theme-border); border-radius: 14px; background: var(--theme-surface); box-shadow: 0 2px 6px color-mix(in srgb, var(--theme-shadow) 2.745%, transparent); }
+.notifications-content .update-card.is-unread { border-color: var(--theme-border); background: var(--theme-primary-soft); }
+.notifications-content .update-card .section-symbol { flex: 0 0 38px; width: 38px; height: 38px; border-radius: 50%; color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.notifications-content .update-card > div { flex: 1; min-width: 0; padding-right: 28px; }
+.notifications-content .update-card strong { display: block; font-size: 16px; line-height: 22px; color: var(--theme-text); }
+.notifications-content .update-card small { display: block; margin-top: 3px; font-size: 12px; line-height: 18px; font-weight: 400; color: var(--theme-text-muted); }
+.notifications-content .update-card p { margin: 6px 0 0; font-size: 14px; line-height: 20px; color: var(--theme-text-muted); overflow-wrap: anywhere; }
+main.shopping-main .notifications-content .update-card button { position: absolute; right: 8px; top: 12px; min-width: 44px; min-height: 44px; border: 0; padding: 0; background: transparent; color: var(--theme-primary-text); }
+.notifications-content .update-card > div { position: static; }
+main.shopping-main .notifications-content .update-card button { inset: 0; width: 100%; height: 100%; border-radius: 14px; cursor: pointer; }
+.notifications-content .update-card button > svg { position: absolute; right: 21px; top: 25px; }
+.notifications-content .update-card button:disabled { cursor: wait; }
+.notifications-content .update-card:has(button:hover:not(:disabled)) { border-color: var(--theme-border); }
+.notifications-content .feature-empty { padding: 36px 18px; border: 1px solid var(--theme-border); border-radius: 14px; background: var(--theme-background); color: var(--theme-text-muted); font-size: 14px; line-height: 22px; }
+.updates-page :is(button,a):focus-visible { outline: 2px solid var(--theme-focus); outline-offset: 2px; }
+.notifications-intro button:focus-visible { outline-color: var(--theme-focus); }
+#root:has([data-retained-view]:not([hidden]) .updates-page) > .mobile-navigation { display: none; }
+.shopping-header:has(+ main [data-retained-view]:not([hidden]) .updates-page) .desktop-navigation { display: none; }
+body:has([data-retained-view]:not([hidden]) .updates-page) { padding-bottom: 0; }

@@ -1,0 +1,9 @@
+# Local database services, backups, exports and demo login credentials
+/backups/
+/reports/
+/ecommerce-test-mysql/
+/shop-demo-access.json
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*

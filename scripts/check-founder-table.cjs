@@ -1,0 +1,82 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const { chromium } = require('../shop/node_modules/playwright');
+
+(async () => {
+  await fs.mkdir('artifacts/founder-table', { recursive: true });
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, serviceWorkers: 'block' });
+    const page = await context.newPage(), errors = [], writes = [];
+    let reads = 0;
+    let founders = [{ id: 1, name: 'First Founder', share_bps: 6000, is_active: true }, { id: 2, name: 'Second Founder', share_bps: 4000, is_active: true }, { id: 3, name: 'Past Founder', share_bps: 0, is_active: false }];
+    let version = 1;
+    page.on('pageerror', error => errors.push(error.message));
+    await page.route('**/sanctum/csrf-cookie', route => route.fulfill({ status: 204 }));
+    await page.route('**/api/**', async route => {
+      const request = route.request(), url = new URL(request.url()), path = url.pathname;
+      let data = { items: [], total: 0, summary: { total: 0, access_counts: {} } };
+      if (path.endsWith('/branding')) data = { primary_color: '#0e684e' };
+      if (path.endsWith('/office/auth/me')) data = { admin: { id: 1, name: 'Office Admin', email: 'admin@example.test', role: 'super_admin' } };
+      if (path.endsWith('/office/financial-report')) data = {};
+      if (path.endsWith('/office/financial-book/founders')) {
+        const body = request.postDataJSON(); writes.push(body); version++;
+        founders = [...body.founders.map((founder, index) => ({ ...founder, id: founder.id || 10 + index, is_active: true })), ...founders.filter(founder => !body.founders.some(item => item.id === founder.id)).map(founder => ({ ...founder, share_bps: 0, is_active: false }))];
+        data = { ok: true };
+      } else if (path.endsWith('/office/financial-book')) { reads++; data = { founders, settings_version: version }; }
+      await route.fulfill({ json: data });
+    });
+    await page.goto('http://127.0.0.1:5175');
+    await page.getByRole('button', { name: 'Founders', exact: true }).click();
+    const table = page.getByRole('table', { name: 'Founder profit shares' });
+    await table.waitFor();
+    assert.equal(await table.getByRole('textbox').count(), 0);
+    assert.equal(await page.locator('.office-page-error').count(), 0);
+    await page.screenshot({ path: 'artifacts/founder-table/table.png', fullPage: true });
+    await page.getByRole('button', { name: 'Actions for founder First Founder' }).click();
+    await page.getByRole('menuitem', { name: 'Edit founder', exact: true }).click();
+    const name = page.getByLabel('Founder name', { exact: true });
+    await name.fill('Unapplied Founder');
+    await page.getByRole('button', { name: 'Cancel editing', exact: true }).click();
+    assert.equal(reads, 1);
+    assert.equal(await table.getByText('Unapplied Founder').count(), 0);
+    await page.getByRole('button', { name: 'Add founder', exact: true }).click();
+    await name.fill('New Founder');
+    await page.getByLabel('Profit share (%)', { exact: true }).fill('10');
+    await page.getByRole('dialog', { name: 'Add founder', exact: true }).waitFor();
+    await page.screenshot({ path: 'artifacts/founder-table/modal-create.png', fullPage: true });
+    await page.getByRole('button', { name: 'Apply changes', exact: true }).click();
+    await page.getByRole('button', { name: 'Actions for founder First Founder' }).click();
+    await page.getByRole('menuitem', { name: 'Edit founder', exact: true }).click();
+    await page.getByLabel('Profit share (%)', { exact: true }).fill('50');
+    await page.getByLabel('Profit share (%)', { exact: true }).press('Enter');
+    await page.getByRole('button', { name: 'Save founders', exact: true }).click();
+    await page.getByText('Founder settings saved. New shares apply to future allocations.', { exact: true }).waitFor();
+    await page.getByRole('button', { name: 'Add founder', exact: true }).waitFor({ state: 'visible' });
+    assert.equal(writes.length, 1);
+    assert.equal(writes[0].founders.reduce((sum, item) => sum + item.share_bps, 0), 10000);
+    await page.getByRole('button', { name: 'Actions for founder New Founder' }).click();
+    await page.getByRole('menuitem', { name: 'Remove founder', exact: true }).click();
+    await page.getByRole('button', { name: 'Keep founder', exact: true }).click();
+    await table.getByText('New Founder', { exact: true }).waitFor();
+    const priorReads = reads;
+    await page.getByRole('button', { name: 'Actions for founder First Founder' }).click();
+    await page.getByRole('menuitem', { name: 'Edit founder', exact: true }).click();
+    await name.fill('Retained draft');
+    await page.goBack();
+    await page.getByRole('heading', { name: 'Overview', exact: true }).waitFor();
+    await page.goForward();
+    await name.waitFor();
+    assert.equal(await name.inputValue(), 'Retained draft');
+    assert.equal(reads, priorReads);
+    await page.getByRole('button', { name: 'Cancel editing', exact: true }).click();
+    await page.setViewportSize({ width: 1100, height: 900 });
+    await page.screenshot({ path: 'artifacts/founder-table/table-1100.png', fullPage: true });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+    assert.deepEqual(errors, []);
+    assert.equal(await page.getByRole('button', { name: 'Reset changes', exact: true }).count(), 0);
+    assert.equal(await page.getByRole('button', { name: 'Cancel', exact: true }).count(), 0);
+    console.log('Founder table passed: minimal app bar, modal create/edit/cancel, Enter applies once, atomic 100% save, removal cancellation, retained editor on Back and 1440/1100 layouts. All API calls intercepted.');
+    await context.close();
+  } finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

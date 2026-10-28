@@ -1,0 +1,60 @@
+.office-book-explanation { display: flex; align-items: start; gap: 10px; padding: 12px 14px; color: var(--theme-primary-text); border: 1px solid var(--theme-border); background: var(--theme-primary-soft); border-radius: var(--office-radius); }
+.office-book-explanation > svg { flex-shrink: 0; margin-top: 2px; }
+.office-book-explanation strong { font-size: 13px; }
+.office-book-explanation p { margin: 4px 0; font-size: 12px; }
+.office-book-explanation small { color: var(--office-muted); font-size: 11px; }
+.office-stat-grid.office-book-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.office-book-stats .office-stat-card strong { font-size: 16px; overflow-wrap: anywhere; }
+.office-book-founders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: hidden; }
+.office-book-founders > :is(.office-book-founders-heading, .office-book-profit-summary, .office-book-deficit, .office-book-founders-help) { grid-column: 1 / -1; }
+.office-book-founders-heading { padding: 12px 14px; border-bottom: 1px solid var(--office-line-soft); }
+.office-book-founders-heading h2 { margin: 0; font-size: 14px; }
+.office-book-founders-heading p, .office-book-founders-help { margin: 5px 0 0; font-size: 12px; color: var(--office-muted); }
+.office-book-profit-summary { display: grid; grid-template-columns: auto 1fr auto 1fr; align-items: baseline; gap: 8px 14px; margin: 0; padding: 12px 14px; background: var(--theme-background); border-bottom: 1px solid var(--office-line-soft); font-size: 12px; }
+.office-book-profit-summary dt { color: var(--office-muted); }
+.office-book-profit-summary dd { margin: 0; font-weight: 700; color: var(--theme-primary-text); }
+.office-book-founder-column { min-width: 0; padding: 16px; }
+.office-book-founder-column + .office-book-founder-column { border-left: 1px solid var(--office-line); }
+.office-book-founder-column > header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.office-book-founder-column h3 { margin: 0; font-size: 14px; color: var(--theme-text); }
+.office-book-founder-column header > span { font-size: 12px; font-weight: 600; color: var(--theme-primary-text); }
+.office-book-founder-column dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin: 0; align-items: stretch; font-size: 12px; }
+.office-book-founder-column :is(dt, dd) { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--office-line-soft); overflow-wrap: anywhere; }
+.office-book-founder-column dt { color: var(--office-muted); }
+.office-book-founder-column dd { text-align: right; font-weight: 600; }
+.office-book-founder-column .office-book-unpaid { color: var(--theme-primary-text); font-weight: 800; }
+.office-book-founder-column dd.office-book-unpaid { font-size: 15px; }
+.office-book-founders-help { margin: 0; padding: 10px 14px; border-top: 1px solid var(--office-line-soft); }
+.office-book-deficit { margin: 12px 14px 0; color: var(--theme-danger-text); font-size: 12px; }
+.office-book-table { min-width: 850px; }
+.office-book-table .office-cell-stack { max-width: 250px; white-space: normal; overflow-wrap: anywhere; }
+.office-book-cash-direction { display: block; margin-top: 4px; color: var(--office-muted); font-size: 10px; }
+.office-book-voided td:not(.office-action-column) { color: var(--office-muted); background: var(--theme-surface); }
+.office-book-modal { width: min(680px, calc(100vw - 32px)); }
+.office-book-form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 14px; min-width: 0; }
+.office-book-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.office-book-form label { display: grid; gap: 6px; font-size: 12px; font-weight: 600; }
+.office-book-form :is(input, select, textarea) { width: 100%; min-width: 0; font: inherit; padding: 8px; border: 1px solid var(--office-line); border-radius: 5px; }
+.office-book-form textarea { resize: vertical; }
+.office-book-form-note { display: grid; gap: 5px; margin: 0; padding: 10px 12px; border-radius: 5px; background: var(--office-bg); font-size: 12px; color: var(--office-muted); }
+.office-book-details { margin: 0; }
+.office-book-details > div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--office-line-soft); font-size: 12px; }
+.office-book-details dt { color: var(--office-muted); }
+.office-book-details dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.office-book-allocation-details { margin-top: 16px; padding: 12px; background: var(--office-bg); border-radius: 5px; font-size: 12px; }
+.office-book-allocation-details h3 { margin: 0 0 10px; font-size: 13px; }
+.office-book-allocation-details p { display: flex; justify-content: space-between; gap: 10px; }
+
+.office-bank-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.office-bank-books article { padding: 14px; border: 1px solid var(--office-line); border-radius: var(--office-radius); background: var(--theme-surface); border-top: 3px solid var(--theme-border); }
+.office-bank-books h2 { margin: 0 0 10px; font-size: 13px; color: var(--theme-text); }
+.office-bank-books strong { display: block; font-size: 19px; color: var(--theme-primary-text); overflow-wrap: anywhere; }
+.office-bank-books small { display: block; margin-top: 6px; font-size: 11px; color: var(--office-muted); }
+.office-book-bank-review { margin: 0; padding: 10px 14px; border-left: 3px solid var(--theme-border); color: var(--theme-warning-text); background: var(--theme-warning-soft); font-size: 12px; }
+
+.office-bank-books button { margin-top: 12px; padding: 5px 8px; font-size: 11px; color: var(--theme-primary-text); }
+.office-bank-books strong.office-book-negative-balance { color: var(--theme-danger-text); }
+.office-book-opening-preview { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; margin: 0; padding: 12px; border: 1px solid var(--office-line); border-radius: 5px; font-size: 12px; }
+.office-book-opening-preview dt { color: var(--office-muted); }
+.office-book-opening-preview dd { margin: 0; text-align: right; font-weight: 600; }
+.office-book-opening-preview :is(dt, dd):nth-last-child(-n+2) { padding-top: 8px; border-top: 1px solid var(--office-line); color: var(--theme-primary-text); font-weight: 800; }

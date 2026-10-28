@@ -1,0 +1,29 @@
+/* Home is the shared sizing standard for searches below the app bar. */
+.shopping-main .app-bar-search-band { background: var(--theme-primary); padding: 0 max(14px, calc((100vw - 1192px) / 2)) 20px; }
+.shopping-main .app-bar-search { display: flex; align-items: center; gap: 8px; height: 46px; min-height: 44px; padding: 0 10px 0 14px; border: 1px solid var(--theme-border); border-radius: 12px; background: var(--theme-info-soft); color: var(--theme-text-muted); }
+.shopping-main .app-bar-search > svg { width: 21px; height: 21px; flex-shrink: 0; }
+main.shopping-main .cart-workspace .app-bar-search input[type="search"] { min-width: 0; width: 100%; height: 38px; min-height: 38px; padding: 8px 10px; border: 0; border-radius: 9px; font-size: 14px; background: transparent; box-shadow: none; outline: none; }
+.shopping-main .app-bar-search input::placeholder { color: var(--theme-text-muted); opacity: 1; }
+.shopping-main .app-bar-search:focus-within { border-color: var(--theme-focus); outline: none; box-shadow: 0 0 0 1px var(--theme-inverse-text); }
+.shopping-main .app-bar-search button { border: 0; background: transparent; color: var(--theme-text-muted); min-width: 44px; min-height: 44px; padding: 0; flex-shrink: 0; display: grid; place-items: center; }
+main.shopping-main .app-bar-search input:focus { border: 0; outline: none; box-shadow: none; background: transparent; }
+.shopping-main .app-bar-search button:focus-visible { outline: 2px solid var(--theme-focus); outline-offset: -5px; border-radius: 8px; }
+@media (min-width: 761px) {
+  /* Keep the app bar and its search band on one uninterrupted surface. */
+  #root > .shopping-header:has(+ main [data-retained-view]:not([hidden]) .app-bar-search-band) {
+    border-bottom: 0;
+    box-shadow: 0 1px 0 var(--theme-shadow);
+    background: var(--theme-primary);
+  }
+  #root > .shopping-header:has(+ main [data-retained-view]:not([hidden]) .app-bar-search-band)::before { background: none; }
+  /* Match the backing at the join so fractional paint edges cannot expose white. */
+  main.shopping-main:has([data-retained-view]:not([hidden]) .app-bar-search-band) {
+    padding-top: 0;
+    background: linear-gradient(var(--theme-primary) 0 2px, var(--theme-surface) 2px);
+  }
+  .shopping-main .app-bar-search-band { margin-top: 0; border-top: 0; box-shadow: none; }
+}
+@media (max-width: 760px) {
+  main.shopping-main.is-cart-page:has(.cart-workspace) { background: linear-gradient(var(--theme-primary) 0 82px, var(--theme-surface) 82px); }
+  .cart-workspace .cart-content { min-height: calc(100dvh - 126px - 82px - var(--shopping-safe-bottom)); }
+}

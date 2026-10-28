@@ -1,0 +1,1654 @@
+{
+  "roles": {
+    "border": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 1345
+    },
+    "surface": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 931
+    },
+    "primary_text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 924
+    },
+    "shadow": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 301
+    },
+    "text_muted": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 1047
+    },
+    "primary_soft": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 309
+    },
+    "focus": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ],
+      "occurrences": 90
+    },
+    "chart_1": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile"
+      ],
+      "occurrences": 6
+    },
+    "text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 430
+    },
+    "warning_soft": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 104
+    },
+    "background": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 589
+    },
+    "primary": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 212
+    },
+    "primary_hover": {
+      "apps": [
+        "Office",
+        "Mobile"
+      ],
+      "occurrences": 3
+    },
+    "secondary_soft": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 54
+    },
+    "sidebar": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ],
+      "occurrences": 27
+    },
+    "danger_text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ],
+      "occurrences": 260
+    },
+    "on_primary": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 230
+    },
+    "info": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 11
+    },
+    "warning_text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 107
+    },
+    "sidebar_text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Website"
+      ],
+      "occurrences": 22
+    },
+    "sidebar_selected_text": {
+      "apps": [
+        "Office",
+        "Desktop"
+      ],
+      "occurrences": 8
+    },
+    "sidebar_selected": {
+      "apps": [
+        "Office",
+        "Desktop"
+      ],
+      "occurrences": 8
+    },
+    "sidebar_muted": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Website"
+      ],
+      "occurrences": 7
+    },
+    "chart_5": {
+      "apps": [
+        "Office",
+        "Mobile"
+      ],
+      "occurrences": 3
+    },
+    "chart_3": {
+      "apps": [
+        "Office",
+        "Mobile"
+      ],
+      "occurrences": 3
+    },
+    "surface_raised": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 21
+    },
+    "danger_soft": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ],
+      "occurrences": 133
+    },
+    "info_text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 27
+    },
+    "info_soft": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 66
+    },
+    "surface_muted": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ],
+      "occurrences": 36
+    },
+    "success_text": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ],
+      "occurrences": 21
+    },
+    "success_soft": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile"
+      ],
+      "occurrences": 22
+    },
+    "secondary": {
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ],
+      "occurrences": 19
+    },
+    "secondary_text": {
+      "apps": [
+        "Office",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 6
+    },
+    "inverse_text": {
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 13
+    },
+    "on_danger": {
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ],
+      "occurrences": 14
+    },
+    "warning": {
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 8
+    },
+    "danger": {
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 14
+    },
+    "document_ink": {
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ],
+      "occurrences": 4
+    },
+    "document_paper": {
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ],
+      "occurrences": 3
+    },
+    "inverse_surface": {
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ],
+      "occurrences": 7
+    },
+    "success": {
+      "apps": [
+        "Desktop",
+        "Shop"
+      ],
+      "occurrences": 3
+    },
+    "chart_2": {
+      "apps": [
+        "Mobile"
+      ],
+      "occurrences": 1
+    },
+    "chart_4": {
+      "apps": [
+        "Mobile"
+      ],
+      "occurrences": 1
+    },
+    "on_info": {
+      "apps": [
+        "Shop"
+      ],
+      "occurrences": 2
+    },
+    "on_warning": {
+      "apps": [
+        "Shop"
+      ],
+      "occurrences": 1
+    },
+    "on_secondary": {
+      "apps": [
+        "Website"
+      ],
+      "occurrences": 8
+    }
+  },
+  "derived": [
+    {
+      "role": "shadow",
+      "opacity": 0.14,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.01569,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.039220000000000005,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.14901999999999999,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Shop"
+      ]
+    },
+    {
+      "role": "focus",
+      "opacity": 0.4,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "info",
+      "opacity": 0.4,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Shop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.14118,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.03137,
+      "apps": [
+        "Office",
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.05,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.09,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.08,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.1,
+      "apps": [
+        "Office",
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.13,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "sidebar",
+      "opacity": 0.05,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.25,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Website"
+      ]
+    },
+    {
+      "role": "sidebar",
+      "opacity": 0.1,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.21,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "sidebar",
+      "opacity": 0.42,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.07,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.1,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.12,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "focus",
+      "opacity": 0.3,
+      "apps": [
+        "Office"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.48,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.24,
+      "apps": [
+        "Office",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.035,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.18,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Shop",
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.045,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "focus",
+      "opacity": 0.2,
+      "apps": [
+        "Office",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "secondary",
+      "opacity": 0.17,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.16,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "secondary",
+      "opacity": 0.2,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.17,
+      "apps": [
+        "Office",
+        "Desktop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.07,
+      "apps": [
+        "Office",
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "focus",
+      "opacity": 0.22,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.18824000000000002,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.047060000000000005,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.14,
+      "apps": [
+        "Desktop",
+        "Website"
+      ]
+    },
+    {
+      "role": "sidebar_text",
+      "opacity": 0.72,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.09,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.07,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.11,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.13,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.09,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.82,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.7,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.28,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.045,
+      "apps": [
+        "Desktop",
+        "Website"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.065,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.04,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.14,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "info",
+      "opacity": 0.22,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.06,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.18,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.94,
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.055,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.2,
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.8,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.3,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.1,
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.18,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "on_primary",
+      "opacity": 0.76,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.12549,
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Shop"
+      ]
+    },
+    {
+      "role": "inverse_surface",
+      "opacity": 0.18,
+      "apps": [
+        "Desktop",
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.65,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.68,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.24,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.02,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.08,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.1,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.12,
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.16,
+      "apps": [
+        "Desktop",
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.28,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.03,
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.45,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.26,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.34,
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.13,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.42,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "secondary",
+      "opacity": 0.22,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "secondary",
+      "opacity": 0.21,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.08,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "focus",
+      "opacity": 0.28,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.17,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.45,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.37646999999999997,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.92,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.75,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.55,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.23,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "secondary",
+      "opacity": 0.19,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.32,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.08,
+      "apps": [
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.15,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.96,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.4,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.15,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.025,
+      "apps": [
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "focus",
+      "opacity": 0.18,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.52,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.82,
+      "apps": [
+        "Mobile",
+        "Website"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.68,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.97,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "background",
+      "opacity": 0.96,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.95,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.16863,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.06275,
+      "apps": [
+        "Mobile",
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.10196,
+      "apps": [
+        "Mobile",
+        "Shop"
+      ]
+    },
+    {
+      "role": "background",
+      "opacity": 0.94,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "background",
+      "opacity": 0.95,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.72,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.2,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.12,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "inverse_surface",
+      "opacity": 0.55,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.32,
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.07059,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.12157,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.027450000000000002,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.36078000000000005,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.43921999999999994,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.18824000000000002,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.09412000000000001,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.25098,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.08234999999999999,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.03137,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.023530000000000002,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.94902,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.07843,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.019610000000000002,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.37646999999999997,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.9411799999999999,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.13333,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.9294100000000001,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.019610000000000002,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.85882,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.023530000000000002,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.01176,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "surface_raised",
+      "opacity": 0.85098,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.04314,
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "role": "background",
+      "opacity": 0.9,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "secondary",
+      "opacity": 0.28,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "info",
+      "opacity": 0.14,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.22,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "shadow",
+      "opacity": 0.27,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.64,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.5,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.24,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "border",
+      "opacity": 0.15,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "surface",
+      "opacity": 0.2,
+      "apps": [
+        "Website"
+      ]
+    },
+    {
+      "role": "primary",
+      "opacity": 0.92157,
+      "apps": [
+        "Website"
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "expression": "color-mix(in srgb, currentColor 6%, transparent)",
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, currentColor 5%, transparent)",
+      "apps": [
+        "Desktop",
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--metric-accent) 22%, var(--theme-border))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, currentColor 18%, transparent)",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 10%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 88%, var(--theme-inverse-surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 4%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 8%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 9%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 5%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 12%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 13%, var(--surface))",
+      "apps": [
+        "Desktop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--danger) 88%, var(--theme-inverse-surface))",
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--danger) 20%, transparent)",
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand-100) 25%, var(--surface))",
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--danger-bg) 50%, var(--surface))",
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--danger) 10%, var(--surface))",
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand-700) 10%, var(--surface))",
+      "apps": [
+        "Mobile"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 9%, var(--theme-surface))",
+      "apps": [
+        "Shop"
+      ]
+    },
+    {
+      "expression": "color-mix(in srgb, var(--brand) 10%, var(--theme-surface))",
+      "apps": [
+        "Shop"
+      ]
+    }
+  ]
+}

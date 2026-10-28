@@ -1,0 +1,34 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, expect, it, vi } from 'vitest';
+import { SalesAiBalanceForm } from './SalesAiBalanceForm';
+import { api } from './api';
+vi.mock('./api', () => ({ api: vi.fn() }));
+beforeEach(() => vi.clearAllMocks());
+const wallet = { balance: '500.000000', reserved: '0', available: '500.000000' };
+it('keeps failed adjustments and retries the same operation, updating the card through its callback', async () => {
+  const saved = vi.fn(), result = { wallet: { balance: '1000.000000', reserved: '0', available: '1000.000000' } };
+  api.mockRejectedValueOnce(new Error('Connection interrupted')).mockResolvedValueOnce(result);
+  render(<SalesAiBalanceForm businessId={10} wallet={wallet} onSaved={saved} />);
+  fireEvent.change(screen.getByLabelText('New balance (MMK)'), { target: { value: '1000' } });
+  fireEvent.change(screen.getByLabelText('Reason'), { target: { value: 'Opening balance correction' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Update balance' }));
+  await screen.findByText('Connection interrupted');
+  expect(screen.getByLabelText('New balance (MMK)')).toHaveValue(1000);
+  fireEvent.click(screen.getByRole('button', { name: 'Update balance' }));
+  await screen.findByText('AI balance updated.');
+  expect(saved).toHaveBeenCalledWith(result.wallet);
+  expect(JSON.parse(api.mock.calls[0][1].body)).toEqual(JSON.parse(api.mock.calls[1][1].body));
+  expect(JSON.parse(api.mock.calls[0][1].body)).toMatchObject({ balance: '1000', expected_balance: '500.000000', reason: 'Opening balance correction' });
+});
+it('blocks duplicate submissions while saving', async () => {
+  let finish; api.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+  render(<SalesAiBalanceForm businessId={10} wallet={wallet} onSaved={vi.fn()} />);
+  fireEvent.change(screen.getByLabelText('New balance (MMK)'), { target: { value: '0' } });
+  fireEvent.change(screen.getByLabelText('Reason'), { target: { value: 'Reset credit' } });
+  const button = screen.getByRole('button', { name: 'Update balance' }); fireEvent.click(button); fireEvent.click(button);
+  expect(api).toHaveBeenCalledTimes(1);
+  expect(screen.getByLabelText('New balance (MMK)')).toBeDisabled();
+  await act(async () => finish({ wallet: { balance: '0', reserved: '0', available: '0' } }));
+  await waitFor(() => expect(screen.getByLabelText('New balance (MMK)')).toHaveValue(null));
+});

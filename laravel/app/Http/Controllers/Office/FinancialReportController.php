@@ -1,0 +1,173 @@
+<?php
+
+namespace App\Http\Controllers\Office;
+
+use App\Http\Controllers\Controller;
+use App\Services\OfficeMonthlyCashFlow;
+use App\Support\AppTime;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+
+class FinancialReportController extends Controller
+{
+    public function payments(Request $request): array
+    {
+        $data = $request->validate([
+            'page' => ['sometimes', 'integer', 'min:1'],
+            'per_page' => ['sometimes', 'integer', 'min:1', 'max:100'],
+            'q' => ['nullable', 'string', 'max:200'],
+            'from' => ['nullable', 'date_format:Y-m-d'],
+            'to' => array_filter(['nullable', 'date_format:Y-m-d', $request->filled('from') ? 'after_or_equal:from' : null]),
+            'currency' => ['nullable', 'string', 'max:20'],
+            'type' => ['sometimes', Rule::in(['all', 'assignment', 'renewal'])],
+        ]);
+
+        $query = DB::table('subscription_payments as payments')
+            ->join('businesses', 'businesses.id', '=', 'payments.business_id')
+            ->join('subscription_plans as plans', 'plans.id', '=', 'payments.subscription_plan_id')
+            ->leftJoin('platform_admins as admins', 'admins.id', '=', 'payments.created_by_admin_id')
+            ->where('payments.amount', '>', 0);
+        if ($search = trim($data['q'] ?? '')) {
+            $query->where(function ($filter) use ($search) {
+                $filter->where('businesses.name', 'like', "%{$search}%")
+                    ->orWhere('plans.name', 'like', "%{$search}%")
+                    ->orWhere('admins.name', 'like', "%{$search}%");
+            });
+        }
+        if ($currency = ($data['currency'] ?? '')) {
+            $query->where('payments.currency', $currency);
+        }
+        if (($data['type'] ?? 'all') !== 'all') {
+            $query->where('payments.type', $data['type']);
+        }
+
+        if (! empty($data['from'])) {
+            $query->where('payments.paid_at', '>=', AppTime::day($data['from'], config('app.timezone')));
+        }
+        if (! empty($data['to'])) {
+            $query->where('payments.paid_at', '<', AppTime::day($data['to'], config('app.timezone'))->addDay());
+        }
+        $total = (clone $query)->count();
+        $perPage = (int) ($data['per_page'] ?? 25);
+        $lastPage = max(1, (int) ceil($total / $perPage));
+        $page = min((int) ($data['page'] ?? 1), $lastPage);
+        $items = $query->select(
+            'payments.id', 'payments.business_id', 'payments.type', 'payments.amount',
+            'payments.currency', 'payments.duration_days', 'payments.note', 'payments.paid_at',
+            'businesses.name as business_name', 'plans.name as plan_name',
+            'admins.name as created_by_name'
+        )->orderByDesc('payments.paid_at')->orderByDesc('payments.id')
+            ->offset(($page - 1) * $perPage)->limit($perPage)->get()->map(function ($row) {
+                $row->paid_at = AppTime::iso($row->paid_at);
+
+                return $row;
+            })->all();
+
+        return [
+            'items' => $items, 'total' => $total, 'page' => $page,
+            'per_page' => $perPage, 'last_page' => $lastPage,
+            'currencies' => DB::table('subscription_payments')->where('amount', '>', 0)->distinct()->orderBy('currency')->pluck('currency')->all(),
+        ];
+    }
+
+    public function destroy(int $paymentId): array
+    {
+        abort_unless(DB::table('subscription_payments')->where('id', $paymentId)->delete(), 404, 'Financial record not found');
+
+        return ['ok' => true];
+    }
+
+    public function index(Request $request): array
+    {
+        $data = $request->validate([
+            'currency' => ['nullable', 'string', 'max:20'],
+        ]);
+        $currency = $data['currency'] ?? DB::table('subscription_payments')
+            ->select('currency', DB::raw('COUNT(*) as payment_count'))
+            ->groupBy('currency')
+            ->orderByDesc('payment_count')
+            ->value('currency') ?? 'Ks';
+        $now = now();
+        $payments = DB::table('subscription_payments')->where('currency', $currency);
+
+        $thisMonth = (clone $payments)
+            ->whereBetween('paid_at', [$now->copy()->startOfMonth(), $now->copy()->endOfMonth()])
+            ->sum('amount');
+        $thisYear = (clone $payments)
+            ->whereBetween('paid_at', [$now->copy()->startOfYear(), $now->copy()->endOfYear()])
+            ->sum('amount');
+        $previousYear = (clone $payments)
+            ->whereBetween('paid_at', [$now->copy()->subYear()->startOfYear(), $now->copy()->subYear()->endOfYear()])
+            ->sum('amount');
+        $allTime = (clone $payments)->sum('amount');
+        $allTimeSales = (clone $payments)->count();
+
+        $monthlyRows = (clone $payments)
+            ->whereYear('paid_at', $now->year)
+            ->selectRaw('MONTH(paid_at) as month_number, SUM(amount) as amount, COUNT(*) as sales')
+            ->groupByRaw('MONTH(paid_at)')
+            ->get()->keyBy('month_number');
+        $monthly = collect(range(1, 12))->map(function ($month) use ($monthlyRows) {
+            $row = $monthlyRows->get($month);
+
+            return [
+                'month' => $month,
+                'label' => now()->month($month)->format('M'),
+                'amount' => (int) ($row->amount ?? 0),
+                'sales' => (int) ($row->sales ?? 0),
+            ];
+        })->all();
+
+        $yearly = (clone $payments)
+            ->selectRaw('YEAR(paid_at) as year, SUM(amount) as amount, COUNT(*) as sales')
+            ->groupByRaw('YEAR(paid_at)')
+            ->orderBy('year')
+            ->get()->map(fn ($row) => [
+                'year' => (int) $row->year,
+                'amount' => (int) $row->amount,
+                'sales' => (int) $row->sales,
+            ])->all();
+
+        $recentSales = DB::table('subscription_payments as payments')
+            ->join('businesses', 'businesses.id', '=', 'payments.business_id')
+            ->join('subscription_plans as plans', 'plans.id', '=', 'payments.subscription_plan_id')
+            ->leftJoin('platform_admins as admins', 'admins.id', '=', 'payments.created_by_admin_id')
+            ->where('payments.currency', $currency)
+            ->select(
+                'payments.id',
+                'payments.type',
+                'payments.amount',
+                'payments.currency',
+                'payments.duration_days',
+                'payments.paid_at',
+                'businesses.name as business_name',
+                'plans.name as plan_name',
+                'admins.name as created_by_name'
+            )->orderByDesc('payments.paid_at')->orderByDesc('payments.id')->limit(8)->get()->all();
+
+        return [
+            'currency' => $currency,
+            'currencies' => DB::table('subscription_payments')->distinct()->orderBy('currency')->pluck('currency')->all(),
+            'current_year' => $now->year,
+            'summary' => [
+                'this_month' => (int) $thisMonth,
+                'this_year' => (int) $thisYear,
+                'previous_year' => (int) $previousYear,
+                'all_time' => (int) $allTime,
+                'all_time_sales' => $allTimeSales,
+                'year_over_year_percent' => $previousYear > 0
+                    ? round((($thisYear - $previousYear) / $previousYear) * 100, 1)
+                    : null,
+            ],
+            'monthly' => $monthly,
+            'monthly_cash_flow' => app(OfficeMonthlyCashFlow::class)->forYear($now->year, $currency),
+            'yearly' => $yearly,
+            'recent_sales' => array_map(function ($row) {
+                $row->paid_at = AppTime::iso($row->paid_at);
+
+                return $row;
+            }, $recentSales),
+        ];
+    }
+}

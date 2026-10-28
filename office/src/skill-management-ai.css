@@ -1,0 +1,11 @@
+.office-skill-ai { display: grid; gap: 12px; }
+.office-skill-ai > p { margin: 0; }
+.office-skill-ai-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.office-skill-ai-proposal, .office-skill-ai-change { display: grid; gap: 10px; min-width: 0; }
+.office-skill-ai-proposal h3, .office-skill-ai-proposal h4 { margin: 0; }
+.office-skill-ai-text, .office-skill-ai pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.office-skill-ai pre { font: inherit; margin: 6px 0 0; }
+.office-skill-ai-change { border: 1px solid var(--office-line); border-radius: 8px; padding: 12px; }
+.office-skill-ai-change details { min-width: 0; }
+.office-skill-ai-change summary { cursor: pointer; font-weight: 600; margin-bottom: 8px; }
+.office-skill-ai-change .office-skill-grid > div { min-width: 0; }

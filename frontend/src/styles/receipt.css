@@ -1,0 +1,530 @@
+.receipt-document-host {
+  --receipt-margin-left: 3mm;
+  --receipt-margin-right: 3mm;
+  --receipt-header-align: center;
+  --receipt-header-size: 11pt;
+  --receipt-body-size: 8.2pt;
+  --receipt-line-height: 1.45;
+  width: var(--receipt-paper-width, 80mm);
+  max-width: 100%;
+  min-width: 0;
+  padding-right: var(--receipt-margin-right);
+  padding-left: var(--receipt-margin-left);
+  color: var(--theme-text);
+  background: var(--theme-surface);
+  font-family: "Noto Sans Myanmar", "Myanmar Text", Pyidaungsu, Arial, sans-serif;
+}
+
+.receipt-document-host .receipt-document {
+  width: 100%;
+  min-width: 0;
+  font-size: var(--receipt-body-size);
+  line-height: var(--receipt-line-height);
+  overflow-wrap: anywhere;
+}
+
+.receipt-document-host .receipt-shop-header {
+  text-align: var(--receipt-header-align);
+  font-size: var(--receipt-header-size);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.receipt-document-host .receipt-logo {
+  display: block;
+  width: auto;
+  max-width: min(100%, 34mm);
+  height: auto;
+  max-height: 20mm;
+  margin: 0 auto 1.5mm;
+  object-fit: contain;
+}
+
+.receipt-document-host .shop-name {
+  font-weight: 800;
+}
+
+.receipt-document-host .shop-title {
+  font-weight: 650;
+}
+
+.receipt-document-host .shop-address,
+.receipt-document-host .shop-phone {
+  font-size: 0.88em;
+}
+
+.receipt-document-host .receipt-rule {
+  margin: 1.5mm 0;
+  border-top: 1px dashed currentColor;
+}
+
+.receipt-document-host .receipt-meta,
+.receipt-document-host .receipt-items,
+.receipt-document-host .receipt-totals {
+  display: grid;
+  gap: 0.7mm;
+}
+
+.receipt-document-host .receipt-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 2mm;
+  min-width: 0;
+}
+
+.receipt-document-host .receipt-row > span,
+.receipt-document-host .receipt-row > strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.receipt-document-host .receipt-row > strong {
+  text-align: right;
+  font-weight: 500;
+}
+
+.receipt-document-host .receipt-item {
+  display: grid;
+  gap: 0.4mm;
+}
+
+.receipt-document-host .receipt-item + .receipt-item {
+  margin-top: 1mm;
+}
+
+.receipt-document-host .receipt-item-name {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.receipt-document-host .receipt-item-amount > strong,
+.receipt-document-host .receipt-total > strong {
+  font-weight: 800;
+}
+
+.receipt-document-host .receipt-foc {
+  font-size: 0.92em;
+}
+
+.receipt-document-host .receipt-footer {
+  white-space: pre-wrap;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.receipt-document-host .receipt-items-table,
+.receipt-document-host .receipt-page-footer {
+  display: none;
+}
+
+.receipt-document-host .receipt-voided {
+  text-align: center;
+  font-weight: 900;
+}
+
+.receipt-document-host.receipt-paper-a5 .receipt-document,
+.receipt-document-host.receipt-paper-a4 .receipt-document {
+  margin: 0 auto;
+}
+
+.receipt-document-host.receipt-paper-a5 .receipt-document { max-width: 118mm; }
+.receipt-document-host.receipt-paper-a4 .receipt-document { max-width: 148mm; }
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-rule {
+  margin: 3mm 0;
+  border-top-style: solid;
+  border-top-color: var(--theme-border);
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-document-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: start;
+  gap: 12mm;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-shop-header {
+  text-align: left;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-logo {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) :is(.receipt-meta, .receipt-totals) {
+  gap: 1.4mm;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items,
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-footer--thermal {
+  display: none;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table th,
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table td {
+  padding: 2.2mm 2mm;
+  border: 1px solid var(--theme-border);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table th {
+  background: var(--theme-background);
+  font-weight: 700;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table .numeric {
+  text-align: right;
+}
+
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table :is(th, td):first-child { width: 29%; }
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table :is(th, td):nth-child(2) { width: 15%; }
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table :is(th, td):nth-child(3),
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table :is(th, td):nth-child(4) { width: 9%; }
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table :is(th, td):nth-child(5) { width: 18%; }
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-items-table :is(th, td):nth-child(6) { width: 20%; }
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-totals { width: min(100%, 82mm); margin-left: auto; }
+.receipt-document-host:is(.receipt-paper-a5, .receipt-paper-a4) .receipt-page-footer {
+  display: block;
+  margin-top: 8mm;
+  padding-top: 2mm;
+  border-top: 1px solid var(--theme-border);
+  color: var(--theme-text-muted);
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.sale-receipt-preview > .receipt-document-host {
+  width: min(100%, var(--receipt-paper-width, 80mm));
+  max-height: 60vh;
+  margin: 0 auto;
+  padding-top: 4mm;
+  padding-bottom: 5mm;
+  overflow: auto;
+  border: 1px solid var(--theme-border);
+}
+
+/* Class-only web preview values. Components select a class; all presentation
+   remains in this shared receipt stylesheet. */
+.receipt-paper-50mm { --receipt-paper-width: 50mm; }
+.receipt-paper-58mm { --receipt-paper-width: 58mm; }
+.receipt-paper-80mm { --receipt-paper-width: 80mm; }
+.receipt-paper-85mm { --receipt-paper-width: 85mm; }
+.receipt-paper-a5 { --receipt-paper-width: 148mm; }
+.receipt-paper-a4 { --receipt-paper-width: 210mm; }
+.receipt-align-left { --receipt-header-align: left; }
+.receipt-align-center { --receipt-header-align: center; }
+.receipt-align-right { --receipt-header-align: right; }
+.receipt-margin-left-0 { --receipt-margin-left: 0mm; }
+.receipt-margin-right-0 { --receipt-margin-right: 0mm; }
+.receipt-margin-left-1 { --receipt-margin-left: 0.5mm; }
+.receipt-margin-right-1 { --receipt-margin-right: 0.5mm; }
+.receipt-margin-left-2 { --receipt-margin-left: 1mm; }
+.receipt-margin-right-2 { --receipt-margin-right: 1mm; }
+.receipt-margin-left-3 { --receipt-margin-left: 1.5mm; }
+.receipt-margin-right-3 { --receipt-margin-right: 1.5mm; }
+.receipt-margin-left-4 { --receipt-margin-left: 2mm; }
+.receipt-margin-right-4 { --receipt-margin-right: 2mm; }
+.receipt-margin-left-5 { --receipt-margin-left: 2.5mm; }
+.receipt-margin-right-5 { --receipt-margin-right: 2.5mm; }
+.receipt-margin-left-6 { --receipt-margin-left: 3mm; }
+.receipt-margin-right-6 { --receipt-margin-right: 3mm; }
+.receipt-margin-left-7 { --receipt-margin-left: 3.5mm; }
+.receipt-margin-right-7 { --receipt-margin-right: 3.5mm; }
+.receipt-margin-left-8 { --receipt-margin-left: 4mm; }
+.receipt-margin-right-8 { --receipt-margin-right: 4mm; }
+.receipt-margin-left-9 { --receipt-margin-left: 4.5mm; }
+.receipt-margin-right-9 { --receipt-margin-right: 4.5mm; }
+.receipt-margin-left-10 { --receipt-margin-left: 5mm; }
+.receipt-margin-right-10 { --receipt-margin-right: 5mm; }
+.receipt-margin-left-11 { --receipt-margin-left: 5.5mm; }
+.receipt-margin-right-11 { --receipt-margin-right: 5.5mm; }
+.receipt-margin-left-12 { --receipt-margin-left: 6mm; }
+.receipt-margin-right-12 { --receipt-margin-right: 6mm; }
+.receipt-margin-left-13 { --receipt-margin-left: 6.5mm; }
+.receipt-margin-right-13 { --receipt-margin-right: 6.5mm; }
+.receipt-margin-left-14 { --receipt-margin-left: 7mm; }
+.receipt-margin-right-14 { --receipt-margin-right: 7mm; }
+.receipt-margin-left-15 { --receipt-margin-left: 7.5mm; }
+.receipt-margin-right-15 { --receipt-margin-right: 7.5mm; }
+.receipt-margin-left-16 { --receipt-margin-left: 8mm; }
+.receipt-margin-right-16 { --receipt-margin-right: 8mm; }
+.receipt-margin-left-17 { --receipt-margin-left: 8.5mm; }
+.receipt-margin-right-17 { --receipt-margin-right: 8.5mm; }
+.receipt-margin-left-18 { --receipt-margin-left: 9mm; }
+.receipt-margin-right-18 { --receipt-margin-right: 9mm; }
+.receipt-margin-left-19 { --receipt-margin-left: 9.5mm; }
+.receipt-margin-right-19 { --receipt-margin-right: 9.5mm; }
+.receipt-margin-left-20 { --receipt-margin-left: 10mm; }
+.receipt-margin-right-20 { --receipt-margin-right: 10mm; }
+.receipt-margin-left-21 { --receipt-margin-left: 10.5mm; }
+.receipt-margin-right-21 { --receipt-margin-right: 10.5mm; }
+.receipt-margin-left-22 { --receipt-margin-left: 11mm; }
+.receipt-margin-right-22 { --receipt-margin-right: 11mm; }
+.receipt-margin-left-23 { --receipt-margin-left: 11.5mm; }
+.receipt-margin-right-23 { --receipt-margin-right: 11.5mm; }
+.receipt-margin-left-24 { --receipt-margin-left: 12mm; }
+.receipt-margin-right-24 { --receipt-margin-right: 12mm; }
+.receipt-margin-left-25 { --receipt-margin-left: 12.5mm; }
+.receipt-margin-right-25 { --receipt-margin-right: 12.5mm; }
+.receipt-margin-left-26 { --receipt-margin-left: 13mm; }
+.receipt-margin-right-26 { --receipt-margin-right: 13mm; }
+.receipt-margin-left-27 { --receipt-margin-left: 13.5mm; }
+.receipt-margin-right-27 { --receipt-margin-right: 13.5mm; }
+.receipt-margin-left-28 { --receipt-margin-left: 14mm; }
+.receipt-margin-right-28 { --receipt-margin-right: 14mm; }
+.receipt-margin-left-29 { --receipt-margin-left: 14.5mm; }
+.receipt-margin-right-29 { --receipt-margin-right: 14.5mm; }
+.receipt-margin-left-30 { --receipt-margin-left: 15mm; }
+.receipt-margin-right-30 { --receipt-margin-right: 15mm; }
+.receipt-margin-left-31 { --receipt-margin-left: 15.5mm; }
+.receipt-margin-right-31 { --receipt-margin-right: 15.5mm; }
+.receipt-margin-left-32 { --receipt-margin-left: 16mm; }
+.receipt-margin-right-32 { --receipt-margin-right: 16mm; }
+.receipt-margin-left-33 { --receipt-margin-left: 16.5mm; }
+.receipt-margin-right-33 { --receipt-margin-right: 16.5mm; }
+.receipt-margin-left-34 { --receipt-margin-left: 17mm; }
+.receipt-margin-right-34 { --receipt-margin-right: 17mm; }
+.receipt-margin-left-35 { --receipt-margin-left: 17.5mm; }
+.receipt-margin-right-35 { --receipt-margin-right: 17.5mm; }
+.receipt-margin-left-36 { --receipt-margin-left: 18mm; }
+.receipt-margin-right-36 { --receipt-margin-right: 18mm; }
+.receipt-margin-left-37 { --receipt-margin-left: 18.5mm; }
+.receipt-margin-right-37 { --receipt-margin-right: 18.5mm; }
+.receipt-margin-left-38 { --receipt-margin-left: 19mm; }
+.receipt-margin-right-38 { --receipt-margin-right: 19mm; }
+.receipt-margin-left-39 { --receipt-margin-left: 19.5mm; }
+.receipt-margin-right-39 { --receipt-margin-right: 19.5mm; }
+.receipt-margin-left-40 { --receipt-margin-left: 20mm; }
+.receipt-margin-right-40 { --receipt-margin-right: 20mm; }
+.receipt-margin-left-41 { --receipt-margin-left: 20.5mm; }
+.receipt-margin-right-41 { --receipt-margin-right: 20.5mm; }
+.receipt-margin-left-42 { --receipt-margin-left: 21mm; }
+.receipt-margin-right-42 { --receipt-margin-right: 21mm; }
+.receipt-margin-left-43 { --receipt-margin-left: 21.5mm; }
+.receipt-margin-right-43 { --receipt-margin-right: 21.5mm; }
+.receipt-margin-left-44 { --receipt-margin-left: 22mm; }
+.receipt-margin-right-44 { --receipt-margin-right: 22mm; }
+.receipt-margin-left-45 { --receipt-margin-left: 22.5mm; }
+.receipt-margin-right-45 { --receipt-margin-right: 22.5mm; }
+.receipt-margin-left-46 { --receipt-margin-left: 23mm; }
+.receipt-margin-right-46 { --receipt-margin-right: 23mm; }
+.receipt-margin-left-47 { --receipt-margin-left: 23.5mm; }
+.receipt-margin-right-47 { --receipt-margin-right: 23.5mm; }
+.receipt-margin-left-48 { --receipt-margin-left: 24mm; }
+.receipt-margin-right-48 { --receipt-margin-right: 24mm; }
+.receipt-margin-left-49 { --receipt-margin-left: 24.5mm; }
+.receipt-margin-right-49 { --receipt-margin-right: 24.5mm; }
+.receipt-margin-left-50 { --receipt-margin-left: 25mm; }
+.receipt-margin-right-50 { --receipt-margin-right: 25mm; }
+.receipt-margin-left-51 { --receipt-margin-left: 25.5mm; }
+.receipt-margin-right-51 { --receipt-margin-right: 25.5mm; }
+.receipt-margin-left-52 { --receipt-margin-left: 26mm; }
+.receipt-margin-right-52 { --receipt-margin-right: 26mm; }
+.receipt-margin-left-53 { --receipt-margin-left: 26.5mm; }
+.receipt-margin-right-53 { --receipt-margin-right: 26.5mm; }
+.receipt-margin-left-54 { --receipt-margin-left: 27mm; }
+.receipt-margin-right-54 { --receipt-margin-right: 27mm; }
+.receipt-margin-left-55 { --receipt-margin-left: 27.5mm; }
+.receipt-margin-right-55 { --receipt-margin-right: 27.5mm; }
+.receipt-margin-left-56 { --receipt-margin-left: 28mm; }
+.receipt-margin-right-56 { --receipt-margin-right: 28mm; }
+.receipt-margin-left-57 { --receipt-margin-left: 28.5mm; }
+.receipt-margin-right-57 { --receipt-margin-right: 28.5mm; }
+.receipt-margin-left-58 { --receipt-margin-left: 29mm; }
+.receipt-margin-right-58 { --receipt-margin-right: 29mm; }
+.receipt-margin-left-59 { --receipt-margin-left: 29.5mm; }
+.receipt-margin-right-59 { --receipt-margin-right: 29.5mm; }
+.receipt-margin-left-60 { --receipt-margin-left: 30mm; }
+.receipt-margin-right-60 { --receipt-margin-right: 30mm; }
+.receipt-header-size-14 { --receipt-header-size: 7pt; }
+.receipt-header-size-15 { --receipt-header-size: 7.5pt; }
+.receipt-header-size-16 { --receipt-header-size: 8pt; }
+.receipt-header-size-17 { --receipt-header-size: 8.5pt; }
+.receipt-header-size-18 { --receipt-header-size: 9pt; }
+.receipt-header-size-19 { --receipt-header-size: 9.5pt; }
+.receipt-header-size-20 { --receipt-header-size: 10pt; }
+.receipt-header-size-21 { --receipt-header-size: 10.5pt; }
+.receipt-header-size-22 { --receipt-header-size: 11pt; }
+.receipt-header-size-23 { --receipt-header-size: 11.5pt; }
+.receipt-header-size-24 { --receipt-header-size: 12pt; }
+.receipt-header-size-25 { --receipt-header-size: 12.5pt; }
+.receipt-header-size-26 { --receipt-header-size: 13pt; }
+.receipt-header-size-27 { --receipt-header-size: 13.5pt; }
+.receipt-header-size-28 { --receipt-header-size: 14pt; }
+.receipt-header-size-29 { --receipt-header-size: 14.5pt; }
+.receipt-header-size-30 { --receipt-header-size: 15pt; }
+.receipt-header-size-31 { --receipt-header-size: 15.5pt; }
+.receipt-header-size-32 { --receipt-header-size: 16pt; }
+.receipt-header-size-33 { --receipt-header-size: 16.5pt; }
+.receipt-header-size-34 { --receipt-header-size: 17pt; }
+.receipt-header-size-35 { --receipt-header-size: 17.5pt; }
+.receipt-header-size-36 { --receipt-header-size: 18pt; }
+.receipt-header-size-37 { --receipt-header-size: 18.5pt; }
+.receipt-header-size-38 { --receipt-header-size: 19pt; }
+.receipt-header-size-39 { --receipt-header-size: 19.5pt; }
+.receipt-header-size-40 { --receipt-header-size: 20pt; }
+.receipt-header-size-41 { --receipt-header-size: 20.5pt; }
+.receipt-header-size-42 { --receipt-header-size: 21pt; }
+.receipt-header-size-43 { --receipt-header-size: 21.5pt; }
+.receipt-header-size-44 { --receipt-header-size: 22pt; }
+.receipt-header-size-45 { --receipt-header-size: 22.5pt; }
+.receipt-header-size-46 { --receipt-header-size: 23pt; }
+.receipt-header-size-47 { --receipt-header-size: 23.5pt; }
+.receipt-header-size-48 { --receipt-header-size: 24pt; }
+.receipt-body-size-60 { --receipt-body-size: 6pt; }
+.receipt-body-size-61 { --receipt-body-size: 6.1pt; }
+.receipt-body-size-62 { --receipt-body-size: 6.2pt; }
+.receipt-body-size-63 { --receipt-body-size: 6.3pt; }
+.receipt-body-size-64 { --receipt-body-size: 6.4pt; }
+.receipt-body-size-65 { --receipt-body-size: 6.5pt; }
+.receipt-body-size-66 { --receipt-body-size: 6.6pt; }
+.receipt-body-size-67 { --receipt-body-size: 6.7pt; }
+.receipt-body-size-68 { --receipt-body-size: 6.8pt; }
+.receipt-body-size-69 { --receipt-body-size: 6.9pt; }
+.receipt-body-size-70 { --receipt-body-size: 7pt; }
+.receipt-body-size-71 { --receipt-body-size: 7.1pt; }
+.receipt-body-size-72 { --receipt-body-size: 7.2pt; }
+.receipt-body-size-73 { --receipt-body-size: 7.3pt; }
+.receipt-body-size-74 { --receipt-body-size: 7.4pt; }
+.receipt-body-size-75 { --receipt-body-size: 7.5pt; }
+.receipt-body-size-76 { --receipt-body-size: 7.6pt; }
+.receipt-body-size-77 { --receipt-body-size: 7.7pt; }
+.receipt-body-size-78 { --receipt-body-size: 7.8pt; }
+.receipt-body-size-79 { --receipt-body-size: 7.9pt; }
+.receipt-body-size-80 { --receipt-body-size: 8pt; }
+.receipt-body-size-81 { --receipt-body-size: 8.1pt; }
+.receipt-body-size-82 { --receipt-body-size: 8.2pt; }
+.receipt-body-size-83 { --receipt-body-size: 8.3pt; }
+.receipt-body-size-84 { --receipt-body-size: 8.4pt; }
+.receipt-body-size-85 { --receipt-body-size: 8.5pt; }
+.receipt-body-size-86 { --receipt-body-size: 8.6pt; }
+.receipt-body-size-87 { --receipt-body-size: 8.7pt; }
+.receipt-body-size-88 { --receipt-body-size: 8.8pt; }
+.receipt-body-size-89 { --receipt-body-size: 8.9pt; }
+.receipt-body-size-90 { --receipt-body-size: 9pt; }
+.receipt-body-size-91 { --receipt-body-size: 9.1pt; }
+.receipt-body-size-92 { --receipt-body-size: 9.2pt; }
+.receipt-body-size-93 { --receipt-body-size: 9.3pt; }
+.receipt-body-size-94 { --receipt-body-size: 9.4pt; }
+.receipt-body-size-95 { --receipt-body-size: 9.5pt; }
+.receipt-body-size-96 { --receipt-body-size: 9.6pt; }
+.receipt-body-size-97 { --receipt-body-size: 9.7pt; }
+.receipt-body-size-98 { --receipt-body-size: 9.8pt; }
+.receipt-body-size-99 { --receipt-body-size: 9.9pt; }
+.receipt-body-size-100 { --receipt-body-size: 10pt; }
+.receipt-body-size-101 { --receipt-body-size: 10.1pt; }
+.receipt-body-size-102 { --receipt-body-size: 10.2pt; }
+.receipt-body-size-103 { --receipt-body-size: 10.3pt; }
+.receipt-body-size-104 { --receipt-body-size: 10.4pt; }
+.receipt-body-size-105 { --receipt-body-size: 10.5pt; }
+.receipt-body-size-106 { --receipt-body-size: 10.6pt; }
+.receipt-body-size-107 { --receipt-body-size: 10.7pt; }
+.receipt-body-size-108 { --receipt-body-size: 10.8pt; }
+.receipt-body-size-109 { --receipt-body-size: 10.9pt; }
+.receipt-body-size-110 { --receipt-body-size: 11pt; }
+.receipt-body-size-111 { --receipt-body-size: 11.1pt; }
+.receipt-body-size-112 { --receipt-body-size: 11.2pt; }
+.receipt-body-size-113 { --receipt-body-size: 11.3pt; }
+.receipt-body-size-114 { --receipt-body-size: 11.4pt; }
+.receipt-body-size-115 { --receipt-body-size: 11.5pt; }
+.receipt-body-size-116 { --receipt-body-size: 11.6pt; }
+.receipt-body-size-117 { --receipt-body-size: 11.7pt; }
+.receipt-body-size-118 { --receipt-body-size: 11.8pt; }
+.receipt-body-size-119 { --receipt-body-size: 11.9pt; }
+.receipt-body-size-120 { --receipt-body-size: 12pt; }
+.receipt-body-size-121 { --receipt-body-size: 12.1pt; }
+.receipt-body-size-122 { --receipt-body-size: 12.2pt; }
+.receipt-body-size-123 { --receipt-body-size: 12.3pt; }
+.receipt-body-size-124 { --receipt-body-size: 12.4pt; }
+.receipt-body-size-125 { --receipt-body-size: 12.5pt; }
+.receipt-body-size-126 { --receipt-body-size: 12.6pt; }
+.receipt-body-size-127 { --receipt-body-size: 12.7pt; }
+.receipt-body-size-128 { --receipt-body-size: 12.8pt; }
+.receipt-body-size-129 { --receipt-body-size: 12.9pt; }
+.receipt-body-size-130 { --receipt-body-size: 13pt; }
+.receipt-body-size-131 { --receipt-body-size: 13.1pt; }
+.receipt-body-size-132 { --receipt-body-size: 13.2pt; }
+.receipt-body-size-133 { --receipt-body-size: 13.3pt; }
+.receipt-body-size-134 { --receipt-body-size: 13.4pt; }
+.receipt-body-size-135 { --receipt-body-size: 13.5pt; }
+.receipt-body-size-136 { --receipt-body-size: 13.6pt; }
+.receipt-body-size-137 { --receipt-body-size: 13.7pt; }
+.receipt-body-size-138 { --receipt-body-size: 13.8pt; }
+.receipt-body-size-139 { --receipt-body-size: 13.9pt; }
+.receipt-body-size-140 { --receipt-body-size: 14pt; }
+.receipt-body-size-141 { --receipt-body-size: 14.1pt; }
+.receipt-body-size-142 { --receipt-body-size: 14.2pt; }
+.receipt-body-size-143 { --receipt-body-size: 14.3pt; }
+.receipt-body-size-144 { --receipt-body-size: 14.4pt; }
+.receipt-body-size-145 { --receipt-body-size: 14.5pt; }
+.receipt-body-size-146 { --receipt-body-size: 14.6pt; }
+.receipt-body-size-147 { --receipt-body-size: 14.7pt; }
+.receipt-body-size-148 { --receipt-body-size: 14.8pt; }
+.receipt-body-size-149 { --receipt-body-size: 14.9pt; }
+.receipt-body-size-150 { --receipt-body-size: 15pt; }
+.receipt-body-size-151 { --receipt-body-size: 15.1pt; }
+.receipt-body-size-152 { --receipt-body-size: 15.2pt; }
+.receipt-body-size-153 { --receipt-body-size: 15.3pt; }
+.receipt-body-size-154 { --receipt-body-size: 15.4pt; }
+.receipt-body-size-155 { --receipt-body-size: 15.5pt; }
+.receipt-body-size-156 { --receipt-body-size: 15.6pt; }
+.receipt-body-size-157 { --receipt-body-size: 15.7pt; }
+.receipt-body-size-158 { --receipt-body-size: 15.8pt; }
+.receipt-body-size-159 { --receipt-body-size: 15.9pt; }
+.receipt-body-size-160 { --receipt-body-size: 16pt; }
+.receipt-body-size-161 { --receipt-body-size: 16.1pt; }
+.receipt-body-size-162 { --receipt-body-size: 16.2pt; }
+.receipt-body-size-163 { --receipt-body-size: 16.3pt; }
+.receipt-body-size-164 { --receipt-body-size: 16.4pt; }
+.receipt-body-size-165 { --receipt-body-size: 16.5pt; }
+.receipt-body-size-166 { --receipt-body-size: 16.6pt; }
+.receipt-body-size-167 { --receipt-body-size: 16.7pt; }
+.receipt-body-size-168 { --receipt-body-size: 16.8pt; }
+.receipt-body-size-169 { --receipt-body-size: 16.9pt; }
+.receipt-body-size-170 { --receipt-body-size: 17pt; }
+.receipt-body-size-171 { --receipt-body-size: 17.1pt; }
+.receipt-body-size-172 { --receipt-body-size: 17.2pt; }
+.receipt-body-size-173 { --receipt-body-size: 17.3pt; }
+.receipt-body-size-174 { --receipt-body-size: 17.4pt; }
+.receipt-body-size-175 { --receipt-body-size: 17.5pt; }
+.receipt-body-size-176 { --receipt-body-size: 17.6pt; }
+.receipt-body-size-177 { --receipt-body-size: 17.7pt; }
+.receipt-body-size-178 { --receipt-body-size: 17.8pt; }
+.receipt-body-size-179 { --receipt-body-size: 17.9pt; }
+.receipt-body-size-180 { --receipt-body-size: 18pt; }
+.receipt-line-height-20 { --receipt-line-height: 1; }
+.receipt-line-height-21 { --receipt-line-height: 1.05; }
+.receipt-line-height-22 { --receipt-line-height: 1.1; }
+.receipt-line-height-23 { --receipt-line-height: 1.15; }
+.receipt-line-height-24 { --receipt-line-height: 1.2; }
+.receipt-line-height-25 { --receipt-line-height: 1.25; }
+.receipt-line-height-26 { --receipt-line-height: 1.3; }
+.receipt-line-height-27 { --receipt-line-height: 1.35; }
+.receipt-line-height-28 { --receipt-line-height: 1.4; }
+.receipt-line-height-29 { --receipt-line-height: 1.45; }
+.receipt-line-height-30 { --receipt-line-height: 1.5; }
+.receipt-line-height-31 { --receipt-line-height: 1.55; }
+.receipt-line-height-32 { --receipt-line-height: 1.6; }
+.receipt-line-height-33 { --receipt-line-height: 1.65; }
+.receipt-line-height-34 { --receipt-line-height: 1.7; }
+.receipt-line-height-35 { --receipt-line-height: 1.75; }
+.receipt-line-height-36 { --receipt-line-height: 1.8; }
+.receipt-line-height-37 { --receipt-line-height: 1.85; }
+.receipt-line-height-38 { --receipt-line-height: 1.9; }
+.receipt-line-height-39 { --receipt-line-height: 1.95; }
+.receipt-line-height-40 { --receipt-line-height: 2; }
+.receipt-line-height-41 { --receipt-line-height: 2.05; }
+.receipt-line-height-42 { --receipt-line-height: 2.1; }
+.receipt-line-height-43 { --receipt-line-height: 2.15; }
+.receipt-line-height-44 { --receipt-line-height: 2.2; }

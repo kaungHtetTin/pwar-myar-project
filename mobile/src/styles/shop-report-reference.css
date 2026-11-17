@@ -1,0 +1,117 @@
+.shop-mobile-page.shop-report-reference-page { width:min(100%,720px); margin:auto; padding:0 14px calc(95px + var(--app-safe-area-bottom)); }
+.shop-report-header { position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:5px; min-height:56px; margin:0 -14px 12px; padding:6px 10px; border-bottom:1px solid var(--border); background:var(--surface); }
+.shop-report-header .icon-button { display:grid; place-items:center; flex:0 0 36px; width:36px; min-height:40px; padding:0; border:0; background:transparent; box-shadow:none; }
+.shop-report-reference-page .shop-report-header h1 { flex:1; min-width:0; margin:0; font-size:17px; line-height:1.5; }
+.shop-report-header .mobile-export-button { min-height:38px; }
+.shop-report-toolbar { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,.85fr) 38px; gap:7px; margin-bottom:12px; }
+.shop-report-toolbar > * { min-width:0; margin:0; }
+.shop-report-period,.shop-report-currency { display:flex; align-items:center; gap:6px; min-height:40px; padding:7px; border:1px solid var(--border); border-radius:var(--radius-control); color:var(--text); background:var(--surface); font:inherit; font-size:10px; }
+.shop-report-period > span { flex:1; min-width:0; text-align:left; line-height:1.6; }
+.shop-report-period svg,.shop-report-currency svg { flex-shrink:0; }
+.shop-report-currency select { min-width:0; width:100%; min-height:25px; padding:0; border:0; color:var(--text); background:transparent; font:inherit; font-size:11px; }
+.shop-report-toolbar .mobile-filter-toggle { position:relative; display:grid; width:38px; min-height:40px; place-items:center; padding:0; }
+.shop-report-toolbar .mobile-filter-toggle > span,.shop-report-toolbar .mobile-filter-chevron { display:none; }
+.shop-report-content { display:grid; gap:12px; }
+.shop-report-card { min-width:0; padding:12px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); scroll-margin-top:68px; }
+.shop-report-reference-page .shop-report-card h2 { margin:0; font-size:14px; line-height:1.6; }
+.shop-report-card > header { display:flex; align-items:center; gap:8px; margin-bottom:11px; }
+.shop-report-card > header > :is(div,h2) { flex:1; min-width:0; }
+.shop-report-card > header > div h2 { font-size:13px; }
+.shop-report-card > header > div small { color:var(--muted); font-size:10px; line-height:1.6; }
+.shop-report-card > header > button { display:flex; align-items:center; justify-content:center; gap:3px; flex-shrink:0; min-height:30px; padding:3px 0; border:0; color:var(--theme-primary-text); background:transparent; font:inherit; font-size:10px; }
+.shop-report-overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+.shop-report-metric { min-width:0; padding:10px; border:1px solid var(--border); border-radius:var(--radius-control); }
+.shop-report-metric > small { display:block; margin-bottom:5px; color:var(--muted); font-size:10px; line-height:1.6; }
+.shop-report-metric > strong { display:block; font-size:17px; line-height:1.5; overflow-wrap:anywhere; }
+.shop-report-metric-comparison { display:flex; align-items:flex-start; gap:4px; margin-top:5px; }
+.shop-report-metric-comparison > span { flex:1; min-width:0; font-size:10px; line-height:1.65; overflow-wrap:anywhere; }
+.shop-report-metric-comparison svg { display:inline; vertical-align:middle; }
+.shop-report-metric-comparison > button { display:grid; place-items:center; flex:0 0 24px; width:24px; min-height:28px; margin:-3px -5px -5px 0; padding:0; border:0; color:var(--muted); background:transparent; }
+.shop-report-metric-comparison .is-positive { color:var(--theme-primary-text); }
+.shop-report-metric-comparison .is-negative { color:var(--theme-danger-text); }
+.shop-report-metric-comparison .is-neutral { color:var(--muted); }
+.shop-report-comparison-period { margin:9px 0 0; color:var(--muted); font-size:10px; line-height:1.65; }
+.shop-report-trend > header { flex-wrap:wrap; margin-bottom:4px; }
+.shop-report-trend-legend { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:8px; margin:3px 0 10px; color:var(--muted); font-size:9px; }
+.shop-report-trend-legend > span { display:flex; align-items:center; gap:4px; }
+.shop-report-trend-legend i { width:7px; height:7px; border-radius:50%; background:var(--brand-700); }
+.shop-report-trend-legend > span:last-child i { background:var(--theme-primary-soft); }
+.shop-report-trend-svg { display:block; width:100%; height:auto; overflow:visible; }
+.shop-report-trend-svg text { fill:var(--muted); font:9px sans-serif; }
+.report-trend-grid { stroke:var(--border); stroke-width:.7; }
+.report-trend-order { fill:var(--theme-primary-text); }
+.report-trend-line { fill:none; stroke:var(--theme-primary-text); stroke-width:1.6; stroke-linejoin:round; }
+.report-trend-dot { fill:var(--theme-primary-text); }
+.shop-report-trend-totals { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:9px; padding:9px; border-radius:var(--radius-control); background:var(--theme-background); text-align:center; }
+.shop-report-trend-totals span { display:grid; gap:4px; }
+.shop-report-trend-totals span + span { border-left:1px solid var(--border); }
+.shop-report-trend-totals strong { font-size:13px; overflow-wrap:anywhere; }
+.shop-report-trend-totals small { color:var(--muted); font-size:10px; }
+.shop-report-trend .shop-mobile-table-scroll { max-height:340px; }
+.shop-report-trend table { width:100%; font-size:11px; }
+.shop-report-trend :is(th,td) { padding:8px; white-space:nowrap; }
+.shop-report-product { display:flex; align-items:center; gap:8px; padding:8px 0; }
+.shop-report-product + .shop-report-product { border-top:1px solid var(--border); }
+.shop-report-product-photo { display:grid; place-items:center; flex:0 0 34px; width:34px; height:38px; border-radius:var(--radius-control); color:var(--theme-primary-text); background:var(--brand-100); }
+.shop-report-product > span:nth-child(2) { flex:1; min-width:0; }
+.shop-report-product > span:last-child { max-width:110px; text-align:right; }
+.shop-report-product > span:not(.shop-report-product-photo) { display:grid; gap:4px; }
+.shop-report-product strong { font-size:11px; font-weight:600; line-height:1.6; overflow-wrap:anywhere; }
+.shop-report-product small { color:var(--muted); font-size:10px; line-height:1.6; }
+.shop-report-summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.shop-report-section-icon { display:grid; place-items:center; flex:0 0 34px; width:34px; height:34px; border-radius:var(--radius-control); color:var(--theme-primary-text); background:var(--brand-100); }
+.shop-report-breakdown ul { display:grid; gap:0; margin:0; padding:0; list-style:none; }
+.shop-report-breakdown li { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:5px 9px; align-items:start; padding:9px 0; font-size:12px; line-height:1.65; }
+.shop-report-breakdown li + li { border-top:1px solid var(--theme-border); }
+.shop-report-breakdown li > span { display:flex; align-items:flex-start; gap:7px; min-width:0; overflow-wrap:anywhere; }
+.report-key-dot { flex:0 0 7px; width:7px; height:7px; margin-top:6px; border-radius:50%; background:var(--brand-700); }
+.report-key-dot.is-1 { background:var(--theme-surface-raised); }
+.report-key-dot.is-2 { background:var(--theme-surface-raised); }
+.report-key-dot.is-3 { background:var(--theme-warning); }
+.report-key-dot.is-4 { background:var(--theme-danger); }
+.shop-report-breakdown li > strong { max-width:145px; font-size:12px; text-align:right; overflow-wrap:anywhere; }
+.shop-report-breakdown li > small { grid-column:1/-1; color:var(--muted); font-size:11px; }
+.shop-report-breakdown.is-compact { padding:10px; }
+.shop-report-breakdown.is-compact > header { position:relative; flex-wrap:wrap; align-items:flex-start; gap:5px; margin-bottom:5px; }
+.shop-report-breakdown.is-compact > header > div { flex-basis:calc(100% - 25px); }
+.shop-report-breakdown.is-compact > header .shop-report-section-icon { flex-basis:20px; width:20px; height:23px; background:transparent; }
+.shop-report-breakdown.is-compact > header h2 { font-size:11px; }
+.shop-report-breakdown.is-compact > header > button { min-height:27px; margin-left:auto; font-size:9px; }
+.shop-report-breakdown.is-compact li { gap:5px; padding:5px 0; font-size:10px; }
+.shop-report-breakdown.is-compact li > strong { max-width:75px; font-size:10px; }
+.shop-report-breakdown.is-compact .report-key-dot { width:5px; height:5px; flex-basis:5px; margin-top:5px; }
+.shop-report-follow-up-link { display:flex; align-items:center; gap:9px; min-height:54px; padding:10px; border:1px solid var(--border); border-radius:var(--radius-card); color:var(--text); background:var(--surface); text-align:left; }
+.shop-report-follow-up-link > span { flex:1; display:grid; gap:4px; min-width:0; }
+.shop-report-follow-up-link strong { font-size:12px; }
+.shop-report-follow-up-link small { color:var(--muted); font-size:10px; }
+.shop-report-extra-metrics { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.shop-report-extra-metrics > div { display:grid; gap:6px; min-width:0; padding:11px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); }
+.shop-report-extra-metrics small { color:var(--muted); font-size:11px; line-height:1.65; }
+.shop-report-extra-metrics strong { font-size:14px; overflow-wrap:anywhere; }
+.shop-report-scope-note { margin:9px 0 0; color:var(--muted); font-size:11px; line-height:1.7; }
+.shop-report-scope-note button { min-height:32px; margin-left:4px; border:1px solid var(--border); border-radius:var(--radius-control); color:var(--theme-primary-text); background:var(--surface); font:inherit; font-size:12px; }
+.shop-report-empty { margin:8px 0; color:var(--muted); font-size:12px; line-height:1.7; }
+.shop-report-breakdowns-section { display:grid; gap:12px; padding-top:8px; scroll-margin-top:68px; }
+.shop-report-period-summary { display:flex; align-items:center; gap:8px; margin:0; padding:10px; border-radius:var(--radius-control); color:var(--muted); background:var(--theme-background); font-size:11px; line-height:1.7; }
+.shop-report-period-summary svg { flex-shrink:0; }
+.shop-report-reference-page .shop-report-breakdowns-section > h2 { margin:0; font-size:17px; }
+.shop-report-customer { display:flex; align-items:center; gap:9px; width:100%; min-width:0; margin-top:10px; padding:10px 0; border:0; border-top:1px solid var(--border); color:var(--text); background:transparent; text-align:left; font:inherit; }
+.shop-report-customer > span:nth-child(2) { flex:1; display:grid; gap:4px; min-width:0; }
+.shop-report-customer strong { font-size:12px; overflow-wrap:anywhere; }
+.shop-report-customer small { color:var(--muted); font-size:10px; line-height:1.7; }
+.shop-report-customer-avatar { display:grid; place-items:center; flex:0 0 32px; width:32px; height:32px; border-radius:50%; color:var(--theme-primary-text); background:var(--brand-100); font-size:12px; font-weight:600; }
+.shop-report-info .mobile-sheet-body { display:grid; gap:10px; font-size:13px; line-height:1.7; }
+.shop-report-date-filter { display:grid; gap:12px; min-width:0; margin:0; padding:0; border:0; }
+.shop-report-date-filter legend { margin-bottom:10px; padding:0; font-size:13px; font-weight:600; }
+.shop-report-presets { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+.shop-report-presets button { min-height:40px; padding:5px; border:1px solid var(--border); border-radius:var(--radius-control); color:var(--text); background:var(--surface); font:inherit; font-size:11px; }
+.shop-report-presets button[aria-pressed=true] { border-color:var(--brand-700); color:var(--theme-primary-text); background:var(--brand-100); }
+.shop-report-date-fields { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.shop-report-date-fields .mobile-field { min-width:0; }
+.shop-report-filter .shop-report-date-fields input { width:100%; min-width:0; padding:7px; font-size:11px; }
+.shop-report-date-filter details { color:var(--muted); font-size:11px; }
+.shop-report-date-filter summary { min-height:32px; padding:7px 0; cursor:pointer; }
+.shop-report-filter .shop-report-timezone { color:var(--muted); font-size:11px; }
+.shop-report-loading-scope { color:var(--muted); font-size:11px; }
+.shop-report-reference-page :is(button,input,select):focus-visible { outline:2px solid var(--brand-700); outline-offset:2px; }
+@media(max-width:350px) { .shop-report-summary-grid { grid-template-columns:1fr; } .shop-report-metric { padding:8px; } .shop-report-metric > strong { font-size:15px; } .shop-report-currency > svg { display:none; } .shop-report-period { padding:5px; font-size:10px; } }

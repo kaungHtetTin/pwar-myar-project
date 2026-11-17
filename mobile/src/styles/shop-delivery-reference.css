@@ -1,0 +1,34 @@
+.shop-mobile-page.shop-delivery-reference-page { width: min(100%,720px); min-height: calc(100dvh - 60px); margin: 0 auto; padding: 0 14px calc(150px + var(--app-safe-area-bottom)); }
+.shop-delivery-header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 6px; min-height: 56px; margin: 0 -14px 12px; padding: 6px 10px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.shop-delivery-header .icon-button { display: grid; width: 36px; min-height: 40px; flex: 0 0 36px; place-items: center; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.shop-delivery-reference-page .shop-delivery-header h1 { flex: 1; min-width: 0; margin: 0; font-size: 18px; font-weight: 700; line-height: 1.4; }
+.shop-delivery-header > .mobile-primary { min-height: 36px; gap: 5px; padding: 7px 10px; font-size: 12px; }
+.shop-delivery-notice { display: flex; align-items: start; gap: 9px; padding: 12px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); color: var(--theme-primary-text); background: var(--brand-100); }
+.shop-delivery-notice > svg { flex-shrink: 0; }
+.shop-delivery-notice p { flex: 1; margin: 0; font-size: 12px; line-height: 1.6; }
+.shop-delivery-notice button { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; padding: 0; border: 0; border-radius: var(--radius-small); color: inherit; background: transparent; }
+.shop-delivery-count { margin: 13px 0 10px; color: var(--muted); font-size: 12px; }
+.shop-delivery-list { display: grid; gap: 10px; }
+.shop-delivery-row { display: grid; grid-template-columns: 40px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 13px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.shop-delivery-icon { display: grid; width: 40px; height: 44px; place-items: center; border-radius: var(--radius-control); color: var(--theme-primary-text); background: var(--brand-100); }
+.shop-delivery-copy { display: grid; min-width: 0; gap: 7px; }
+.shop-delivery-reference-page .shop-delivery-copy h2 { margin: 0; font-size: 13px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+.shop-delivery-price { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.shop-delivery-price strong { font-size: 15px; overflow-wrap: anywhere; }
+.shop-delivery-price > span { padding: 3px 6px; border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--brand-100); font-size: 10px; }
+.shop-delivery-row-actions { display: flex; gap: 6px; }
+.shop-delivery-row-actions button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 42px; min-height: 52px; padding: 7px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-background); font-size: 10px; }
+.shop-delivery-row-actions .is-danger { border-color: var(--theme-border); color: var(--theme-danger-text); background: var(--danger-bg); }
+.shop-delivery-reference-page .shop-delivery-form { display: grid; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.shop-delivery-form > fieldset { display: grid; min-width: 0; gap: 0; margin: 0; padding: 0; border: 0; }
+.shop-delivery-form .mobile-field { display: grid; min-width: 0; gap: 7px; margin: 0; padding: 13px 13px 8px; border: 1px solid var(--border); border-bottom: 0; border-radius: var(--radius-card) var(--radius-card) 0 0; color: var(--text); background: var(--surface); font-size: 12px; font-weight: 600; }
+.shop-delivery-form .mobile-field input { width: 100%; min-width: 0; min-height: 40px; padding: 8px 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--text); background: var(--surface); font: inherit; font-weight: 400; scroll-margin-block: 80px 150px; }
+.shop-delivery-form .shop-delivery-field-hint { margin: 0 0 12px; padding: 0 13px 13px; border: 1px solid var(--border); border-top: 0; border-radius: 0 0 var(--radius-card) var(--radius-card); color: var(--muted); background: var(--surface); font-size: 11px; line-height: 1.6; }
+.shop-delivery-form .mobile-field-error { font-size: 12px; font-weight: 400; }
+.shop-delivery-reference-page .shop-delivery-form .shop-mobile-actions { position: fixed; z-index: 6; left: 50%; bottom: calc(60px + var(--app-safe-area-bottom)); display: grid; grid-template-columns: .8fr 1.2fr; width: min(100%,720px); gap: 8px; margin: 0; padding: 10px 14px; transform: translateX(-50%); border-top: 1px solid var(--border); background: var(--surface); }
+.shop-delivery-form .shop-mobile-actions button { min-width: 0; min-height: 40px; font-size: 12px; }
+.shop-delivery-error { padding: 11px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-danger-text); background: var(--danger-bg); font-size: 12px; line-height: 1.6; }
+.shop-delivery-empty { display: grid; justify-items: center; gap: 10px; padding: 30px 14px; border: 1px solid var(--border); border-radius: var(--radius-card); color: var(--muted); background: var(--surface); text-align: center; }
+.shop-delivery-empty :is(h2,p) { margin: 0; font-size: 13px; }
+.shop-delivery-reference-page :is(button,input):focus-visible { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+@media(max-width:360px) { .shop-delivery-row { grid-template-columns: 32px minmax(0,1fr); gap: 9px; padding: 11px; } .shop-delivery-icon { width: 32px; height: 38px; } .shop-delivery-row-actions { grid-column: 2; } .shop-delivery-row-actions button { flex-direction: row; min-height: 36px; } }

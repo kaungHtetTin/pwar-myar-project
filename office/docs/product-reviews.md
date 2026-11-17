@@ -1,0 +1,11 @@
+# Product review management
+
+Open Product reviews in Office to manage customer reviews of products across every shop. This uses the existing shop_reviews table and storefront rating calculations. Shop-level reviews (target_id = 0) are excluded. No schema migration or data backfill is needed.
+
+Use New review in the shared app bar. Search for a shop, choose a product belonging to it, then choose an active customer with a completed purchase of that product. Select a rating from 1 to 5 and optionally enter a comment and seller reply. Reviews appear on the storefront immediately. A customer can have one review per product. Shop, product and customer stay fixed after creation; Edit review changes rating, comment and reply.
+
+The shared row-action menu contains View review, Edit review and Delete review, all using modals. Deletion requires confirmation and removes the review and reply from public rating counts. Cancellation does not mutate or refetch the list. Save errors keep the draft; busy forms block duplicate submission and dismissal. Version tokens include the content and seller response, so concurrent customer edits or seller replies cause a conflict instead of being overwritten.
+
+Filters support shop, rating, reply status, written/rating-only, date range and sorting. Search matches shop, product, customer, comment or reply. Clear preserves search and page size. The shared Businesses pagination and sticky 80px action column are reused. Office navigation retains loaded data, query, scroll and modal drafts; Back does not cause an initial-load request.
+
+Verification: OfficeProductReviewTest covers authentication, CRUD/public summaries, purchase eligibility, duplicates, product ownership, shop-review exclusion, concurrent changes, filters, pagination, lookup eligibility and reviews whose products were deleted. ProductReviewsPage.test.jsx covers row controls, modal cancellation/focus, chained lookups, create, failed-edit retry, busy guards, deletion, drawer controls, pagination boundaries and retained drafts. Dashboard.test.jsx checks sidebar navigation, app-bar placement and browser Back. The rendered smoke test in scripts/product-reviews-ui-smoke.cjs uses in-memory fixtures to exercise CRUD and desktop layouts without changing real reviews.

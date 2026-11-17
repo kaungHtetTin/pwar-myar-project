@@ -1,0 +1,77 @@
+{
+  "instructions": "Replace placeholders with verified non-secret values. Supply credentials privately. Null means unknown, not approval to guess.",
+  "authorization": "prepare artifacts only; set deploy authorization explicitly when ready",
+  "repository": {
+    "url": null,
+    "branch": null,
+    "commit": null
+  },
+  "installation": {
+    "mode": "fresh or upgrade",
+    "existing_production_data": null,
+    "maintenance_window": null,
+    "backup_location_outside_webroot": null,
+    "backup_verified_at": null,
+    "restore_owner": null
+  },
+  "cpanel": {
+    "hostname": null,
+    "account": null,
+    "transport": "SSH/SFTP or supported HTTPS API or manual operator",
+    "port": null,
+    "credential_reference": "private environment entry name only",
+    "laravel_directory": null,
+    "php_cli_path": null,
+    "php_web_version": null,
+    "composer_command": null,
+    "cron_minimum_interval_minutes": null,
+    "cron_maximum_runtime_seconds": null,
+    "symlinks_allowed": null,
+    "laravel_outbound_ips": [],
+    "database_host": null,
+    "database_port": 3306,
+    "database_name": null,
+    "database_user": null,
+    "document_roots": {
+      "pwarmyar.com": null,
+      "www.pwarmyar.com": null,
+      "pos.pwarmyar.com": null,
+      "office.pwarmyar.com": null,
+      "shop.pwarmyar.com": null,
+      "mobilepos.pwarmyar.com": null
+    }
+  },
+  "node": {
+    "hostname": null,
+    "account": null,
+    "port": null,
+    "credential_reference": "private environment entry name only",
+    "application_directory": null,
+    "node_version": null,
+    "process_manager": null,
+    "service_name": null,
+    "reverse_proxy": null,
+    "tls_certificate_path": null,
+    "tls_key_path": null
+  },
+  "dns_and_tls": {
+    "cpanel_ip": null,
+    "node_ip": null,
+    "dns_management_method": null,
+    "tls_management_method": null
+  },
+  "production_admin": {
+    "name": null,
+    "email": null,
+    "password_delivery": "private interactive prompt or approved private channel"
+  },
+  "optional_integrations": {
+    "ai_enabled": false,
+    "node_ai_wakeups_enabled": false,
+    "telegram_customer_service_enabled": false,
+    "smtp_host": null,
+    "smtp_port": 587,
+    "smtp_encryption": "tls",
+    "verified_sender_addresses": []
+  }
+}

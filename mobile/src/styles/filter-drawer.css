@@ -1,0 +1,64 @@
+.mobile-filter-drawer-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  /* Hidden creates a scroll container: Firefox scrolls it to follow the
+     focused close button during the slide, cancelling the translation. */
+  overflow: clip;
+  border: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.mobile-filter-drawer-layer[open] { display: flex; justify-content: flex-end; }
+.mobile-filter-drawer-layer:not([open]) { display: none; }
+.mobile-filter-drawer-layer::backdrop { background: transparent; }
+.mobile-filter-drawer-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 0; background: color-mix(in srgb, var(--theme-primary) 42%, transparent); cursor: default; animation: drawer-fade-in 180ms ease-out; }
+.mobile-filter-drawer { position: relative; display: flex; width: min(22rem, calc(100% - 1.25rem)); min-width: 0; height: 100%; flex-direction: column; margin: 0; padding: 0; border: 0; border-left: 1px solid var(--border); background: var(--surface); box-shadow: -1rem 0 3rem color-mix(in srgb, var(--theme-shadow) 18%, transparent); animation: filter-drawer-slide-in 220ms ease-out; }
+.mobile-filter-drawer-header { display: flex; flex: 0 0 auto; align-items: center; gap: .6rem; padding: max(1rem, var(--app-safe-area-top)) max(1rem, var(--app-safe-area-right)) .85rem 1rem; border-bottom: 1px solid var(--border); }
+.mobile-filter-drawer-icon { display: grid; width: 2.25rem; height: 2.25rem; flex-shrink: 0; place-items: center; border-radius: var(--radius-control); color: var(--theme-primary-text); background: var(--brand-100); }
+/* Static initial focus target; interactive controls keep their keyboard focus rings. */
+.mobile-filter-drawer-header h2[tabindex="-1"]:focus { outline: none; }
+.mobile-filter-drawer-header h2 { flex: 1; margin: 0; color: var(--theme-primary-text); font-size: .95rem; line-height: 1.6; }
+.mobile-drawer-heading { flex: 1; min-width: 0; }
+.mobile-drawer-heading p { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.mobile-filter-drawer .mobile-filter-drawer-close { display: grid; width: 2.75rem; min-height: 2.75rem; flex: 0 0 2.75rem; place-items: center; padding: 0; border: 1px solid var(--border); border-radius: var(--radius-control); color: var(--muted); background: var(--surface); }
+
+/* Retain each screen's field styles, with one drawer layout at every width. */
+.mobile-filter-drawer .mobile-filter-drawer-body { display: grid; width: 100%; min-width: 0; min-height: 0; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 1rem; margin: 0; padding: 1.1rem max(1rem, var(--app-safe-area-right)) 1rem 1rem; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; border: 0; border-radius: 0; background: var(--surface); box-shadow: none; scrollbar-gutter: stable; }
+.mobile-filter-drawer-body > * { min-width: 0; max-width: 100%; }
+.mobile-filter-drawer-body .mobile-field { position: relative; display: grid; gap: .3rem; }
+.mobile-filter-drawer-body .mobile-field > label { position: static; max-width: none; margin: 0; padding: 0; color: var(--muted); font-size: .65rem; font-weight: 700; line-height: 1.6; letter-spacing: 0; text-transform: none; white-space: normal; pointer-events: auto; }
+.mobile-filter-drawer-body .mobile-field > input,
+.mobile-filter-drawer-body .mobile-field > select { min-width: 0; min-height: 3rem; padding: .55rem .7rem; border: 1px solid var(--border); border-radius: var(--radius-control); color: var(--text); background: var(--surface); font: inherit; font-size: .76rem; }
+.mobile-filter-drawer-body .mobile-field > input:focus,
+.mobile-filter-drawer-body .mobile-field > select:focus { border-color: var(--brand-700); outline: 2px solid var(--brand-100); outline-offset: 1px; }
+.mobile-filter-drawer-body input[type="checkbox"] { width: 1.1rem; height: 1.1rem; min-height: 1.1rem; flex: 0 0 1.1rem; padding: 0; accent-color: var(--brand-700); }
+.mobile-filter-drawer-body .shop-mobile-check { display: flex; align-items: center; gap: .55rem; font-size: .7rem; line-height: 1.6; }
+.mobile-filter-drawer-body > p { margin: 0; line-height: 1.65; }
+
+.mobile-filter-drawer-footer { flex: 0 0 auto; padding: .85rem max(1rem, var(--app-safe-area-right)) max(.85rem, var(--app-safe-area-bottom)) 1rem; border-top: 1px solid var(--border); background: var(--surface); }
+.mobile-filter-drawer-footer > div { display: grid; width: 100%; min-width: 0; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: .6rem; margin: 0; padding: 0; border: 0; }
+.mobile-filter-drawer-footer > div > button { display: flex; min-width: 0; min-height: 3rem; align-items: center; justify-content: center; gap: .35rem; padding: .6rem; border: 1px solid var(--border); border-radius: var(--radius-control); color: var(--theme-primary-text); background: var(--surface); font: inherit; font-size: .72rem; font-weight: 750; line-height: 1.6; }
+.mobile-filter-drawer-footer > div > button > svg { flex-shrink: 0; }
+.mobile-filter-drawer-footer > div > .mobile-primary { border-color: var(--brand-800); color: var(--theme-on-primary); background: var(--brand-800); }
+.mobile-filter-drawer-footer > div > button:disabled { opacity: .5; cursor: not-allowed; }
+.mobile-filter-drawer button:focus-visible { outline: 3px solid var(--brand-700); outline-offset: 2px; }
+.mobile-filter-drawer-close:hover { color: var(--theme-primary-text); }
+.mobile-filter-toggle.is-active .mobile-filter-chevron,
+.mobile-control-row > .product-toolbar-toggle.is-active .mobile-filter-chevron { transform: none; }
+
+.mobile-filter-drawer-body .purchase-quick-ranges,
+.mobile-filter-drawer-body .expense-quick-ranges,
+.mobile-filter-drawer-body .transaction-presets { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; }
+.mobile-filter-drawer-body :is(.purchase-quick-ranges, .expense-quick-ranges, .transaction-presets) > button { min-width: 3rem; min-height: 2.75rem; flex: 1; padding: .4rem; font-size: .64rem; }
+
+/* Match the navigation drawer's simple mount/slide pattern, from the right. */
+@keyframes filter-drawer-slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .mobile-filter-drawer, .mobile-filter-drawer-backdrop { animation: none; } }

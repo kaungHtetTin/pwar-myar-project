@@ -1,0 +1,210 @@
+/* Desktop paint layer. Keep all geometry and type metrics in the existing
+   component styles. Consume the published palette; never replace brand roles.
+   Screen-only scope keeps mobile and printed documents unchanged. */
+@media screen and (min-width: 981px) {
+  :root {
+    --desktop-divider: color-mix(in srgb, var(--theme-border) 65%, var(--theme-surface));
+    --desktop-header: color-mix(in srgb, var(--theme-surface) 65%, var(--theme-background));
+    --desktop-row-alt: color-mix(in srgb, var(--theme-surface) 76%, var(--theme-background));
+    --desktop-row-hover: color-mix(in srgb, var(--theme-primary-soft) 55%, var(--theme-surface));
+    --desktop-panel-shadow: 0 1px 2px color-mix(in srgb, var(--theme-shadow) 4%, transparent),
+      0 4px 14px color-mix(in srgb, var(--theme-shadow) 3%, transparent);
+    --desktop-popover-shadow: 0 4px 12px color-mix(in srgb, var(--theme-shadow) 8%, transparent),
+      0 18px 44px color-mix(in srgb, var(--theme-shadow) 12%, transparent);
+    --desktop-focus-ring: 0 0 0 3px color-mix(in srgb, var(--theme-focus) 20%, transparent);
+  }
+
+  .app-shell.desktop-workspace,
+  .app-shell.desktop-workspace > main {
+    background: var(--theme-background);
+  }
+
+  .desktop-workspace .workspace-header {
+    background: var(--theme-surface);
+    border-bottom-color: var(--desktop-divider);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--theme-shadow) 4%, transparent);
+  }
+
+  .desktop-workspace > .sidebar {
+    box-shadow: 2px 0 12px color-mix(in srgb, var(--theme-shadow) 8%, transparent);
+  }
+
+  .desktop-workspace .sidebar nav :is(button, a):hover:not(.active) {
+    background: color-mix(in srgb, var(--theme-sidebar-text) 9%, var(--theme-sidebar));
+  }
+
+  .desktop-workspace .sidebar nav :is(button, a).active {
+    background: var(--theme-sidebar-selected);
+    color: var(--theme-sidebar-selected-text);
+    box-shadow: inset 3px 0 0 var(--theme-focus);
+  }
+
+  /* Shared work surfaces, including POS, reports, settings and account panels. */
+  .desktop-workspace .module-view :is(
+    .product-table-card, .purchase-table-card, .supplier-table-card,
+    .customer-table-card, .customer-history-card, .expense-table-card,
+    .transaction-table-card, .billing-panel, .access-panel, .settings-panel,
+    .report-panel, .customer-account-overview, .customer-account-section,
+    .sale-left-panel, .sale-cart-panel, .product-control-card,
+    .transaction-toolbar, .purchase-toolbar
+  ) {
+    border-color: var(--desktop-divider);
+    background: var(--theme-surface);
+    box-shadow: var(--desktop-panel-shadow);
+  }
+
+  .desktop-workspace .module-view :is(
+    .product-stat-card, .customer-metric, .customer-account-summary > span,
+    .supplier-metric, .expense-metric, .expense-summary-card,
+    .transaction-metric, .report-kpi, .report-inventory-metric,
+    .report-account-metric, .billing-summary-card, .access-summary-grid > article,
+    .settings-data-summary > div
+  ) {
+    border-color: var(--desktop-divider);
+    background: var(--theme-surface);
+    box-shadow: var(--desktop-panel-shadow);
+  }
+
+  .desktop-workspace .module-view :is(
+    .product-table-title, .customer-table-heading, .supplier-table-heading,
+    .expense-table-heading, .transaction-table-heading, .customer-history-title,
+    .customer-account-section-heading, .report-card-title, .billing-panel-heading,
+    .access-panel-heading, .settings-panel-heading
+  ) {
+    border-bottom-color: var(--desktop-divider);
+    background: var(--theme-surface);
+  }
+
+  /* A row owns its opaque fill so sticky action cells match ordinary cells. */
+  body .desktop-workspace .module-view :is(
+    .supplier-table, .supplier-detail-table, .product-data-table,
+    .product-stock-list-table, .purchase-history-table,
+    .purchase-wizard-quantity-table, .purchase-review-table, .customer-table,
+    .customer-history-table table, .expense-table, .transaction-table,
+    .billing-table, .access-table, .desktop-sync-table, .table-wrap.sheet-table table
+  ) {
+    --desktop-row-surface: var(--theme-surface);
+
+    & thead th {
+      background: var(--desktop-header);
+      border-bottom-color: var(--desktop-divider);
+      color: var(--theme-text-muted);
+    }
+
+    & tbody tr:nth-child(even) {
+      --desktop-row-surface: var(--desktop-row-alt);
+    }
+
+    & tbody tr:hover {
+      --desktop-row-surface: var(--desktop-row-hover);
+    }
+
+    & tbody tr:is(.selected, [aria-selected='true']) {
+      --desktop-row-surface: var(--theme-primary-soft);
+    }
+
+    & tbody tr td,
+    & tbody tr:nth-child(even) td:last-child:not([colspan]),
+    & tbody tr:hover td:last-child:not([colspan]) {
+      background: var(--desktop-row-surface);
+      border-bottom-color: var(--desktop-divider);
+    }
+
+    /* tables.css locks the sticky action hook with !important. Match that
+       contract for paint only, including alternate and hovered rows. */
+    & tbody tr td.table-actions-cell,
+    & tbody tr:nth-child(even) td.table-actions-cell,
+    & tbody tr:hover td.table-actions-cell {
+      background: var(--desktop-row-surface) !important;
+    }
+
+    & thead th.table-actions-cell {
+      background: var(--desktop-header) !important;
+    }
+  }
+
+  .desktop-workspace .module-view .data-table-footer {
+    background: var(--desktop-header);
+  }
+
+  /* Keep specialized POS keys, status colors and destructive actions intact. */
+  :is(.desktop-workspace, .mkpos-modal, .mkpos-filter-drawer) button.primary {
+    border-color: var(--theme-primary);
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--theme-shadow) 10%, transparent);
+  }
+
+  :is(.desktop-workspace, .mkpos-modal, .mkpos-filter-drawer) button.primary:hover:not(:disabled) {
+    border-color: var(--theme-primary-hover);
+    background: var(--theme-primary-hover);
+  }
+
+  :is(.desktop-workspace, .mkpos-modal, .mkpos-filter-drawer) button.primary:active:not(:disabled) {
+    box-shadow: inset 0 1px 3px color-mix(in srgb, var(--theme-shadow) 20%, transparent);
+  }
+
+  .desktop-workspace .workspace-header :is(.workspace-icon-button, .workspace-app-bar-action-group > button):hover:not(.primary):not(:disabled),
+  .row-actions-trigger:hover,
+  .row-actions-trigger.is-open {
+    background: var(--theme-primary-soft);
+    color: var(--theme-primary-text);
+    border-color: var(--theme-focus);
+  }
+
+  :is(.desktop-workspace .module-view, .mkpos-modal, .mkpos-filter-drawer) .danger-button:hover:not(:disabled) {
+    background: var(--theme-danger-soft);
+    color: var(--theme-danger-text);
+    border-color: var(--theme-danger);
+  }
+
+  :is(.desktop-workspace, .mkpos-modal, .mkpos-filter-drawer) :is(button, a):focus-visible,
+  .row-actions-menu > button:focus-visible {
+    outline: 2px solid var(--theme-focus);
+    outline-offset: 2px;
+  }
+
+  :is(.desktop-workspace, .mkpos-modal, .mkpos-filter-drawer) :is(
+    input:not([type='checkbox']):not([type='radio']):not([type='file']), select, textarea
+  ):focus,
+  :is(.desktop-workspace .module-view, .mkpos-modal, .mkpos-filter-drawer) .remote-combobox:focus-within {
+    border-color: var(--theme-focus);
+    box-shadow: var(--desktop-focus-ring);
+    outline-color: var(--theme-focus);
+  }
+
+  /* Search wrappers own their ring; their inner input stays transparent. */
+  .desktop-workspace :is(.product-search-field, .expense-search-input, .supplier-search-input):focus-within {
+    border-color: var(--theme-focus);
+    box-shadow: var(--desktop-focus-ring);
+  }
+
+  .desktop-workspace :is(.product-search-field, .expense-search-input, .supplier-search-input) input:focus {
+    box-shadow: none;
+  }
+
+  .desktop-workspace .settings-side-tabs button.selected {
+    background: var(--theme-primary-soft);
+    color: var(--theme-primary-text);
+    box-shadow: inset 3px 0 0 var(--theme-focus);
+  }
+
+  .mkpos-modal-overlay,
+  .mkpos-filter-drawer-overlay {
+    background: color-mix(in srgb, var(--theme-overlay) 42%, transparent);
+  }
+
+  .mkpos-modal,
+  .mkpos-filter-drawer,
+  .row-actions-menu {
+    border-color: var(--desktop-divider);
+    box-shadow: var(--desktop-popover-shadow);
+  }
+
+  .mkpos-modal-header,
+  .mkpos-filter-drawer-header,
+  .mkpos-modal-footer {
+    background: var(--desktop-header);
+    border-color: var(--desktop-divider);
+  }
+}

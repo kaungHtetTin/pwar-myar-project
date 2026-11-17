@@ -1,0 +1,37 @@
+.shop-mobile-page.shop-contacts-reference-page { width: min(100%,720px); min-height: calc(100dvh - 60px); margin: 0 auto; padding: 0 14px calc(150px + var(--app-safe-area-bottom)); }
+.shop-contacts-header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 6px; min-height: 56px; margin: 0 -14px 12px; padding: 6px 10px; border-bottom: 1px solid var(--border); background: var(--surface); }
+.shop-contacts-header .icon-button { display: grid; flex: 0 0 36px; width: 36px; min-height: 40px; place-items: center; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.shop-contacts-reference-page .shop-contacts-header h1 { flex: 1; min-width: 0; margin: 0; font-size: 18px; font-weight: 700; line-height: 1.4; }
+.shop-contacts-header > .mobile-primary { min-height: 36px; gap: 5px; padding: 7px 10px; font-size: 12px; white-space: nowrap; }
+.shop-contacts-capacity { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 10px; padding: 11px; border: 1px solid var(--border); border-radius: var(--radius-small); background: var(--theme-background); }
+.shop-contacts-capacity strong { font-size: 12px; font-weight: 600; }
+.shop-contacts-capacity small { color: var(--muted); font-size: 11px; }
+.shop-contacts-list { display: grid; gap: 10px; }
+.shop-contact-row { display: grid; grid-template-columns: 36px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.shop-contact-icon { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; color: var(--theme-primary-text); background: var(--brand-100); }
+.shop-contact-copy { display: grid; min-width: 0; gap: 4px; }
+.shop-contacts-reference-page .shop-contact-copy h2 { margin: 0; font-size: 13px; font-weight: 700; }
+.shop-contact-copy small { color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.shop-contact-copy p { margin: 0; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.shop-contact-row { row-gap: 4px; }
+.shop-contact-row > .shop-contact-icon { grid-column: 1; grid-row: 1 / span 2; }
+.shop-contact-copy { grid-column: 2; grid-row: 1; }
+.shop-contact-value { grid-column: 2 / -1; grid-row: 2; min-width: 0; margin: 0; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.shop-contact-row > .shop-contact-actions { grid-column: 3; grid-row: 1; }
+.shop-contact-actions { display: flex; gap: 6px; }
+.shop-contact-actions button { display: grid; width: 36px; height: 38px; min-height: 38px; place-items: center; padding: 0; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-background); }
+.shop-contact-actions .is-danger { border-color: var(--theme-border); color: var(--theme-danger-text); background: var(--danger-bg); }
+.shop-contacts-reference-page .shop-contact-form { display: grid; gap: 12px; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.shop-contact-form > fieldset { display: grid; min-width: 0; gap: 12px; margin: 0; padding: 0; border: 0; }
+.shop-contact-form fieldset > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.shop-contact-form .mobile-field { display: grid; gap: 7px; min-width: 0; padding: 13px; border: 1px solid var(--border); border-radius: var(--radius-card); color: var(--text); background: var(--surface); font-size: 12px; font-weight: 600; }
+.shop-contact-form .mobile-field > :is(input,select) { width: 100%; min-width: 0; min-height: 40px; padding: 8px 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--text); background: var(--surface); font: inherit; font-weight: 400; scroll-margin-block: 80px 150px; }
+.shop-contact-form .mobile-field-error { font-size: 12px; font-weight: 400; }
+.shop-contact-form fieldset > small { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.shop-contacts-reference-page .shop-contact-form .shop-mobile-actions { position: fixed; z-index: 6; left: 50%; bottom: calc(60px + var(--app-safe-area-bottom)); display: grid; grid-template-columns: .8fr 1.2fr; width: min(100%,720px); gap: 8px; margin: 0; padding: 10px 14px; transform: translateX(-50%); border-top: 1px solid var(--border); background: var(--surface); }
+.shop-contact-form .shop-mobile-actions button { min-width: 0; min-height: 40px; font-size: 12px; }
+.shop-contacts-error { padding: 11px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-danger-text); background: var(--danger-bg); font-size: 12px; line-height: 1.6; }
+.shop-contacts-empty { display: grid; justify-items: center; gap: 10px; padding: 30px 14px; border: 1px solid var(--border); border-radius: var(--radius-card); color: var(--muted); background: var(--surface); text-align: center; }
+.shop-contacts-empty :is(h2,p) { margin: 0; font-size: 13px; }
+.shop-contacts-reference-page :is(button,input,select):focus-visible { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+@media(max-width:360px) { .shop-contact-row { grid-template-columns: 32px minmax(0,1fr) auto; column-gap: 8px; row-gap: 4px; padding: 10px; } .shop-contact-icon { width: 32px; height: 32px; } .shop-contact-actions { gap: 5px; } .shop-contacts-header > .mobile-primary { padding-inline: 8px; } }

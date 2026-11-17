@@ -1,0 +1,75 @@
+import { afterEach, expect, it, vi } from 'vitest';
+import { io } from 'socket.io-client';
+import { monitorCustomerOrders } from './customerOrderRealtime';
+vi.mock('socket.io-client', () => ({ io: vi.fn() }));
+afterEach(() => { localStorage.clear(); vi.useRealTimers(); vi.restoreAllMocks(); });
+it('drains each status event once and resumes the persisted customer cursor after reconnect/remount', async () => {
+  vi.useFakeTimers(); localStorage.clear();
+  const handlers = {};
+  const socket = { on: vi.fn((event,handler) => { handlers[event]=handler; }), connect: vi.fn(), removeAllListeners: vi.fn(), disconnect: vi.fn() };
+  io.mockReturnValue(socket);
+  let responses = [{ cursor: 10, items: [] }, { cursor: 11, items: [{ id: 11, event: 'accepted' }], has_more: true }, { cursor: 12, items: [{ id: 12, event: 'packing' }] }];
+  const api = vi.fn(async (path, options) => path.endsWith('/config') ? { realtime_enabled: true, scheme: 'http', host: 'localhost', port: 8080, channel: 'private-shop.orders.customer.1' } : path.endsWith('/auth') ? { token: 'ticket' } : responses.shift() || { cursor: 12, items: [{ id: 12, event: 'packing' }] });
+  const receive = vi.fn(); let stop = monitorCustomerOrders(api, { customerId: 1 }, receive);
+  await vi.advanceTimersByTimeAsync(0); expect(receive).not.toHaveBeenCalled();
+  const auth = vi.fn(); await io.mock.calls.at(-1)[1].auth(auth); await vi.advanceTimersByTimeAsync(0);
+  expect(auth).toHaveBeenCalledWith({ token: 'ticket' });
+  await handlers['order.updated']({ event_id: 11 }); await vi.advanceTimersByTimeAsync(150);
+  expect(receive.mock.calls).toEqual([[[{ id: 11, event: 'accepted' }], { catchUp: false, recoveryId: expect.any(String) }], [[{ id: 12, event: 'packing' }], { catchUp: false, recoveryId: expect.any(String) }]]);
+  expect(JSON.parse(api.mock.calls.filter(([path]) => path.endsWith('/feed')).at(-1)[1].body)).toEqual({ after_id: 11 });
+  await handlers.connect(); await vi.advanceTimersByTimeAsync(150); expect(receive).toHaveBeenCalledTimes(3);
+  expect(receive).toHaveBeenLastCalledWith([], { notificationsChanged: true });
+  handlers.disconnect('io server disconnect'); expect(socket.connect).toHaveBeenCalledOnce();
+  stop(); expect(socket.disconnect).toHaveBeenCalled();
+  stop = monitorCustomerOrders(api, { customerId: 1 }, receive);
+  await vi.advanceTimersByTimeAsync(0); expect(receive).toHaveBeenCalledTimes(3);
+  expect(JSON.parse(api.mock.calls.filter(([path]) => path.endsWith('/feed')).at(-1)[1].body)).toEqual({ after_id: 12 });
+  stop();
+});
+it('keeps guest credentials in POST bodies, does not poll, and stops after an event reveals revoked access', async () => {
+  vi.useFakeTimers(); localStorage.clear();
+  let revoked = false, cursor = 0; const handlers = {};
+  const socket = { connected: true, active: true, on: vi.fn((event, handler) => { handlers[event] = handler; }), connect: vi.fn(), removeAllListeners: vi.fn(), disconnect: vi.fn() };
+  io.mockReturnValue(socket);
+  const api = vi.fn(async (path, options) => {
+    expect(path).not.toContain('secret'); expect(options.customerAuth).toBe(false);
+    expect(JSON.parse(options.body)).toMatchObject({ reference: 'O-PRIVATE', credential: 'secret' });
+    if (revoked) throw { status: 404 };
+    return path.endsWith('/config') ? { realtime_enabled: true, channel: 'tracking' } : { cursor, items: cursor ? [{ id: cursor, event: 'completed' }] : [] };
+  });
+  const receive = vi.fn(); const stop = monitorCustomerOrders(api, { reference: 'O-PRIVATE', credential: 'secret' }, receive);
+  await vi.advanceTimersByTimeAsync(0); const baseline = api.mock.calls.length;
+  cursor = 1; await vi.advanceTimersByTimeAsync(600000);
+  expect(api).toHaveBeenCalledTimes(baseline);
+  handlers['order.updated'](); await vi.advanceTimersByTimeAsync(150);
+  expect(receive).toHaveBeenCalledWith([{ id: 1, event: 'completed' }], expect.objectContaining({ catchUp: false }));
+  revoked = true; handlers['order.updated'](); await vi.advanceTimersByTimeAsync(150);
+  expect(receive).toHaveBeenLastCalledWith([]);
+  const count = api.mock.calls.length; await vi.advanceTimersByTimeAsync(30000); expect(api).toHaveBeenCalledTimes(count); stop();
+});
+
+it('drains the entire reconnect backlog without an idle polling timer', async () => {
+  vi.useFakeTimers(); localStorage.clear();
+  let queue = [{ cursor: 0, items: [] }], cursor = 0; const handlers = {};
+  const socket = { connected: true, active: true, on: vi.fn((event, handler) => { handlers[event] = handler; }), connect: vi.fn(), removeAllListeners: vi.fn(), disconnect: vi.fn() };
+  io.mockReturnValue(socket);
+  const api = vi.fn(async path => {
+    if (path.endsWith('/config')) return { realtime_enabled: true, channel: 'customer' };
+    const data = queue.shift() || { cursor, items: [] }; cursor = data.cursor; return data;
+  });
+  const receive = vi.fn(); const stop = monitorCustomerOrders(api, { customerId: 6 }, receive);
+  await vi.advanceTimersByTimeAsync(0);
+  socket.connected = false; handlers.disconnect('transport close');
+  queue = [1, 2, 3, 4].map(id => ({ cursor: id, items: [{ id }], has_more: id < 4 }));
+  await vi.advanceTimersByTimeAsync(600000); expect(receive).not.toHaveBeenCalled();
+  socket.connected = true; handlers.connect(); await vi.advanceTimersByTimeAsync(300);
+  const items = receive.mock.calls.filter(([rows]) => rows.length);
+  expect(items).toHaveLength(4);
+  const recoveryId = items[0][1].recoveryId;
+  for (const [, delivery] of items) expect(delivery).toEqual({ catchUp: true, recoveryId });
+  queue = [{ cursor: 5, items: [{ id: 5 }] }];
+  handlers['order.updated'](); await vi.advanceTimersByTimeAsync(150);
+  expect(receive.mock.calls.at(-1)[1].catchUp).toBe(false);
+  const calls = api.mock.calls.length; await vi.advanceTimersByTimeAsync(600000);
+  expect(api).toHaveBeenCalledTimes(calls); stop();
+});

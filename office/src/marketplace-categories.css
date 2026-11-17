@@ -1,0 +1,13 @@
+.marketplace-category-manager > .feedback, .marketplace-category-manager > p { margin: 12px; }
+.marketplace-category-modal { width: min(740px, 100%); display: flex; flex-direction: column; overflow: hidden; }
+.marketplace-category-modal .office-modal-header, .marketplace-category-modal .office-modal-footer { flex-shrink: 0; }
+.marketplace-category-modal .office-modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.marketplace-category-fields { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.marketplace-category-fields label, .marketplace-category-filters label { display: grid; gap: 8px; min-width: 0; }
+.marketplace-category-fields small, .marketplace-category-manager .office-cell-stack small { color: var(--muted, var(--theme-text-muted)); overflow-wrap: anywhere; }
+.marketplace-category-parent { grid-column: 1 / -1; display: grid; gap: 12px; }
+.marketplace-category-modal .marketplace-category-fields .marketplace-category-check { display: flex; align-items: center; gap: 10px; grid-column: 1 / -1; }
+.marketplace-category-check input { width: 18px; height: 18px; min-height: 18px; }
+.marketplace-category-filters { display: grid; gap: 20px; }
+.marketplace-category-manager .office-cell-stack { max-width: 420px; overflow-wrap: anywhere; }
+@media (max-width: 640px) { .marketplace-category-fields { grid-template-columns: minmax(0, 1fr); } }

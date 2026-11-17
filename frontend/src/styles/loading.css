@@ -1,0 +1,81 @@
+/* One loading language for tables, forms, cards, reports and local pickers. */
+.skeleton-block,
+.product-barcode-picker-skeleton i,
+.product-movement-skeleton-row td > i,
+.purchase-product-table-skeleton i,
+.purchase-modal-form-skeleton > i {
+  display: block;
+  min-width: 0;
+  height: 12px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--theme-text) 12%, var(--theme-surface));
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+
+.loading-skeleton {
+  position: static;
+  min-width: 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--mkpos-radius, 6px);
+  background: var(--theme-surface);
+}
+
+.loading-skeleton-content { display: grid; gap: 12px; }
+.loading-skeleton--form .loading-skeleton-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.skeleton-item { min-width: 0; }
+.skeleton-item > div { display: grid; min-width: 0; gap: 8px; }
+.skeleton-label { width: 46%; max-width: 140px; }
+.skeleton-control { height: var(--mkpos-control-height, 34px); width: 100%; }
+.skeleton-description { width: 72%; height: 10px; }
+.skeleton-item:nth-child(even) .skeleton-label { width: 62%; }
+.loading-skeleton--cards .loading-skeleton-content { grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); }
+.loading-skeleton--cards .skeleton-item { display: grid; gap: 10px; padding: 10px; border: 1px solid var(--theme-border); border-radius: 6px; }
+.skeleton-image { height: 90px; width: 100%; }
+.loading-skeleton--list .skeleton-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+.loading-skeleton--list .skeleton-item > div { flex: 1; }
+.skeleton-block.skeleton-avatar { flex: 0 0 32px; width: 32px; height: 32px; border-radius: 6px; }
+.skeleton-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.skeleton-metric { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--theme-border); border-radius: 6px; }
+.skeleton-metric > :first-child { width: 58%; }
+.skeleton-metric > :last-child { width: 35%; height: 20px; }
+.skeleton-chart { padding: 12px; border: 1px solid var(--theme-border); border-radius: 6px; }
+.skeleton-title { width: 30%; }
+.skeleton-chart > div { display: flex; height: 210px; align-items: end; gap: 5%; padding-top: 20px; }
+.skeleton-chart-bar { flex: 1; }
+.skeleton-chart-bar--45 { height: 45%; }
+.skeleton-chart-bar--72 { height: 72%; }
+.skeleton-chart-bar--55 { height: 55%; }
+.skeleton-chart-bar--88 { height: 88%; }
+.skeleton-chart-bar--65 { height: 65%; }
+.skeleton-chart-bar--95 { height: 95%; }
+.skeleton-chart-bar--76 { height: 76%; }
+
+body .module-view .table-skeleton-row td { height: var(--mkpos-table-row-height, 42px); }
+.skeleton-cell-content { display: flex; min-width: 0; align-items: center; gap: 8px; }
+.skeleton-line { width: 78%; }
+.table-skeleton-row:nth-child(even) .skeleton-line { width: 62%; }
+.table-skeleton-row td:last-child .skeleton-line { width: 22px; margin-inline: auto; }
+.table-skeleton-row td:has(.skeleton-avatar) .skeleton-line { flex: 1; }
+.loading-refresh-status { padding: 8px 10px; font-size: 12px; color: var(--theme-text-muted); }
+
+/* Preserve the dimensions of purchase form labels and fields. */
+.purchase-modal-form-skeleton > .purchase-modal-skeleton-label { height: 12px; }
+.purchase-modal-form-skeleton > .purchase-modal-skeleton-control,
+.purchase-modal-form-skeleton > .purchase-modal-skeleton-note { height: 44px; }
+
+@media (max-width: 640px) {
+  .loading-skeleton--form .loading-skeleton-content { grid-template-columns: 1fr; }
+  .skeleton-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block,
+  .product-barcode-picker-skeleton i,
+  .product-movement-skeleton-row td > i,
+  .purchase-product-table-skeleton i,
+  .purchase-modal-form-skeleton > i { animation: none; }
+}

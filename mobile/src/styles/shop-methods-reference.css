@@ -1,0 +1,62 @@
+.shop-mobile-page.shop-methods-reference-page { width:min(100%,720px); min-height:calc(100dvh - 60px); margin:auto; padding:0 14px calc(150px + var(--app-safe-area-bottom)); }
+.shop-methods-header { position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:7px; min-height:56px; margin:0 -14px 12px; padding:6px 10px; border-bottom:1px solid var(--border); background:var(--surface); }
+.shop-methods-header .icon-button { display:grid; width:36px; min-height:40px; flex:0 0 36px; place-items:center; padding:0; border:0; background:transparent; box-shadow:none; }
+.shop-methods-reference-page .shop-methods-header h1 { flex:1; min-width:0; margin:0; font-size:17px; line-height:1.5; }
+.shop-method-add { display:flex; align-items:center; gap:5px; min-height:40px; padding:0 5px; border:0; color:var(--theme-primary-text); background:transparent; font:inherit; font-size:13px; font-weight:700; }
+.shop-method-add > svg { padding:3px; width:25px; height:25px; border-radius:50%; color:var(--theme-on-primary); background:var(--brand-700); }
+.shop-methods-intro { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin:0 0 14px; }
+.shop-methods-intro p { margin:0; color:var(--muted); font-size:12px; line-height:1.65; }
+.shop-methods-intro > strong { flex-shrink:0; padding-top:1px; font-size:12px; font-weight:500; }
+.shop-methods-list { display:grid; gap:10px; }
+.shop-method-row { display:flex; align-items:flex-start; gap:12px; min-width:0; padding:14px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); }
+.shop-method-icon { display:grid; flex:0 0 48px; width:48px; height:48px; place-items:center; border-radius:var(--radius-control); color:var(--theme-primary-text); background:var(--brand-100); }
+.shop-method-copy { flex:1; min-width:0; }
+.shop-methods-reference-page .shop-method-copy h2 { margin:0 0 5px; font-size:15px; line-height:1.5; overflow-wrap:anywhere; }
+.shop-method-copy p { margin:3px 0; color:var(--muted); font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+.shop-method-state { display:inline-flex; align-items:center; gap:6px; margin-top:6px; padding:3px 7px; border-radius:var(--radius-small); color:var(--muted); background:var(--background,var(--theme-background)); font-size:11px; }
+.shop-method-state.is-active { color:var(--theme-primary-text); background:var(--brand-100); }
+.shop-method-state > i { width:7px; height:7px; border-radius:50%; background:currentColor; }
+.shop-method-menu-button { display:grid; align-self:center; flex:0 0 32px; width:32px; min-height:40px; place-items:center; padding:0; border:0; color:var(--muted); background:transparent; }
+.shop-method-menu .mobile-sheet-body { display:grid; gap:8px; }
+.shop-method-menu .mobile-sheet-body > button { display:flex; align-items:center; gap:10px; min-height:44px; padding:10px; border:1px solid var(--border); border-radius:var(--radius-control); color:var(--text); background:var(--surface); text-align:left; font:inherit; font-size:13px; }
+.shop-method-menu .mobile-sheet-body > .is-danger { color:var(--theme-danger-text); }
+.shop-methods-reference-page .shop-mobile-card.shop-method-form { display:block; margin:0; padding:0; border:0; background:transparent; box-shadow:none; }
+.shop-method-form > fieldset { display:grid; gap:12px; min-width:0; margin:0; padding:0; border:0; }
+.shop-method-form-section { min-width:0; padding:14px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); }
+.shop-methods-reference-page .shop-method-form-section h2 { margin:0 0 7px; font-size:15px; line-height:1.5; }
+.shop-method-form-section > p { margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.65; }
+.shop-method-form-section .mobile-field { display:grid; gap:6px; margin:0; }
+.shop-method-form-section .mobile-field + .mobile-field { margin-top:12px; }
+.shop-method-form-section .mobile-field > label { position:static; margin:0; padding:0; color:var(--text); background:transparent; font-size:12px; line-height:1.6; font-weight:500; pointer-events:auto; }
+.shop-method-form-section .mobile-field > :is(input,textarea) { width:100%; min-height:42px; padding:9px 10px; border:1px solid var(--border); border-radius:var(--radius-control); color:var(--text); background:var(--surface); font:inherit; font-size:13px; font-weight:400; line-height:1.6; }
+.shop-method-form-section .mobile-field > textarea { min-height:90px; resize:vertical; }
+.shop-method-form-section .shop-method-field-hint { margin:7px 0 0; color:var(--muted); font-size:11px; line-height:1.65; }
+.shop-method-types { min-width:0; margin:0; padding:0; border:0; }
+.shop-method-types legend { margin-bottom:10px; font-size:14px; font-weight:700; line-height:1.6; }
+.shop-method-types legend > span { color:var(--theme-danger-text); }
+.shop-method-types > div { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.shop-method-types label { position:relative; display:flex; align-items:center; gap:8px; min-height:70px; padding:10px 8px; border:1px solid var(--border); border-radius:var(--radius-control); }
+.shop-method-types label.is-selected { border-color:var(--brand-700); background:var(--brand-100); }
+.shop-method-types label > svg { flex-shrink:0; color:var(--theme-primary-text); }
+.shop-method-types label > span { display:grid; gap:4px; min-width:0; }
+.shop-method-types strong { font-size:12px; line-height:1.5; }
+.shop-method-types small { color:var(--muted); font-size:10px; line-height:1.5; }
+.shop-method-form .shop-method-types input[type=radio] { width:15px; height:15px; min-height:15px; flex:0 0 15px; margin-left:auto; padding:0; accent-color:var(--brand-700); }
+.shop-method-character-count { display:block; margin-top:5px; color:var(--muted); font-size:10px; text-align:right; }
+.shop-method-required { color:var(--theme-danger-text); }
+.shop-method-form-section.shop-method-instructions .mobile-field > label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.shop-method-active { position:relative; display:flex; align-items:center; gap:9px; min-height:35px; width:fit-content; font-size:13px; }
+.shop-method-form .shop-method-active input { position:absolute; z-index:1; top:50%; left:0; width:44px; height:26px; min-height:0; margin:0; padding:0; transform:translateY(-50%); opacity:0; }
+.shop-method-switch { position:relative; display:inline-block; flex:0 0 42px; width:42px; height:25px; border-radius:var(--radius-round); background:var(--muted); pointer-events:none; }
+.shop-method-switch::after { position:absolute; top:3px; left:3px; width:19px; height:19px; border-radius:50%; background:var(--theme-surface); content:''; }
+.shop-method-active input:checked + .shop-method-switch { background:var(--brand-700); }
+.shop-method-active input:checked + .shop-method-switch::after { left:20px; }
+.shop-method-active input:focus-visible + .shop-method-switch { outline:2px solid var(--brand-700); outline-offset:3px; }
+.shop-methods-reference-page .shop-method-form .shop-mobile-actions { position:fixed; z-index:6; left:50%; bottom:calc(60px + var(--app-safe-area-bottom)); display:grid; grid-template-columns:1fr 1fr; gap:9px; width:min(100%,720px); margin:0; padding:10px 14px; transform:translateX(-50%); border-top:1px solid var(--border); background:var(--surface); }
+.shop-method-form .shop-mobile-actions button { min-width:0; min-height:42px; font-size:13px; }
+.shop-method-error { margin:0 0 12px; padding:10px; border:1px solid var(--danger-bg); border-radius:var(--radius-small); color:var(--theme-danger-text); background:var(--danger-bg); font-size:12px; line-height:1.7; }
+.shop-methods-empty { padding:20px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); text-align:center; }
+.shop-methods-reference-page button:disabled { opacity:.5; cursor:not-allowed; }
+.shop-methods-reference-page :is(button,input,textarea):focus-visible,.shop-method-types label:focus-within { outline:2px solid var(--brand-700); outline-offset:2px; }
+.shop-method-form :is(input,textarea) { scroll-margin-top:80px; scroll-margin-bottom:150px; }
+@media(max-width:360px) { .shop-method-types label { flex-wrap:wrap; gap:5px; padding:8px; } .shop-method-types label > span { flex:1; } .shop-method-types label > svg { width:21px; } .shop-method-copy h2 { font-size:14px; } }

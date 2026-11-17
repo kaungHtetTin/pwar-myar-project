@@ -1,0 +1,160 @@
+/* The Windows queue owns its scrollbar, including when the POS locks body scrolling. */
+.desktop-sync-page-windows {
+  box-sizing: border-box;
+  height: 100dvh;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.desktop-sync-page-windows .desktop-mode-header {
+  min-height: 52px;
+  padding: 8px 16px;
+}
+
+.desktop-sync-page-windows .desktop-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.desktop-sync-page-windows .desktop-online-badge {
+  min-height: 28px;
+  padding: 0 9px;
+}
+
+.desktop-sync-page-windows .desktop-sync-card {
+  width: calc(100% - 24px);
+  margin: 12px auto;
+  overflow: visible;
+  border-radius: 6px;
+}
+
+.desktop-sync-page-windows .desktop-sync-heading {
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+}
+
+.desktop-sync-page-windows .desktop-sync-heading > span {
+  width: 34px;
+  height: 34px;
+  flex-basis: 34px;
+  border-radius: 6px;
+}
+
+.desktop-sync-page-windows .desktop-sync-heading p {
+  font-size: 10px;
+}
+
+.desktop-sync-page-windows .desktop-sync-heading h1 {
+  margin: 2px 0;
+  font-size: 18px;
+}
+
+.desktop-sync-page-windows .desktop-sync-heading small {
+  font-size: 11px;
+}
+
+.desktop-sync-page-windows .desktop-sync-summary {
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.desktop-sync-page-windows .desktop-sync-summary > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+.desktop-sync-page-windows .desktop-sync-summary strong {
+  font-size: 18px;
+}
+
+.desktop-sync-page-windows .desktop-sync-summary span {
+  font-size: 11px;
+}
+
+.desktop-sync-page-windows :is(.desktop-sync-message, .desktop-sync-progress, .desktop-sync-warning) {
+  margin: 0 12px 8px;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+body .desktop-sync-page-windows .desktop-sync-table-wrap {
+  /* Vertical content belongs to the page; narrow windows can scroll the table sideways. */
+  max-height: none !important;
+  overflow: auto;
+  overscroll-behavior: auto;
+}
+
+body .desktop-sync-page-windows .desktop-sync-table {
+  table-layout: auto;
+}
+
+body .desktop-sync-page-windows .desktop-sync-table thead th {
+  height: 30px;
+  padding: 5px 8px;
+  font-size: 10px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+body .desktop-sync-page-windows .desktop-sync-table tbody td {
+  height: 36px;
+  padding: 5px 8px;
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+body .desktop-sync-page-windows .desktop-sync-table td small {
+  font-size: 10px;
+}
+
+body .desktop-sync-page-windows .desktop-sync-table td.desktop-sync-result {
+  width: 38%;
+  min-width: 240px;
+  max-width: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.desktop-sync-page-windows .desktop-sale-status {
+  gap: 4px;
+  font-weight: 650;
+}
+
+.desktop-sync-page-windows .desktop-sale-status svg {
+  width: 14px;
+  height: 14px;
+}
+
+.desktop-sync-page-windows button {
+  min-height: 28px;
+  padding: 4px 9px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.desktop-sync-page-windows .desktop-sync-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--theme-border);
+  border-radius: 0 0 6px 6px;
+}
+
+.desktop-sync-page-windows .desktop-sync-actions button {
+  min-height: 30px;
+}

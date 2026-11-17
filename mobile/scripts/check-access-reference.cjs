@@ -1,0 +1,78 @@
+const { setDrawerLanguage } = require('./drawer-language.cjs');
+// Dev-server QA only. Synthetic users/roles and intercepted mutations; no live account changes.
+const { chromium } = require('../../shop/node_modules/playwright');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const { execFileSync } = require('node:child_process');
+const root = path.resolve(__dirname, '..'), output = path.join(root, 'artifacts/access-reference'), origin = 'http://127.0.0.1:5176';
+const permissions = ['sell', 'products', 'purchases', 'sales', 'suppliers', 'customers', 'expenses', 'transactions', 'reports', 'ecommerce_settings', 'ecommerce_catalog', 'ecommerce_orders', 'ecommerce_process', 'ecommerce_payments', 'ecommerce_refunds'];
+const labels = ['Sell', 'Products', 'Purchases', 'Sales', 'Suppliers', 'Customers', 'Expenses', 'Transactions', 'Reports', 'Shop settings', 'Online catalog', 'Online orders', 'Process online orders', 'Confirm online payments', 'Record online refunds'];
+const roles = [{ id: 2, name: 'Manager', permissions: permissions.slice(0, 9), staff_count: 1 }, { id: 1, name: 'Cashier', permissions: ['sell', 'products', 'sales'], staff_count: 2 }];
+const staff = [{ id: 2, name: 'Olivia Martin', email: 'olivia.martin@example.com', is_active: true, access_role_id: 1, access_role: roles[1] }, { id: 3, name: 'Daniel Lee', email: 'daniel.lee@example.com', is_active: true, access_role_id: 2, access_role: roles[0] }, { id: 4, name: 'Mia Clark', email: 'mia@example.com', is_active: false, access_role_id: 1, access_role: roles[1] }];
+const owner = { user: { id: 101, role: 'owner', name: 'Alex Morgan', email: 'alex.morgan@example.com' }, business: { id: 101, name: 'Fixture shop', currency: 'MMK' }, permissions: ['access', 'sell', 'products', 'sales', 'shop'], subscription: { is_valid: true } };
+(async () => {
+  await fs.mkdir(output, { recursive: true }); execFileSync('python', ['-c', "from PIL import Image; from pathlib import Path; p=Path('artifacts/access-reference'); [(Image.open(f).resize((393,850)).crop((0,33,393,850)).save(p/('reference-'+f.name[:3]+'.png'))) for f in Path('docs/design/access').glob('*.png')]"], { cwd: root });
+  const browser = await chromium.launch({ headless: true }); let page, calls = [], errors = [], failSave = false;
+  try {
+    async function contextFor(session) {
+      const context = await browser.newContext({ viewport: { width: 393, height: 817 }, timezoneId: 'Asia/Yangon', isMobile: true, hasTouch: true });
+      await context.addInitScript(() => localStorage.setItem('mkpos.language', 'en'));
+      await context.route(`${origin}/api/**`, async route => {
+        const req = route.request(), url = new URL(req.url()), endpoint = url.pathname.slice(4), method = req.method(), body = ['POST', 'PUT'].includes(method) ? req.postDataJSON() : undefined;
+        calls.push({ endpoint, query: url.search, method, body: body ? Object.fromEntries(Object.entries(body).map(([key, value]) => [key, key.startsWith('password') ? '[REDACTED]' : value])) : undefined });
+        let result;
+        if (session.user.role !== 'owner' && /^\/(roles|staff)/.test(endpoint)) return route.fulfill({ status: 403, contentType: 'application/json', body: JSON.stringify({ message: 'Owner access required.' }) });
+        if (method === 'POST' || method === 'PUT') {
+          if (failSave) return route.fulfill({ status: 422, contentType: 'application/json', body: JSON.stringify({ message: 'Fixture save failed; try again.' }) });
+          if (endpoint.endsWith('/password')) result = { ok: true };
+          else if (endpoint.startsWith('/staff')) { const record = staff.find(item => item.id === Number(endpoint.split('/')[2])); if (record) Object.assign(record, body, { access_role: roles.find(role => role.id === body.access_role_id) }); result = record || { id: 5, ...body }; }
+          else { const record = roles.find(item => item.id === Number(endpoint.split('/')[2])); if (record) Object.assign(record, body); result = record || { id: 3, ...body }; }
+        } else if (method === 'DELETE') result = { ok: true };
+        else if (endpoint === '/auth/me') result = session;
+        else if (endpoint === '/app-config') result = { enabled_modules: session.permissions, permissions: session.permissions, business: {} };
+        else if (endpoint === '/roles') result = { items: roles, total: roles.length, modules: permissions.map((id, i) => ({ id, label: labels[i] })) };
+        else if (endpoint === '/staff') result = { items: staff, total: staff.length };
+        else if (/^\/roles\/\d+$/.test(endpoint)) result = roles.find(item => item.id === Number(endpoint.split('/')[2]));
+        else if (/^\/staff\/\d+$/.test(endpoint)) result = staff.find(item => item.id === Number(endpoint.split('/')[2]));
+        else if (endpoint === '/settings') result = { payment_methods: 'Cash' };
+        else if (endpoint === '/shop-admin/chat/config') result = { enabled: false };
+        else result = { items: [], total: 0 };
+        await route.fulfill({ contentType: 'application/json', body: JSON.stringify(result) });
+      });
+      await context.route('**/sanctum/csrf-cookie', route => route.fulfill({ status: 204 })); return context;
+    }
+    const context = await contextFor(owner); page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
+    async function capture(id) {
+      await page.evaluate(() => document.fonts.ready); await page.locator(':focus').evaluateAll(nodes => nodes.forEach(n => n.blur())); await page.evaluate(() => window.scrollTo(0, 0));
+      await page.screenshot({ animations: 'disabled', path: path.join(output, `screen-${id}.png`) });
+      execFileSync('python', ['-c', `from PIL import Image; im=Image.new('RGB',(786,817),'white'); im.paste(Image.open('artifacts/access-reference/reference-${id}.png'),(0,0)); im.paste(Image.open('artifacts/access-reference/screen-${id}.png'),(393,0)); im.save('artifacts/access-reference/comparison-${id}.png')`], { cwd: root });
+      for (const width of [320, 768]) { await page.setViewportSize({ width, height: 817 }); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${id} ${width}px overflow`); await page.screenshot({ animations: 'disabled', path: path.join(output, `screen-${id}-${width}.png`) }); } await page.setViewportSize({ width: 393, height: 817 });
+    }
+    await page.goto(`${origin}/access`); await page.getByRole('button', { name: 'Actions for role Manager', exact: true }).waitFor(); await capture('049');
+    await page.getByRole('button', { name: 'New role', exact: true }).click(); await page.getByRole('button', { name: 'Create role', exact: true }).click(); await page.getByText('Role name is required.', { exact: true }).waitFor(); await page.locator('main:visible').getByLabel('Role name', { exact: true }).fill('Store manager'); for (const label of ['Sell', 'Products', 'Sales', 'Suppliers', 'Customers']) await page.getByRole('checkbox', { name: label, exact: true }).check(); await capture('050'); await page.locator('main:visible').getByLabel('Role name', { exact: true }).focus(); await page.screenshot({ path: path.join(output, 'role-focus.png') });
+    await page.getByRole('button', { name: 'Cancel', exact: true }).click(); await page.goForward(); assert.equal(await page.locator('main:visible').getByLabel('Role name', { exact: true }).inputValue(), 'Store manager'); await page.getByRole('button', { name: 'Create role', exact: true }).click(); await page.getByRole('button', { name: 'Actions for role Manager', exact: true }).waitFor(); const rolePost = calls.find(c => c.endpoint === '/roles' && c.method === 'POST'); assert.deepEqual(rolePost.body.permissions.sort(), ['customers', 'products', 'sales', 'sell', 'suppliers']);
+    await page.getByRole('button', { name: 'Actions for role Manager', exact: true }).click(); await page.getByRole('button', { name: /^Edit/ }).click(); await page.locator('main:visible').getByLabel('Role name', { exact: true }).fill('Store manager'); await capture('051'); failSave = true; await page.getByRole('button', { name: 'Save changes', exact: true }).click(); await page.getByText('Fixture save failed; try again.', { exact: true }).waitFor(); assert.equal(await page.locator('main:visible').getByLabel('Role name', { exact: true }).inputValue(), 'Store manager'); failSave = false; await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+    await page.getByRole('button', { name: 'Staff', exact: true }).click(); await page.getByRole('button', { name: 'Actions for staff Mia Clark', exact: true }).waitFor(); await capture('110'); await page.getByRole('button', { name: 'New staff', exact: true }).click(); await page.locator('main:visible').getByLabel('Staff name', { exact: true }).fill('Mia Clark'); await page.locator('main:visible').getByLabel('Email', { exact: true }).fill('mia@example.com'); await page.locator('main:visible').getByLabel('Assigned role', { exact: true }).selectOption('1'); await page.locator('main:visible').getByLabel('Password', { exact: true }).fill('FixturePass123!'); await page.locator('main:visible').getByLabel('Confirm password', { exact: true }).fill('FixturePass123!'); await capture('052');
+    await page.getByRole('button', { name: 'Show password', exact: true }).click(); assert.equal(await page.locator('main:visible').getByLabel('Password', { exact: true }).getAttribute('type'), 'text'); await page.getByRole('button', { name: 'Hide password', exact: true }).click(); await page.locator('main:visible').getByLabel('Staff name', { exact: true }).fill('New Staff'); await page.locator('main:visible').getByLabel('Email', { exact: true }).fill('new.staff@example.com'); await page.getByRole('button', { name: 'Create staff', exact: true }).click(); await page.getByRole('button', { name: 'Staff', exact: true }).click();
+    await page.getByRole('button', { name: 'Actions for staff Mia Clark', exact: true }).click(); await page.getByRole('button', { name: /^Edit/ }).click(); await page.locator('main:visible').getByLabel('Staff name', { exact: true }).fill('Mia draft'); const staffReads = calls.filter(c => c.endpoint === '/staff/4' && c.method === 'GET').length; await page.locator('main:visible').getByLabel('Assigned role', { exact: true }).selectOption('2'); assert.equal(await page.locator('main:visible').getByLabel('Staff name', { exact: true }).inputValue(), 'Mia draft'); assert.equal(calls.filter(c => c.endpoint === '/staff/4' && c.method === 'GET').length, staffReads); await page.locator('main:visible').getByLabel('Staff name', { exact: true }).fill('Mia Clark'); await page.locator('main:visible').getByLabel('Assigned role', { exact: true }).selectOption('1'); await page.getByRole('checkbox', { name: 'Active account', exact: true }).check(); await capture('053'); await page.getByRole('button', { name: 'Save changes', exact: true }).click();
+    await page.getByRole('button', { name: 'Actions for staff Mia Clark', exact: true }).click(); await page.getByRole('button', { name: /^Reset password/ }).click(); await page.locator('main:visible').getByLabel('New password', { exact: true }).fill('FixturePass123!'); await page.locator('main:visible').getByLabel('Confirm new password', { exact: true }).fill('FixturePass123!'); await capture('054'); await page.locator('main:visible').getByLabel('Confirm new password', { exact: true }).fill('different'); await page.getByRole('button', { name: 'Reset password', exact: true }).click(); await page.getByText('Passwords do not match.', { exact: true }).waitFor(); await page.locator('main:visible').getByLabel('Confirm new password', { exact: true }).fill('FixturePass123!'); await page.getByRole('button', { name: 'Reset password', exact: true }).click(); await page.getByRole('button', { name: 'Staff', exact: true }).click();
+    const source = page.getByRole('button', { name: 'Actions for staff Mia Clark', exact: true }); await source.evaluate(n => n.dataset.retention = 'access-source'); await source.click(); await page.getByRole('button', { name: /^Edit/ }).click(); await page.locator('main:visible').getByLabel('Staff name', { exact: true }).fill('Retained staff draft'); const reads = calls.length; await page.getByRole('button', { name: 'Back to access', exact: true }).click(); assert.equal(await source.getAttribute('data-retention'), 'access-source'); assert.equal(calls.length, reads); await page.goForward(); assert.equal(await page.locator('main:visible').getByLabel('Staff name', { exact: true }).inputValue(), 'Retained staff draft'); await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+    await source.click(); await page.getByRole('button', { name: /^Delete/ }).click(); await page.getByRole('dialog', { name: 'Delete staff account?', exact: true }).waitFor(); await page.getByRole('button', { name: 'Cancel', exact: true }).click(); assert.equal(calls.filter(c => c.method === 'DELETE').length, 0);
+    await page.getByRole('button', { name: 'Open app menu', exact: true }).click(); await setDrawerLanguage(page, 'my'); await page.keyboard.press('Escape'); await page.screenshot({ path: path.join(output, 'myanmar-staff.png') }); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    roles.length = 0; staff.length = 0;
+    const ownerOnly = await contextFor(owner); page = await ownerOnly.newPage();
+    await page.goto(`${origin}/access`);
+    await page.getByText('Full access to all features', { exact: true }).waitFor();
+    await page.locator('.access-skeleton').waitFor({ state: 'detached' });
+    assert.equal(await page.locator('.mobile-empty-state').count(), 0);
+    await page.screenshot({ path: path.join(output, 'owner-only-roles.png') });
+    await page.getByRole('button', { name: 'Staff', exact: true }).click();
+    await page.locator('.access-owner-card strong').filter({ hasText: 'Alex Morgan' }).waitFor();
+    assert.equal(await page.locator('.mobile-empty-state').count(), 0);
+    await page.screenshot({ path: path.join(output, 'owner-only-staff.png') });
+    const unauthorized = await contextFor({ ...owner, user: { id: 9, role: 'staff', name: 'Limited Staff' }, permissions: ['sales'] }); page = await unauthorized.newPage(); page.on('pageerror', e => errors.push(e.message)); const forbiddenStart = calls.length; await page.goto(`${origin}/access`); await page.getByRole('heading', { name: 'Permission denied', exact: true }).waitFor(); await capture('157'); assert.equal(calls.slice(forbiddenStart).filter(c => /^\/(roles|staff)/.test(c.endpoint)).length, 0); await page.locator('.access-denied-content').getByRole('button', { name: 'Back to authorized workspace', exact: true }).click(); await page.getByRole('heading', { name: 'Sales', exact: true }).waitFor();
+    assert.deepEqual(errors, []); await fs.writeFile(path.join(output, 'checks.json'), JSON.stringify({ result: 'Eight access references, 320/768px layouts, role payload, staff role-change draft, password validation/reset, failure retention, retained source/tab, delete cancellation, Myanmar and denied-access no-fetch checks passed.', errors, calls }, null, 2)); console.log('Access reference dev-server checks passed.');
+  } catch (error) { if (page) { await page.screenshot({ path: path.join(output, 'failure.png') }); await fs.writeFile(path.join(output, 'failure.json'), JSON.stringify({ error: error.message, errors, calls, text: await page.locator('body').innerText() }, null, 2)); } throw error; }
+  finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

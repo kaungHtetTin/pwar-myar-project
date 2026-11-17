@@ -1,0 +1,58 @@
+import React from 'react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { PasswordResetForm } from './PasswordResetForm';
+import { request } from '../api';
+vi.mock('../api', () => ({ request: vi.fn() }));
+beforeEach(() => request.mockReset());
+afterEach(() => { cleanup(); vi.useRealTimers(); });
+const send = async (resendAfter = 60) => {
+  request.mockResolvedValueOnce({ message: 'If an eligible account exists, a reset code has been sent.', resend_after: resendAfter });
+  fireEvent.change(screen.getByLabelText('Email address'), { target: { value: 'buyer@example.test' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Send reset code' }));
+  await screen.findByLabelText('Email verification code');
+};
+it('requests an OTP, then resets the password without signing the user in', async () => {
+  const back = vi.fn(); render(<PasswordResetForm onBack={back} />); await send();
+  expect(request.mock.calls[0][0]).toBe('/auth/forgot-password');
+  expect(screen.getByRole('button', { name: 'Resend code in 60s' })).toBeDisabled();
+  fireEvent.change(screen.getByLabelText('Email verification code'), { target: { value: '012345' } });
+  fireEvent.change(screen.getByLabelText('New password'), { target: { value: 'new-password' } });
+  fireEvent.change(screen.getByLabelText('Confirm new password'), { target: { value: 'new-password' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Show new password' }));
+  expect(screen.getByLabelText('New password')).toHaveAttribute('type', 'text');
+  fireEvent.click(screen.getByRole('button', { name: 'Hide new password' }));
+  expect(screen.getByLabelText('New password')).toHaveAttribute('type', 'password');
+  request.mockResolvedValueOnce({ message: 'Reset successfully' });
+  fireEvent.click(screen.getByRole('button', { name: 'Reset password' }));
+  await screen.findByText('Your password has been changed. Sign in with your new password.');
+  expect(request.mock.calls[1][0]).toBe('/auth/reset-password');
+  expect(JSON.parse(request.mock.calls[1][1].body)).toMatchObject({ email: 'buyer@example.test', code: '012345', password_confirmation: 'new-password' });
+  fireEvent.click(screen.getByRole('button', { name: 'Back to sign in' })); expect(back).toHaveBeenCalledOnce();
+});
+it('preserves a failed reset for retry and blocks duplicate submissions while saving', async () => {
+  render(<PasswordResetForm onBack={vi.fn()} />); await send();
+  fireEvent.change(screen.getByLabelText('Email verification code'), { target: { value: '111111' } });
+  fireEvent.change(screen.getByLabelText('New password'), { target: { value: 'new-password' } });
+  fireEvent.change(screen.getByLabelText('Confirm new password'), { target: { value: 'new-password' } });
+  request.mockRejectedValueOnce(Object.assign(new Error('Invalid code'), { payload: { errors: { code: ['Request a new code'] } } }));
+  fireEvent.submit(screen.getByRole('button', { name: 'Reset password' }).closest('form'));
+  await screen.findByText('Invalid code'); expect(screen.getByLabelText('Email verification code')).toHaveValue('111111');
+  expect(screen.getByLabelText('Email verification code')).toHaveAttribute('aria-invalid', 'true');
+  let finish; request.mockImplementationOnce(() => new Promise(resolve => { finish = resolve; }));
+  const form = screen.getByRole('button', { name: 'Reset password' }).closest('form');
+  fireEvent.submit(form); fireEvent.submit(form);
+  expect(request).toHaveBeenCalledTimes(3); expect(screen.getByRole('button', { name: 'Back to sign in' })).toBeDisabled();
+  await act(async () => finish({}));
+});
+it('resends after cooldown and clears the code before switching email', async () => {
+  render(<PasswordResetForm onBack={vi.fn()} />); await send(1);
+  await screen.findByRole('button', { name: 'Resend code' }, { timeout: 2500 });
+  request.mockResolvedValueOnce({ message: 'New code sent', resend_after: 60 });
+  fireEvent.click(screen.getByRole('button', { name: 'Resend code' }));
+  await act(async () => {}); expect(request).toHaveBeenCalledTimes(2);
+  expect(screen.getByRole('button', { name: 'Resend code in 60s' })).toBeDisabled();
+  fireEvent.click(screen.getByRole('button', { name: 'Use a different email' }));
+  expect(screen.queryByLabelText('Email verification code')).not.toBeInTheDocument();
+  expect(screen.getByLabelText('Email address')).not.toHaveAttribute('readonly');
+});

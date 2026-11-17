@@ -1,0 +1,114 @@
+// Synthetic incoming messages; all APIs are intercepted and no customer is contacted.
+const { chromium, firefox } = require('../../shop/node_modules/playwright');
+const fs = require('node:fs/promises');
+const assert = require('node:assert/strict');
+const path = require('node:path');
+(async () => {
+  const engine = process.env.NOTIFICATION_BROWSER || 'chromium';
+  const browser = await ({ chromium, firefox })[engine].launch();
+  const output = path.resolve('artifacts/chat-notification', engine);
+  await fs.mkdir(output, { recursive: true });
+  try {
+    const context = await browser.newContext({ viewport: { width: 375, height: 667 }, serviceWorkers: 'block' });
+    const page = await context.newPage(), errors = [], calls = [];
+    page.on('pageerror', error => errors.push(error.message));
+    const uuid = '12345678-1234-1234-1234-123456789abc';
+    const permissions = ['sell', 'products', 'shop', 'ecommerce_orders', 'ecommerce_process'];
+    let feed = { enabled: true, cursor: 0, unread_count: 0, items: [] };
+    const session = { user: { id: 1, name: 'Demo Owner', role: 'owner' }, business: { id: 1, name: 'Demo shop' }, permissions, subscription: { is_valid: true } };
+    await context.route('http://127.0.0.1:5176/api/**', async route => {
+      const endpoint = new URL(route.request().url()).pathname.replace(/^.*\/api/, '');
+      calls.push(endpoint);
+      let data = { items: [], total: 0 };
+      if (endpoint === '/auth/me') data = session;
+      else if (endpoint === '/app-config') data = { enabled_modules: ['sell', 'products', 'shop'], permissions, language: 'en', business: {} };
+      else if (endpoint === '/settings') data = { price_types: 'Retail', currency: 'Ks' };
+      else if (endpoint === '/categories') data = [];
+      else if (endpoint.endsWith('/notifications')) data = feed;
+      else if (endpoint === '/shop-admin/owner-location') data = { submitted: true };
+      else if (endpoint.endsWith('/chat/config')) data = { enabled: true, realtime_enabled: false };
+      else if (endpoint.endsWith('/messages')) data = { items: [], thread: { customer_name: 'Kaung Htet Tin' }, has_more: false };
+      await route.fulfill({ status: 200, json: data });
+    });
+    await page.goto('http://127.0.0.1:5176/products');
+    const search = page.locator('main:visible .ui-search input').first();
+    await search.waitFor({ timeout: 8000 }).catch(async error => { await page.screenshot({ path: path.join(output, 'failure.png') }); console.log(await page.locator('body').innerText()); throw error; });
+    await search.focus();
+    feed = { enabled: true, cursor: 1, unread_count: 1, items: [{ id: 1, uuid, name: 'Kaung Htet Tin', preview: 'Hi, is this product available? I would like to order two bags.' }] };
+    await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+    const notice = page.locator('.chat-app-alert');
+    await notice.waitFor({ timeout: 8000 }).catch(async error => { console.log({ calls, errors, body: await page.locator('body').innerText() }); throw error; });
+    assert.equal(await search.evaluate(input => input === document.activeElement), true, 'Incoming notification does not steal typing focus');
+    for (const width of [320, 375, 393, 768]) {
+      await page.setViewportSize({ width, height: 667 });
+      const rect = await notice.boundingBox();
+      assert.ok(rect.x >= 11 && rect.x + rect.width <= width - 11, 'Banner fits mobile gutters');
+      assert.ok(rect.y < 30 && rect.y + rect.height < 230, 'Compact banner arrives at the top');
+      assert.ok(await notice.getByRole('button', { name: 'Dismiss chat notification' }).evaluate(button => button.getBoundingClientRect().height >= 44), 'Dismiss has a touch target');
+      await page.screenshot({ path: path.join(output, `arrival-${width}.png`), animations: 'disabled' });
+    }
+    const sourceUrl = page.url();
+    await notice.getByRole('button', { name: 'Dismiss chat notification' }).click();
+    await notice.waitFor({ state: 'hidden' });
+    assert.equal(page.url(), sourceUrl, 'Dismiss stays on the source page');
+    const globalChat = page.locator('.shared-app-bar .app-bar-chat');
+    assert.equal(await globalChat.locator('.app-bar-chat-badge').innerText(), '1', 'Dismissing notification leaves unread badge');
+    assert.equal(await globalChat.evaluate(button => button.nextElementSibling.classList.contains('app-bar-menu')), true, 'Chat sits immediately before app menu');
+    await page.screenshot({ path: path.join(output, 'global-chat-badge-768.png'), animations: 'disabled' });
+    for (const width of [320,375]) {
+      await page.setViewportSize({ width, height: 667 });
+      await page.screenshot({ path: path.join(output, `global-chat-badge-${width}.png`), animations: 'disabled' });
+    }
+    await search.fill('retained product search');
+    await page.waitForLoadState('networkidle');
+    const sourceInput = await search.elementHandle();
+    const readsBeforeChat = calls.filter(endpoint => endpoint === '/products').length;
+    await globalChat.click();
+    await page.waitForURL('**/shop/chat');
+    assert.equal(await globalChat.getAttribute('aria-current'), 'page');
+    const inboxUrl = page.url();
+    await globalChat.click();
+    assert.equal(page.url(), inboxUrl, 'Current inbox action keeps its existing view');
+    await page.goBack();
+    await search.waitFor();
+    assert.equal(await search.inputValue(), 'retained product search', 'Global chat Back preserves search');
+    assert.equal(await sourceInput.evaluate(input => input.isConnected), true, 'Global chat Back resumes the retained page');
+    assert.equal(calls.filter(endpoint => endpoint === '/products').length, readsBeforeChat, 'Global chat Back does not refetch the source list');
+    feed = { ...feed, unread_count: 120, items: [] };
+    await page.evaluate(() => window.dispatchEvent(new Event('mkpos:shop-chat-read')));
+    await page.waitForFunction(() => document.querySelector('.app-bar-chat-badge')?.textContent === '99+');
+    assert.ok((await globalChat.getAttribute('aria-label')).includes('120'), 'Accessible label retains the exact unread count');
+    await page.screenshot({ path: path.join(output, 'global-chat-count-320.png'), animations: 'disabled' });
+    feed = { ...feed, unread_count: 0 };
+    await page.evaluate(() => window.dispatchEvent(new Event('mkpos:shop-chat-read')));
+    await page.locator('.app-bar-chat-badge').waitFor({ state: 'hidden' });
+    feed = { ...feed, cursor: 2, unread_count: 1, items: [{ id: 2, uuid, name: 'Kaung Htet Tin — Evergreen Wholesale customer account', preview: 'A longer message preview wraps without covering the page actions. '.repeat(8) }] };
+    await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+    await notice.waitFor();
+    await page.setViewportSize({ width: 320, height: 667 });
+    assert.ok(await notice.evaluate(element => element.scrollWidth <= element.clientWidth), 'Long sender and preview fit the banner');
+    await page.screenshot({ path: path.join(output, 'long-content-320.png'), animations: 'disabled' });
+    await notice.getByRole('button', { name: 'Open chat', exact: true }).focus();
+    await page.keyboard.press('Enter');
+    await page.waitForURL(`**/shop/chat/${uuid}`);
+    await notice.waitFor({ state: 'hidden' });
+    await page.getByRole('button', { name: 'Open app menu' }).click();
+    await page.locator('.language-toggle').click();
+    await page.keyboard.press('Escape');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    // Incoming activity is badge-only in Chat; verify translated toasts on the source page.
+    await page.goBack();
+    await search.waitFor();
+    feed = { ...feed, cursor: 3, unread_count: 1, items: [{ id: 3, uuid, name: 'မောင်မောင်', preview: 'မင်္ဂလာပါ။ ဒီကုန်ပစ္စည်းကို မှာယူချင်ပါတယ်။' }] };
+    await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+    await notice.waitFor();
+    assert.equal(await notice.evaluate(element => getComputedStyle(element).animationName), 'none', 'Arrival respects reduced motion');
+    await page.waitForLoadState('networkidle');
+    await page.evaluate(() => document.fonts.ready);
+    await page.screenshot({ path: path.join(output, 'myanmar-320.png'), animations: 'disabled' });
+    await notice.locator('.chat-app-alert-dismiss').click();
+    await page.screenshot({ path: path.join(output, 'global-chat-myanmar-320.png'), animations: 'disabled' });
+    assert.deepEqual(errors, []);
+    console.log(`${engine}: notification layout, focus, dismiss, arrival, Open chat, Myanmar and reduced motion passed.`);
+  } finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

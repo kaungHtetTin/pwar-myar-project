@@ -1,0 +1,33 @@
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* Keep the input's actual font large enough for iOS without disabling user zoom.
+   Existing field heights, card spacing and surrounding typography stay compact. */
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  :root #root :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="hidden"]):not([type="button"]):not([type="submit"]), select, textarea, [contenteditable="true"]) {
+    font-size: 16px;
+    scroll-margin-block: var(--shop-input-scroll-margin, 72px 24px);
+  }
+  html[data-shop-keyboard-open] .mobile-navigation { visibility: hidden; pointer-events: none; }
+  /* A conversation scrolls internally. Safari keeps the layout viewport tall
+     when its keyboard opens, so the ordinary main-page min-height cannot apply. */
+  main.shopping-main:has([data-retained-view]:not([hidden]) .customer-chat-page) {
+    position: fixed;
+    inset: 0 0 auto;
+    min-height: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  html[data-shop-keyboard-open] main.shopping-main:has([data-retained-view]:not([hidden]) .customer-chat-page) {
+    top: var(--shop-keyboard-top, 0px);
+    height: var(--shop-keyboard-height, 100dvh);
+  }
+  :root #root .customer-chat-page { height: 100dvh; }
+  html[data-shop-keyboard-open] #root .customer-chat-page { height: var(--shop-keyboard-height, 100dvh); }
+  :root #root .customer-chat-page .shop-chat-composer textarea {
+    font-size: 16px;
+    --shop-input-scroll-margin: 0px;
+  }
+  html[data-shop-keyboard-open] .customer-chat-page .shop-chat-composer {
+    padding-bottom: 8px;
+  }
+}

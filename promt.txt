@@ -1,0 +1,30 @@
+I want to change the project branding
+No new function or feature or module implementation
+
+name
+MKPOS => PwarMyar 
+
+logo
+i add logo folder with three logos:
+main logo, transparent logo with label and transparent logo without label
+you need to set these in relavent config like main logo, app logo, favicon, welcome page
+
+domain configuration and cors
+landing website => https://www.pwarmyar.com
+office app => https://office.pwarmyar.com
+shop app => https://shop.pwarmyar.com
+mobile app => https://mobilepos.pwarmyar.com
+frontend app => https://pos.pwarmyar.com
+socket app => https://socket.pwarmyar.com
+laravel app => https://www.pwarmyar.com/public/api
+
+android apps
+you need to change the app package name or android app id
+and other related sections
+
+window apps
+make app proper configation for window apps
+
+you can ask me before implementation if you have question
+
+

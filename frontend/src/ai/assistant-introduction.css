@@ -1,0 +1,17 @@
+.ai-introduction { container: ai-introduction / inline-size; width: 100%; max-width: 680px; min-width: 0; margin: 0 auto; padding: 12px 0; color: var(--text, var(--theme-text)); text-align: start; font-size: 13px; line-height: 1.75; overflow-wrap: anywhere; }
+.ai-introduction header { margin-bottom: 14px; }
+.ai-introduction-avatar { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-bottom: 6px; border-radius: 12px; background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+.ai-introduction h2 { margin: 0; font-size: 18px; line-height: 1.8; }
+.ai-introduction p { margin: 4px 0 0; }
+.ai-introduction ul { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ai-introduction li { display: flex; gap: 9px; align-items: flex-start; min-width: 0; padding: 10px; border: 1px solid var(--line, var(--border, var(--theme-border))); border-radius: var(--radius-sm, 8px); }
+.ai-introduction li > svg { flex: none; margin-top: 4px; color: var(--theme-primary-text); }
+.ai-introduction li > div { min-width: 0; }
+.ai-introduction h3 { margin: 0; font-size: 13px; line-height: 1.8; }
+.ai-introduction li p, .ai-introduction footer { color: var(--muted, var(--theme-text-muted)); font-size: 12px; }
+.ai-introduction footer { margin-top: 12px; }
+.ai-introduction .ai-introduction-example { color: var(--text, var(--theme-text)); margin-top: 8px; }
+@container ai-introduction (min-width: 500px) { .ai-introduction ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ai-mobile-page .ai-introduction { padding-block: 8px; font-size: 14px; }
+.ai-mobile-page .ai-introduction h3 { font-size: 14px; }
+.ai-mobile-page .ai-introduction li p, .ai-mobile-page .ai-introduction footer { font-size: 13px; }

@@ -1,0 +1,18 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+import { mkdir } from 'node:fs/promises';
+const browser=await chromium.launch({headless:true});
+await mkdir('test-artifacts/featured-ranking',{recursive:true});
+try {for(const width of [393,1366]) {
+ const context=await browser.newContext({viewport:{width,height:956},geolocation:{latitude:16.84,longitude:96.17},permissions:['geolocation']});const page=await context.newPage();const calls=[];
+ await page.route('**/ecommerce/**',route=>{const url=new URL(route.request().url()),path=url.pathname.split('/ecommerce')[1];calls.push(path+url.search);let data={items:[],has_more:false,unread_count:0};
+ if(path==='/marketplace/products') { const nearby=url.searchParams.has('latitude');data={items:Array.from({length:6},(_,index)=>({id:index+1,name:(nearby?'Nearby Rice ':'Rice ')+(index+1),store_slug:'demo',store_name:'Demo Shop',category:'Food',currency:'K',price:1000,available_quantity:20,rating:{count:0}})),has_more:false};}
+ if(path==='/marketplace/shops')data={items:[{slug:'demo',display_name:'Demo Shop',accepting_orders:true,rating:{count:0}}],has_more:false};return route.fulfill({json:data});});
+ await page.goto('http://127.0.0.1:5177/#/marketplace');await page.getByRole('button',{name:'Use my location',exact:true}).waitFor();await page.locator('.home-shop-card').waitFor();assert.ok(!calls.some(url=>url.includes('latitude=')));assert.ok(calls.some(url=>url.startsWith('/marketplace/products')&&url.includes('featured=1')));assert.ok(calls.some(url=>url.startsWith('/marketplace/shops')&&url.includes('featured=1')));
+ await page.getByRole('button',{name:'Use my location',exact:true}).click();await page.getByRole('button',{name:'Clear location',exact:true}).waitFor();await page.locator('.home-section').filter({has:page.getByRole('heading',{name:'Featured Products',exact:true})}).getByRole('heading',{name:'Nearby Rice 1',exact:true}).waitFor();assert.ok(calls.some(url=>url.startsWith('/marketplace/shops')&&url.includes('latitude=16.84')&&url.includes('longitude=96.17')));assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:`test-artifacts/featured-ranking/home-${width}.png`});
+ await page.getByRole('button',{name:'Clear location',exact:true}).click();await page.locator('.home-section').filter({has:page.getByRole('heading',{name:'Featured Products',exact:true})}).getByRole('heading',{name:'Rice 1',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Clear location',exact:true}).count(),0);
+ await Promise.all([page.waitForResponse(response => response.url().includes('/marketplace/products') && !response.url().includes('featured=1')), page.getByRole('button',{name:'Shop Now',exact:true}).click()]);await page.getByRole('button',{name:'Back to home',exact:true}).waitFor();assert.ok(calls.filter(url=>url.startsWith('/marketplace/products')).at(-1).includes('featured=1')===false);
+ console.log(`PASS ${width}: ranked products/shops, opt-in location, distance queries, clear location, normal catalog and responsive layout`);await context.close();
+}
+const denied=await browser.newContext();const page=await denied.newPage();await page.route('**/ecommerce/**',route=>route.fulfill({json:{items:[],has_more:false,unread_count:0}}));await page.goto('http://127.0.0.1:5177');await page.getByRole('button',{name:'Use my location',exact:true}).click();await page.getByText('Location is unavailable. Recommendations still work without it.',{exact:true}).waitFor();console.log('PASS denied location: graceful fallback');
+}finally{await browser.close();}

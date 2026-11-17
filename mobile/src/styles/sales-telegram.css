@@ -1,0 +1,15 @@
+.sales-telegram-page { display: grid; gap: var(--space-4, 16px); }
+.sales-telegram-page[hidden] { display: none; }
+/* Keep the final group row and editor actions clear of the fixed navigation. */
+.shop-mobile-page:has(.sales-telegram-page) {
+  padding-bottom: calc(var(--shell-bottom-nav-height, calc(60px + var(--app-safe-area-bottom))) + 16px);
+}
+.sales-telegram-form { display: grid; gap: 12px; min-width: 0; }
+.sales-telegram-form h2, .sales-telegram-form p { margin: 0; }
+.sales-telegram-form p { font-size: 13px; line-height: 1.7; color: var(--theme-text-muted); }
+.sales-telegram-form fieldset { display: grid; gap: 14px; padding: 0; border: 0; min-width: 0; }
+.sales-telegram-form label { display: grid; gap: 6px; min-width: 0; }
+.sales-telegram-form label.sales-ai-mobile-choice { display: flex; align-items: flex-start; gap: 10px; }
+.sales-telegram-form label.sales-ai-mobile-choice input { flex-shrink: 0; }
+.sales-telegram-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sales-telegram-actions h2 { flex: 1; }

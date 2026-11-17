@@ -1,0 +1,56 @@
+const { chromium, expect } = require('../shop/node_modules/playwright/test');
+const assert = require('node:assert/strict');
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const context = await browser.newContext({ viewport: { width: 1400, height: 950 } });
+    const page = await context.newPage();
+    const errors = [], calls = [];
+    page.on('pageerror', e => errors.push(e.message));
+    const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aWQ0AAAAASUVORK5CYII=', 'base64');
+    let customer = { id: 1, name: 'Demo Buyer', email: 'buyer@example.test', phone: '', address: '', avatar_url: null };
+    await context.addInitScript(() => localStorage.setItem('mkpos.shop.customerToken', 'fixture-token'));
+    await context.route('**/api/ecommerce/**', async route => {
+      const path = new URL(route.request().url()).pathname.replace('/api/ecommerce', '');
+      const method = route.request().method();
+      calls.push(`${method} ${path}`);
+      if (path.startsWith('/customer/avatars/')) return route.fulfill({ contentType: 'image/png', body: png });
+      if (path === '/customer/profile/avatar') customer = { ...customer, avatar_url: method === 'DELETE' ? null : 'http://127.0.0.1:8000/api/ecommerce/customer/avatars/fixture.jpg' };
+      if (path === '/customer/profile') customer = { ...customer, ...route.request().postDataJSON() };
+      const body = path === '/customer/logout' ? { ok: true } : path === '/customer/me' || path.startsWith('/customer/profile') ? { customer } : { items: [], has_more: false };
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify(body) });
+    });
+    await page.goto('http://127.0.0.1:5177/#/account');
+    const name = page.getByLabel('Name', { exact: true });
+    await name.fill('Retained draft');
+    const source = await name.elementHandle();
+    const chooserPromise = page.waitForEvent('filechooser');
+    await page.getByRole('button', { name: 'Upload picture', exact: true }).click();
+    await (await chooserPromise).setFiles({ name: 'profile.png', mimeType: 'image/png', buffer: png });
+    await expect(page.getByRole('button', { name: 'Replace picture' })).toBeVisible();
+    await expect(page.getByAltText('Your profile')).toBeVisible();
+    await expect(name).toHaveValue('Retained draft');
+    assert.equal(await name.evaluate((node, old) => node === old, source), true);
+    await page.screenshot({ path: '.codex/customer-avatar.png' });
+    await page.getByRole('link', { name: 'Shops', exact: true }).click();
+    const count = calls.length;
+    await page.goBack();
+    await expect(name).toHaveValue('Retained draft');
+    assert.equal(await name.evaluate((node, old) => node === old, source), true);
+    assert.equal(calls.length, count);
+    const replaceChooser = page.waitForEvent('filechooser');
+    await page.getByRole('button', { name: 'Replace picture' }).click();
+    await (await replaceChooser).setFiles({ name: 'new.png', mimeType: 'image/png', buffer: png });
+    await expect.poll(() => calls.filter(c => c === 'POST /customer/profile/avatar').length).toBe(2);
+    await expect(page.getByRole('button', { name: 'Remove picture' })).toBeEnabled();
+    await page.getByRole('button', { name: 'Remove picture' }).click();
+    await expect(page.getByRole('button', { name: 'Upload picture' })).toBeVisible();
+    await expect(name).toHaveValue('Retained draft');
+    await page.getByRole('button', { name: 'Save profile', exact: true }).click();
+    await expect(page.getByText('Profile saved.', { exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Customer sign in' })).toBeVisible();
+    assert.deepEqual(errors, []);
+    console.log('PASS: upload, replace, remove, save, sign-out; profile draft and DOM retained on Back without refetch.');
+  } finally { await browser.close(); }
+})().catch(e => { console.error(e); process.exitCode = 1; });

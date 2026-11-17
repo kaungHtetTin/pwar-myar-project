@@ -1,0 +1,244 @@
+/*
+ * Myanmar typography is loaded last so compact module rules cannot squeeze
+ * combining marks into English-sized line boxes.
+ */
+html[lang="my"] {
+  --mkpos-control-height: 38px;
+  --mkpos-table-row-height: 44px;
+  --mkpos-line-height: 1.65;
+}
+
+html[lang="my"],
+html[lang="my"] body,
+html[lang="my"] .localization-root {
+  font-family: "Noto Sans Myanmar", "Myanmar Text", "Padauk", "Myanmar3", sans-serif;
+  line-height: var(--mkpos-line-height);
+}
+
+html[lang="my"] :where(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  label,
+  legend,
+  th,
+  td,
+  button,
+  input,
+  select,
+  textarea,
+  option,
+  small,
+  strong,
+  b,
+  span
+) {
+  font-family: inherit;
+  letter-spacing: 0;
+  line-height: var(--mkpos-line-height);
+}
+
+html[lang="my"] :where(h1, h2, h3, h4, h5, h6) {
+  padding-block: 2px;
+}
+
+html[lang="my"] :where(
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea
+) {
+  height: auto !important;
+  min-height: var(--mkpos-control-height);
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+html[lang="my"] textarea {
+  min-height: 78px;
+}
+
+html[lang="my"] :where(button, .button-link) {
+  height: auto !important;
+  min-height: var(--mkpos-control-height);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+html[lang="my"] :where(
+  button.icon-btn,
+  .product-row-actions button,
+  .purchase-row-actions button,
+  .supplier-row-actions button,
+  .customer-row-actions button,
+  .expense-row-actions button,
+  .transaction-row-actions button
+) {
+  width: 34px;
+  min-width: 34px;
+  height: 34px !important;
+  min-height: 34px;
+  padding: 0;
+  line-height: 1;
+}
+
+html[lang="my"] .sidebar nav button {
+  min-height: 52px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+html[lang="my"] :where(th, td) {
+  height: auto;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  vertical-align: middle;
+}
+
+html[lang="my"] :where(
+  [class$="-badge"],
+  [class*="-badge "],
+  [class$="-pill"],
+  [class*="-pill "],
+  .sale-product-stock
+) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  line-height: 1.55;
+  overflow: visible;
+}
+
+/* Numeric notification counts keep their compact dimensions in either locale. */
+html[lang="my"] :where(.workspace-chat-badge, .shop-order-action-badge) {
+  min-height: 0;
+  padding-block: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+html[lang="my"] :where(
+  .notice,
+  .toast,
+  .global-notification,
+  .notification-item,
+  .loading-state,
+  .empty-state,
+  .error-state
+) {
+  min-height: 42px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: var(--mkpos-line-height);
+}
+
+html[lang="my"] :where(
+  .sale-product-card,
+  .product-summary-card,
+  .report-summary-card,
+  .expense-summary-card
+) {
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+html[lang="my"] .sale-product-card {
+  min-height: 126px;
+}
+
+html[lang="my"] .product-stat-card,
+html[lang="my"] button.product-stat-card {
+  min-height: 76px;
+  overflow: visible;
+}
+
+html[lang="my"] .product-stat-card > div {
+  gap: 0;
+}
+
+html[lang="my"] .product-filter-row {
+  align-items: stretch;
+}
+
+html[lang="my"] :where(
+  .product-search-field,
+  .product-scan-field
+) {
+  min-height: var(--mkpos-control-height);
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+html[lang="my"] .product-action-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+html[lang="my"] .product-table-title {
+  min-height: 48px;
+}
+
+html[lang="my"] .product-price-row {
+  align-items: start;
+}
+
+html[lang="my"] .product-price-row em {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+/* Size Myanmar product columns from their content instead of forcing an
+   oversized table. Horizontal overflow remains available only when needed. */
+html[lang="my"] .product-grid-wrap .product-data-table {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: auto !important;
+}
+
+html[lang="my"] :where(
+  .product-section-heading,
+  .product-price-name
+) {
+  min-height: 40px;
+}
+
+html[lang="my"] :where(
+  .sale-cart-header,
+  .sale-cart-item,
+  .sale-total-box,
+  .sale-payment-box
+) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+html[lang="my"] :where(
+  .modal-header,
+  .modal-body,
+  .modal-footer,
+  .drawer-header,
+  .drawer-body
+) {
+  line-height: var(--mkpos-line-height);
+}
+
+@media (max-width: 1199px) {
+  html[lang="my"] {
+    --mkpos-control-height: 37px;
+    --mkpos-table-row-height: 43px;
+  }
+
+  html[lang="my"] .sidebar nav button {
+    min-height: 49px;
+  }
+}

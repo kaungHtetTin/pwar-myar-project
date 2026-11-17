@@ -1,0 +1,9 @@
+.ai-weekly-avatar { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; margin-bottom: 3px; }
+.ai-weekly-avatar-core { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.ai-weekly-ring { position: absolute; inset: 0; width: 44px; height: 44px; overflow: visible; fill: none; stroke-width: 3; }
+.ai-weekly-track { stroke: color-mix(in srgb, var(--ai-quota-color) 25%, var(--theme-border)); }
+.ai-weekly-fill { stroke: var(--ai-quota-color); stroke-linecap: round; transform: rotate(-90deg); transform-origin: center; transition: stroke-dasharray 300ms ease, stroke 300ms ease; }
+.ai-weekly-percent { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); min-width: 26px; padding: 1px 4px; border: 1px solid var(--theme-border); border-radius: 99px; background: var(--theme-surface); color: var(--theme-text); font-size: 10px; font-weight: 700; line-height: 13px; text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ai-weekly-avatar[data-empty] .ai-weekly-avatar-core { color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.shop-customer-chat-title .ai-weekly-reset, .shop-chat-header-copy .ai-weekly-reset { display: block; font-size: 10px; line-height: 1.35; color: var(--theme-text-muted); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .ai-weekly-fill { transition: none; } }

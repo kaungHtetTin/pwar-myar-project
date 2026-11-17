@@ -1,0 +1,94 @@
+/* List items use their surface, spacing and internal dividers instead of outer frames.
+   Keep border widths so removing decorative strokes does not change layout density.
+   Inputs, action buttons, radio/check indicators and focus outlines are separate controls. */
+.common-navigation-shell :is(
+  .sale-mobile-product,
+  .sale-cart-card,
+  .offline-sale-row,
+  .offline-reference-card,
+  .product-card,
+  .barcode-product-row,
+  .purchase-item-card,
+  .purchase-history-list > article,
+  .customer-mobile-card,
+  .customer-sales-list article,
+  .customer-payment-list article,
+  .supplier-card,
+  .supplier-history-list article,
+  .supplier-payment-list article,
+  .supplier-reference-history-card,
+  .sales-reference-history-card,
+  .expense-card,
+  .transaction-card,
+  .payment-reference-row,
+  .access-card,
+  .settings-price-list article,
+  .settings-repeat-list > div,
+  .publication-row,
+  .shop-order-card,
+  .shop-chat-thread,
+  .shop-chat-shared-product,
+  .shop-chat-product-preview,
+  .shop-contact-row,
+  .shop-delivery-row,
+  .shop-method-row,
+  .promotion-reference-card,
+  .shop-review-card,
+  .shop-report-follow-up-link,
+  .shop-loading-card
+) {
+  border-color: transparent;
+}
+
+/* Grouped navigation lists retain their existing row separators. */
+.common-navigation-shell :is(
+  .settings-navigation-group .settings-section-grid,
+  .shop-overview-group .settings-section-grid,
+  .settings-support-list,
+  .movement-list,
+  .stock-movement-section,
+  .purchase-picker-results,
+  .purchase-product-picker,
+  .purchase-review-list,
+  .purchase-detail-items-panel,
+  .shop-customer-history
+) {
+  border-color: transparent;
+}
+
+/* Nested item rows and selectable results use a divider, never a boxed outline.
+   Selected backgrounds and native selection indicators remain visible. */
+.common-navigation-shell :is(
+  .compact-product-list article,
+  .purchase-detail-items article,
+  .purchase-reference-review-items > article,
+  .purchase-recorded-payment > div,
+  .sale-detail-items article,
+  .transaction-line-list > article,
+  .sale-customer-list > button,
+  .payment-reference-account-options > button,
+  .shop-mobile-menu-row,
+  .promotion-picker-product,
+  .promotion-selected-product,
+  .review-reference-product
+) {
+  border-color: transparent;
+  border-bottom-color: var(--border);
+}
+.common-navigation-shell :is(
+  .sale-customer-list > button,
+  .payment-reference-account-options > button,
+  .shop-mobile-menu-row,
+  .promotion-picker-product
+):is(.is-selected, [aria-pressed="true"]) {
+  border-color: transparent;
+}
+
+/* Selection is conveyed by the existing fill and checkbox, without an outer ring. */
+.common-navigation-shell :is(.barcode-product-row:has(input:checked), .sale-mobile-product.is-selected) {
+  box-shadow: none;
+}
+/* These leading strips encode sync status; they are not decorative card frames. */
+.common-navigation-shell .offline-sale-row.status-synced { border-left-color: var(--brand-700); }
+.common-navigation-shell .offline-sale-row.status-failed { border-left-color: var(--danger); }
+.common-navigation-shell .offline-sale-row.status-syncing { border-left-color: var(--status-info-text); }

@@ -1,0 +1,55 @@
+.site-header.shopping-header.account-app-bar { gap: 6px; }
+.shopping-header.account-app-bar .brand { flex: 1; min-width: 0; flex-shrink: 1; margin: 0; }
+.shopping-header.account-app-bar .brand > span { min-width: 0; }
+.shopping-header.account-app-bar .account-app-bar-title { margin: 0; font-size: 22px; line-height: 26px; font-weight: 700; }
+.shopping-header.account-app-bar .brand small { white-space: normal; font-size: 9px; line-height: 13px; }
+.shopping-header.account-app-bar .language { flex: none; margin: 0; }
+.shopping-header.account-app-bar .account-app-bar-action { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 10px; background: color-mix(in srgb, var(--theme-surface) 7.059%, transparent); color: var(--theme-on-primary); }
+.account-app-bar-action:focus-visible { outline: 2px solid var(--theme-focus); outline-offset: 2px; }
+.me-dashboard .me-intro, .edit-profile-page .edit-profile-intro, .addresses-page .addresses-intro, .addresses-page > .addresses-content > .feature-panel-heading, .updates-page .notifications-intro { display: none; }
+body main.shopping-main .me-dashboard .me-profile-card { margin-top: 16px; }
+body main.shopping-main .edit-profile-page form { margin-top: 16px; }
+body main.shopping-main .addresses-page .addresses-content, body main.shopping-main .updates-page .notifications-content { margin-top: 0; }
+body main.shopping-main:has([data-retained-view]:not([hidden]) :is(.me-dashboard,.edit-profile-page,.addresses-page,.updates-page)) { background: linear-gradient(var(--theme-primary) 0 16px, var(--theme-surface) 16px); }
+body main.shopping-main .me-dashboard, body main.shopping-main .edit-profile-page { border-radius: 16px 16px 0 0; background: var(--theme-surface); padding-top: 16px; }
+body main.shopping-main .me-dashboard .me-profile-card, body main.shopping-main .edit-profile-page form { margin-top: 0; }
+body main.shopping-main .addresses-page .addresses-content, body main.shopping-main .updates-page .notifications-content { border-radius: 16px 16px 0 0; }
+.favorites-page .favorites-intro { padding-top: 0; padding-bottom: 18px; }
+.favorites-page .favorites-intro :is(h1,p) { display: none; }
+@media(max-width:400px) { .shopping-header.account-app-bar .account-app-bar-title { font-size: 20px; line-height: 24px; } }
+.site-header.shopping-header.account-app-bar.me-app-bar { height: 104px; min-height: 104px; padding-bottom: 32px; }
+body main.shopping-main:has([data-retained-view]:not([hidden]) .me-dashboard) { position: relative; z-index: 11; background: var(--theme-surface); min-height: calc(100dvh - 104px); }
+body main.shopping-main .me-dashboard { display: flow-root; padding-top: 0; border-radius: 0; position: relative; z-index: 1; }
+body main.shopping-main .me-dashboard .me-profile-card { margin-top: -24px; }
+.site-header.shopping-header.account-app-bar:has(+ main [data-retained-view]:not([hidden]) .edit-profile-page) { height: 104px; min-height: 104px; padding-bottom: 32px; }
+body main.shopping-main:has([data-retained-view]:not([hidden]) .edit-profile-page) { position: relative; z-index: 11; background: var(--theme-surface); min-height: calc(100dvh - 104px); }
+body main.shopping-main .edit-profile-page { display: flow-root; position: relative; padding-top: 0; border-radius: 0; }
+body main.shopping-main .edit-profile-page form { margin-top: -24px; }
+#root:has([data-retained-view]:not([hidden]) .edit-profile-page) > .mobile-navigation { display: none; }
+body:has([data-retained-view]:not([hidden]) .edit-profile-page) { padding-bottom: 0; }
+@media(min-width:761px) {
+  .site-header.shopping-header.account-app-bar.me-app-bar { gap: 12px; }
+  .shopping-header.account-app-bar.me-app-bar .brand { flex: 0 0 auto; }
+  .shopping-header.account-app-bar.me-app-bar .brand small { font-size: 10px; }
+  .shopping-header.account-app-bar.me-app-bar .desktop-navigation { display: flex; margin-left: auto; }
+  .shopping-header:has(.chats-app-bar-title) .brand { flex: 0 0 auto; }
+  .shopping-header:has(.chats-app-bar-title) .chats-app-bar-toggle { margin-left: 0; }
+}
+@media(min-width:761px) and (max-width:1100px) {
+  .shopping-header.me-app-bar .desktop-navigation, .shopping-header:has(.chats-app-bar-title) .desktop-navigation { gap: 4px; }
+  .shopping-header.me-app-bar .desktop-navigation > a, .shopping-header:has(.chats-app-bar-title) .desktop-navigation > a { font-size: 0; min-width: 44px; justify-content: center; padding: 10px; gap: 0; }
+}
+@media(min-width:761px) {
+  #root > .site-header.shopping-header:has(> .desktop-navigation) { display: flex; flex-wrap: nowrap; gap: 12px; }
+  #root > .shopping-header:has(> .desktop-navigation) .brand { flex: 0 0 auto; margin-right: auto; }
+  #root > .shopping-header > .desktop-navigation { display: flex; flex: 0 0 auto; order: 10; margin-left: 0; gap: 10px; justify-content: flex-end; }
+  #root > .shopping-header > .desktop-navigation > a { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; min-width: 0; padding: 10px 12px; font-size: 13px; border-radius: 10px; color: var(--theme-on-primary); }
+  #root > .shopping-header > .desktop-navigation > a[aria-current="page"] { background: color-mix(in srgb, var(--theme-surface) 12.157%, transparent); color: var(--theme-on-primary); font-weight: 700; }
+  #root > .shopping-header:has(> .desktop-navigation) :is(.language,.chats-app-bar-toggle) { margin-left: 0; }
+}
+@media(min-width:761px) {
+  #root > .site-header.shopping-header:has(> .desktop-navigation) { height: auto; min-height: 124px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+  #root > .shopping-header:has(> .desktop-navigation) .brand { margin-right: auto; }
+  #root > .shopping-header > .desktop-navigation { order: 10; flex: 0 0 100%; width: 100%; margin: 0; }
+  #root > .site-header.shopping-header.me-app-bar { padding-bottom: 36px; }
+}

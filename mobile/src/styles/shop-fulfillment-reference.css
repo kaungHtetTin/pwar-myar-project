@@ -1,0 +1,29 @@
+.shop-mobile-page.shop-fulfillment-reference-page { width:min(100%,720px); min-height:calc(100dvh - 60px); margin:auto; padding:0 14px calc(140px + var(--app-safe-area-bottom)); }
+.shop-fulfillment-header { position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:7px; min-height:56px; margin:0 -14px 12px; padding:6px 10px; border-bottom:1px solid var(--border); background:var(--surface); }
+.shop-fulfillment-header .icon-button { display:grid; width:36px; min-height:40px; place-items:center; padding:0; border:0; background:transparent; box-shadow:none; }
+.shop-fulfillment-reference-page .shop-fulfillment-header h1 { margin:0; font-size:17px; line-height:1.5; }
+.shop-fulfillment-form > fieldset { display:grid; gap:12px; min-width:0; margin:0; padding:0; border:0; }
+.shop-fulfillment-card { min-width:0; padding:14px; border:1px solid var(--border); border-radius:var(--radius-card); background:var(--surface); }
+.shop-fulfillment-reference-page .shop-fulfillment-card h2 { margin:0 0 5px; font-size:15px; line-height:1.5; }
+.shop-fulfillment-card > p { margin:0 0 14px; color:var(--muted); font-size:12px; line-height:1.65; }
+.shop-fulfillment-card .mobile-field { display:grid; gap:6px; margin:0; }
+.shop-fulfillment-card .mobile-field > label { position:static; margin:0; padding:0; color:var(--muted); font-size:12px; font-weight:500; line-height:1.6; background:transparent; pointer-events:auto; }
+.fulfillment-icon-field { display:flex; align-items:center; gap:9px; min-height:42px; padding:0 10px; border:1px solid var(--border); border-radius:var(--radius-control); }
+.fulfillment-icon-field > svg { flex-shrink:0; color:var(--muted); }
+.fulfillment-icon-field input { width:100%; min-width:0; min-height:40px; padding:8px 0; border:0; outline:0; background:transparent; font:inherit; font-size:13px; font-weight:400; }
+.fulfillment-icon-field:focus-within { border-color:var(--brand-700); outline:2px solid var(--brand-100); }
+.fulfillment-icon-field:has(input[aria-invalid=true]) { border-color:var(--danger); }
+.fulfillment-field-hint { display:block; margin:6px 0 12px; color:var(--muted); font-size:10px; line-height:1.6; }
+.shop-fulfillment-card textarea { width:100%; min-height:96px; padding:10px; border:1px solid var(--border); border-radius:var(--radius-control); color:var(--text); background:var(--surface); font:inherit; font-size:13px; font-weight:400; line-height:1.7; resize:vertical; }
+.fulfillment-character-count { display:block; margin-top:4px; text-align:right; color:var(--muted); font-size:10px; }
+.fulfillment-buyer-preview { padding:12px; border-radius:var(--radius-control); background:var(--brand-100); }
+.fulfillment-buyer-preview h3 { display:flex; align-items:center; gap:7px; margin:0 0 10px; font-size:13px; }
+.fulfillment-preview-row { display:flex; align-items:flex-start; gap:10px; padding:9px 0; }
+.fulfillment-preview-row + .fulfillment-preview-row { margin-top:5px; padding-top:12px; border-top:1px solid var(--border); }
+.fulfillment-preview-icon { display:grid; flex:0 0 34px; width:34px; height:34px; place-items:center; border-radius:50%; color:var(--theme-primary-text); background:var(--surface); }
+.fulfillment-preview-row > div { min-width:0; }
+.fulfillment-preview-row strong { font-size:12px; line-height:1.6; }
+.fulfillment-preview-row p { margin:3px 0 0; color:var(--muted); font-size:12px; line-height:1.65; white-space:pre-wrap; overflow-wrap:anywhere; }
+.shop-fulfillment-actions { position:fixed; z-index:6; bottom:calc(60px + var(--app-safe-area-bottom)); left:50%; width:min(100%,720px); padding:10px 14px; transform:translateX(-50%); border-top:1px solid var(--border); background:var(--surface); }
+.shop-fulfillment-actions button { width:100%; min-height:42px; font-size:13px; }
+.shop-fulfillment-reference-page :is(button,textarea):focus-visible { outline:2px solid var(--brand-700); outline-offset:2px; }

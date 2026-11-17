@@ -1,0 +1,25 @@
+# Electron dependencies, packaging output and local runtime files
+/node_modules/
+/dist/
+/build/
+/release/
+/releases/
+/artifacts/
+/test-artifacts/
+/coverage/
+/offline/
+/logs/
+/desktop-config.json
+*.log
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+
+# Environment overrides and code-signing credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.p12
+*.pfx

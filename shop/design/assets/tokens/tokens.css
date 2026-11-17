@@ -1,0 +1,8 @@
+:root { --mk-primary:#087F74; --mk-primary-deep:#006E63; --mk-mint:#E7F7F2; --mk-page:#F8FAF7; --mk-surface:#FFFFFF; --mk-ink:#20342E; --mk-heading:#101D32; --mk-muted:#64748B; --mk-border:#E0E7E6; --mk-success:#16845A; --mk-warning:#B7791F; --mk-danger:#DC3D50; --mk-info:#2673C8; --mk-radius-input:12px; --mk-radius-card:16px; --mk-radius-pill:999px; --mk-space-1:4px; --mk-space-2:8px; --mk-space-3:12px; --mk-space-4:16px; --mk-space-5:20px; --mk-space-6:24px; --mk-tap-min:44px; --mk-nav-height:64px; --mk-content-padding:16px; --mk-shadow-card:0 2px 14px rgba(16,29,50,.055); --mk-font-latin:'DM Sans',Manrope,system-ui,sans-serif; --mk-font-myanmar:'Noto Sans Myanmar',system-ui,sans-serif; }
+.mk-root { font-family:var(--mk-font-latin); background:var(--mk-page);color:var(--mk-ink); }
+.mk-root[lang="my"] {font-family:var(--mk-font-myanmar);line-height:1.65}
+.mk-card {background:var(--mk-surface);border:1px solid var(--mk-border);border-radius:var(--mk-radius-card);box-shadow:var(--mk-shadow-card)}
+.mk-button-primary {border:0;border-radius:12px;min-height:48px;background:var(--mk-primary);color:#fff;font-weight:700}
+.mk-field {min-height:48px;border:1px solid var(--mk-border);border-radius:12px;background:white}
+.mk-field:focus-within {border-color:var(--mk-primary);outline:0;box-shadow:0 0 0 1px var(--mk-primary)}
+.mk-bottom-nav{padding-bottom:env(safe-area-inset-bottom);min-height:var(--mk-nav-height)}

@@ -1,0 +1,188 @@
+/* Billing references 047, 048 and 149; scoped to the existing billing module. */
+.billing-reference-page.sale-retail-page { width: min(100%, 720px); margin: auto; padding: 0 14px calc(76px + var(--app-safe-area-bottom)); color: var(--theme-text); line-height: 1.4; }
+.billing-reference-header h1 { font-size: 20px; }
+.billing-reference-header { height: auto; min-height: calc(50px + var(--app-safe-area-top)); padding-top: var(--app-safe-area-top); padding-bottom: 0; }
+.billing-plan-features { margin: 0 0 8px; color: var(--theme-text-muted); font-size: 11px; }
+.billing-reference-card { min-width: 0; margin-top: 8px; padding: 9px 8px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: var(--theme-surface); }
+/* Overview spacing stays compact, with clear separation around headings and controls. */
+.billing-overview-page > .billing-reference-card { margin-top: 12px; padding: 12px; }
+.billing-overview-page .billing-reference-section-heading { gap: 12px; }
+.billing-overview-page .billing-reference-section-heading p { margin-top: 4px; line-height: 1.5; }
+.billing-overview-page .billing-reference-section-heading + .billing-reference-section-body { margin-top: 12px; }
+.billing-overview-page .billing-plan-options { gap: 8px; margin-bottom: 12px; }
+.billing-overview-page .billing-plan-options > label { min-height: 54px; padding: 10px; }
+.billing-overview-page .billing-account-picker { gap: 6px; margin-bottom: 12px; }
+.billing-overview-page .billing-reference-section-body:has(.billing-account-details) { margin-left: 0; }
+:is(.billing-overview-page, .billing-request-page) .billing-account-details { gap: 0; padding: 4px 10px; }
+:is(.billing-overview-page, .billing-request-page) .billing-account-details > div { min-height: 48px; grid-template-columns: minmax(80px, .9fr) minmax(0, 1.3fr) 44px; gap: 8px; padding-block: 4px; }
+:is(.billing-overview-page, .billing-request-page) .billing-account-details > div + div { border-top: 1px solid var(--border); }
+:is(.billing-overview-page, .billing-request-page) .billing-account-details dt { font-size: 11px; line-height: 1.5; }
+:is(.billing-overview-page, .billing-request-page) .billing-account-details dd { font-size: 12px; line-height: 1.5; }
+:is(.billing-overview-page, .billing-request-page) .billing-account-details .ui-icon-button { width: 44px; min-width: 44px; height: 44px; min-height: 44px; justify-self: end; }
+.billing-overview-page .billing-current-title { margin-block: 4px 6px; }
+.billing-overview-page .billing-current-plan p + p { margin-top: 4px; }
+.billing-reference-icon { display: grid; width: 36px; height: 36px; flex-shrink: 0; place-items: center; border-radius: var(--radius-round); color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.billing-reference-icon.is-solid { width: 46px; height: 46px; color: var(--theme-on-primary); background: var(--brand-800); }
+.billing-reference-section-heading { display: flex; gap: 11px; align-items: flex-start; }
+.billing-reference-section-heading > div { min-width: 0; padding-top: 0; }
+.billing-reference-section-heading h2 { margin: 0; color: var(--theme-text); font-size: 14px; font-weight: 700; line-height: 1.35; }
+.billing-reference-section-heading p { margin: 2px 0 0; color: var(--theme-text-muted); font-size: 11px; line-height: 1.45; }
+.billing-reference-section-body { margin: -10px 0 0 47px; font-size: 11px; }
+.billing-reference-section-heading:has(p) + .billing-reference-section-body { margin-top: 0; }
+.billing-current-plan { display: flex; gap: 15px; align-items: flex-start; padding: 13px 12px; background: var(--theme-background); border-color: var(--theme-border); }
+.billing-current-plan > div { min-width: 0; font-size: 12px; }
+.billing-current-plan small { color: var(--theme-text-muted); font-size: 12px; }
+.billing-current-title { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 1px 0 3px; }
+.billing-current-title > strong { font-size: 19px; line-height: 1.3; }
+.billing-reference-status { display: inline-flex; gap: 5px; align-items: center; padding: 3px 8px; border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-primary-soft); font-size: 11px; white-space: normal; }
+.billing-reference-status i { width: 7px; height: 7px; flex-shrink: 0; border-radius: var(--radius-round); background: var(--theme-primary); }
+.billing-reference-status.is-expired { color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.billing-reference-status.is-expired i { background: currentColor; }
+.billing-reference-status.is-pending { color: var(--theme-warning-text); background: var(--theme-warning-soft); font-size: 10px; }
+.billing-current-plan p { margin: 2px 0 0; color: var(--theme-text-muted); font-size: 11px; }
+.billing-overview-link { display: flex; width: 100%; gap: 15px; align-items: center; text-align: left; }
+.billing-overview-link > span:nth-child(2) { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.billing-overview-link strong { color: var(--theme-text); font-size: 14px; font-weight: 700; }
+.billing-overview-link small { color: var(--theme-text-muted); font-size: 11px; }
+.billing-overview-link > svg { flex-shrink: 0; color: var(--theme-text-muted); }
+.billing-latest-payment { padding: 9px 12px; }
+.billing-latest-payment strong { font-size: 18px; }
+.billing-latest-payment em { color: var(--theme-primary-text); font-style: normal; }
+.billing-plan-options { display: grid; gap: 6px; min-width: 0; margin: 0 0 8px; padding: 0; border: 0; }
+.billing-available-plans .billing-reference-section-body { margin-left: 0; }
+.billing-plan-options > label { display: flex; min-height: 50px; gap: 13px; align-items: center; padding: 8px 10px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); background: var(--theme-surface); }
+.billing-plan-options > label.is-selected { border-color: var(--brand-800); background: var(--theme-background); }
+.billing-plan-options input { width: 18px; height: 18px; flex-shrink: 0; margin: 0; accent-color: var(--brand-800); }
+.billing-plan-options label > span { display: grid; min-width: 0; gap: 1px; }
+.billing-plan-options label > span:nth-child(2) { flex: 1; }
+.billing-plan-options label > span:last-child { max-width: 45%; text-align: right; }
+.billing-plan-options strong, .billing-plan-options b { font-size: 13px; line-height: 1.3; }
+.billing-plan-options small { color: var(--theme-text-muted); font-size: 10px; line-height: 1.4; }
+.billing-reference-page .billing-submit { display: flex; width: 100%; min-height: 37px; gap: 10px; align-items: center; justify-content: center; padding: 8px; border-radius: var(--radius-small); font-size: 14px; font-weight: 650; box-shadow: none; }
+.billing-account-details { display: grid; gap: 4px; margin: 0; padding: 6px 9px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); }
+.billing-account-details > div { display: grid; grid-template-columns: minmax(75px, 1fr) minmax(0, 1.6fr) 22px; gap: 4px; align-items: center; }
+.billing-account-details dt { color: var(--theme-text-muted); font-size: 10px; }
+.billing-account-details dd { margin: 0; color: var(--theme-text); font-size: 11px; overflow-wrap: anywhere; user-select: text; }
+.billing-account-details button { display: grid; width: 24px; min-height: 20px; padding: 0; place-items: center; border: 0; color: var(--theme-text-muted); background: transparent; }
+.billing-account-picker { display: flex; flex-wrap: wrap; align-items: stretch; min-width: 0; gap: 6px; margin: 0 0 8px; padding: 0; border: 0; color: var(--muted); font-size: 11px; }
+.billing-account-picker legend { margin-bottom: 6px; padding: 0; }
+.billing-account-option { display: flex; flex: 0 1 auto; min-width: 0; max-width: 100%; min-height: 44px; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius-small); background: var(--surface); cursor: pointer; }
+.billing-account-option.is-selected { border-color: var(--brand-700); background: var(--brand-100); }
+.billing-account-option > .ui-check { flex: none; margin: 0; }
+.billing-account-option > span { min-width: 0; overflow-wrap: anywhere; }
+.billing-account-option strong { color: var(--text); font-size: 12px; font-weight: 600; line-height: 1.5; }
+.billing-reference-form, .billing-reference-form > fieldset { display: grid; min-width: 0; gap: 0; margin: 0; padding: 0; border: 0; }
+.billing-reference-form { margin-top: 0; }
+.billing-selected-plan { display: flex; gap: 14px; align-items: center; padding: 10px 12px; background: var(--theme-background); border-color: var(--theme-border); }
+.billing-selected-plan > div { display: grid; flex: 1; min-width: 0; gap: 2px; font-size: 11px; }
+.billing-selected-plan > div:last-child { max-width: 40%; flex: 0 1 auto; text-align: right; }
+.billing-selected-plan strong, .billing-selected-plan b { font-size: 14px; line-height: 1.3; }
+.billing-selected-plan small, .billing-selected-plan p { margin: 0; color: var(--theme-text-muted); font-size: 10px; line-height: 1.4; }
+.billing-reference-instructions { display: flex; min-width: 0; gap: 13px; align-items: flex-start; margin-top: 8px; padding: 10px 13px; border-radius: var(--radius-small); color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.billing-reference-instructions > svg { flex-shrink: 0; margin-top: 1px; }
+.billing-reference-instructions strong { font-size: 12px; }
+.billing-reference-instructions p { margin: 2px 0 0; color: var(--theme-text-muted); font-size: 11px; line-height: 1.45; }
+.billing-reference-proof { display: flex; gap: 8px; align-items: stretch; }
+.billing-proof-preview { position: relative; width: 100px; height: 81px; flex-shrink: 0; padding: 3px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); }
+.billing-proof-preview img { width: 100%; height: 100%; object-fit: contain; border-radius: var(--radius-subtle); }
+.billing-proof-preview > button { position: absolute; top: -5px; right: -5px; display: grid; width: 20px; min-height: 20px; place-items: center; padding: 0; border: 2px solid var(--theme-border); border-radius: var(--radius-round); color: var(--theme-text); background: var(--theme-surface-raised); }
+.billing-proof-upload { position: relative; display: grid; width: 100px; min-height: 81px; align-content: center; justify-items: center; gap: 6px; overflow: hidden; border: 1px dashed var(--theme-border); border-radius: var(--radius-small); color: var(--theme-primary-text); font-size: 10px; cursor: pointer; }
+.billing-proof-upload svg { color: var(--theme-text-muted); }
+.billing-proof-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.billing-proof-upload:focus-within { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.billing-proof-upload.has-error { border-color: var(--danger); }
+.billing-proof-help, .billing-proof-received { margin: 6px 0 0; color: var(--theme-text-muted); font-size: 10px; }
+.billing-proof-filename { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.billing-reference-input { width: 100%; min-width: 0; min-height: 30px; padding: 7px 9px; border: 1px solid var(--theme-border); border-radius: var(--radius-small); color: var(--theme-text); background: var(--theme-surface); font: inherit; font-size: 11px; resize: vertical; }
+.billing-reference-input::placeholder { color: var(--theme-text-muted); }
+.billing-note-count { display: block; color: var(--theme-text-muted); font-size: 9px; text-align: right; }
+.billing-reference-form .billing-submit { margin-top: 7px; }
+.billing-request-cancel { width: fit-content; min-height: 30px; margin: 4px auto 0; padding: 3px 12px; border: 0; color: var(--theme-primary-text); background: transparent; font-size: 11px; }
+.billing-reference-page button:focus-visible, .billing-reference-page input:focus-visible, .billing-reference-page textarea:focus-visible, .billing-reference-page select:focus-visible { outline: 2px solid var(--brand-700); outline-offset: 2px; }
+.billing-reference-page .mobile-field-error { color: var(--theme-danger-text); font-size: 11px; }
+.billing-pending-confirmation { display: flex; gap: 14px; padding: 11px 12px; border-color: var(--theme-border); background: var(--theme-background); }
+.billing-pending-confirmation .billing-reference-icon { width: 48px; height: 48px; background: var(--theme-primary-soft); }
+.billing-pending-confirmation h2 { margin: 0; font-size: 14px; }
+.billing-pending-confirmation p { margin: 2px 0 4px; color: var(--theme-text-muted); font-size: 12px; line-height: 1.4; }
+.billing-pending-confirmation small { color: var(--theme-text-muted); font-size: 10px; }
+.billing-pending-confirmation > div { font-size: 11px; line-height: 1.3; }
+.billing-pending-confirmation p { font-size: 11px; line-height: 1.3; }
+.billing-pending-confirmation small { display: block; line-height: 1.3; }
+.billing-available-plans .billing-reference-section-body { margin-top: 7px; }
+.billing-notes-group { margin-top: 8px; padding-bottom: 6px; border: 1px solid var(--theme-border); border-radius: var(--radius-card); background: var(--theme-surface); }
+.billing-notes-group > .billing-reference-card { margin-top: 0; border: 0; background: transparent; }
+.billing-notes-group > .billing-reference-instructions { margin: 6px 6px 0; }
+.billing-notes-group > .billing-submit { width: calc(100% - 12px); margin: 6px 6px 0; }
+.billing-notes-group > .billing-pending-actions { margin: 8px 6px 0; }
+.billing-section-footer > .billing-reference-instructions { margin-top: 7px; }
+.billing-reference-instructions { padding-block: 8px; }
+.billing-reference-instructions > div { font-size: 12px; line-height: 1.3; }
+.billing-reference-form .billing-reference-section-heading:not(:has(p)) + .billing-reference-section-body { margin-top: -18px; }
+.billing-reference-page .billing-overview-link:not(.billing-latest-payment) { padding-block: 12px; }
+.billing-latest-payment { padding-block: 4px; }
+.billing-current-plan { padding-block: 8px; }
+.billing-reference-page .billing-notes-group > .billing-submit, .billing-reference-page .billing-notes-group > .billing-pending-actions { position: fixed; z-index: 24; left: 50%; bottom: calc(60px + var(--app-safe-area-bottom)); width: calc(100% - 28px); max-width: 692px; margin: 0; transform: translateX(-50%); }
+.billing-reference-page .billing-notes-group > .billing-pending-actions { padding: 5px 0; background: var(--theme-surface); }
+.billing-reference-page .billing-notes-group { margin-bottom: 38px; }
+.billing-notes-group > .billing-reference-card { padding-block: 7px; }
+.billing-notes-group textarea { padding-block: 5px; line-height: 1.3; }
+.billing-notes-group > .billing-reference-instructions { padding-block: 6px; }
+.billing-reference-form .billing-selected-plan { padding-block: 8px; }
+.billing-reference-form > fieldset > .billing-reference-card:not(.billing-selected-plan) { padding-block: 8px; }
+.billing-reference-form .billing-section-footer > .billing-reference-instructions { padding-block: 6px; }
+.billing-reference-form .billing-notes-group > .billing-reference-card { padding-block: 6px; }
+.billing-reference-form input.billing-reference-input { min-height: 28px; padding-block: 5px; }
+.billing-reference-form textarea.billing-reference-input { display: block; }
+.billing-reference-form .billing-notes-group .billing-reference-section-heading { position: relative; display: block; padding-left: 47px; }
+.billing-reference-form .billing-notes-group .billing-reference-section-heading > .billing-reference-icon { position: absolute; top: 0; left: 0; }
+.billing-reference-form .billing-notes-group .billing-reference-section-heading + .billing-reference-section-body { margin-top: 0; margin-left: 47px; }
+.billing-notes-group > .billing-reference-instructions { padding-block: 4px; }
+.billing-notes-group > .billing-reference-instructions p { line-height: 1.3; }
+.billing-reference-instructions p { font-size: 10px; line-height: 1.4; }
+.billing-current-plan { padding-block: 10px; }
+.billing-latest-payment { padding-block: 7px; }
+.billing-reference-sheet .billing-contact-heading strong, .billing-reference-sheet .billing-contact-group > strong { font-size: 14px; }
+.billing-reference-sheet .billing-contact-heading small, .billing-reference-sheet .billing-contact-group a { font-size: 12px; }
+.billing-plan-details { display: grid; gap: 6px; margin: 0; }
+.billing-plan-details > div { display: grid; grid-template-columns: 1fr 1.6fr; gap: 7px; }
+.billing-plan-details dt { color: var(--theme-text-muted); font-size: 11px; }
+.billing-plan-details dd { min-width: 0; margin: 0; font-size: 11px; }
+.billing-pending-note { margin: 0; color: var(--theme-text-muted); font-size: 11px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.billing-pending-note + p { margin-top: 5px; }
+.billing-pending-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 8px; }
+.billing-pending-actions > button { min-height: 34px; padding: 6px; border-radius: var(--radius-small); font-size: 13px; font-weight: 650; box-shadow: none; }
+.billing-pending-link { display: flex; width: 100%; gap: 10px; align-items: center; color: var(--theme-warning-text); background: var(--theme-warning-soft); text-align: left; }
+.billing-pending-link > span { display: grid; flex: 1; gap: 2px; font-size: 12px; }
+.billing-pending-link small { font-size: 10px; }
+.billing-reference-sheet .billing-history-list strong, .billing-reference-sheet .billing-history-list b { font-size: 14px; }
+.billing-reference-sheet .billing-history-list small, .billing-reference-sheet .billing-history-list em { font-size: 11px; }
+@media (max-width: 370px) { .billing-reference-header h1 { font-size: 18px; } .billing-plan-options > label { gap: 7px; padding-inline: 7px; } .billing-plan-options strong, .billing-plan-options b { font-size: 11px; } .billing-selected-plan { gap: 8px; } .billing-selected-plan strong, .billing-selected-plan b { font-size: 12px; } .billing-reference-section-body { margin-left: 0; } }
+
+/* Request form: use the card width for fields and leave room below the fixed action. */
+.billing-request-page.sale-retail-page { padding-bottom: calc(132px + var(--app-safe-area-bottom)); }
+.billing-request-page .billing-reference-form > fieldset > .billing-reference-card { margin-top: 12px; padding: 12px; }
+.billing-request-page .billing-reference-section-heading { gap: 12px; }
+.billing-request-page .billing-reference-section-heading p { margin-top: 4px; line-height: 1.5; }
+.billing-request-page .billing-reference-form .billing-reference-section-heading + .billing-reference-section-body { margin: 12px 0 0; }
+.billing-request-page .billing-account-picker { gap: 6px; margin-bottom: 12px; }
+.billing-request-page .billing-section-footer > .billing-reference-instructions { margin-top: 12px; padding: 10px; }
+.billing-request-page .billing-reference-instructions p { margin-top: 4px; font-size: 11px; line-height: 1.5; }
+.billing-request-page .billing-reference-proof { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.billing-request-page .billing-proof-preview, .billing-request-page .billing-proof-upload { width: 100%; min-width: 0; height: 108px; }
+.billing-request-page .billing-proof-preview { padding: 6px; }
+.billing-request-page .billing-proof-preview > .ui-icon-button { top: 4px; right: 4px; width: 44px; height: 44px; min-height: 44px; background: var(--surface); color: var(--theme-primary-text); }
+.billing-request-page .billing-proof-filename { position: static; display: block; width: auto; height: auto; margin-top: 8px; clip-path: none; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.billing-request-page .billing-proof-help { margin-top: 8px; line-height: 1.5; }
+.billing-request-page .mobile-field-error { margin: 10px 0 0; padding: 10px; border-radius: var(--radius-small); background: var(--danger-bg); line-height: 1.6; overflow-wrap: anywhere; }
+.billing-request-page .billing-notes-group { margin: 12px 0 0; padding-bottom: 12px; }
+.billing-request-page .billing-reference-form .billing-notes-group > .billing-reference-card { padding: 12px; }
+.billing-request-page .billing-notes-group > .billing-reference-card + .billing-reference-card { border-top: 1px solid var(--border); }
+.billing-request-page .billing-reference-form .billing-notes-group .billing-reference-section-heading { display: flex; padding-left: 0; }
+.billing-request-page .billing-reference-form .billing-notes-group .billing-reference-section-heading > .billing-reference-icon { position: static; }
+.billing-request-page .billing-reference-form input.billing-reference-input { min-height: 44px; padding: 10px; }
+.billing-request-page .billing-reference-form textarea.billing-reference-input { min-height: 88px; padding: 10px; line-height: 1.5; }
+.billing-request-page .billing-note-count { margin-top: 6px; font-size: 10px; }
+.billing-request-page .billing-notes-group > .billing-reference-instructions { margin: 0 12px; padding: 10px; }
+.billing-request-page .billing-notes-group > .billing-reference-instructions + .billing-reference-instructions { margin-top: 10px; }
+.billing-request-page .billing-request-cancel { min-height: 44px; margin-top: 12px; }
+.billing-request-page :is(input, select, textarea, button) { scroll-margin-block: 80px 140px; }

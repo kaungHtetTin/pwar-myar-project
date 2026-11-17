@@ -1,0 +1,97 @@
+.office-data-table th.office-action-column,
+.office-data-table td.office-action-column {
+  position: sticky;
+  right: 0;
+  width: 80px !important;
+  min-width: 80px;
+  max-width: 80px;
+  padding-inline: 9px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: -1px 0 0 var(--office-line);
+}
+.office-data-table th.office-action-column { z-index: 5; background: var(--office-bg); }
+.office-data-table td.office-action-column { z-index: 3; background: var(--theme-surface); }
+.office-data-table tbody tr:nth-child(even) td.office-action-column { background: var(--theme-surface); }
+.office-data-table tbody tr:hover td.office-action-column { background: var(--theme-background); }
+.office-shell .office-table-pagination {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border-top: 1px solid var(--office-line);
+  background: var(--theme-surface);
+  color: var(--theme-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+.office-table-pagination .office-table-pagination-summary { font-variant-numeric: tabular-nums; }
+.office-table-pagination .office-table-pagination-controls,
+.office-table-pagination .office-table-pagination-pages,
+.office-table-pagination .office-table-pagination-controls label { display: flex; align-items: center; }
+.office-table-pagination .office-table-pagination-controls { gap: 16px; margin-left: auto; }
+.office-table-pagination .office-table-pagination-controls label { gap: 7px; margin: 0; white-space: nowrap; }
+.office-content .office-table-pagination select {
+  width: 58px;
+  height: 30px;
+  min-height: 30px;
+  padding: 3px 7px;
+  border-color: var(--office-line);
+  background: var(--theme-surface);
+  color: var(--office-ink);
+  font-size: 11px;
+  font-weight: 600;
+}
+.office-table-pagination .office-table-pagination-pages { gap: 2px; }
+.office-table-pagination .office-table-pagination-pages > span {
+  min-width: 82px;
+  padding: 0 7px;
+  color: var(--office-ink);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.office-table-pagination .office-table-pagination-pages button {
+  display: inline-grid;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  place-items: center;
+  place-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--office-ink);
+  box-shadow: none;
+}
+.office-table-pagination .office-table-pagination-pages button:hover:not(:disabled) { background: var(--theme-primary-soft); color: var(--theme-primary-text); }
+.office-table-pagination .office-table-pagination-pages button:disabled { color: var(--theme-text-muted); cursor: default; opacity: .65; }
+
+@media (max-width: 700px) {
+  .office-shell .office-table-pagination { align-items: stretch; padding: 10px; }
+  .office-table-pagination .office-table-pagination-summary { width: 100%; }
+  .office-table-pagination .office-table-pagination-controls { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-left: 0; }
+  .office-table-pagination .office-table-pagination-pages { margin-left: auto; }
+  .office-table-pagination .office-table-pagination-pages button { width: 40px; min-width: 40px; height: 40px; min-height: 40px; }
+  .office-content .office-table-pagination select { height: 40px; min-height: 40px; }
+}
+
+/* Loading uses the same headers, cell spacing and sticky action column as records. */
+.office-table-loading { min-width:0; overflow:hidden; border:1px solid var(--office-line); border-radius:6px; background:var(--theme-surface); }
+.office-panel > .office-table-loading { border:0; border-radius:0; }
+.office-table-loading-status { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+.office-table-skeleton-row td { height:50px; box-sizing:border-box; }
+.office-table-skeleton { display:block; max-width:160px; height:10px; border-radius:4px; background:var(--office-line); animation:office-table-loading-pulse 1.6s ease-in-out infinite; }
+.office-table-skeleton-action { width:22px; max-width:22px; height:22px; margin-inline:auto; }
+.office-data-table tbody tr.office-table-skeleton-row:hover,
+.office-data-table tbody tr.office-table-skeleton-row:hover td.office-action-column { background:var(--theme-surface); }
+@keyframes office-table-loading-pulse { 0%,100% { opacity:.45; } 50% { opacity:.85; } }
+@media(prefers-reduced-motion:reduce) {
+  .office-table-skeleton { animation:none; }
+}

@@ -1,0 +1,1303 @@
+{
+  "schemaVersion": 1,
+  "source": "Route-bearing rows in 02-screen-specifications.md; non-route surfaces remain in prose.",
+  "screens": [
+    {
+      "route": "/login",
+      "screen": "Login",
+      "section": "1. Authentication and application frame",
+      "layout": "Brand/context; welcome title; email/password; visibility control; Remember me; primary Login; signup link",
+      "behavior": "Preserve login validation, server errors, pending state, keyboard submission and session recovery. Do not expose password text by default."
+    },
+    {
+      "route": "/signup",
+      "screen": "Signup",
+      "section": "1. Authentication and application frame",
+      "layout": "Brand/context; business name, owner name and email; password/confirmation; create-account action; login link",
+      "behavior": "Preserve minimum-eight-character password and current validation. Show field-level and general errors without clearing values."
+    },
+    {
+      "route": "/sell",
+      "screen": "Product selection",
+      "section": "2. Sell and offline sales",
+      "layout": "Sale header/cart count; search + scan; category filter drawer; product rows/cards with photo, name, stock, price options; cart continuation summary",
+      "behavior": "Add using correct price type; preserve selected quantities and draft while filtering. Show unavailable/out-of-stock/below-cost context from source. Offline cache readiness/sync context remains visible."
+    },
+    {
+      "route": "/sell/cart",
+      "screen": "Quantity step",
+      "section": "2. Sell and offline sales",
+      "layout": "Back/title and line/unit count; one card per selected price line; quantity stepper, FOC field, pack/unit shortcut; line total; Continue",
+      "behavior": "Distinguish sold quantity from free quantity. Show stock and below-cost warnings at affected line. Remove is clearly labeled. Empty cart links back to product selection."
+    },
+    {
+      "route": "/sell/checkout",
+      "screen": "Checkout",
+      "section": "2. Sell and offline sales",
+      "layout": "Back/title; confirmed customer selection; totals/discount; payment method and paid-now amount; balance/change; submit",
+      "behavior": "Require customer when credit remains according to source. Online/offline constraints must remain explicit. Disable duplicate checkout and keep draft on rejection. Omit the unsavable sale-note field."
+    },
+    {
+      "route": "/sell/customer/new",
+      "screen": "New checkout customer",
+      "section": "2. Sell and offline sales",
+      "layout": "Reference-mapped header/cart shortcut; retained-cart panel; one form panel; Cancel/Create customer",
+      "behavior": "Name and phone required in this checkout-specific form; optional email/address/customer note. Select created customer in Checkout without losing cart/payment. See the mapped reference and implementation record."
+    },
+    {
+      "route": "/sell/offline-sales",
+      "screen": "Offline queue",
+      "section": "2. Sell and offline sales",
+      "layout": "Back/title/menu; connection banner; four stored status counts; Sync now; latest/oldest sort; local receipt cards with amount, units/items, date, status and action menu; receipt preview",
+      "behavior": "Follow mapped references 005 and 144. Separate pending, syncing, conflict and completed states. Sync actions use the existing waiting queue; disable sync offline and retain failed records for explicit retry. Preserve canonical local receipt IDs, source draft and list sort on Back. Never call a local sale server-confirmed before sync."
+    },
+    {
+      "route": "/products",
+      "screen": "Inventory",
+      "section": "3. Products",
+      "layout": "Reference 006: Back/title/Add; two inventory summaries; search/scan + filter; count/export/tools; compact photo/name/SKU/stock/primary-price cards; shared bottom navigation",
+      "behavior": "Category/stock filters remain in the right drawer. Tools retains refresh, import and barcode selection. Stock status includes text; below-cost warning remains. No product-detail route is invented."
+    },
+    {
+      "route": "/products/new",
+      "screen": "Create",
+      "section": "3. Products",
+      "layout": "References 007–009: Basic photo/identity/base-unit form; Inventory identity/conversion/stock/cost/threshold; Prices manual/automatic cards; pinned Cancel/Previous/Continue/Save product",
+      "behavior": "Wait for configured pricing rules before initialization. Preserve values/photo across steps and route return. Currency follows the active business. Shared automatic markup/rounding remain read-only; per-product mode/price remain editable."
+    },
+    {
+      "route": "/products/:id/edit",
+      "screen": "Edit",
+      "section": "3. Products",
+      "layout": "References 010–012: photo panel and identity/description fields; inventory profile + unit/conversion/stock/cost panels; price-step profile above progress and price cards",
+      "behavior": "Description uses supported online_description. Unit-size metadata is unsupported and omitted. SKU/category remain optional. Product-name and description limits follow the API. Busy saves disable form editing and guard duplicate submissions; failures retain draft and target the failing step."
+    },
+    {
+      "route": "/products/:id/stock",
+      "screen": "Stock",
+      "section": "3. Products",
+      "layout": "Reference 013: Back/title/menu; product photo/stock/price; Add stock/Remove stock; quantity/unit, resulting balance, reason and Save adjustment; dated movement rows",
+      "behavior": "Direction determines the signed API adjustment; prevent zero/nonfinite or negative resulting stock. Retain reason/quantity on failure. Refresh affected stock/history after success; preserve source search/list state on ordinary Back."
+    },
+    {
+      "route": "/purchases",
+      "screen": "Purchase history",
+      "section": "4. Purchases",
+      "layout": "Title + New purchase; summary/context; search + date/filter drawer + export; purchase rows with supplier/reference/date/total/payment context",
+      "behavior": "Separate row navigation from overflow actions. Keep filtered history and scroll when returning."
+    },
+    {
+      "route": "/purchases/new",
+      "screen": "Create",
+      "section": "4. Purchases",
+      "layout": "Four-step wizard: Basic information; Select products; Quantities and costs; Review and submit",
+      "behavior": "Step 1 supplier/reference; step 2 searchable/category product selection; step 3 buying unit, conversion, paid quantity, FOC, cost; step 4 totals, payment/paid-now and note. Preserve draft between steps."
+    },
+    {
+      "route": "/purchases/:id/edit",
+      "screen": "Edit",
+      "section": "4. Purchases",
+      "layout": "Same wizard with existing purchase and edit context",
+      "behavior": "Explain resulting stock/account changes through existing rules; validate all lines before saving."
+    },
+    {
+      "route": "/purchases/:id",
+      "screen": "Detail",
+      "section": "4. Purchases",
+      "layout": "Back/reference; supplier/date/payment summary; purchased item cards; totals; actions",
+      "behavior": "Supplier navigation when permitted; edit/delete actions visible as authorized; unknown/deleted purchase recovery."
+    },
+    {
+      "route": "/sales",
+      "screen": "Sales history",
+      "section": "5. Sales",
+      "layout": "Title; period/search/filter/export; totals with clear scope; sale rows with receipt/customer/date/amount and payment state",
+      "behavior": "Shared transaction/history infrastructure remains in use; keep sales context in labels and return paths."
+    },
+    {
+      "route": "/sales/:id",
+      "screen": "Sale detail",
+      "section": "5. Sales",
+      "layout": "Back/receipt; sale total and paid/balance; customer/payment/date; item list; totals/discount; receipt and authorized edit/delete",
+      "behavior": "Receipt printing is a separate operation from changing sale. Keep print progress/failure local."
+    },
+    {
+      "route": "/sales/:id/edit",
+      "screen": "Edit sale",
+      "section": "5. Sales",
+      "layout": "Two-step Cart and Checkout; selected items/prices/quantities/FOC, then customer/payment/discount and authorization",
+      "behavior": "Preserve stock/account reconciliation, price type, original receipt identity and protected-edit/PIN flow. Keep errors by field/line and bring validation into view. The API has no payment-note field."
+    },
+    {
+      "route": "/customers",
+      "screen": "Contacts",
+      "section": "6. Credit customer accounts",
+      "layout": "Title + Add; search/filter/export; compact customer contact rows with name/contact left and balance state right",
+      "behavior": "This is the presentation reference for shop customer rows. Receivable/payable/settled use text as well as semantic color."
+    },
+    {
+      "route": "/customers/new",
+      "screen": "Create",
+      "section": "6. Credit customer accounts",
+      "layout": "Customer identity/contact form; grouped optional details; Cancel/Save",
+      "behavior": "Name, phone, optional email, address/note according to existing form; return to actual caller."
+    },
+    {
+      "route": "/customers/:id/edit",
+      "screen": "Edit",
+      "section": "6. Credit customer accounts",
+      "layout": "Same form with existing identity",
+      "behavior": "Preserve source detail/list state; report validation without wiping values."
+    },
+    {
+      "route": "/customers/:id",
+      "screen": "Account detail",
+      "section": "6. Credit customer accounts",
+      "layout": "Customer profile/contact; receivable/payable summary; Add payment, statement print and edit actions; tabs Credit sales / Payment records",
+      "behavior": "Search history and date drawer belong to active history. Preserve tab/query/page/scroll. Show account direction clearly."
+    },
+    {
+      "route": "/customers/:id/payments/new",
+      "screen": "New movement",
+      "section": "6. Credit customer accounts",
+      "layout": "Account identity/balance context; direction; amount; payment method; note; submit",
+      "behavior": "Explicitly label customer pays shop vs shop pays customer. Do not rely on signed numbers alone."
+    },
+    {
+      "route": "/customers/:id/payments/:paymentId/edit",
+      "screen": "Edit movement",
+      "section": "6. Credit customer accounts",
+      "layout": "Same payment form populated with current record",
+      "behavior": "Preserve audit/business rules, financial confirmation and required PIN. Cancel returns to correct account/history."
+    },
+    {
+      "route": "/suppliers",
+      "screen": "Directory",
+      "section": "7. Suppliers",
+      "layout": "Title + Add; search/filter/export; contact rows and payable/account summary",
+      "behavior": "Match customer directory density while retaining supplier-specific labels and direction."
+    },
+    {
+      "route": "/suppliers/new",
+      "screen": "Create",
+      "section": "7. Suppliers",
+      "layout": "Supplier name, phone/contact person, address/note; Cancel/Save",
+      "behavior": "Keep existing optional/required rules; retain caller context from purchases if used."
+    },
+    {
+      "route": "/suppliers/:id/edit",
+      "screen": "Edit",
+      "section": "7. Suppliers",
+      "layout": "Same form with current supplier",
+      "behavior": "Validation and missing record states."
+    },
+    {
+      "route": "/suppliers/:id",
+      "screen": "Supplier detail",
+      "section": "7. Suppliers",
+      "layout": "Contact summary; account balance; pay/statement/edit; Purchases and Payment records tabs; history filters",
+      "behavior": "Distinguish shop owes supplier from supplier owes shop. Keep tab/date/query and loaded rows on return."
+    },
+    {
+      "route": "/suppliers/:id/payments/new",
+      "screen": "New payment",
+      "section": "7. Suppliers",
+      "layout": "Supplier/account context; movement direction, amount/method/note; confirm",
+      "behavior": "Shop pays supplier vs supplier pays shop must be readable."
+    },
+    {
+      "route": "/suppliers/:id/payments/:paymentId/edit",
+      "screen": "Edit payment",
+      "section": "7. Suppliers",
+      "layout": "Same populated payment form",
+      "behavior": "Reconcile affected balances/history after server success."
+    },
+    {
+      "route": "/expenses",
+      "screen": "Expense list",
+      "section": "8. Expenses",
+      "layout": "Title + Add; today/month/filtered summary with period labels; search/filter/export; expense rows",
+      "behavior": "Date/category/payment filters and presets in drawer; top-category context must identify scope."
+    },
+    {
+      "route": "/expenses/new",
+      "screen": "New expense",
+      "section": "8. Expenses",
+      "layout": "Date, title/category, amount/payment method, note; Cancel/Save",
+      "behavior": "Numeric keyboard, clear currency, inline validation."
+    },
+    {
+      "route": "/expenses/:id/edit",
+      "screen": "Edit expense",
+      "section": "8. Expenses",
+      "layout": "Same populated form with record context",
+      "behavior": "Keep source filters/scroll; missing record and save failure recovery."
+    },
+    {
+      "route": "/transactions",
+      "screen": "Payment history",
+      "section": "9. Transactions",
+      "layout": "Title; Customers / Suppliers tabs; search/date/filter/export; scoped totals; movement cards",
+      "behavior": "Each row names party, direction, method, date, amount and reference. Switching tabs keeps context coherent; sales history is its own module."
+    },
+    {
+      "route": "/transactions/payments/:id/edit",
+      "screen": "Customer payment edit",
+      "section": "9. Transactions",
+      "layout": "Party/record context; direction/amount/method/note; Cancel/Save",
+      "behavior": "Use shared payment edit rules while returning to the transaction origin."
+    },
+    {
+      "route": "/transactions/supplier-payments/:id/edit",
+      "screen": "Supplier payment edit",
+      "section": "9. Transactions",
+      "layout": "Equivalent supplier payment form",
+      "behavior": "Keep supplier-specific direction/copy and API behavior."
+    },
+    {
+      "route": "/reports",
+      "screen": "Reports",
+      "section": "10. Business reports",
+      "layout": "Title; date period/filter/export; net profit; sales/paid/credit/expense/FOC metrics; cash movement; inventory/account snapshots; month/year sales trends; payment breakdown; top products; expense categories",
+      "behavior": "Keep period activity separate from current inventory valuation and outstanding balances. Explain the applicable date/as-of values. Chart values need readable alternatives."
+    },
+    {
+      "route": "/billing",
+      "screen": "Billing overview",
+      "section": "11. Billing",
+      "layout": "Current plan/status/validity; latest payment; available package cards; payment account availability; billing history/export; support contacts",
+      "behavior": "Distinguish trial, valid paid, expired and pending approval. Selected plan has clear price/duration from server."
+    },
+    {
+      "route": "/billing/request/:planId",
+      "screen": "Plan payment request",
+      "section": "11. Billing",
+      "layout": "Selected plan summary; payment account/instructions; transfer proof picker; reference/note/message; submit",
+      "behavior": "Plan ID is numeric in current routing. JPG/PNG/WebP proof, max 5MB. Show preview/replace/upload error. Explain office approval; submission does not instantly activate the plan."
+    },
+    {
+      "route": "/access",
+      "screen": "Access",
+      "section": "12. Access management",
+      "layout": "Title/context; Roles / Staff tabs; Add action; rows with role/permission summary or staff identity/status; secondary export",
+      "behavior": "Owner/authorized access only. Keep current user and protected roles/staff restrictions obvious."
+    },
+    {
+      "route": "/access/roles/new",
+      "screen": "New role",
+      "section": "12. Access management",
+      "layout": "Role name; grouped page access selection; Cancel/Create",
+      "behavior": "Require at least one allowed page according to source. No vague “all access” styling when only partial access is granted."
+    },
+    {
+      "route": "/access/roles/:id/edit",
+      "screen": "Edit role",
+      "section": "12. Access management",
+      "layout": "Same role form with assigned permissions",
+      "behavior": "Preserve backend permission identities and dependent constraints."
+    },
+    {
+      "route": "/access/staff/new",
+      "screen": "New staff",
+      "section": "12. Access management",
+      "layout": "Name/email; role selection; active status; password/confirmation; Create",
+      "behavior": "Current password rule: minimum eight characters; do not expose existing passwords."
+    },
+    {
+      "route": "/access/staff/:id/edit",
+      "screen": "Edit staff",
+      "section": "12. Access management",
+      "layout": "Identity, role and active status",
+      "behavior": "Password reset is its own route; prevent confusing role save with password update."
+    },
+    {
+      "route": "/access/staff/:id/password",
+      "screen": "Reset staff password",
+      "section": "12. Access management",
+      "layout": "Staff identity; new password + confirmation; reset action",
+      "behavior": "Minimum eight characters, clear busy/success/failure; never put password in a summary or toast."
+    },
+    {
+      "route": "/settings",
+      "screen": "Settings index",
+      "section": "13. Settings and device tools",
+      "layout": "Title; grouped identity/business, output/device, administration and help rows",
+      "behavior": "Permission-aware rows. Staff currently have account/receipt/printer/barcode/about only; do not expose owner tools through styling."
+    },
+    {
+      "route": "/settings/account",
+      "screen": "Account",
+      "section": "13. Settings and device tools",
+      "layout": "Current identity; profile fields; current password; optional new password/confirmation; Save",
+      "behavior": "Current password required for profile changes under existing logic. Sensitive input is not retained in visible summaries."
+    },
+    {
+      "route": "/settings/shop",
+      "screen": "Business/shop",
+      "section": "13. Settings and device tools",
+      "layout": "Business name/title/contact/address/currency; logo preview/picker; Save",
+      "behavior": "Shared business identity affects other modules/storefront. Logo JPG/PNG/WebP max512KB. Explain shared effect where relevant."
+    },
+    {
+      "route": "/settings/receipt",
+      "screen": "Receipt",
+      "section": "13. Settings and device tools",
+      "layout": "Content visibility toggles; footer/alignment; paper/layout/font/margins; live preview; save/test print",
+      "behavior": "Preserve 50/58/80/85mm, A5/A4 choices and template behavior. Preview updates must not jump form scroll. Separate template settings from device printer profile."
+    },
+    {
+      "route": "/settings/barcode",
+      "screen": "Barcode",
+      "section": "13. Settings and device tools",
+      "layout": "Format selector; physical dimensions/margins/gaps; name/value toggles; live sample; Save/print where supported",
+      "behavior": "Formats: A4 3x8 / 4x10; rolls 40x30, 50x30, 60x40; custom sheet/roll. Label dimensions are physical mm, not CSS pixel suggestions. Invalid geometry needs inline errors."
+    },
+    {
+      "route": "/settings/printer",
+      "screen": "Printer",
+      "section": "13. Settings and device tools",
+      "layout": "Native/browser context; connection type; conditional setup; paper/copies/cut/color/orientation; connection/test actions; Save",
+      "behavior": "Native system/TCP/Bluetooth Classic; browser fallback explains printing path. Host/port for TCP; paired device selection and pairing help for Bluetooth. Preserve test progress/error."
+    },
+    {
+      "route": "/settings/payments",
+      "screen": "Payment methods",
+      "section": "13. Settings and device tools",
+      "layout": "Existing method rows; add/remove; save footer",
+      "behavior": "Preserve validation and method names used by transactions. Avoid accidental row deletion on field focus."
+    },
+    {
+      "route": "/settings/prices",
+      "screen": "Price types",
+      "section": "13. Settings and device tools",
+      "layout": "Price rows with manual/automatic rule and usage; Add/Edit/Delete",
+      "behavior": "Used types may be protected. Display automatic cost markup and rounding meaning."
+    },
+    {
+      "route": "/settings/prices/new",
+      "screen": "New price",
+      "section": "13. Settings and device tools",
+      "layout": "Identity; manual/automatic mode; markup/rounding/min profit; Save",
+      "behavior": "Automatic-only fields disabled meaningfully in manual mode."
+    },
+    {
+      "route": "/settings/prices/:name/edit",
+      "screen": "Edit price",
+      "section": "13. Settings and device tools",
+      "layout": "Same form; usage count; explicit Apply to existing option",
+      "behavior": "Applying to existing products replaces calculated prices; preserve explicit opt-in and explain effect. URL-encode names."
+    },
+    {
+      "route": "/settings/security",
+      "screen": "Security",
+      "section": "13. Settings and device tools",
+      "layout": "PIN status; PIN configuration/update form; Save",
+      "behavior": "Preserve optional PIN protection; never render stored PIN in plaintext."
+    },
+    {
+      "route": "/settings/data",
+      "screen": "Data tools",
+      "section": "13. Settings and device tools",
+      "layout": "Backup status/download; restore entry; visually separated danger reset entry",
+      "behavior": "Paid-plan gating for backup/restore; show trial restriction and Billing path. Export failure does not remove local/server data."
+    },
+    {
+      "route": "/settings/data/restore",
+      "screen": "Restore",
+      "section": "13. Settings and device tools",
+      "layout": "Prominent replacement consequence; `.mkpos-backup` picker; typed RESTORE; PIN if enabled; Restore",
+      "behavior": "Max25MB; preserve server validation, long-running busy behavior and identity/cache refresh after success. No real restore during design QA."
+    },
+    {
+      "route": "/settings/data/reset",
+      "screen": "Reset",
+      "section": "13. Settings and device tools",
+      "layout": "What is removed/preserved; safety backup explanation; typed RESET; optional PIN; destructive action",
+      "behavior": "Second confirmation sheet required by current flow. Preserve account/users/roles/subscription/billing; clear operational data only through server rules. Never execute in production for a visual check."
+    },
+    {
+      "route": "/settings/language",
+      "screen": "Language",
+      "section": "13. Settings and device tools",
+      "layout": "English / Myanmar choices and clear active state",
+      "behavior": "Apply existing global localization behavior, preserve source navigation and mixed-script data."
+    },
+    {
+      "route": "/settings/about",
+      "screen": "About",
+      "section": "13. Settings and device tools",
+      "layout": "App version/runtime/server context; support/contact links",
+      "behavior": "Distinguish browser/PWA/native build context; do not expose secrets."
+    },
+    {
+      "route": "/shop",
+      "screen": "My Shop",
+      "section": "14. My Shop overview and gates",
+      "layout": "Workspace/title/context; compact management rows with icon, title, description, chevron",
+      "behavior": "Orders, Customers, Chat, Reviews, Report, Catalog, Promotions, Contacts, Delivery, Methods, Storefront, Fulfillment, Cover; owner logo/location entries. Filter by permissions and subscription."
+    },
+    {
+      "route": "/shop/location",
+      "screen": "Shop location",
+      "section": "14. My Shop overview and gates",
+      "layout": "Saved status/coordinates/time; public-location explanation and GPS update; expandable help; separate denied screen",
+      "behavior": "References 072/154; owner-only GPS, retry without invented coordinates, retained source and required setup gate. Missing location blocks staff until the owner acts."
+    },
+    {
+      "route": "/shop/orders",
+      "screen": "Orders",
+      "section": "15. Shop orders",
+      "layout": "Title; search/filter/export toolbar; result count/context; shared OrderCard list; endless footer",
+      "behavior": "Drawer: order/payment status, dates/timezone, request-only state and existing controls. No always-open date strip."
+    },
+    {
+      "route": "/shop/orders/:id",
+      "screen": "Order detail",
+      "section": "15. Shop orders",
+      "layout": "Back/reference; total/item count/state hero; fulfillment roadmap; icon+label action tiles; customer and fulfillment panels; requests; items/totals/promotions; linked POS sale; payment/proof/account; audit",
+      "behavior": "Distinct customer and delivery/pickup icon language. Clear optional sections. Preserve cross-module permissions on customer/sale links."
+    },
+    {
+      "route": "/shop/orders/:id/action/:action",
+      "screen": "Action deep link",
+      "section": "15. Shop orders",
+      "layout": "Same order context with focused action confirmation modal/form",
+      "behavior": "Normal detail actions open a modal without unnecessary navigation. Deep links must remain usable and close/back safely."
+    },
+    {
+      "route": "/shop/orders/:id/requests/:requestId/review",
+      "screen": "Request review",
+      "section": "15. Shop orders",
+      "layout": "Full-page order summary; request type/reason/photo; decision radio cards; required review note; pinned Save decision/Cancel",
+      "behavior": "Preserve accept/reject rules, required reasons, pending state and record reconciliation."
+    },
+    {
+      "route": "/shop/catalog",
+      "screen": "Catalog",
+      "section": "16. Shop catalog",
+      "layout": "Title; search/filter/export or bulk controls as present; product rows with stock/online price/publication; bulk Publish/Unpublish",
+      "behavior": "Drawer for category, stock, publication, online-price and sort controls. Bulk filtered action affects all matching records, not just visible rows; confirm filter scope/count."
+    },
+    {
+      "route": "/shop/catalog/:id/edit",
+      "screen": "Publication editor",
+      "section": "16. Shop catalog",
+      "layout": "Product identity; public product/unit/description/price/publication fields from source; preview context; Save",
+      "behavior": "Distinguish inventory fields from public publication fields; retain validation, missing record and subscription restriction."
+    },
+    {
+      "route": "/shop/customers",
+      "screen": "Buyer list",
+      "section": "17. Shop customers",
+      "layout": "Title; compact search/filter/export; contact-style customer rows; pagination",
+      "behavior": "Name/contact left, purchase badge/summary right, chevron. No oversized avatar, left accent stripe or decorative footer. Distinguish account/guest/blocked and optional contact information."
+    },
+    {
+      "route": "/shop/customers/:customerKey",
+      "screen": "Buyer detail",
+      "section": "17. Shop customers",
+      "layout": "Back/customer identity; profile/contact/state; compact actions; purchase statistics by currency; order history heading/toolbar; shared OrderCard rows",
+      "behavior": "Preserve currency separation; no combined total across currencies. History filters and scroll survive order/chat navigation. Customer keys can represent account or guest and must be URL-encoded."
+    },
+    {
+      "route": "/shop/customers/:customerKey/action/block",
+      "screen": "Block action",
+      "section": "17. Shop customers",
+      "layout": "Customer context; current block state; explicit Block/Unblock confirmation and reason if provided by flow",
+      "behavior": "Busy/error keeps context. Permission-aware; never silently block on opening detail."
+    },
+    {
+      "route": "/shop/customers/:customerKey/action/credit",
+      "screen": "Link credit contact",
+      "section": "17. Shop customers",
+      "layout": "Buyer identity; existing/new credit contact context from source; explicit confirmation",
+      "behavior": "Reuse/link intentionally; no automatic financial balance creation or matching solely by name."
+    },
+    {
+      "route": "/shop/chat",
+      "screen": "Inbox",
+      "section": "18. Shop chat",
+      "layout": "Title; compact search/unread filter drawer; avatar/name/last-message/time rows; unread and presence cues",
+      "behavior": "Entire conversation row opens thread. Long preview truncates without hiding identity/time. Empty inbox differs from no unread matches."
+    },
+    {
+      "route": "/shop/chat/:uuid",
+      "screen": "Conversation",
+      "section": "18. Shop chat",
+      "layout": "Full-page white header: Back, clickable avatar+name, presence; neutral message canvas; date/history states; bottom composer",
+      "behavior": "UUID is a 36-character thread key. Hide outer app header/trial banner only here. Profile group opens buyer detail. No separate placeholder-profile icon. Preserve true origin on Back."
+    },
+    {
+      "route": "/shop/reviews",
+      "screen": "Ratings and reviews",
+      "section": "19. Reviews",
+      "layout": "Title/context; search/filter/export; compact summaries Matching reviews / Awaiting reply shown; review cards; endless footer",
+      "behavior": "Drawer: shop/product type, rating, reply status, content, dates and sort from source. The shown awaiting count describes loaded rows only."
+    },
+    {
+      "route": "/shop/reviews/:id/edit",
+      "screen": "Reply editor",
+      "section": "19. Reviews",
+      "layout": "Review/customer/rating/target context; existing reply; clearly labeled public reply textarea; Cancel/Save",
+      "behavior": "Process permission required to reply. Max2,000 characters; blank removes existing reply. Explain removal before saving blank content. Keep source list filters/scroll."
+    },
+    {
+      "route": "/shop/report",
+      "screen": "Online-shop report",
+      "section": "20. Shop report",
+      "layout": "Title; period/currency/filter/export; summary and previous-period comparisons; daily chart/table; product/buyer/outcome/origin/segment breakdowns; payment/refund/fulfillment and customer follow-up",
+      "behavior": "Currency and resolved date range are required context. Reset stages valid initial dates/currency; Apply is explicit. No cross-currency total. Show comparison absence honestly instead of infinite percent growth."
+    },
+    {
+      "route": "/shop/promotions",
+      "screen": "Promotions",
+      "section": "21. Promotions",
+      "layout": "Title + New coupon/New flash sale; search/filter; selected count and bulk actions when selected; promotion rows with type/status/schedule/discount",
+      "behavior": "Selection persists across filter/page changes as implemented. Select loaded vs select matching scope must be explicit. Preserve max1,000 selected constraint."
+    },
+    {
+      "route": "/shop/promotions/new/coupon",
+      "screen": "New coupon",
+      "section": "21. Promotions",
+      "layout": "Identity/code; percent/fixed discount; minimum subtotal/usage limits; enabled/schedule; review/save",
+      "behavior": "Clearly show discount units/currency; optional limits distinct from zero. Use business timezone."
+    },
+    {
+      "route": "/shop/promotions/new/flash_sale",
+      "screen": "New flash sale",
+      "section": "21. Promotions",
+      "layout": "Identity/schedule; product picker; per-product discount and quantity limits; Save",
+      "behavior": "Up to100 product rows; used product restrictions remain visible. Product removal and price edits have clear row targets."
+    },
+    {
+      "route": "/shop/promotions/:id/edit",
+      "screen": "Edit",
+      "section": "21. Promotions",
+      "layout": "Matching coupon/flash-sale form with existing usage/state context",
+      "behavior": "Lock used/restricted fields according to source; do not silently reset history/limits."
+    },
+    {
+      "route": "/shop/contacts",
+      "screen": "Contacts",
+      "section": "22. Shop configuration",
+      "layout": "Title + Add; compact platform/contact rows; edit/delete actions; count/limit",
+      "behavior": "Current maximum100. Platform icon is meaningful and paired with label/value."
+    },
+    {
+      "route": "/shop/contacts/new",
+      "screen": "Add contact",
+      "section": "22. Shop configuration",
+      "layout": "Platform; label; value; Save",
+      "behavior": "Platforms include phone/email/Facebook/TikTok/YouTube/Telegram/Viber/Instagram/WhatsApp. Preserve platform-specific validation."
+    },
+    {
+      "route": "/shop/contacts/:id/edit",
+      "screen": "Edit contact",
+      "section": "22. Shop configuration",
+      "layout": "Same form populated",
+      "behavior": "Encoded identity and missing-record recovery."
+    },
+    {
+      "route": "/shop/delivery",
+      "screen": "Delivery",
+      "section": "22. Shop configuration",
+      "layout": "Title + Add; option name/fee rows and actions",
+      "behavior": "Current maximum100; clear currency and zero-fee meaning."
+    },
+    {
+      "route": "/shop/delivery/new",
+      "screen": "Add delivery",
+      "section": "22. Shop configuration",
+      "layout": "Option name and fee; Save",
+      "behavior": "Validate fee with current rules."
+    },
+    {
+      "route": "/shop/delivery/:id/edit",
+      "screen": "Edit delivery",
+      "section": "22. Shop configuration",
+      "layout": "Same form populated",
+      "behavior": "Preserve references from existing orders."
+    },
+    {
+      "route": "/shop/methods",
+      "screen": "Payment methods",
+      "section": "22. Shop configuration",
+      "layout": "Reference 098: title/Add, explanation/count, cash/bank cards, receiving summary, manual/active state, overflow Edit/Delete",
+      "behavior": "Maximum 20; masked summary/full editable account; guarded deletion and last-active validation. Separate from POS payment labels."
+    },
+    {
+      "route": "/shop/methods/new",
+      "screen": "Add method",
+      "section": "22. Shop configuration",
+      "layout": "Reference 099: name, payment-type radio cards, receiving-details card, instructions/count, active switch; fixed Cancel/Save method",
+      "behavior": "Preserve Cash/transfer drafts, custom bank/wallet names, optional receiving details and supported 2,000-character instructions. Natural scrolling."
+    },
+    {
+      "route": "/shop/methods/:id/edit",
+      "screen": "Edit method",
+      "section": "22. Shop configuration",
+      "layout": "Reference 100: same populated sections with Save changes",
+      "behavior": "Preserve full account values, inline validation, retry, unique retained IDs and source Back state; existing orders retain their payment snapshot."
+    },
+    {
+      "route": "/shop/storefront",
+      "screen": "Storefront",
+      "section": "23. Storefront, branding and fulfillment",
+      "layout": "Public URL/slug and identity context; online price type; description; storefront/accepting-orders/marketplace options; announcement; opening hours/temporary closure; Save",
+      "behavior": "Shared business fields and owner restrictions remain enforced. Slug is locked after orders exist. Use labeled switches with consequence text. Show public URL as a link with correct target."
+    },
+    {
+      "route": "/shop/fulfillment",
+      "screen": "Fulfillment",
+      "section": "23. Storefront, branding and fulfillment",
+      "layout": "Pickup address/hours, buyer instructions, live buyer preview; fixed Save changes",
+      "behavior": "Reference 102; blank address falls back to shop address, hours are descriptive, instructions retain the supported 2,000-character limit. New pickup orders snapshot the saved details."
+    },
+    {
+      "route": "/shop/cover",
+      "screen": "Cover",
+      "section": "23. Storefront, branding and fulfillment",
+      "layout": "Current cover/empty preview; upload requirements; choose/replace/remove; Save",
+      "behavior": "PNG/JPG/WebP, max2MB and4800x4800px under current UI requirements; preserve preview vs persisted state and upload errors. Preview scales without stretching."
+    },
+    {
+      "route": "/shop/logo",
+      "screen": "Logo",
+      "section": "23. Storefront, branding and fulfillment",
+      "layout": "Square shared-logo preview; business identity explanation; owner note; requirements; Replace/Remove; fixed Cancel/Save",
+      "behavior": "Reference 104; PNG/JPG/WebP up to 512 KB and 2400 × 2400 px. Stage removal until Save, support Undo/retry and retain selected files through Back/Forward."
+    }
+  ],
+  "routeMatchers": [
+    {
+      "source": "src/access/accessUtils.js",
+      "line": 4,
+      "pattern": "^\\/access\\/roles\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/access/accessUtils.js",
+      "line": 5,
+      "pattern": "^\\/access\\/staff\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/access/accessUtils.js",
+      "line": 6,
+      "pattern": "^\\/access\\/staff\\/(\\d+)\\/password$"
+    },
+    {
+      "source": "src/app/App.jsx",
+      "line": 400,
+      "pattern": "^\\/access(?:\\/|$)"
+    },
+    {
+      "source": "src/billing/billingUtils.js",
+      "line": 2,
+      "pattern": "^\\/billing\\/request\\/(\\d+)$"
+    },
+    {
+      "source": "src/customers/customerUtils.js",
+      "line": 22,
+      "pattern": "^\\/customers\\/(\\d+)\\/payments\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/customers/customerUtils.js",
+      "line": 24,
+      "pattern": "^\\/customers\\/(\\d+)\\/payments\\/new$"
+    },
+    {
+      "source": "src/customers/customerUtils.js",
+      "line": 26,
+      "pattern": "^\\/customers\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/customers/customerUtils.js",
+      "line": 28,
+      "pattern": "^\\/customers\\/(\\d+)$"
+    },
+    {
+      "source": "src/expenses/expenseUtils.js",
+      "line": 35,
+      "pattern": "^\\/expenses\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 3,
+      "pattern": "^\\/shop\\/promotions\\/(?:new\\/(?:coupon|flash_sale)|\\d+\\/edit)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 4,
+      "pattern": "^\\/shop\\/promotions$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 5,
+      "pattern": "^\\/shop\\/reviews\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 6,
+      "pattern": "^\\/shop\\/reviews$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 7,
+      "pattern": "^\\/shop\\/(reviews|report)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 8,
+      "pattern": "^\\/shop\\/chat\\/[^/]+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 9,
+      "pattern": "^\\/shop\\/chat$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 10,
+      "pattern": "^\\/shop\\/customers\\/[^/]+\\/action\\/[^/]+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 11,
+      "pattern": "^\\/shop\\/customers\\/[^/]+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 12,
+      "pattern": "^\\/shop\\/customers$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 13,
+      "pattern": "^\\/shop\\/(storefront|fulfillment|cover|logo)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 14,
+      "pattern": "^\\/shop\\/(contacts|delivery|methods)\\/(?:new|[^/]+\\/edit)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 15,
+      "pattern": "^\\/shop\\/catalog\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 16,
+      "pattern": "^\\/shop\\/(contacts|delivery|methods|catalog)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 17,
+      "pattern": "^\\/shop\\/orders\\/\\d+\\/action\\/[^/]+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 18,
+      "pattern": "^\\/shop\\/orders\\/\\d+\\/requests\\/\\d+\\/review$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 19,
+      "pattern": "^\\/shop\\/orders\\/\\d+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 20,
+      "pattern": "^\\/shop\\/orders$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 21,
+      "pattern": "^\\/shop\\/location$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 22,
+      "pattern": "^\\/products\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 23,
+      "pattern": "^\\/products\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 24,
+      "pattern": "^\\/products\\/\\d+\\/stock$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 25,
+      "pattern": "^\\/purchases\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 26,
+      "pattern": "^\\/purchases\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 27,
+      "pattern": "^\\/purchases\\/\\d+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 28,
+      "pattern": "^\\/sales\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 29,
+      "pattern": "^\\/sales\\/\\d+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 30,
+      "pattern": "^\\/suppliers\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 31,
+      "pattern": "^\\/suppliers\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 32,
+      "pattern": "^\\/suppliers\\/\\d+\\/payments\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 33,
+      "pattern": "^\\/suppliers\\/\\d+\\/payments\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 34,
+      "pattern": "^\\/suppliers\\/\\d+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 35,
+      "pattern": "^\\/customers\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 36,
+      "pattern": "^\\/customers\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 37,
+      "pattern": "^\\/customers\\/\\d+\\/payments\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 38,
+      "pattern": "^\\/customers\\/\\d+\\/payments\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 39,
+      "pattern": "^\\/customers\\/\\d+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 40,
+      "pattern": "^\\/expenses\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 41,
+      "pattern": "^\\/expenses\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 42,
+      "pattern": "^\\/transactions\\/payments\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 44,
+      "pattern": "^\\/transactions\\/supplier-payments\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 48,
+      "pattern": "^\\/billing\\/request\\/[^/]+$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 49,
+      "pattern": "^\\/settings\\/prices\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 51,
+      "pattern": "^\\/settings\\/prices\\/[^/]+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 55,
+      "pattern": "^\\/settings\\/data\\/restore$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 56,
+      "pattern": "^\\/settings\\/data\\/reset$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 57,
+      "pattern": "^\\/settings\\/([^/]+)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 58,
+      "pattern": "^\\/access\\/roles\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 59,
+      "pattern": "^\\/access\\/roles\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 60,
+      "pattern": "^\\/access\\/staff\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 61,
+      "pattern": "^\\/access\\/staff\\/\\d+\\/edit$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 62,
+      "pattern": "^\\/access\\/staff\\/\\d+\\/password$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 63,
+      "pattern": "^\\/sell\\/cart$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 64,
+      "pattern": "^\\/sell\\/checkout$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 65,
+      "pattern": "^\\/sell\\/customer\\/new$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 66,
+      "pattern": "^\\/sell\\/offline-sales$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 70,
+      "pattern": "^\\/settings\\/([^/]+)$"
+    },
+    {
+      "source": "src/navigation/appBarRoute.js",
+      "line": 76,
+      "pattern": "^\\/(customers|suppliers)\\/(\\d+)\\/(?:edit|payments\\/(?:new|\\d+\\/edit))$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 172,
+      "pattern": "^\\/shop\\/chat\\/[a-f0-9-]{36}$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/transactions(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/suppliers(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/reviews(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/promotions(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/orders(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/methods(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/delivery(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/customers(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/contacts(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/shop\\/catalog(?:\\/|$)"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/expenses(?:\\/(?:new|\\d+\\/edit))?$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/billing(?:\\/request\\/\\d+)?$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/products(?:\\/(?:new|\\d+\\/(?:edit|stock)))?$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/access(?:\\/(?:roles|staff)\\/(?:new|\\d+\\/(?:edit|password)))?$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/sales(?:\\/\\d+(?:\\/edit)?)?$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/customers(?:\\/(?:new|\\d+(?:\\/edit|\\/payments\\/(?:new|\\d+\\/edit))?))?$"
+    },
+    {
+      "source": "src/navigation/AppShell.jsx",
+      "line": 173,
+      "pattern": "^\\/purchases(?:\\/(?:new|\\d+(?:\\/edit)?))?$"
+    },
+    {
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 63,
+      "pattern": "^\\/products\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/products/ProductsScreen.jsx",
+      "line": 65,
+      "pattern": "^\\/products\\/(\\d+)\\/stock$"
+    },
+    {
+      "source": "src/purchases/purchaseUtils.js",
+      "line": 28,
+      "pattern": "^\\/purchases\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/purchases/purchaseUtils.js",
+      "line": 30,
+      "pattern": "^\\/purchases\\/(\\d+)$"
+    },
+    {
+      "source": "src/settings/settingsUtils.js",
+      "line": 13,
+      "pattern": "^\\/settings\\/prices\\/([^/]+)\\/edit$"
+    },
+    {
+      "source": "src/settings/settingsUtils.js",
+      "line": 18,
+      "pattern": "^\\/settings\\/([^/]+)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 67,
+      "pattern": "^\\/shop\\/orders\\/(\\d+)\\/action\\/([^/]+)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 68,
+      "pattern": "^\\/shop\\/orders\\/(\\d+)\\/requests\\/(\\d+)\\/review$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 69,
+      "pattern": "^\\/shop\\/orders\\/(\\d+)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 70,
+      "pattern": "^\\/shop\\/(contacts|delivery|methods)\\/(?:new|([^/]+)\\/edit)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 71,
+      "pattern": "^\\/shop\\/(contacts|delivery|methods)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 72,
+      "pattern": "^\\/shop\\/catalog\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 73,
+      "pattern": "^\\/shop\\/customers\\/([^/]+)\\/action\\/(block|credit)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 74,
+      "pattern": "^\\/shop\\/customers\\/([^/]+)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 75,
+      "pattern": "^\\/shop\\/chat\\/([a-f0-9-]{36})$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 76,
+      "pattern": "^\\/shop\\/reviews\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 77,
+      "pattern": "^\\/shop\\/promotions\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 78,
+      "pattern": "^\\/shop\\/promotions\\/new\\/(coupon|flash_sale)$"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 80,
+      "pattern": "^\\/shop\\/(catalog|promotions|contacts|delivery|methods|storefront|fulfillment|cover|logo)(\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 83,
+      "pattern": "^\\/shop\\/catalog(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 84,
+      "pattern": "^\\/shop\\/contacts(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 131,
+      "pattern": "^\\/shop\\/delivery(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 134,
+      "pattern": "^\\/shop\\/methods(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 136,
+      "pattern": "^\\/shop\\/reviews(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 138,
+      "pattern": "^\\/shop\\/promotions(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/reviews(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/promotions(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/orders(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/methods(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/delivery(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/customers(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/contacts(?:\\/|$)"
+    },
+    {
+      "source": "src/shop/ShopScreen.jsx",
+      "line": 139,
+      "pattern": "^\\/shop\\/catalog(?:\\/|$)"
+    },
+    {
+      "source": "src/suppliers/supplierUtils.js",
+      "line": 21,
+      "pattern": "^\\/suppliers\\/(\\d+)\\/payments\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/suppliers/supplierUtils.js",
+      "line": 23,
+      "pattern": "^\\/suppliers\\/(\\d+)\\/payments\\/new$"
+    },
+    {
+      "source": "src/suppliers/supplierUtils.js",
+      "line": 25,
+      "pattern": "^\\/suppliers\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/suppliers/supplierUtils.js",
+      "line": 27,
+      "pattern": "^\\/suppliers\\/(\\d+)$"
+    },
+    {
+      "source": "src/transactions/transactionUtils.js",
+      "line": 18,
+      "pattern": "^\\/sales\\/(\\d+)\\/edit$"
+    },
+    {
+      "source": "src/transactions/transactionUtils.js",
+      "line": 20,
+      "pattern": "^\\/sales\\/(\\d+)$"
+    },
+    {
+      "source": "src/transactions/transactionUtils.js",
+      "line": 24,
+      "pattern": "^\\/transactions\\/(payments|supplier-payments)\\/(\\d+)\\/edit$"
+    }
+  ]
+}

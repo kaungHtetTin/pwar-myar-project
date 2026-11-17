@@ -1,0 +1,17 @@
+Options -MultiViews -Indexes
+DirectoryIndex index.html
+RewriteEngine On
+
+RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
+
+RewriteCond %{HTTP_HOST} ^(?:www\.)?pwarmyar\.com(?::[0-9]+)?$ [NC]
+RewriteCond %{REQUEST_URI} ^/(?:public/)?mobile(?:/|$) [NC]
+RewriteRule ^(.*)$ https://mobilepos.pwarmyar.com/$1 [R=302,L]
+RewriteRule ^(?:api|sanctum)(?:/|$) - [R=404,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^(?:assets|branding)(?:/|$) - [R=404,L]
+RewriteRule \.[^/]+$ - [R=404,L]
+RewriteRule ^ index.html [L]

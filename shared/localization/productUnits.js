@@ -1,0 +1,31 @@
+export const PRODUCT_UNIT_MESSAGES = {
+  'Stock unit': 'လက်ကျန်ရေတွက်သည့်ယူနစ်',
+  'Stock unit:': 'လက်ကျန်ရေတွက်သည့်ယူနစ်:',
+  'Purchase unit': 'ဝယ်ယူသည့်ယူနစ်',
+  'Purchase unit:': 'ဝယ်ယူသည့်ယူနစ်:',
+  'Buy in a different unit?': 'မတူညီသောယူနစ်ဖြင့် ဝယ်ယူပါသလား။',
+  'Stock entry unit': 'လက်ကျန်ထည့်သွင်းမည့်ယူနစ်',
+  'Cost entry unit': 'ဝယ်ဈေးထည့်သွင်းမည့်ယူနစ်',
+  'e.g. Piece': 'ဥပမာ - ခု',
+  'e.g. Carton': 'ဥပမာ - ဖာ',
+  'The unit used to count inventory and set selling prices.': 'လက်ကျန်ရေတွက်ရန်နှင့် ရောင်းဈေးသတ်မှတ်ရန် အသုံးပြုသောယူနစ်။',
+  'Stock unit is fixed for existing products to preserve stock, costs and history.': 'လက်ကျန်၊ ဝယ်ဈေးနှင့် မှတ်တမ်းများ မှန်ကန်စေရန် ရှိပြီးသားပစ္စည်း၏ လက်ကျန်ယူနစ်ကို ပြောင်း၍မရပါ။',
+  'The larger pack you buy from your supplier.': 'ပေးသွင်းသူထံမှ ဝယ်ယူသည့် အထုပ်ကြီးယူနစ်။',
+  'Enter the number of stock units in one purchase pack.': 'ဝယ်ယူသည့်တစ်ထုပ်တွင် ပါဝင်သော လက်ကျန်ယူနစ်အရေအတွက်ကို ထည့်ပါ။',
+  'Enter a purchase unit or turn off Buy in a different unit.': 'ဝယ်ယူသည့်ယူနစ်ကို ထည့်ပါ သို့မဟုတ် မတူညီသောယူနစ်ဖြင့် ဝယ်ယူခြင်းကို ပိတ်ပါ။',
+  'Stock unit cannot be changed on an existing product because stock, costs and history use this unit.': 'လက်ကျန်၊ ဝယ်ဈေးနှင့် မှတ်တမ်းများတွင် အသုံးပြုထားသောကြောင့် ရှိပြီးသားပစ္စည်း၏ လက်ကျန်ယူနစ်ကို ပြောင်း၍မရပါ။',
+  'Prices per': 'တစ်ယူနစ်ရောင်းဈေး —',
+  'Selling prices are per': 'ရောင်းဈေးများ၏ယူနစ် —',
+};
+
+export const PRODUCT_UNIT_PATTERNS = [
+  [/^How many (.+) in 1 purchase unit\?$/, 'ဝယ်ယူသည့် ၁ ယူနစ်တွင် $1 မည်မျှ ပါဝင်သနည်း။'],
+  [/^How many (.+) in 1 (.+)\?$/, '$2 တစ်ယူနစ်တွင် $1 မည်မျှ ပါဝင်သနည်း။'],
+  [/^Purchase cost per (.+) \((.+)\)$/, '$1 တစ်ယူနစ်ဝယ်ဈေး ($2)'],
+  [/^Opening stock \((.+)\)$/, 'အဖွင့်လက်ကျန် ($1)'],
+  [/^Current stock \((.+)\)$/, 'လက်ရှိလက်ကျန် ($1)'],
+  [/^Low-stock threshold \((.+)\)$/, 'လက်ကျန်နည်းသတိပေးအဆင့် ($1)'],
+  [/^Stock: (.+)$/, 'လက်ကျန်: $1'],
+  [/^Stored cost: (.+) per (.+) \(rounded to whole currency units\)$/, 'သိမ်းဆည်းမည့်ဝယ်ဈေး: $2 တစ်ယူနစ်လျှင် $1 (ငွေပမာဏကို ကိန်းပြည့်ပတ်ထားသည်)'],
+  [/^Stored cost: (.+) per (.+)$/, 'သိမ်းဆည်းမည့်ဝယ်ဈေး: $2 တစ်ယူနစ်လျှင် $1'],
+];

@@ -1,0 +1,9 @@
+.app-variant-recommendation .mobile-sheet-layer { align-items: center; padding: 16px; z-index: 1300; }
+.app-variant-recommendation .mobile-sheet { width: min(100%, 440px); margin: auto; border-radius: var(--radius-surface); }
+.app-variant-recommendation .mobile-sheet-handle { display: none; }
+.app-variant-recommendation .mobile-sheet-header { padding: 16px; }
+.app-variant-recommendation .mobile-sheet-header h2 { font-size: 18px; }
+.app-variant-recommendation .app-variant-copy { display: flex; gap: 14px; align-items: flex-start; }
+.app-variant-recommendation .app-variant-copy > svg { flex-shrink: 0; color: var(--theme-primary-text); }
+.app-variant-recommendation .app-variant-copy p { margin: 0; line-height: 1.65; }
+.app-variant-recommendation .mobile-sheet-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; padding: 16px; }

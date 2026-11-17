@@ -1,0 +1,9 @@
+# Find expired paying businesses
+
+Open **Businesses → Filters → Access → Previously paid, now expired**, then **Apply filters**. Use the app-bar search to narrow by business name, owner name, or owner email. The matching count and existing pagination use the filtered results. Open a business to review its billing history or use its existing Send email action.
+
+The API accepts `GET /api/office/businesses?access=paid_expired`. It combines the existing current access state `expired` with an existing subscription history record whose `price_paid` is greater than zero and whose start date has arrived. The history record must represent paid access (including legacy null access types on non-trial plans). This is subscription purchase history, not the business's inventory purchases. Free grants and trials alone do not qualify. Current active paid/trial, scheduled, and suspended access are excluded. Multiple purchases produce one business result.
+
+No database migration is required. The existing access-filter badge, owner search, pagination, refresh, and retained detail navigation are reused. The drawer restores applied filters when reopened; dismissing drafts does not change results.
+
+Verification: backend feature tests cover historical purchases, multiple purchases without duplicates, expired status and elapsed active periods, trial-only/free accounts, renewed/current trial access, suspended/scheduled/no-plan accounts, owner name/email search, pagination, and combined filters. Rendered UI tests cover Apply, Escape/dismiss, reopen, Clear, and existing pagination/Retry/email controls. Dashboard tests cover filtered owner search and app-bar/browser Back to the same Businesses table without a new list request. Interactive browser visual review was not performed; scroll restoration remains owned by the shared retained-view shell.

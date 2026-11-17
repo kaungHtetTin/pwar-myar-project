@@ -1,0 +1,15 @@
+.shopping-header .brand > .shop-platform-icon { display: block; width: 32px; height: 32px; flex: 0 0 32px; object-fit: contain; border-radius: 8px; }
+/* Mobile adjustments; medium and large screens use the original app-bar styles. */
+@media (max-width: 760px) {
+#root > .shopping-header .brand { min-width: 0; flex-shrink: 1; gap: 10px; }
+#root > .shopping-header .brand > span { display: grid; min-width: 0; gap: 4px; }
+#root > .shopping-header .brand > svg { width: 28px; height: 28px; flex: 0 0 28px; }
+#root > .shopping-header :is(.brand-name, .account-app-bar-title, .chats-app-bar-title) { margin: 0; font-size: 20px; font-weight: 700; line-height: 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#root > .shopping-header .brand small { display: block; min-width: 0; font-size: 10px; font-weight: 400; line-height: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--theme-on-primary); }
+#root > .shopping-header :is(.shopping-header-back, .language, .updates-link, .account-app-bar-action, .app-bar-track-order) { min-width: 44px; min-height: 44px; flex-shrink: 0; }
+#root > .shopping-header :is(.shopping-header-back, .updates-link, .account-app-bar-action, .app-bar-track-order) > svg { width: 26px; height: 26px; }
+#root > .shopping-header :is(.shopping-header-back, .updates-link, .account-app-bar-action) { display: grid; place-items: center; box-sizing: border-box; width: 44px; height: 44px; padding: 0; }
+#root > .shopping-header .language { justify-content: center; padding-inline: 8px; }
+  #root > .site-header.shopping-header { gap: 8px; }
+  #root > .shopping-header .brand strong { font-size: 15px; }
+}

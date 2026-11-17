@@ -1,0 +1,33 @@
+node_modules/
+dist/
+.jdk/
+.gradle-dist/
+android/.gradle/
+android/app/build/
+releases/
+android/upload-key.properties
+android/mkpos-upload-key.jks
+
+# Local environment overrides; retain public build configuration and templates
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.production
+!.env.laravel
+
+# Test output and local tool caches
+artifacts/
+test-artifacts/
+coverage/
+playwright-report/
+test-results/
+.vite/
+*.log
+*.tsbuildinfo
+
+# Signing credentials, regardless of their branding or filename
+*.jks
+*.keystore
+*.p12
+*.pfx

@@ -1,0 +1,71 @@
+.mobile-sheet.mobile-sheet--action-menu {
+  width: min(100%, 34rem);
+  margin: 0 auto;
+  border-radius: var(--radius-surface) var(--radius-surface) 0 0;
+}
+
+.mobile-sheet--action-menu .mobile-sheet-handle {
+  width: 2.7rem;
+  height: 0.26rem;
+  margin-top: 0.5rem;
+  background: var(--theme-surface-muted);
+}
+
+.mobile-sheet--action-menu .mobile-sheet-header { align-items: center; gap: 8px; padding: 4px 14px 10px; }
+.mobile-sheet--action-menu .mobile-sheet-header > div { min-width: 0; }
+.mobile-sheet--action-menu .mobile-sheet-header h2 { font-size: 16px; line-height: 1.75; }
+.mobile-sheet--action-menu .mobile-sheet-header p { margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 1.75; overflow-wrap: anywhere; }
+.mobile-sheet--action-menu .mobile-sheet-body { padding: 4px 14px max(12px, var(--app-safe-area-bottom)); }
+.mobile-action-menu { display: grid; gap: 0; }
+.mobile-action-menu button > svg:first-child { width: 36px; height: 36px; padding: 8px; border-radius: var(--radius-control); color: var(--theme-primary-text); background: var(--brand-100); }
+.mobile-action-menu button > span { display: grid; min-width: 0; gap: 2px; }
+.mobile-action-menu button strong { font-size: 14px; font-weight: 600; line-height: 1.6; }
+.mobile-action-menu button small { color: var(--muted); font-size: 12px; font-weight: 400; line-height: 1.6; white-space: normal; overflow-wrap: anywhere; }
+.mobile-action-menu button:disabled { opacity: .55; }
+.mobile-action-menu .mobile-action-chevron { justify-self: end; color: var(--muted); }
+.mobile-action-menu .danger-action > svg:first-child { color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.mobile-action-menu .danger-action small, .mobile-action-menu .danger-action .mobile-action-chevron { color: var(--theme-danger-text); }
+
+.mobile-sheet--delete-confirmation .mobile-sheet-body { padding-top: 0.72rem; }
+.mobile-delete-confirmation { display: grid; gap: 0.72rem; }
+.mobile-delete-target {
+  display: grid;
+  min-height: 3.45rem;
+  grid-template-columns: 2.3rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.58rem;
+  padding: 0.38rem 0.58rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-control);
+  color: var(--theme-danger-text);
+  background: var(--theme-danger-soft);
+}
+.mobile-delete-target > svg {
+  width: 2.3rem;
+  height: 2.3rem;
+  padding: 0.56rem;
+  border-radius: var(--radius-control);
+  color: var(--theme-danger-text);
+  background: var(--theme-danger-soft);
+}
+.mobile-delete-target > span { display: grid; min-width: 0; gap: 0.04rem; }
+.mobile-delete-target strong { overflow-wrap: anywhere; font-size: .74rem; }
+.mobile-delete-target small { overflow-wrap: anywhere; color: var(--theme-text-muted); font-size: .59rem; line-height: 1.4; }
+.mobile-delete-confirmation input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.62rem 0.72rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-control);
+  outline: 0;
+  color: var(--text);
+  background: var(--theme-surface);
+  font: inherit;
+}
+.mobile-delete-confirmation input:focus { border-color: var(--brand-700); background: var(--theme-surface); box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-shadow) 10%, transparent); }
+.mobile-delete-actions { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: 0.48rem; }
+.mobile-delete-actions > button { min-width: 0; min-height: 3rem; }
+
+@media (min-width: 38rem) {
+  .mobile-sheet.mobile-sheet--action-menu { margin-bottom: 1rem; border-radius: var(--radius-surface); }
+}

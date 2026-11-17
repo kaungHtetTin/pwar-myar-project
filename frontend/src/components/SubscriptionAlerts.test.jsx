@@ -1,0 +1,20 @@
+import React from 'react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, expect, it, vi } from 'vitest';
+import { SubscriptionAlerts } from './SubscriptionAlerts';
+import { monitorSubscription } from '../subscriptionActivity';
+vi.mock('../subscriptionActivity', () => ({ monitorSubscription: vi.fn() }));
+afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+it('updates access, queues approvals, opens billing once and dismisses without navigation', () => {
+ let receive;const stop=vi.fn();monitorSubscription.mockImplementation((api,scope,callback)=>{receive=callback;return stop;});
+ const open=vi.fn(), entitlement=vi.fn();window.addEventListener('mkpos:subscription-entitlement',entitlement);
+ const view=render(<><input aria-label="Product search" /><SubscriptionAlerts apiRequest={vi.fn()} scope="owner:1" onOpen={open} /></>);
+ const input=screen.getByRole('textbox');input.focus();
+ act(()=>receive([{id:1,plan_name:'Pro'},{id:2,plan_name:'Annual'}],{is_valid:true}));
+ expect(input).toHaveFocus();expect(entitlement.mock.calls[0][0].detail).toEqual({is_valid:true});
+ expect(screen.getByRole('status')).toHaveTextContent('Pro');
+ fireEvent.click(screen.getByRole('button',{name:'View billing'}));expect(open).toHaveBeenCalledOnce();
+ expect(screen.getByRole('status')).toHaveTextContent('Annual');
+ fireEvent.click(screen.getByRole('button',{name:'Dismiss subscription notification'}));expect(open).toHaveBeenCalledOnce();expect(screen.queryByRole('status')).not.toBeInTheDocument();
+ view.unmount();expect(stop).toHaveBeenCalledOnce();window.removeEventListener('mkpos:subscription-entitlement',entitlement);
+});

@@ -1,0 +1,74 @@
+.access-screen { display: flex; flex-direction: column; gap: 8px; height: var(--mkpos-screen-height); min-height: 0; overflow: auto; }
+.access-toolbar, .access-panel, .access-summary-grid article { border: 1px solid var(--theme-border); border-radius: var(--mkpos-radius); background: var(--theme-surface); box-shadow: 0 2px 8px color-mix(in srgb, var(--theme-shadow) 3.5%, transparent); }
+.access-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 12px; }
+.access-toolbar > div { display: grid; gap: 2px; }
+.access-toolbar > div span { color: var(--theme-text-muted); font-size: 0.8rem; }
+.access-toolbar button, .access-panel header button, .access-role-list footer button, .access-row-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.access-summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.access-summary-grid article { display: flex; align-items: center; gap: 10px; padding: 9px 11px; }
+.access-summary-grid article > span { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 6px; color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.access-summary-grid article div { display: grid; }
+.access-summary-grid small { color: var(--theme-text-muted); }
+.access-summary-grid strong { color: var(--theme-primary-text); font-size: 1.15rem; }
+.access-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; width: 100%; min-width: 0; min-height: 0; }
+.access-panel { box-sizing: border-box; width: 100%; min-width: 0; overflow: hidden; }
+.access-panel > header { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 9px; border-bottom: 1px solid var(--theme-border); background: var(--theme-background); }
+.access-panel > header > div { display: inline-flex; align-items: center; gap: 7px; color: var(--theme-primary-text); }
+.access-panel > header > div > span { padding: 2px 7px; border-radius: 999px; color: var(--theme-text-muted); background: var(--theme-background); font-size: 0.72rem; }
+.access-role-list { display: grid; align-content: start; gap: 8px; max-height: calc(var(--mkpos-screen-height) - 205px); padding: 9px; overflow: auto; }
+.access-role-list > article { display: grid; gap: 9px; padding: 10px; border: 1px solid var(--theme-border); border-radius: 6px; }
+.access-role-heading { display: flex; align-items: center; gap: 8px; }
+.access-role-heading > span, .access-person > span { display: grid; flex: 0 0 30px; height: 30px; place-items: center; border-radius: 6px; color: var(--theme-primary-text); background: var(--theme-background); }
+.access-role-heading > div, .access-person > div { display: grid; min-width: 0; gap: 1px; }
+.access-role-heading small, .access-person small { overflow: hidden; color: var(--theme-text-muted); font-size: 0.74rem; text-overflow: ellipsis; white-space: nowrap; }
+.access-role-permissions { display: flex; flex-wrap: wrap; gap: 4px; }
+.access-role-permissions span { padding: 3px 6px; border-radius: 999px; color: var(--theme-text-muted); background: var(--theme-background); font-size: 0.7rem; font-weight: 700; }
+.access-role-list footer { display: flex; justify-content: flex-end; gap: 6px; padding-top: 7px; border-top: 1px solid var(--theme-border); }
+.access-table-wrap { max-height: none; overflow: visible; }
+.access-role-table-wrap { overflow: visible; }
+.access-table { width: 100%; min-width: 0 !important; table-layout: fixed; border-collapse: collapse; font-size: 0.8rem; }
+.access-role-table col.access-role-name-column { width: 27%; }
+.access-role-table col.access-permissions-column { width: auto; }
+.access-role-table col.access-role-staff-column { width: 60px; }
+.access-table col.access-staff-column { width: 38%; }
+.access-table col.access-role-column { width: 31%; }
+.access-table col.access-status-column { width: auto; }
+.access-table th, .access-table td { padding: 8px 9px; border-bottom: 1px solid var(--theme-border); text-align: left; }
+.access-table th { position: sticky; z-index: 1; top: 0; color: var(--theme-text-muted); background: var(--theme-surface); font-size: 0.72rem; text-transform: uppercase; }
+.access-person { display: flex; align-items: center; min-width: 0; gap: 8px; }
+.access-table td { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.access-table td:nth-child(2) strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.access-role-table .access-role-heading > span { flex-basis: 26px; height: 26px; }
+.access-role-table .access-role-permissions { gap: 3px; }
+.access-role-table .access-role-permissions span { padding: 2px 5px; font-size: 0.66rem; }
+.access-status { display: inline-flex; padding: 3px 7px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; }
+.access-status.active { color: var(--theme-primary-text); background: var(--theme-primary-soft); }
+.access-status.inactive { color: var(--theme-danger-text); background: var(--theme-danger-soft); }
+.access-row-actions { display: flex; gap: 5px; }
+.access-row-actions button { width: 31px; min-height: 30px; padding: 0; }
+.access-empty { display: grid; min-height: 160px; place-items: center; align-content: center; gap: 5px; padding: 20px; color: var(--theme-text-muted); text-align: center; }
+.access-empty strong { color: var(--theme-text); }
+.access-denied-page { display: grid; min-height: 100dvh; place-items: center; align-content: center; gap: 8px; padding: 24px; color: var(--theme-text-muted); text-align: center; }
+.access-denied-page svg { color: var(--theme-primary-text); }
+.access-denied-page h1, .access-denied-page p { margin: 0; }
+.access-denied-page h1 { color: var(--theme-primary-text); }
+.access-form-modal { width: min(680px, 100%); }
+.access-password-modal { width: min(460px, 100%); }
+.access-modal-form { display: grid; gap: 10px; }
+.access-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.access-permission-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.access-permission-fieldset legend { color: var(--theme-text); font-size: 0.82rem; font-weight: 800; }
+.access-permission-fieldset > p { margin: 3px 0 8px; color: var(--theme-text-muted); font-size: 0.75rem; }
+.access-permission-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.access-permission-grid label { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 8px; border: 1px solid var(--theme-border); border-radius: 5px; background: var(--theme-surface); cursor: pointer; }
+.access-permission-grid label.selected { border-color: var(--theme-border); background: var(--theme-primary-soft); }
+.access-permission-grid input, .access-active-toggle input { width: 16px; min-width: 16px; height: 16px; min-height: 16px; margin: 0; padding: 0; accent-color: var(--theme-primary-text); }
+.access-permission-grid label > span { display: grid; }
+.access-permission-grid small { color: var(--theme-text-muted); font-size: 0.7rem; }
+.access-active-toggle { display: flex; align-items: center; gap: 9px; padding: 9px; border: 1px solid var(--theme-border); border-radius: 5px; background: var(--theme-background); }
+.access-active-toggle > span { display: grid; }
+.access-active-toggle small { color: var(--theme-text-muted); font-size: 0.72rem; }
+.access-modal-actions { display: flex; justify-content: flex-end; gap: 7px; margin: 2px -12px -12px; padding: 10px 12px; border-top: 1px solid var(--theme-border); background: var(--theme-background); }
+
+@media (max-width: 900px) { .access-layout { grid-template-columns: 1fr; } .access-role-list, .access-table-wrap { max-height: none; } .access-permission-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .access-toolbar { align-items: flex-start; flex-direction: column; } .access-summary-grid, .access-form-grid, .access-permission-grid { grid-template-columns: 1fr; } .access-modal-actions { flex-direction: column-reverse; } .access-modal-actions button { width: 100%; } }

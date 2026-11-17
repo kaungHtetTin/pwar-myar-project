@@ -1,0 +1,28 @@
+import React from 'react';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, expect, it, vi } from 'vitest';
+import { OrderAlerts } from './OrderAlerts';
+import { monitorOrders } from './orderActivity';
+vi.mock('./orderActivity', () => ({ monitorOrders: vi.fn() }));
+afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+it('queues incoming orders without stealing focus, opens once and dismisses without replay', () => {
+  let receive;
+  const stop = vi.fn();
+  monitorOrders.mockImplementation((api, callback) => { receive = callback; return stop; });
+  const open = vi.fn();
+  const view = render(<><input aria-label="Product search" /><OrderAlerts apiRequest={vi.fn()} onOpen={open} /></>);
+  const input = screen.getByRole('textbox'); input.focus();
+  const first = { id: 1, reference: 'O-ONE', customer_name: 'Buyer', total: 1200, currency: 'MMK' };
+  act(() => receive([first, { ...first, id: 2, reference: 'O-TWO' }]));
+  expect(input).toHaveFocus();
+  expect(screen.getByRole('status')).toHaveTextContent('O-ONE');
+  fireEvent.click(screen.getByRole('button', { name: 'Open order' }));
+  expect(open).toHaveBeenCalledExactlyOnceWith(first);
+  expect(screen.getByRole('status')).toHaveTextContent('O-TWO');
+  fireEvent.click(screen.getByRole('button', { name: 'Dismiss order notification' }));
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  act(() => receive([{ ...first, id: 3 }]));
+  act(() => receive([]));
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  view.unmount(); expect(stop).toHaveBeenCalledOnce();
+});

@@ -1,0 +1,23 @@
+# Dependencies and generated web/desktop renderer builds
+/node_modules/
+/dist/
+/dist-desktop/
+/build/
+/.vite/
+/coverage/
+/test-artifacts/
+/artifacts/
+/playwright-report/
+/test-results/
+/scroll-layout-fixture.png
+*.log
+*.tsbuildinfo
+
+# Private overrides; retain the public build configuration and templates
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.production
+!.env.laravel
+!.env.desktop

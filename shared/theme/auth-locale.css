@@ -1,0 +1,79 @@
+/* A quiet, touch-friendly language choice shared by all authentication forms. */
+.auth-locale-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 18px;
+}
+.auth-locale-toggle {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  background: var(--theme-surface-muted);
+}
+.auth-locale-row .auth-locale-toggle > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  min-height: 44px;
+  margin: 0;
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--theme-text-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.8;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: none;
+}
+.auth-locale-row .auth-locale-toggle > button[aria-pressed="true"] {
+  border-color: var(--theme-border);
+  background: var(--theme-surface);
+  color: var(--theme-primary-text);
+}
+.auth-locale-row .auth-locale-toggle > button:hover { color: var(--theme-primary-text); }
+.auth-locale-row .auth-locale-toggle > button:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 2px;
+}
+
+/* Match the mobile drawer's compact EN / Myanmar switch. */
+.auth-locale-row > .auth-compact-locale {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-control, 8px);
+  background: transparent;
+  box-shadow: none;
+  color: var(--theme-text-muted);
+  font-family: inherit;
+  cursor: pointer;
+}
+.auth-compact-locale > span {
+  padding: 2px 7px;
+  border-radius: var(--radius-small, 4px);
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+.auth-compact-locale > .is-selected {
+  background: var(--theme-primary);
+  color: var(--theme-on-primary);
+}
+.auth-locale-row > .auth-compact-locale:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Starting PwarMyar</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      body { display: grid; grid-template-rows: 1fr auto; background: #0f4c3a; color: #fff; font-family: "Segoe UI", Arial, sans-serif; user-select: none; }
+      main { display: flex; align-items: center; gap: 18px; padding: 34px 36px 24px; }
+      .mark { width: 78px; height: 78px; object-fit: contain; background: white; border-radius: 18px; }
+      h1 { margin: 0; font-size: 29px; }
+      p { margin: 6px 0 0; color: #d7eee6; font-size: 13px; }
+      footer { padding: 0 36px 27px; }
+      #status { min-height: 20px; margin-bottom: 10px; color: #e8f6f1; font-size: 12px; }
+      .progress { position: relative; height: 3px; overflow: hidden; background: rgba(255,255,255,.2); }
+      .progress::after { position: absolute; inset: 0 auto 0 0; width: 38%; background: #c9f451; content: ""; animation: loading 1.15s ease-in-out infinite; }
+      @keyframes loading { from { transform: translateX(-105%); } to { transform: translateX(270%); } }
+    </style>
+  </head>
+  <body>
+    <main><img class="mark" src="branding/pwarmyar-mark.png" alt="PwarMyar"><div><h1>PwarMyar</h1><p>Preparing your shop workspace.</p></div></main>
+    <footer><div id="status" role="status">Starting PwarMyar...</div><div class="progress"></div></footer>
+    <script>window.setSplashStatus = (message) => { document.getElementById('status').textContent = String(message || 'Starting PwarMyar...'); };</script>
+  </body>
+</html>

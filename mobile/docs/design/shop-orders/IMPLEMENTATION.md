@@ -1,0 +1,35 @@
+# Shop orders
+
+Mappings: 073 orders, 074 detail, 075 dispatched action deep link, 076 request review, 120 right filter drawer, 136 cancel, 137 full payment, 138 refund, 155 unavailable, 158 load-more failure and 164 payment/audit continuation.
+
+The list uses the reference header, search/filter/export row, simple order count and the shared order cards used in buyer history. Sorting lives in the filter drawer, following the user's October 17 request. The detail uses a white amount/status/progress summary, direct icon-and-label operation / Cancel / payment approval actions, adjacent customer and fulfillment cards, customer requests, item photos/totals, linked sale, payment and visible audit history. Print order is an icon-only app-bar action before the global Chat and app-menu controls. The order-specific app-bar and content More buttons are removed. At 320px the two context cards stack so real contact/address text remains readable. Long records scroll naturally above shared bottom navigation.
+
+Cancel and full-payment confirmation use centered dialogs; dispatch/refund use bottom sheets over the current order. Request review follows the full-page reference with order identity, actual reason/evidence, decision radio cards, required review note and Save decision / Cancel. Back resumes the retained source state. Dialog dismissal preserves the detail; busy financial operations block dismissal and duplicate submission. Print produces an escaped order record through the existing browser/native printing helper, without recording payment or creating a sale.
+
+The right drawer uses shared animation and controls, draft filters, draft-only Reset, explicit Apply and date validation. Business timezone is read-only. The pending-request switch filters real pending customer requests and approved unresolved returns, as supported by the API; it does not mean orders awaiting acceptance. Sorting adds validated newest/oldest API ordering, preserving the previous newest default. Order-detail item images use the existing tenant-scoped order photo endpoint; list/history previews retain their four-image limit.
+
+The drawer's Sort orders selector participates in the same draft state: closing discards pending changes, Apply submits the selected order, and Reset restores Newest first without a request until Apply. Non-default sorting counts toward the filter badge. Applied ordering also remains part of CSV export and retained list state after Back. Sorting and the footer remain reachable by scrolling at narrow widths. The 18 scoped ShopOrders tests cover these controls and retained search/sort without a Back-triggered list read; Chromium and Firefox fixture checks provide the rendered evidence in `sorting-draft*.png` and `073*.png`.
+
+The pending-request switch row retains 12px inner padding and a separate flexible text area; the shared 44px switch target stays inside the frame. Legacy native-checkbox switch styling was removed. Browser checks measure both insets and the text/control gap, exercise checked/unchecked draft state, and capture `request-toggle-320.png` and `request-toggle-375.png` at 667px height.
+
+## Intentional reference corrections
+
+- The user's October 17 action-layout request supersedes the reference's Print/More strip. Available operation, cancellation and payment actions are direct buttons in a grid of up to three columns. Reject proof, return, reopen and refund actions also remain directly accessible when supported by the order state and permissions. All existing confirmation, full-payment and return safeguards remain intact. The accepted/unpaid state is captured at 375x667 in `accepted-unpaid-actions.png`, with narrow and wide variants; tests verify direct modal entry/cancel, focus restoration and the print popup.
+
+- The dispatch API stores a status transition only. Courier selection, tracking number, dispatch date and a customer-message field from 075 are omitted rather than presenting unsaved controls. The supported dispatch confirmation remains functional.
+- Payment/refund totals remain the actual full order amount. Verification, staff notes, required cancellation reasons, physical-return checks and permission restrictions are retained. The existing 2,000-character reason/note limits are preserved.
+- Refund copy describes reversing the existing linked POS sale through its PIN-protected workflow. It does not instruct staff to create a new sale, or claim goods have returned without recorded evidence.
+- Request approval requires a review note under the existing API, including acceptance. Evidence is shown only when available. Approval does not itself record a refund or physical return.
+- Native status chrome, live names/dates/currency, product-photo availability and the shared MKPOS compact tokens differ from the illustrative records. Missing photos use the existing themed package fallback. Naturally scrolling sheets retain readable controls instead of compressing all fields into one frame.
+- Payment/account information appears once; proof and audit records retain real data and independent retry controls. The primary detail ordering follows 074; 164 describes its expanded payment/audit continuation rather than a separate route.
+
+## Verification
+
+Run `node scripts/check-shop-orders-reference.cjs`; set `ORDERS_BROWSER=firefox` for Firefox. All browser API reads/mutations are intercepted fixtures. It covers all 11 mapped states at 393px, overflow at 320/768px, filter cancellation/application, sorting, retained Back, pagination failure/retry, verified full-payment payload, review decisions, print popup, unavailable navigation and Myanmar/long content. Screenshots and API-call records are under `artifacts/shop-orders-reference/<browser>`. Compare the final images at the same viewport before claiming visual acceptance.
+
+Scoped React tests verify modal focus/Android Back/busy dismissal, action payloads, validation/retry, permissions, retained navigation, filters/export, review prerequisites, private-image selection and print escaping. The Laravel EcommerceApiTest suite verifies ordering/pagination validation, detail/list/history scoped photos and existing commerce behavior. No production build is required or run.
+
+Completed: Chromium and Firefox fixture checks passed; 29 scoped frontend tests and 77 Laravel feature tests passed. Scoped ESLint and handoff validation passed. Final mapped screenshots, narrow Myanmar detail and full detail were inspected. Same-viewport proposed/implemented comparisons are saved as `artifacts/shop-orders-reference/firefox/compare-073.png` through the mapped reference IDs. These comparisons document the corrections above, not an exact pixel match.
+
+
+The Shop Orders list app bar no longer has its order-specific More action or one-option Order options sheet. Pending customer requests remain available directly in Filters. Export, chat and the final global app-menu button remain. Removed unused header prop/menu state. All 18 ShopOrders tests, scoped lint and the Chromium order visual/interaction flow pass; final list app-bar screenshot inspected.

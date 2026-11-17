@@ -1,0 +1,46 @@
+.office-distribution-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:14px; }
+.office-distribution-summary > div { display:grid; gap:4px; padding:12px 14px; border:1px solid var(--office-line); border-radius:var(--office-radius); background:var(--office-panel); }
+.office-distribution-summary small { color:var(--office-muted); font-size:11px; }
+.office-distribution-summary strong { font-size:23px; }
+.office-distribution-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,360px); align-items:start; gap:14px; }
+.office-distribution-layout > div { min-width:0; }
+.office-distribution-map-panel { overflow:hidden; border:1px solid var(--office-line); border-radius:var(--office-radius); background:var(--office-panel); }
+.office-distribution-map { height:560px; max-height:65dvh; min-height:300px; z-index:0; }
+.office-distribution-map-tools { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; padding:9px 12px; }
+.office-distribution-map-tools > span { display:flex; align-items:center; flex-wrap:wrap; gap:6px; color:var(--office-muted); font-size:11px; }
+.office-distribution-map-tools i { width:9px; height:9px; border-radius:50%; background:#006bdc; }
+.office-distribution-map-tools i.is-suspended { background:#b45309; margin-left:8px; }
+.office-distribution-tile-error,.office-distribution-caption { padding:10px 12px; margin:0; font-size:12px; color:var(--office-muted); }
+.office-distribution-shops ul { list-style:none; padding:0; margin:0; max-height:520px; overflow-y:auto; }
+.office-distribution-shops li { display:grid; gap:5px; padding:12px; border-bottom:1px solid var(--office-line); }
+.office-distribution-shops li.is-selected { background:var(--theme-primary-soft); }
+.office-distribution-shops li > div { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.office-distribution-shops li > span,.office-distribution-shops small { font-size:11px; color:var(--office-muted); overflow-wrap:anywhere; }
+.office-distribution-shops strong { overflow-wrap:anywhere; font-size:13px; }
+.office-distribution-location { display:inline-flex; align-items:center; gap:4px; font-size:11px; }
+.office-distribution-shops .office-table-pagination { align-items:start; flex-direction:column; padding:10px; }
+.office-distribution-shops .office-table-pagination-controls { flex-wrap:wrap; gap:8px; }
+.office-distribution-selected { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:12px; margin-top:10px; border:1px solid var(--office-line); border-radius:var(--office-radius); background:var(--office-panel); }
+.office-distribution-selected > div { flex:1 1 180px; min-width:0; overflow-wrap:anywhere; }
+.office-distribution-selected p { margin:5px 0; font-size:12px; }
+.office-distribution-selected small { color:var(--office-muted); font-size:11px; }
+.office-distribution-error { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px; margin-bottom:10px; color:var(--theme-danger-text); background:var(--theme-danger-soft); }
+@media(max-width:1100px) { .office-distribution-layout { grid-template-columns:minmax(0,1fr); } .office-distribution-shops ul { max-height:none; } .office-distribution-map { height:420px; } }
+@media(max-width:520px) { .office-distribution-summary { gap:6px; } .office-distribution-summary > div { padding:9px; } .office-distribution-page .office-button { min-height:44px; } }
+.office-distribution-shop-actions { flex-wrap:wrap; }
+.office-distribution-shops li > .office-distribution-statuses,.office-distribution-statuses { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:4px; margin:3px 0; }
+.office-distribution-statuses > span { padding:2px 5px; border:1px solid var(--office-line); border-radius:4px; color:var(--office-muted); background:var(--office-bg); font-size:10px; line-height:1.5; }
+.office-distribution-map .leaflet-control-zoom { display:grid; gap:6px; border:0; box-shadow:none; }
+.office-distribution-map .leaflet-control-zoom a { width:30px; height:30px; line-height:28px; border:1px solid var(--office-line); border-radius:5px; color:var(--office-ink); background:var(--theme-surface); }
+.office-distribution-map .leaflet-control-zoom a:hover { border-color:var(--office-brand); color:var(--theme-primary-text); background:var(--theme-primary-soft); }
+.office-distribution-map .leaflet-control-zoom a:focus-visible { outline:3px solid color-mix(in srgb, var(--theme-focus) 40%, transparent); outline-offset:2px; }
+.office-distribution-map .leaflet-control-zoom a.leaflet-disabled { opacity:.55; cursor:not-allowed; }
+@media(max-width:520px) { .office-distribution-map .leaflet-control-zoom a { width:44px; height:44px; line-height:42px; } }
+@media(max-width:700px) {
+  .office-shell[data-active-page="shop-distribution"] .office-topbar { flex-direction:row; flex-wrap:nowrap; align-items:center; gap:6px; }
+  .office-shell[data-active-page="shop-distribution"] .office-appbar-search { flex:0 1 40px; min-width:0; }
+  .office-shell[data-active-page="shop-distribution"] .office-appbar-search:focus-within,
+  .office-shell[data-active-page="shop-distribution"] .office-appbar-search.has-value { flex:1 1 0; }
+  .office-shell[data-active-page="shop-distribution"] .office-appbar-search input { max-width:100%; }
+  .office-shell[data-active-page="shop-distribution"] .office-topbar-actions { flex:0 0 auto; }
+}

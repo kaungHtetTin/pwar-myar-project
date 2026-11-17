@@ -1,0 +1,46 @@
+.office-telegram-settings .office-telegram-wide { grid-column: 1 / -1; }
+.office-telegram-settings .office-management-form fieldset { align-items: start; }
+.office-telegram-settings .office-management-form label { align-self: start; align-content: start; grid-auto-rows: max-content; }
+.office-telegram-settings .office-management-form :is(input:not([type="checkbox"]), select) { box-sizing: border-box; height: 36px; min-height: 36px; padding: 6px 10px; line-height: 1.4; }
+.office-telegram-settings .office-management-form label > small { margin: 0; font-weight: 400; }
+.office-telegram-settings h2 { margin-top: 0; }
+.office-telegram-subheading { border-top: 1px solid var(--office-line); padding-top: 14px; }
+.office-telegram-subheading h3 { margin: 0; }
+.office-telegram-subheading p { margin: 4px 0 0; }
+.office-telegram-settings p, .office-telegram-settings small { color: var(--office-muted); line-height: 1.6; }
+.office-telegram-status { display: flex; flex-wrap: wrap; gap: 10px 24px; padding: 12px; margin: 16px 0; border: 1px solid var(--office-line); border-radius: 8px; font-size: 13px; }
+.office-telegram-connection { padding: 0 18px 18px; margin: 18px -18px -18px; border-top: 1px solid var(--office-line); }
+.office-telegram-connection-heading { display: flex; align-items: center; gap: 12px; padding: 14px 18px; margin: 0 -18px 16px; border-bottom: 1px solid var(--office-line); background: var(--theme-surface-muted); }
+.office-telegram-connection-icon { display: grid; place-items: center; width: 34px; height: 34px; flex: 0 0 34px; border: 1px solid var(--office-line); border-radius: 6px; color: var(--theme-primary-text); background: var(--theme-surface); }
+.office-telegram-connection-heading > div { min-width: 0; }
+.office-telegram-connection-heading p { margin: 4px 0 0; }
+.office-telegram-connection h3 { margin: 0; }
+.office-telegram-connection dl { display: flex; flex-wrap: wrap; gap: 18px 32px; margin: 16px 0; }
+.office-telegram-connection dt { font-size: 12px; color: var(--office-muted); }
+.office-telegram-connection dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.office-telegram-replace { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 16px 0; }
+.office-telegram-replace input { width: 16px; height: 16px; flex: 0 0 auto; }
+.office-telegram-buttons { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.office-telegram-buttons button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.office-telegram-connection > small { display: block; margin-top: 10px; }
+.office-telegram-delivery-check { padding: 10px; margin: 10px 0; border: 1px solid var(--office-line); border-radius: 5px; background: var(--theme-surface-muted); font-size: 12px; }
+.office-telegram-delivery-check p { margin: 3px 0; }
+.office-telegram-settings .feedback.error { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.office-telegram-groups h2 { margin: 0; }
+.office-settings-detail-content .office-telegram-groups { border: 0; border-top: 1px solid var(--office-line); border-radius: 0; box-shadow: none; }
+.office-telegram-groups .office-panel-header > div { min-width: 0; }
+.office-telegram-groups .office-panel-header p { max-width: 90ch; margin: 4px 0 0; font-size: 11px; line-height: 1.5; }
+.office-telegram-groups .office-telegram-groups-message { margin: 10px; font-size: 12px; }
+.office-telegram-groups .office-data-table { width: 100%; min-width: 880px; }
+.office-telegram-groups-table th:nth-child(1) { width: 27%; }
+.office-telegram-groups-table th:nth-child(2) { width: 17%; }
+.office-telegram-groups-table th:nth-child(3) { width: 13%; }
+.office-telegram-groups-table th:nth-child(4) { width: 14%; }
+.office-telegram-groups .office-data-table td small { display: block; margin-top: 2px; font-size: 11px; line-height: 1.4; }
+.office-telegram-check { display: flex !important; align-items: center; gap: 8px; }
+.office-telegram-check input { width: 16px; height: 16px; }
+@media (max-width: 600px) {
+  .office-telegram-settings .office-management-form :is(input:not([type="checkbox"]), select) { height: 40px; min-height: 40px; }
+  .office-telegram-groups .office-modal :is(button, select, input:not([type="checkbox"])) { min-height: 40px; }
+}
+@media (max-width: 600px) { .office-telegram-buttons { align-items: stretch; flex-direction: column; } .office-telegram-buttons a { text-align: center; } }
